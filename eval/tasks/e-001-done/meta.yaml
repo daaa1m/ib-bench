@@ -1,0 +1,16 @@
+# Documentation
+task:
+  id: e-001
+  type: fix-error
+  category: excel
+  description: "LLM is provided a simple LBO model with an unbalanced balance sheet. LLM needs to find the source of the error. In this case, formula in row 140 neglects to add values in row 138."
+
+input:
+  original-input-file: dave-and-busters.xlsx
+  notes: "LLM is provided a guide on how to fix an unbalanced balance sheet. We also specify that there is only 1 source of error"
+
+# --------------------------------
+# Config (parsed by eval pipeline, changes in this section will impact eval pipeline)
+# --------------------------------
+evaluation:
+  type: programmatic

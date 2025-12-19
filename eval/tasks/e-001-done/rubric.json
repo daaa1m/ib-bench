@@ -1,0 +1,44 @@
+{
+  "task_id": "IB-E-001",
+  "eval_type": "diagnostic_repair",
+  "criteria": {
+    "key_1_location": {
+      "description": "Must identify the Cash from Investing subtotal row or specific cells.",
+      "accepted_values": [
+        "Row 140",
+        "140",
+        "L140",
+        "M140",
+        "N140",
+        "O140",
+        "P140",
+        "L140:P140",
+        "Range 140"
+      ],
+      "match_type": "substring_one_of"
+    },
+    "key_3_formula": {
+      "description": "Must include Row 138 (Maintenance Capex) in the sum.",
+      "required_elements": ["138"],
+      "forbidden_elements": ["#REF!", ""],
+      "valid_patterns": [
+        "SUM\\(.*138.*139.*\\)",
+        "SUM\\(.*135.*139.*\\)",
+        "\\+.*138",
+        "138.*\\+"
+      ],
+      "match_type": "regex_pattern"
+    },
+    "key_4_explanation": {
+      "description": "Must explain that Maintenance Capex was excluded.",
+      "core_concepts": [
+        "Maintenance Capex",
+        "Row 138",
+        "missing",
+        "omitted",
+        "Investing"
+      ],
+      "match_type": "llm_judge"
+    }
+  }
+}
