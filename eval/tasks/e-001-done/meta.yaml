@@ -13,4 +13,4 @@ input:
 # Config (parsed by eval pipeline, changes in this section will impact eval pipeline)
 # --------------------------------
 evaluation:
-  type: programmatic
+  type: hybrid

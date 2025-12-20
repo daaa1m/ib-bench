@@ -7,4 +7,6 @@ requires-python = ">=3.10"
 dependencies = [
     "openpyxl>=3.1.5",
     "pyyaml>=6.0.3",
+    "anthropic>=0.40.0",
+    "openai>=1.50.0",
 ]
