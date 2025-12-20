@@ -1,0 +1,15 @@
+{
+  "provider": "anthropic",
+  "model": "claude-sonnet-4-20250514",
+  "task_ids": [
+    "e-001"
+  ],
+  "started_at": "2025-12-20T20:46:22.312438",
+  "completed_at": "2025-12-20T20:48:55.582519",
+  "results_summary": [
+    {
+      "task_id": "e-001",
+      "status": "success"
+    }
+  ]
+}

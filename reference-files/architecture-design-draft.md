@@ -1,6 +1,7 @@
 # LLM Evaluation Pipeline
 
-A lightweight, practical evaluation framework for testing LLM capabilities on complex tasks involving documents, spreadsheets, and multi-step reasoning.
+A lightweight, practical evaluation framework for testing LLM capabilities on
+complex tasks involving documents, spreadsheets, and multi-step reasoning.
 
 ### Core Principle: Separate Expensive from Cheap
 
@@ -21,35 +22,6 @@ You can:
 2. Start a generation run
 3. Write rubrics while waiting (or after)
 4. Score and re-score as you refine criteria
-
-## Project Structure
-
-```
-eval/
-├── tasks/                      # One folder per task
-│   ├── e-001/                  # Easy task 001
-│   │   ├── prompt.md           # The task prompt (required)
-│   │   ├── input.pdf           # Input files (optional)
-│   │   ├── rubric.json         # Evaluation criteria (for scoring)
-│   │   └── meta.yaml           # Metadata and config (optional)
-│   ├── e-002/
-│   ├── m-001/                  # Medium task 001
-│   └── h-001/                  # Hard task 001
-├── results/                    # One folder per run
-│   └── 20250115_143022_sonnet/
-│       ├── config.json         # Run configuration
-│       ├── responses/          # Model outputs (expensive, cached)
-│       │   ├── e-001.json
-│       │   └── e-002.json
-│       ├── scores/             # Evaluation scores (cheap, regenerate freely)
-│       │   ├── e-001.json
-│       │   └── e-002.json
-│       └── summary.json        # Aggregated results
-├── run.py                      # Generate responses
-├── score.py                    # Score responses
-├── status.py                   # Check progress
-└── helpers.py                  # Shared utilities
-```
 
 ## Task Anatomy
 
@@ -481,11 +453,12 @@ def score(output: str, rubric: dict) -> dict:
 
 ## FAQ
 
-**Q: Can I run without rubrics?**
-Yes. Generation doesn't need rubrics. Add them later and run scoring when ready.
+**Q: Can I run without rubrics?** Yes. Generation doesn't need rubrics. Add them
+later and run scoring when ready.
 
-**Q: Can I use GPT-4 instead of Claude?**
-The pipeline is Claude-focused but you can swap `helpers.py` to use OpenAI's API. File handling will need adjustment since OpenAI handles documents differently.
+**Q: Can I use GPT-4 instead of Claude?** The pipeline is Claude-focused but you
+can swap `helpers.py` to use OpenAI's API. File handling will need adjustment
+since OpenAI handles documents differently.
 
 **Q: How do I compare two runs?**
 
@@ -494,8 +467,9 @@ The pipeline is Claude-focused but you can swap `helpers.py` to use OpenAI's API
 diff results/run1/summary.json results/run2/summary.json
 ```
 
-**Q: Can I use this for agentic/tool-use tasks?**
-Yes, but you'll need to implement tool execution in `helpers.py`. The structure supports multi-turn conversations.
+**Q: Can I use this for agentic/tool-use tasks?** Yes, but you'll need to
+implement tool execution in `helpers.py`. The structure supports multi-turn
+conversations.
 
 ## License
 

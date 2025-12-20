@@ -8,6 +8,7 @@ Usage:
 
 import json
 import sys
+from datetime import datetime, date, time
 from pathlib import Path
 from openpyxl import load_workbook
 from openpyxl.utils import get_column_letter
@@ -139,10 +140,10 @@ def xlsx_to_json(filepath: str, include_empty: bool = False, include_formatting:
                 # Check if it's a formula
                 if formula_val is not None and str(formula_val).startswith('='):
                     cell_data["formula"] = str(formula_val)
-                    cell_data["value"] = computed_val
+                    cell_data["value"] = _serialize_value(computed_val)
                     cell_data["type"] = "formula"
                 elif formula_val is not None:
-                    cell_data["value"] = formula_val
+                    cell_data["value"] = _serialize_value(formula_val)
                     cell_data["type"] = _get_type(formula_val)
                 else:
                     cell_data["value"] = None
@@ -174,8 +175,27 @@ def _get_type(value) -> str:
         return "number"
     elif isinstance(value, str):
         return "string"
+    elif isinstance(value, (datetime, date, time)):
+        return "datetime"
     else:
         return "other"
+
+
+def _serialize_value(value):
+    """Convert value to JSON-serializable format."""
+    if value is None:
+        return None
+    elif isinstance(value, (str, int, float, bool)):
+        return value
+    elif isinstance(value, datetime):
+        return value.isoformat()
+    elif isinstance(value, date):
+        return value.isoformat()
+    elif isinstance(value, time):
+        return value.isoformat()
+    else:
+        # Handle any other types (like DataTableFormula) by converting to string
+        return str(value)
 
 
 if __name__ == "__main__":

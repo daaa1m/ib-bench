@@ -1,0 +1,22 @@
+{
+  "task_id": "e-001",
+  "passed": false,
+  "passed_criteria": 0,
+  "total_criteria": 2,
+  "criteria": [
+    {
+      "id": "key_1_location",
+      "passed": false,
+      "match_type": "substring_one_of",
+      "actual": "K150",
+      "details": "None of ['Row 140', '140', 'L140', 'M140', 'N140', 'O140', 'P140', 'L140:P140', 'Range 140'] found in 'K150'"
+    },
+    {
+      "id": "key_3_formula",
+      "passed": false,
+      "match_type": "regex_pattern",
+      "actual": "=SUM(K145:K149)",
+      "details": "Missing required elements: ['138']"
+    }
+  ]
+}

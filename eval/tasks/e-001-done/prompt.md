@@ -1,6 +1,6 @@
 ## Task
 
-You are an investment banking analyst tasked with auditing a simple, integrated LBO model for 'Dave & Buster’s' (ib-e-001.xlsx) that is currently broken. Specifically, the Balance Sheet does not tie (Total Assets ≠ Total Liabilities + Equity) in row 140.
+You are an investment banking analyst tasked with auditing a simple, integrated LBO model for 'Dave & Buster’s' (ib-e-001.xlsx) that is currently broken. Specifically, the Balance Sheet does not tie (Total Assets ≠ Total Liabilities + Equity) in row 123.
 
 A preliminary review suggests the discrepancy originates from an error in the Balance Sheet or the Cash Flow Statement. Your goal is to identify the specific row causing the imbalance and provide a structural fix. There is exactly one source of error causing this model to be unbalanced.
 

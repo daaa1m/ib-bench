@@ -27,4 +27,9 @@ Negative Constraints:
 
 ## Output Format
 
-Provide the summary in flowing prose paragraphs. Use your best judgement on the appropriate length of the summary.
+Provide your response as a raw JSON object with the following keys. Do not include any markdown formatting, backticks, or preamble.
+
+`{
+  "reasoning": "Your analysis process - how you identified key points, what you prioritized and why",
+  "summary": "The summary in flowing prose paragraphs. Use your best judgement on the appropriate length."
+}`

@@ -1,0 +1,22 @@
+{
+  "task_id": "e-001",
+  "passed": true,
+  "passed_criteria": 2,
+  "total_criteria": 2,
+  "criteria": [
+    {
+      "id": "key_1_location",
+      "passed": true,
+      "match_type": "substring_one_of",
+      "actual": "Row 140 (Cash from Investing), Columns L through P",
+      "details": "Found 'Row 140' in response"
+    },
+    {
+      "id": "key_3_formula",
+      "passed": true,
+      "match_type": "regex_pattern",
+      "actual": "=L138+L139",
+      "details": "Matched pattern: 138.*\\+"
+    }
+  ]
+}

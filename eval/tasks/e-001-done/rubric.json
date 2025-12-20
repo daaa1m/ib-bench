@@ -1,6 +1,5 @@
 {
   "task_id": "IB-E-001",
-  "eval_type": "diagnostic_repair",
   "criteria": {
     "key_1_location": {
       "description": "Must identify the Cash from Investing subtotal row or specific cells.",

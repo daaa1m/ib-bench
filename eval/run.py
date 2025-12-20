@@ -16,23 +16,20 @@ from datetime import datetime
 from pathlib import Path
 
 from helpers import load_tasks, get_runner, create_run_directory
-from xlsx_converter import xlsx_to_json
 
 
 def run_task(task, runner, run_dir: Path) -> dict:
     """Execute a single task and save the response."""
     print(f"Running task {task.id}...")
 
-    # Convert xlsx input if present
-    xlsx_data = None
-    for input_file in task.input_files:
-        if input_file.suffix == ".xlsx":
-            print(f"  Converting {input_file.name} to JSON...")
-            xlsx_data = xlsx_to_json(str(input_file))
+    # Find input file (xlsx, pdf, etc.)
+    input_file = None
+    for f in task.input_files:
+        if f.suffix in [".xlsx", ".pdf", ".xls"]:
+            input_file = f
             break
 
-    # Call LLM
-    response = runner.run(task, xlsx_json=xlsx_data)
+    response = runner.run(task, input_file=input_file)
 
     # Prepare response data
     response_data = {
@@ -48,8 +45,8 @@ def run_task(task, runner, run_dir: Path) -> dict:
         },
     }
 
-    # Save response
-    response_path = run_dir / "responses" / f"{task.id}.json"
+    # Save response (run_dir is already under results/responses/)
+    response_path = run_dir / f"{task.id}.json"
     with open(response_path, "w") as f:
         json.dump(response_data, f, indent=2)
 
@@ -62,15 +59,19 @@ def run_task(task, runner, run_dir: Path) -> dict:
 
 def main():
     parser = argparse.ArgumentParser(description="Run IB-bench evaluation")
-    parser.add_argument("--tasks", nargs="+", required=True, help="Task IDs to run (required)")
+    parser.add_argument(
+        "--tasks", nargs="+", required=True, help="Task IDs to run (required)"
+    )
     parser.add_argument("--filter", help="Task ID prefix filter (e.g., 'e-' for easy)")
-    parser.add_argument("--provider", default="anthropic", choices=["anthropic", "openai"])
+    parser.add_argument(
+        "--provider", default="anthropic", choices=["anthropic", "openai"]
+    )
     parser.add_argument("--model", help="Model identifier")
     parser.add_argument("--resume", help="Run ID to resume")
     args = parser.parse_args()
 
-    # Load tasks
-    tasks = load_tasks(task_ids=args.tasks, filter_pattern=args.filter)
+    # Load tasks (no rubric needed for running, only for scoring)
+    tasks = load_tasks(task_ids=args.tasks, filter_pattern=args.filter, include_rubric=False)
     if not tasks:
         print("No tasks found!")
         print(f"Looked for task IDs: {args.tasks}")
@@ -84,7 +85,7 @@ def main():
 
     # Create or resume run directory
     if args.resume:
-        run_dir = Path(__file__).parent / "results" / args.resume
+        run_dir = Path(__file__).parent / "results" / "responses" / args.resume
         if not run_dir.exists():
             print(f"Run directory not found: {run_dir}")
             return
@@ -108,7 +109,7 @@ def main():
     results = []
     for task in tasks:
         # Skip if response already exists (for resume)
-        response_path = run_dir / "responses" / f"{task.id}.json"
+        response_path = run_dir / f"{task.id}.json"
         if response_path.exists() and args.resume:
             print(f"Skipping {task.id} (already completed)")
             continue
@@ -119,6 +120,14 @@ def main():
         except Exception as e:
             print(f"  ERROR: {e}")
             results.append({"task_id": task.id, "status": "error", "error": str(e)})
+
+    # Clean up if no successful responses
+    successful = [r for r in results if r["status"] == "success"]
+    if not successful and not args.resume:
+        import shutil
+        print(f"\nNo successful responses. Cleaning up {run_dir}")
+        shutil.rmtree(run_dir)
+        return
 
     # Update config with completion info
     config["completed_at"] = datetime.now().isoformat()
