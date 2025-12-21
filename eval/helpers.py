@@ -25,7 +25,6 @@ class Task:
     task_type: str
     category: str
     description: str
-    evaluation_type: str
     prompt: str
     rubric: dict
     input_files: list[Path]
@@ -51,7 +50,6 @@ def load_task(task_dir: Path, include_rubric: bool = True) -> Task:
         meta = yaml.safe_load(f)
 
     task_meta = meta.get("task", {})
-    eval_meta = meta.get("evaluation", {})
 
     # Read prompt
     prompt_path = task_dir / "prompt.md"
@@ -74,7 +72,6 @@ def load_task(task_dir: Path, include_rubric: bool = True) -> Task:
         task_type=task_meta.get("type"),
         category=task_meta.get("category"),
         description=task_meta.get("description", ""),
-        evaluation_type=eval_meta.get("type", "programmatic"),
         prompt=prompt,
         rubric=rubric,
         input_files=input_files,
@@ -128,6 +125,19 @@ def load_tasks(
     return tasks
 
 
+def normalize_criteria(criteria) -> list[dict]:
+    """Normalize criteria to list format.
+
+    Handles both formats:
+    - Dict format: {"criterion_id": {...specs...}}
+    - List format: [{"id": "criterion_id", ...specs...}]
+    """
+    if isinstance(criteria, dict):
+        # Convert dict format to list format
+        return [{"id": cid, **spec} for cid, spec in criteria.items()]
+    return criteria  # Already a list
+
+
 def _extract_json(text: str) -> dict | None:
     """Extract JSON object from response text."""
     # Try direct parse first
@@ -158,7 +168,9 @@ def _extract_json(text: str) -> dict | None:
 class AnthropicRunner:
     """Run tasks against Anthropic Claude models with code execution for Excel files."""
 
-    def __init__(self, api_key: str = None, model: str = "claude-sonnet-4-20250514"):
+    def __init__(self, api_key: str = None, model: str = None):
+        if not model:
+            raise ValueError("model is required for AnthropicRunner")
         self.api_key = api_key or os.environ.get("ANTHROPIC_API_KEY")
         if not self.api_key:
             raise ValueError("ANTHROPIC_API_KEY not set")
@@ -247,7 +259,9 @@ class AnthropicRunner:
 class OpenAIRunner:
     """Run tasks against OpenAI models (converts Excel to JSON since no code execution)."""
 
-    def __init__(self, api_key: str = None, model: str = "gpt-4o"):
+    def __init__(self, api_key: str = None, model: str = None):
+        if not model:
+            raise ValueError("model is required for OpenAIRunner")
         self.api_key = api_key or os.environ.get("OPENAI_API_KEY")
         if not self.api_key:
             raise ValueError("OPENAI_API_KEY not set")
@@ -309,12 +323,12 @@ class OpenAIRunner:
         )
 
 
-def get_runner(provider: str, model: str = None):
+def get_runner(provider: str, model: str):
     """Factory function to get the appropriate runner."""
     if provider == "anthropic":
-        return AnthropicRunner(model=model) if model else AnthropicRunner()
+        return AnthropicRunner(model=model)
     elif provider == "openai":
-        return OpenAIRunner(model=model) if model else OpenAIRunner()
+        return OpenAIRunner(model=model)
     else:
         raise ValueError(f"Unknown provider: {provider}")
 
@@ -369,8 +383,8 @@ class LLMJudge:
                 "weighted_total": 0.85
             }
         """
-        # Format criteria for the prompt
-        criteria = rubric.get("criteria", [])
+        # Format criteria for the prompt (normalize to list format)
+        criteria = normalize_criteria(rubric.get("criteria", []))
         criteria_text = "\n".join(
             [
                 f"- **{c['id']}** (weight: {c['weight']}): {c['description']}"
@@ -458,10 +472,9 @@ Include all criteria: {", ".join(c["id"] for c in criteria)}"""
                 weighted_total += score_val * weight
                 total_weight += weight
 
+        # Normalize to 0-1 scale if weights don't sum to 1
         if total_weight > 0:
-            weighted_total = (
-                weighted_total / total_weight * total_weight
-            )  # Already weighted
+            weighted_total = weighted_total / total_weight
 
         parsed["weighted_total"] = weighted_total
         return parsed

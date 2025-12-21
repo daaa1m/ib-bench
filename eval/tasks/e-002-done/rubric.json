@@ -1,40 +1,37 @@
 {
-  "criteria": [
-    {
-      "id": "accuracy",
-      "weight": 0.25,
+  "task_id": "e-002",
+  "version": "1.0",
+  "total_points": 100,
+  "criteria": {
+    "accuracy": {
       "description": "Are all facts, figures, and claims accurate and traceable to the article with no hallucinated information?",
-      "scale": "0-1"
+      "type": "llm_judge",
+      "points": 25
     },
-    {
-      "id": "completeness",
-      "weight": 0.25,
+    "completeness": {
       "description": "Does the summary capture all key points including the primary event, relevant figures, parties involved, and material implications?",
-      "scale": "0-1"
+      "type": "llm_judge",
+      "points": 25
     },
-    {
-      "id": "conciseness",
-      "weight": 0.15,
+    "conciseness": {
       "description": "Is the summary appropriately sized with no filler phrases, excessive hedging, or redundancy?",
-      "scale": "0-1"
+      "type": "llm_judge",
+      "points": 15
     },
-    {
-      "id": "relevance",
-      "weight": 0.15,
+    "relevance": {
       "description": "Does the summary lead with the most important takeaway and prioritises relevant information?",
-      "scale": "0-1"
+      "type": "llm_judge",
+      "points": 15
     },
-    {
-      "id": "commentary_quality",
-      "weight": 0.1,
+    "commentary_quality": {
       "description": "Is any commentary clearly distinguished from article facts, relevant, and insightful? If no commentary is included, is that appropriate?",
-      "scale": "0-1"
+      "type": "llm_judge",
+      "points": 10
     },
-    {
-      "id": "professional_tone",
-      "weight": 0.1,
+    "professional_tone": {
       "description": "Is the language professional, precise, and appropriate for senior banker communication?",
-      "scale": "0-1"
+      "type": "llm_judge",
+      "points": 10
     }
-  ]
+  }
 }

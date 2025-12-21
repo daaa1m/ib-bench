@@ -4,13 +4,7 @@ task:
   type: summarise
   category: pdf
   description: "LLM is provided a financial article, that is highly specialised as well as industry-native, and is asked to generate a summary."
-
 input:
-  original-input-file: grants-vol43-no22.pdf
+  input-file-original: "ib-bench/data-factory/human-generated/grants-vol43-no22.pdf"
+  input-file-used: "input-file-original"
   notes: "LLM is asked to generate a summary and use it's best judgement on the most important ideas to highlight."
-
-# --------------------------------
-# Config (parsed by eval pipeline, changes in this section will impact eval pipeline)
-# --------------------------------
-evaluation:
-  type: llm

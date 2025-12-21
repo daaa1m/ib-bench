@@ -1,8 +1,12 @@
 {
-  "task_id": "IB-E-001",
+  "task_id": "e-001",
+  "version": "1.0",
+  "total_points": 100,
   "criteria": {
-    "key_1_location": {
+    "error_location": {
       "description": "Must identify the Cash from Investing subtotal row or specific cells.",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
       "accepted_values": [
         "Row 140",
         "140",
@@ -14,30 +18,36 @@
         "L140:P140",
         "Range 140"
       ],
-      "match_type": "substring_one_of"
+      "points": 42,
+      "gates_llm": true
     },
-    "key_3_formula": {
+    "corrected_formula": {
       "description": "Must include Row 138 (Maintenance Capex) in the sum.",
+      "type": "programmatic",
+      "match_type": "regex_pattern",
       "required_elements": ["138"],
-      "forbidden_elements": ["#REF!", ""],
+      "forbidden_elements": ["#REF!"],
       "valid_patterns": [
         "SUM\\(.*138.*139.*\\)",
         "SUM\\(.*135.*139.*\\)",
         "\\+.*138",
         "138.*\\+"
       ],
-      "match_type": "regex_pattern"
+      "points": 43,
+      "gates_llm": true
     },
-    "key_4_explanation": {
-      "description": "Must explain that Maintenance Capex was excluded.",
+    "logical_explanation": {
+      "description": "Must explain that Maintenance Capex was excluded from Cash from Investing.",
+      "type": "llm_judge",
       "core_concepts": [
         "Maintenance Capex",
         "Row 138",
         "missing",
         "omitted",
+        "excluded",
         "Investing"
       ],
-      "match_type": "llm_judge"
+      "points": 15
     }
   }
 }
