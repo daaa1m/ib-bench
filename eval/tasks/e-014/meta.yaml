@@ -1,0 +1,17 @@
+# Documentation
+task:
+  id: e-014
+  type: fix-error
+  category: excel
+  description:
+    "LLM is provided a quarterly model with date/period alignment errors where
+    fiscal quarters don't match correctly. LLM must identify and fix the
+    misalignment. Expected answer: corrected period labels and formula
+    references. Tests LLM's ability to debug timeline issues in models."
+
+prompt:
+  notes: "LLM should verify quarterly data sums to annual totals"
+
+input:
+  input-file-original: None
+  notes: "TODO: create model with intentional period alignment errors"

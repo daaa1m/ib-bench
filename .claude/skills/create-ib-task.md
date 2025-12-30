@@ -11,7 +11,7 @@ This skill creates `prompt.md` and `rubric.json` for IB-bench evaluation tasks.
 
 Before using this skill, you MUST have:
 1. A populated `meta.yaml` in the task directory
-2. Read existing examples: `eval/tasks/e-001-done/`, `eval/tasks/e-002-done/`, `eval/tasks/e-003-done/`
+2. Read existing examples: `eval/tasks/e-001/`, `eval/tasks/e-002/`, `eval/tasks/e-003/`
 
 ## Step 1: Analyze the meta.yaml
 
@@ -20,23 +20,29 @@ Read the task's `meta.yaml` and extract all fields:
 ```yaml
 # Documentation
 task:
-  id: e-001                    # Task identifier
-  type: fix-error              # Task type: fix-error, summarise, extraction, etc.
-  category: excel              # Input category: excel, pdf, web, etc.
-  description: "..."           # What the task requires and expected answer
+  id: e-001                    # Task identifier (must match folder name)
+  type: fix-error              # fix-error, summarise, extraction, creating
+  category: excel              # excel, pdf, web
+  description:
+    "Brief explanation. Error/problem (if applicable). Expected answer with
+    specific values. What capability this tests."
+
+prompt:
+  notes: "Special instructions or context given to LLM"
 
 input:
-  input-file-original: "path/to/source.xlsx"  # Path to original source file, or None
-  input-file-used: "description of what's used"  # How input is used, or None for web tasks
-  notes: "Additional context"  # Task-specific notes, or None
+  input-file-original: "$human/source.xlsx"  # Path, list of paths, or None
+  notes: "Modifications or notable aspects of input"
 ```
+
+**Path alias:** `$human` = `data-factory/human-generated/`
 
 **Key fields to use:**
 - `task.type` → Determines prompt structure and methodology
 - `task.category` → Determines input handling (excel/pdf/web)
 - `task.description` → Contains the answer and specific requirements
-- `input.input-file-original` → Source file path (None for web-based tasks)
-- `input.input-file-used` → How input was modified or used
+- `prompt.notes` → Context about what instructions LLM receives
+- `input.input-file-original` → Source file path(s), or None for web tasks
 - `input.notes` → Additional context for prompt creation
 
 ## Step 2: Create prompt.md
@@ -71,12 +77,15 @@ Negative Constraints:
 
 ## Output Format
 
-Provide your response as a raw JSON object with the following keys. Do not include any markdown formatting, backticks, or preamble.
+Provide your response as a raw JSON object with the following keys. Do not
+include any markdown formatting, backticks, or preamble.
 
-`{
+```json
+{
   "key_matching_rubric_criterion": "description",
   ...
-}`
+}
+```
 ```
 
 ### Key Rules for prompt.md:

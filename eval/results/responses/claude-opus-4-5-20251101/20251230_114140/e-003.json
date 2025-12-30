@@ -1,0 +1,16 @@
+{
+  "task_id": "e-003",
+  "model": "claude-opus-4-5-20251101",
+  "timestamp": "2025-12-30T19:41:25.687280",
+  "input_files": [],
+  "raw_response": "{\"purchase_obligations_24m\": \"95066\", \"source_reference\": \"Amazon FY2024 10-K, Item 7 - Management's Discussion and Analysis, Contractual Obligations table, page 24. Purchase obligations due in less than 12 months: $52,928 million, plus obligations due in 12-24 months: $42,138 million, totaling $95,066 million.\"}",
+  "parsed_response": {
+    "purchase_obligations_24m": "95066",
+    "source_reference": "Amazon FY2024 10-K, Item 7 - Management's Discussion and Analysis, Contractual Obligations table, page 24. Purchase obligations due in less than 12 months: $52,928 million, plus obligations due in 12-24 months: $42,138 million, totaling $95,066 million."
+  },
+  "usage": {
+    "input_tokens": 514,
+    "output_tokens": 99,
+    "latency_ms": 4514.922857284546
+  }
+}

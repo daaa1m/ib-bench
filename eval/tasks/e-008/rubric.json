@@ -1,0 +1,37 @@
+{
+  "task_id": "e-008",
+  "version": "1.0",
+  "total_points": 100,
+  "criteria": {
+    "key_themes": {
+      "description": "Does the response identify 3-5 distinct, material themes that accurately reflect the MD&A content? Are the themes substantive and capture management's core narrative?",
+      "type": "llm_judge",
+      "core_concepts": ["themes", "main points", "management perspective", "material", "substantive"],
+      "points": 30
+    },
+    "business_drivers": {
+      "description": "Does the response accurately identify and explain the key business drivers discussed in the MD&A (revenue factors, cost drivers, competitive dynamics)?",
+      "type": "llm_judge",
+      "core_concepts": ["revenue drivers", "cost factors", "competitive dynamics", "growth factors", "profitability"],
+      "points": 25
+    },
+    "trends_and_outlook": {
+      "description": "Does the response capture significant trends and management's forward-looking outlook? Are specific metrics or projections included where management provides them?",
+      "type": "llm_judge",
+      "core_concepts": ["trends", "outlook", "forward-looking", "projections", "strategic priorities", "growth areas"],
+      "points": 25
+    },
+    "risk_factors": {
+      "description": "Does the response identify key risks and uncertainties that management emphasizes in the MD&A section?",
+      "type": "llm_judge",
+      "core_concepts": ["risks", "uncertainties", "challenges", "headwinds", "concerns"],
+      "points": 10
+    },
+    "accuracy": {
+      "description": "Are all stated facts, figures, and claims accurate and traceable to the MD&A with no hallucinated information?",
+      "type": "llm_judge",
+      "core_concepts": ["accuracy", "factual", "traceable", "no hallucination"],
+      "points": 10
+    }
+  }
+}

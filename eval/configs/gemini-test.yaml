@@ -1,0 +1,7 @@
+# Test with Gemini
+provider: gemini
+model: gemini-2.5-flash
+tasks:
+  - e-001
+  - e-002
+parallel: 1

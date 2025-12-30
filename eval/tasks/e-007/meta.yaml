@@ -1,0 +1,23 @@
+# Documentation
+task:
+  id: e-007
+  type: summarise
+  category: pdf
+  description:
+    "LLM is provided two equity research reports (Goldman Sachs and JPMorgan) on
+    Alphabet Q3'25 earnings plus both banks' financial models. LLM must synthesize
+    both research views, extract key metrics (ratings, price targets), and identify
+    key drivers from the models. Expected: GS Buy/$330, JPM OW/$340, Search +14.5%,
+    Cloud +34%, capex $91-93bn. Tests LLM's ability to compare analyst views and
+    extract model drivers."
+
+prompt:
+  notes: "LLM must synthesize two competing research views and reference both models for drivers"
+
+input:
+  input-file-original:
+    - "$human/GS-Alphabet-2025-10-30.pdf"
+    - "$human/JPM-Alphabet-20251030.pdf"
+    - "$human/GS-Alphabet-20251030.xlsx"
+    - "$human/JPM-Alphabet-20251030.xlsx"
+  notes: "Four files: two PDF research reports and two Excel models, one from each bank"

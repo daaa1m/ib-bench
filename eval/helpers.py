@@ -2,18 +2,57 @@
 Shared utilities for the IB-bench evaluation pipeline.
 """
 
+import hashlib
 import json
 import os
 import re
 import time
 from dataclasses import dataclass
 from datetime import datetime
+from functools import wraps
 from pathlib import Path
 
 import yaml
 from dotenv import load_dotenv
 
 load_dotenv(Path(__file__).parent.parent / ".env")
+
+
+def retry_on_rate_limit(max_retries: int = 3, initial_wait: int = 60):
+    """Decorator to retry on rate limit errors with exponential backoff.
+
+    Args:
+        max_retries: Maximum number of retry attempts
+        initial_wait: Initial wait time in seconds (doubles each retry)
+    """
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            last_exception = None
+            wait_time = initial_wait
+
+            for attempt in range(max_retries + 1):
+                try:
+                    return func(*args, **kwargs)
+                except Exception as e:
+                    error_str = str(e)
+                    # Check if it's a rate limit error (429)
+                    if "429" in error_str or "rate_limit" in error_str.lower():
+                        last_exception = e
+                        if attempt < max_retries:
+                            print(f"  Rate limited. Waiting {wait_time}s before retry ({attempt + 1}/{max_retries})...")
+                            time.sleep(wait_time)
+                            wait_time *= 2  # Exponential backoff
+                        else:
+                            print(f"  Rate limited. Max retries ({max_retries}) exceeded.")
+                            raise
+                    else:
+                        # Not a rate limit error, raise immediately
+                        raise
+
+            raise last_exception
+        return wrapper
+    return decorator
 
 
 @dataclass
@@ -48,6 +87,10 @@ def load_task(task_dir: Path, include_rubric: bool = True) -> Task:
     meta_path = task_dir / "meta.yaml"
     with open(meta_path) as f:
         meta = yaml.safe_load(f)
+
+    # Skip if meta.yaml is not a proper dict (e.g., just a comment blurb)
+    if not isinstance(meta, dict):
+        raise ValueError(f"meta.yaml is not a valid task definition (got {type(meta).__name__})")
 
     task_meta = meta.get("task", {})
 
@@ -138,6 +181,12 @@ def normalize_criteria(criteria) -> list[dict]:
     return criteria  # Already a list
 
 
+def get_rubric_hash(rubric: dict) -> str:
+    """Generate 8-char hash of rubric content for versioning."""
+    content = json.dumps(rubric, sort_keys=True)
+    return hashlib.sha256(content.encode()).hexdigest()[:8]
+
+
 def _extract_json(text: str) -> dict | None:
     """Extract JSON object from response text."""
     # Try direct parse first
@@ -185,10 +234,12 @@ class AnthropicRunner:
             self._client = anthropic.Anthropic(api_key=self.api_key)
         return self._client
 
-    def run(self, task: Task, input_file: Path = None) -> LLMResponse:
+    @retry_on_rate_limit(max_retries=3, initial_wait=60)
+    def run(self, task: Task, input_files: list[Path] = None) -> LLMResponse:
         """Execute a task against Claude with file upload via Files API."""
-        if input_file:
-            return self._run_with_file(task, input_file)
+        files = input_files or []
+        if files:
+            return self._run_with_files(task, files)
         else:
             return self._run_text_only(task)
 
@@ -214,18 +265,21 @@ class AnthropicRunner:
             latency_ms=latency_ms,
         )
 
-    def _run_with_file(self, task: Task, input_file: Path) -> LLMResponse:
-        """Run with file upload - uploads file via Files API and uses code execution."""
-        # Upload the file
-        print(f"  Uploading {input_file.name} to Files API...")
-        with open(input_file, "rb") as f:
-            file_obj = self.client.beta.files.upload(file=f)
+    def _run_with_files(self, task: Task, input_files: list[Path]) -> LLMResponse:
+        """Run with file upload - uploads files via Files API and uses code execution."""
+        # Upload all files
+        file_ids = []
+        for input_file in input_files:
+            print(f"  Uploading {input_file.name} to Files API...")
+            with open(input_file, "rb") as f:
+                file_obj = self.client.beta.files.upload(file=f)
+                file_ids.append(file_obj.id)
 
-        # Build message with file reference
-        content = [
-            {"type": "container_upload", "file_id": file_obj.id},
-            {"type": "text", "text": task.prompt},
-        ]
+        # Build message with file references
+        content = []
+        for file_id in file_ids:
+            content.append({"type": "container_upload", "file_id": file_id})
+        content.append({"type": "text", "text": task.prompt})
 
         # Call with code execution tool
         start = time.time()
@@ -257,7 +311,7 @@ class AnthropicRunner:
 
 
 class OpenAIRunner:
-    """Run tasks against OpenAI models (converts Excel to JSON since no code execution)."""
+    """Run tasks against OpenAI models using Files API + Assistants API."""
 
     def __init__(self, api_key: str = None, model: str = None):
         if not model:
@@ -267,6 +321,7 @@ class OpenAIRunner:
             raise ValueError("OPENAI_API_KEY not set")
         self.model = model
         self._client = None
+        self._assistant_id = None
 
     @property
     def client(self):
@@ -276,49 +331,202 @@ class OpenAIRunner:
             self._client = openai.OpenAI(api_key=self.api_key)
         return self._client
 
-    def run(self, task: Task, input_file: Path = None) -> LLMResponse:
-        """Execute a task against OpenAI (converts xlsx to JSON, PDFs not supported)."""
-        from xlsx_converter import xlsx_to_json
+    def _get_or_create_assistant(self) -> str:
+        """Create assistant with file_search and code_interpreter tools."""
+        if self._assistant_id:
+            return self._assistant_id
 
-        # Build message content
-        content_parts = []
-
-        # Handle input file
-        if input_file:
-            if input_file.suffix in [".xlsx", ".xls"]:
-                print(f"  Converting {input_file.name} to JSON for OpenAI...")
-                xlsx_data = xlsx_to_json(str(input_file))
-                xlsx_text = json.dumps(xlsx_data, indent=2)
-                content_parts.append(
-                    f"## Excel File Data\n\n```json\n{xlsx_text}\n```\n\n"
-                )
-            else:
-                print(f"  Warning: {input_file.suffix} files not supported for OpenAI")
-
-        # Add the prompt
-        content_parts.append(task.prompt)
-
-        full_content = "".join(content_parts)
-
-        # Make API call
-        start = time.time()
-        response = self.client.chat.completions.create(
+        assistant = self.client.beta.assistants.create(
+            name="IB-bench Evaluator",
             model=self.model,
-            max_tokens=4096,
-            messages=[{"role": "user", "content": full_content}],
+            tools=[{"type": "file_search"}, {"type": "code_interpreter"}],
         )
+        self._assistant_id = assistant.id
+        return self._assistant_id
+
+    def _upload_file(self, path: Path) -> str:
+        """Upload file to OpenAI Files API."""
+        with open(path, "rb") as f:
+            file = self.client.files.create(file=f, purpose="assistants")
+        return file.id
+
+    def _get_tools_for_file(self, path: Path) -> list[dict]:
+        """Determine which tools to use based on file type."""
+        suffix = path.suffix.lower()
+        if suffix == ".pdf":
+            return [{"type": "file_search"}]
+        elif suffix in [".xlsx", ".xls", ".csv", ".png", ".jpg", ".jpeg"]:
+            return [{"type": "code_interpreter"}]
+        else:
+            # Default to both for unknown types
+            return [{"type": "file_search"}, {"type": "code_interpreter"}]
+
+    @retry_on_rate_limit(max_retries=3, initial_wait=60)
+    def run(self, task: Task, input_files: list[Path] = None) -> LLMResponse:
+        """Execute a task using Assistants API with file attachments."""
+        start = time.time()
+
+        # Get or create assistant
+        assistant_id = self._get_or_create_assistant()
+
+        # Upload input files
+        file_ids = []
+        attachments = []
+
+        files_to_upload = input_files or []
+        for f in files_to_upload:
+            if f and f.exists():
+                print(f"  Uploading {f.name} to OpenAI Files API...")
+                file_id = self._upload_file(f)
+                file_ids.append(file_id)
+                tools = self._get_tools_for_file(f)
+                attachments.append({"file_id": file_id, "tools": tools})
+
+        # Create thread with attachments
+        thread = self.client.beta.threads.create(
+            messages=[
+                {
+                    "role": "user",
+                    "content": task.prompt,
+                    "attachments": attachments if attachments else None,
+                }
+            ]
+        )
+
+        # Run and poll for completion
+        print(f"  Running assistant...")
+        run = self.client.beta.threads.runs.create_and_poll(
+            thread_id=thread.id, assistant_id=assistant_id
+        )
+
         latency_ms = (time.time() - start) * 1000
 
-        # Extract response
-        raw_text = response.choices[0].message.content
-        parsed_json = _extract_json(raw_text)
+        # Get response
+        messages = self.client.beta.threads.messages.list(thread_id=thread.id)
+        response_text = ""
+        for msg in messages.data:
+            if msg.role == "assistant":
+                for content_block in msg.content:
+                    if content_block.type == "text":
+                        response_text += content_block.text.value + "\n"
+                break  # Only get the first assistant message
+
+        # Cleanup uploaded files
+        for fid in file_ids:
+            try:
+                self.client.files.delete(fid)
+            except Exception as e:
+                print(f"  Warning: Failed to delete file {fid}: {e}")
+
+        # Extract usage info
+        input_tokens = run.usage.prompt_tokens if run.usage else 0
+        output_tokens = run.usage.completion_tokens if run.usage else 0
+
+        parsed_json = _extract_json(response_text)
 
         return LLMResponse(
-            raw_text=raw_text,
+            raw_text=response_text.strip(),
             parsed_json=parsed_json,
             model=self.model,
-            input_tokens=response.usage.prompt_tokens,
-            output_tokens=response.usage.completion_tokens,
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
+            latency_ms=latency_ms,
+        )
+
+    def cleanup(self):
+        """Delete the assistant when done."""
+        if self._assistant_id:
+            try:
+                self.client.beta.assistants.delete(self._assistant_id)
+                self._assistant_id = None
+            except Exception as e:
+                print(f"  Warning: Failed to delete assistant: {e}")
+
+
+class GeminiRunner:
+    """Run tasks against Google Gemini models using Files API + Code Execution."""
+
+    def __init__(self, api_key: str = None, model: str = None):
+        if not model:
+            raise ValueError("model is required for GeminiRunner")
+        self.api_key = api_key or os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+        if not self.api_key:
+            raise ValueError("GEMINI_API_KEY or GOOGLE_API_KEY not set")
+        self.model = model
+        self._client = None
+
+    @property
+    def client(self):
+        if self._client is None:
+            from google import genai
+
+            self._client = genai.Client(api_key=self.api_key)
+        return self._client
+
+    def _upload_file(self, path: Path) -> object:
+        """Upload file to Gemini Files API."""
+        print(f"  Uploading {path.name} to Gemini Files API...")
+        return self.client.files.upload(file=str(path))
+
+    @retry_on_rate_limit(max_retries=3, initial_wait=60)
+    def run(self, task: Task, input_files: list[Path] = None) -> LLMResponse:
+        """Execute a task using Gemini with file upload and code execution."""
+        from google.genai import types
+
+        start = time.time()
+
+        # Upload input files
+        uploaded_files = []
+        files_to_upload = input_files or []
+        for f in files_to_upload:
+            if f and f.exists():
+                uploaded_file = self._upload_file(f)
+                uploaded_files.append(uploaded_file)
+
+        # Build contents with files and prompt
+        contents = uploaded_files + [task.prompt]
+
+        # Configure code execution tool
+        config = types.GenerateContentConfig(
+            tools=[types.Tool(code_execution=types.ToolCodeExecution)]
+        )
+
+        # Make API call
+        print(f"  Running Gemini model...")
+        response = self.client.models.generate_content(
+            model=self.model,
+            contents=contents,
+            config=config,
+        )
+
+        latency_ms = (time.time() - start) * 1000
+
+        # Extract text from response parts
+        response_text = ""
+        for part in response.candidates[0].content.parts:
+            if part.text is not None:
+                response_text += part.text + "\n"
+
+        # Cleanup uploaded files
+        for uploaded_file in uploaded_files:
+            try:
+                self.client.files.delete(name=uploaded_file.name)
+            except Exception as e:
+                print(f"  Warning: Failed to delete file {uploaded_file.name}: {e}")
+
+        # Extract usage info
+        usage = response.usage_metadata
+        input_tokens = usage.prompt_token_count if usage else 0
+        output_tokens = usage.candidates_token_count if usage else 0
+
+        parsed_json = _extract_json(response_text)
+
+        return LLMResponse(
+            raw_text=response_text.strip(),
+            parsed_json=parsed_json,
+            model=self.model,
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
             latency_ms=latency_ms,
         )
 
@@ -329,19 +537,21 @@ def get_runner(provider: str, model: str):
         return AnthropicRunner(model=model)
     elif provider == "openai":
         return OpenAIRunner(model=model)
+    elif provider == "gemini":
+        return GeminiRunner(model=model)
     else:
         raise ValueError(f"Unknown provider: {provider}")
 
 
 def create_run_directory(model: str, base_dir: Path = None) -> Path:
-    """Create a timestamped run directory under results/responses/."""
+    """Create a timestamped run directory under results/responses/{model}/{run_id}."""
     if base_dir is None:
         base_dir = Path(__file__).parent / "results" / "responses"
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     # Sanitize model name for filesystem
     model_safe = model.replace("/", "-").replace(":", "-")
-    run_dir = base_dir / f"{timestamp}_{model_safe}"
+    run_dir = base_dir / model_safe / timestamp
 
     run_dir.mkdir(parents=True, exist_ok=True)
 
@@ -387,7 +597,7 @@ class LLMJudge:
         criteria = normalize_criteria(rubric.get("criteria", []))
         criteria_text = "\n".join(
             [
-                f"- **{c['id']}** (weight: {c['weight']}): {c['description']}"
+                f"- **{c['id']}** ({c.get('points', 0)} points): {c['description']}"
                 for c in criteria
             ]
         )
@@ -457,6 +667,7 @@ Include all criteria: {", ".join(c["id"] for c in criteria)}"""
         parsed = _extract_json(raw_text)
         if not parsed:
             print(f"  Warning: Could not parse judge response as JSON")
+            print(f"  Raw response preview: {raw_text[:500]}...")
             return {"scores": {}, "weighted_total": 0.0, "raw_response": raw_text}
 
         # Calculate weighted total
@@ -466,11 +677,11 @@ Include all criteria: {", ".join(c["id"] for c in criteria)}"""
 
         for criterion in criteria:
             cid = criterion["id"]
-            weight = criterion.get("weight", 0)
+            points = criterion.get("points", 0)
             if cid in scores:
                 score_val = scores[cid].get("score", 0)
-                weighted_total += score_val * weight
-                total_weight += weight
+                weighted_total += score_val * points
+                total_weight += points
 
         # Normalize to 0-1 scale if weights don't sum to 1
         if total_weight > 0:

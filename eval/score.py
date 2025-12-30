@@ -2,19 +2,20 @@
 Score responses from a run. Can re-run freely when rubrics change.
 
 Usage:
-    uv run python eval/score.py RUN_ID                 # Score all
-    uv run python eval/score.py RUN_ID --tasks e-001   # Score specific
-    uv run python eval/score.py RUN_ID --rescore       # Rescore already-scored
-    uv run python eval/score.py RUN_ID --judge-model claude-opus-4-20250514  # Use specific judge
+    uv run python eval/score.py MODEL/RUN_ID                 # Score all
+    uv run python eval/score.py MODEL/RUN_ID --tasks e-001   # Score specific
+    uv run python eval/score.py MODEL/RUN_ID --rescore       # Rescore already-scored
+    uv run python eval/score.py MODEL/RUN_ID --judge-model claude-opus-4-20250514  # Use specific judge
 """
 
 import argparse
 import json
 import re
 from dataclasses import dataclass, field
+from datetime import datetime
 from pathlib import Path
 
-from helpers import load_tasks, LLMJudge, normalize_criteria
+from helpers import load_tasks, LLMJudge, normalize_criteria, get_rubric_hash
 
 
 @dataclass
@@ -151,9 +152,13 @@ def score_task(task, response_data: dict, judge: LLMJudge = None) -> TaskScore:
         match_type = criterion.get("match_type")
         points = criterion.get("points", 0)
         gates_llm = criterion.get("gates_llm", False)
+        search_full_response = criterion.get("search_full_response", False)
 
-        # Use criterion ID as response field key (matching names)
-        actual_value = str(parsed_response.get(criterion_id, ""))
+        # Get value to evaluate: full response JSON or specific field
+        if search_full_response:
+            actual_value = json.dumps(parsed_response)
+        else:
+            actual_value = str(parsed_response.get(criterion_id, ""))
 
         # Evaluate based on match type
         if match_type == "substring_one_of":
@@ -324,7 +329,7 @@ def main():
     parser.add_argument("run_id", help="Run ID to score")
     parser.add_argument("--tasks", nargs="+", help="Specific task IDs to score")
     parser.add_argument("--rescore", action="store_true", help="Rescore already-scored tasks")
-    parser.add_argument("--judge-model", default="claude-sonnet-4-20250514",
+    parser.add_argument("--judge-model", default="claude-sonnet-4-5-20250929",
                         help="Model to use for LLM-as-judge scoring")
     args = parser.parse_args()
 
@@ -352,8 +357,9 @@ def main():
 
     print(f"Scoring {len(response_files)} response(s)...")
 
-    # Load all tasks for rubrics
-    all_tasks = load_tasks()
+    # Load only the tasks we need (based on response files)
+    task_ids_to_load = [f.stem for f in response_files]
+    all_tasks = load_tasks(task_ids=task_ids_to_load, include_rubric=True)
     task_map = {t.id: t for t in all_tasks}
 
     # Initialize LLM judge lazily (only when needed)
@@ -427,6 +433,8 @@ def main():
         # Save score
         score_data = {
             "task_id": score.task_id,
+            "rubric_hash": get_rubric_hash(task.rubric),
+            "scored_at": datetime.now().isoformat(),
             "passed": score.passed,
             "total_points": score.total_points,
             "points_earned": score.points_earned,
@@ -462,6 +470,11 @@ def main():
     summary_file = scores_dir / "summary.json"
     overall_percent = (summary["points_earned"] / summary["total_points"] * 100) if summary["total_points"] > 0 else 0
     summary["overall_percent"] = overall_percent
+    summary["rubric_hashes"] = {
+        r["task_id"]: get_rubric_hash(task_map[r["task_id"]].rubric)
+        for r in summary["results"]
+        if r["task_id"] in task_map
+    }
 
     with open(summary_file, "w") as f:
         json.dump(summary, f, indent=2)

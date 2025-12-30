@@ -1,0 +1,17 @@
+# Documentation
+task:
+  id: e-008
+  type: summarise
+  category: pdf
+  description:
+    "LLM is provided a 10-K filing and must summarize the MD&A section,
+    focusing on key business drivers, significant trends, and management's
+    outlook. Expected answer should capture 3-5 main themes. Tests LLM's
+    ability to extract management perspective from regulatory filings."
+
+prompt:
+  notes: "LLM should prioritize forward-looking statements and risk factors"
+
+input:
+  input-file-original: None
+  notes: "TODO: source 10-K with substantive MD&A section"

@@ -1,0 +1,17 @@
+# Documentation
+task:
+  id: e-012
+  type: summarise
+  category: pdf
+  description:
+    "LLM is provided an S-1 filing and must summarize the top 5 risk factors
+    with analyst implications. Expected answer: prioritized list of material
+    risks with business impact assessment. Tests LLM's ability to prioritize
+    and distill lengthy risk disclosures."
+
+prompt:
+  notes: "LLM should rank risks by materiality, not just list in document order"
+
+input:
+  input-file-original: None
+  notes: "TODO: source S-1 with substantive risk factors section"

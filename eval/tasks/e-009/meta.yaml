@@ -1,0 +1,17 @@
+# Documentation
+task:
+  id: e-009
+  type: extraction
+  category: excel
+  description:
+    "LLM is provided an LBO model and must extract all key assumptions
+    including entry/exit multiples, hold period, debt tranches, rates, and
+    growth rates. Expected answer: complete list of driver cells and values.
+    Tests LLM's ability to navigate complex models and identify inputs."
+
+prompt:
+  notes: "LLM should identify assumption cells vs calculated cells"
+
+input:
+  input-file-original: None
+  notes: "TODO: use existing LBO model from data-factory"

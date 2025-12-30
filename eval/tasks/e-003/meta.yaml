@@ -1,0 +1,17 @@
+# Documentation
+task:
+  id: e-003
+  type: extraction
+  category: web
+  description:
+    "LLM must obtain AMZN's FY2024 10-K from SEC EDGAR or IR site and extract
+    the next 24-month unconditional purchase obligations from Dec 31, 2024.
+    Expected answer: USD 16,477m (USD 8,536m + USD 7,941m). Tests LLM's ability
+    to navigate SEC filings and locate specific footnote data."
+
+prompt:
+  notes: "LLM is given flexibility on data source (EDGAR or IR site)"
+
+input:
+  input-file-original: None
+  notes: "Web-based task, no input file provided"

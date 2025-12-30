@@ -15,3 +15,5 @@ wheels/
 .DS_Store
 .prettierrc
 
+# Private task folders
+eval/tasks/_private/

@@ -1,0 +1,48 @@
+{
+  "task_id": "e-014",
+  "version": "1.0",
+  "total_points": 100,
+  "criteria": {
+    "error_location": {
+      "description": "Must identify the specific cell(s) or row(s) where the period alignment error occurs.",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": [],
+      "points": 35,
+      "gates_llm": true
+    },
+    "corrected_value": {
+      "description": "Must provide the correctly aligned period label or formula reference.",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": [],
+      "points": 35,
+      "gates_llm": true
+    },
+    "quarterly_sum_check": {
+      "description": "Must verify that quarterly data sums match annual totals after correction.",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["PASS"],
+      "points": 15,
+      "gates_llm": false
+    },
+    "explanation": {
+      "description": "Must explain the nature of the period alignment error and how the fix resolves the misalignment.",
+      "type": "llm_judge",
+      "core_concepts": [
+        "period",
+        "quarter",
+        "alignment",
+        "mismatch",
+        "fiscal",
+        "timeline",
+        "Q1",
+        "Q2",
+        "Q3",
+        "Q4"
+      ],
+      "points": 15
+    }
+  }
+}

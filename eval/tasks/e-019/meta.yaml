@@ -1,0 +1,17 @@
+# Documentation
+task:
+  id: e-019
+  type: extraction
+  category: pdf
+  description:
+    "LLM is provided a credit agreement and must extract financial covenants
+    including specific ratios (leverage, coverage), threshold levels, and
+    testing frequency. Expected answer: covenant table with definitions and
+    limits. Tests LLM's ability to parse credit documentation."
+
+prompt:
+  notes: "LLM should capture both ratio definitions and numeric thresholds"
+
+input:
+  input-file-original: None
+  notes: "TODO: source credit agreement with clear covenant section"

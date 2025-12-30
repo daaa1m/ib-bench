@@ -1,0 +1,78 @@
+{
+  "task_id": "e-007",
+  "version": "1.0",
+  "total_points": 100,
+  "criteria": {
+    "gs_rating": {
+      "description": "Goldman Sachs rating must be Buy",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["Buy", "BUY", "buy"],
+      "points": 8,
+      "gates_llm": true
+    },
+    "gs_price_target": {
+      "description": "Goldman Sachs price target must be $330",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["330", "$330"],
+      "points": 8,
+      "gates_llm": true
+    },
+    "jpm_rating": {
+      "description": "JPMorgan rating must be Overweight",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["Overweight", "OVERWEIGHT", "overweight", "OW"],
+      "points": 8,
+      "gates_llm": true
+    },
+    "jpm_price_target": {
+      "description": "JPMorgan price target must be $340",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["340", "$340"],
+      "points": 8,
+      "gates_llm": true
+    },
+    "q3_search_growth": {
+      "description": "Q3 2025 Search growth must be approximately 14-15% YoY",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["14.5", "14.5%", "+14.5%", "15%", "15", "+15%"],
+      "points": 8
+    },
+    "q3_cloud_growth": {
+      "description": "Q3 2025 Cloud growth must be approximately 33-34% YoY",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["34", "34%", "+34%", "33.5", "33.5%", "+33.5%", "33", "33%"],
+      "points": 8
+    },
+    "fy25_capex_guidance": {
+      "description": "FY2025 capex guidance must be $91-93 billion range",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["91-93", "$91-93", "91-$93", "$91-$93", "91B-93B", "$91B-$93B", "91 billion to 93 billion", "91bn-93bn"],
+      "points": 8
+    },
+    "key_drivers": {
+      "description": "Key drivers should include Search/AI, Cloud, YouTube, and margin/capex themes",
+      "type": "llm_judge",
+      "core_concepts": ["Search growth", "AI Overviews", "Google Cloud", "YouTube", "margins", "capex"],
+      "points": 14
+    },
+    "summary_synthesis": {
+      "description": "Summary must synthesize both GS and JPM views, not just repeat one",
+      "type": "llm_judge",
+      "core_concepts": ["Goldman Sachs view", "JPMorgan view", "comparison", "synthesis"],
+      "points": 15
+    },
+    "summary_drivers": {
+      "description": "Summary must reference model drivers and key financial metrics",
+      "type": "llm_judge",
+      "core_concepts": ["revenue drivers", "segment growth", "model assumptions", "valuation"],
+      "points": 15
+    }
+  }
+}

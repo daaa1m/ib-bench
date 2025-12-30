@@ -16,6 +16,7 @@ Create `.env` with API keys:
 ```
 ANTHROPIC_API_KEY=sk-ant-...
 OPENAI_API_KEY=sk-...
+GEMINI_API_KEY=...
 ```
 
 ## Commands
@@ -23,24 +24,60 @@ OPENAI_API_KEY=sk-...
 All Python scripts must be run with `uv run`:
 
 ```bash
-# Run specific tasks (--model is required)
+# Run with config file (recommended)
+uv run python eval/run.py --config configs/quick-test.yaml
+uv run python eval/run.py --config configs/full-easy.yaml
+
+# Override config with CLI args
+uv run python eval/run.py --config configs/quick-test.yaml --model gpt-4o
+uv run python eval/run.py --config configs/quick-test.yaml --parallel 5
+
+# Run without config (all CLI args)
 uv run python eval/run.py --tasks e-001 --model claude-sonnet-4-20250514
 uv run python eval/run.py --tasks e-001 e-002 --model claude-sonnet-4-20250514
-
-# Run tasks by difficulty prefix (e- = easy, m- = medium, h- = hard)
 uv run python eval/run.py --filter e- --model claude-sonnet-4-20250514
 
-# Use OpenAI instead of Anthropic
+# Use different providers
 uv run python eval/run.py --tasks e-001 --provider openai --model gpt-4o
+uv run python eval/run.py --tasks e-001 --provider gemini --model gemini-2.5-flash
+
+# Run tasks in parallel (5 concurrent)
+uv run python eval/run.py --filter e- --model gemini-2.5-flash --parallel 5
 
 # Score responses from a run
 uv run python eval/score.py RUN_ID
 uv run python eval/score.py RUN_ID --tasks e-001
 uv run python eval/score.py RUN_ID --rescore
 
+# Generate leaderboard
+uv run python eval/leaderboard.py                      # CLI table
+uv run python eval/leaderboard.py --export results/    # Export JSON
+uv run python eval/leaderboard.py --weights 25,35,40   # Custom weights
+
 # Run tests
 uv run pytest eval/test_eval.py -v
 ```
+
+### Config Files
+
+Config files live in `eval/configs/` and use YAML format:
+
+```yaml
+# eval/configs/quick-test.yaml
+provider: anthropic
+model: claude-sonnet-4-20250514
+tasks:
+  - e-001
+  - e-002
+parallel: 1
+```
+
+Available config options:
+- `provider`: anthropic, openai, or gemini
+- `model`: Model identifier
+- `tasks`: List of task IDs
+- `filter`: Task ID prefix (e.g., "e-" for all easy tasks)
+- `parallel`: Number of concurrent tasks
 
 ## Architecture
 
@@ -75,16 +112,32 @@ Task IDs follow naming: `{difficulty}-{number}` where difficulty is `e` (easy),
 ### Meta Format
 
 ```yaml
+# Documentation
 task:
   id: e-001
-  type: fix-error # fix-error, summarise, extraction
+  type: fix-error # fix-error, summarise, extraction, creating
   category: excel # excel, pdf, web
-  description: "What the task requires and expected answer"
+  description:
+    "Brief explanation of what the task requires. The error or problem (if
+    applicable). Expected answer with specific values. What capability this
+    tests."
+
+prompt:
+  notes: "Special instructions or context given to the LLM"
 
 input:
-  input-file-original: "path/to/source.xlsx" # Source file path, or None for web tasks
-  input-file-used: "how input was modified" # Or None
-  notes: "Additional context" # Or None
+  input-file-original: "$human/source.xlsx" # Path, list of paths, or None
+  notes: "Modifications made or notable aspects of input"
+```
+
+**Path alias:** `$human` expands to `data-factory/human-generated/`
+
+**Multiple inputs:** `input-file-original` can be a list:
+```yaml
+input:
+  input-file-original:
+    - "$human/report.pdf"
+    - "$human/model.xlsx"
 ```
 
 ### Rubric Format
@@ -121,10 +174,12 @@ Rubrics are self-describing - evaluation type is derived from criteria types:
 - `match_type`: For programmatic - `"substring_one_of"` or `"regex_pattern"`
 - `points`: Score weight for this criterion
 - `gates_llm`: If `true` and this criterion fails, LLM criteria are skipped
-  (saves cost)
+  (saves cost). Only use when rubric has LLM judge criteria.
 
-**Criterion ID = Response JSON key**: The rubric criterion ID must match the
-output field in the prompt's expected JSON format.
+**Criterion ID alignment:**
+- **Programmatic criteria**: ID must match the JSON output key exactly
+- **LLM-judge criteria**: Can be evaluation dimensions (e.g., `summary_synthesis`,
+  `summary_drivers`) that assess qualities of an output field like `summary`
 
 ### Evaluation Types
 
@@ -136,41 +191,88 @@ Derived automatically from rubric criteria:
 
 ### Model Runners
 
-`eval/helpers.py` contains `OpenAIRunner` and `AnthropicRunner` classes for API
-calls.
+`eval/helpers.py` contains three runner classes:
+
+| Runner | Provider | File Handling | Tools |
+|--------|----------|---------------|-------|
+| `AnthropicRunner` | Anthropic | Files API | Code execution |
+| `OpenAIRunner` | OpenAI | Files API + Assistants | file_search, code_interpreter |
+| `GeminiRunner` | Google | Files API | Code execution |
+
+All runners support native file upload - no manual conversion needed.
 
 ## File Handling
 
-| Type        | Processing                                            |
-| ----------- | ----------------------------------------------------- |
-| `.pdf`      | Native Claude document support                        |
-| `.xlsx`     | Converted to JSON with formulas preserved (see below) |
-| `.png/.jpg` | Native image support                                  |
-| `.csv/.txt` | Sent as text                                          |
+All providers handle files natively via their respective APIs:
+
+| Type | Anthropic | OpenAI | Gemini |
+|------|-----------|--------|--------|
+| `.pdf` | Files API | file_search | Files API |
+| `.xlsx` | Code execution | code_interpreter | Code execution |
+| `.png/.jpg` | Native vision | code_interpreter | Files API |
 
 ## Results Directory
 
 ```
 eval/results/
 ├── responses/          # LLM outputs (expensive, preserve)
-│   └── {timestamp}_{model}/
-│       ├── config.json
-│       └── {task-id}.json
+│   └── {model}/
+│       └── {run_id}/
+│           ├── config.json
+│           └── {task-id}.json
 └── scores/             # Scoring outputs (cheap, regenerable)
-    └── {timestamp}_{model}/
-        ├── {task-id}.json
-        └── summary.json
+    └── {model}/
+        └── {run_id}/
+            ├── {task-id}.json  # includes rubric_hash, scored_at
+            └── summary.json
 ```
 
 Responses are cached and reused. Scores can be regenerated freely when rubrics
-change.
+change. Score files include `rubric_hash` for audit trail.
 
-## Task Creation
+When using `--resume` or scoring, specify path as `MODEL/RUN_ID` (e.g.,
+`claude-opus-4-5-20251101/20251230_114140`).
 
-Use the skill at `.claude/skills/create-ib-task.md` to create new tasks:
+## Leaderboard
+
+The leaderboard aggregates scores across models and calculates a weighted overall
+score (max 100).
+
+**Per-task credit:**
+- 0 credit: < 50 points
+- 0.5 credit (half): 50-99 points
+- 1.0 credit (full): 100 points
+
+**Tier score:** `(total credits / tasks completed) × 100`
+
+**Overall score:** `Easy×0.20 + Medium×0.35 + Hard×0.45`
+
+Weights are configurable in `eval/leaderboard_config.yaml` or via `--weights` CLI
+flag.
+
+**JSON export** (`--export`) produces `leaderboard.json` suitable for frontend
+integration.
+
+## Task Workflow
+
+### Creating Tasks
+
+Use `.claude/skills/create-ib-task.md`:
 
 1. Populate `meta.yaml` with task details and expected answer
 2. Run the skill to generate `prompt.md` and `rubric.json`
 
 The skill ensures criterion IDs match JSON output keys and proper point
 allocation.
+
+### Reviewing Tasks
+
+Use `.claude/skills/review-ib-task.md` to validate task quality:
+
+- Structural completeness (all required files exist)
+- Criterion ID alignment between prompt and rubric
+- Rubric quality (points sum, accepted_values variants)
+- Prompt quality (all required sections)
+- Category-input consistency
+- Expected answer traceability
+- Overall coherence

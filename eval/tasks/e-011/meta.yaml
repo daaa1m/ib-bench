@@ -1,0 +1,17 @@
+# Documentation
+task:
+  id: e-011
+  type: extraction
+  category: pdf
+  description:
+    "LLM is provided a credit agreement or 10-K and must extract the complete
+    debt maturity schedule showing principal amounts due by year. Expected
+    answer: table of maturities by year matching source document. Tests LLM's
+    ability to locate and parse debt footnote disclosures."
+
+prompt:
+  notes: "LLM should present data in structured format by maturity year"
+
+input:
+  input-file-original: None
+  notes: "TODO: source 10-K with clear debt maturity table in footnotes"

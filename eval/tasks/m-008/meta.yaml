@@ -1,0 +1,4 @@
+// extraction/pdf+excel - Populate 3-statement model from 10-K
+// provide: empty model template with structure, company 10-K
+// LLM must extract 3 years of historicals and input into correct cells
+// tests: reading comprehension, cell mapping, ensuring statements balance

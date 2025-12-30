@@ -1,0 +1,4 @@
+// creating/excel+pdf - Build operating model from template + investment memo
+// provide: skeleton Excel template with structure, investment memo with assumptions
+// LLM must populate: revenue build, margin assumptions, working capital, capex
+// tests: reading comprehension, model building, cross-referencing memo to model

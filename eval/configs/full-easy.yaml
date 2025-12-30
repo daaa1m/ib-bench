@@ -1,0 +1,5 @@
+# Run all easy tasks in parallel
+provider: anthropic
+model: claude-sonnet-4-20250514
+filter: e-
+parallel: 5

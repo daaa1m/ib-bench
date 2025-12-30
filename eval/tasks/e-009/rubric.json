@@ -1,0 +1,74 @@
+{
+  "task_id": "e-009",
+  "version": "1.0",
+  "total_points": 100,
+  "criteria": {
+    "entry_multiple": {
+      "description": "Must correctly identify the entry EV/EBITDA multiple from the transaction assumptions",
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "valid_patterns": [
+        "^[0-9]+\\.?[0-9]*x?$",
+        "^[0-9]+\\.?[0-9]*$"
+      ],
+      "points": 20,
+      "gates_llm": true
+    },
+    "exit_multiple": {
+      "description": "Must correctly identify the exit EV/EBITDA multiple from the transaction assumptions",
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "valid_patterns": [
+        "^[0-9]+\\.?[0-9]*x?$",
+        "^[0-9]+\\.?[0-9]*$"
+      ],
+      "points": 20,
+      "gates_llm": true
+    },
+    "hold_period_years": {
+      "description": "Must correctly identify the investment holding period in years",
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "valid_patterns": [
+        "^[1-9][0-9]*$"
+      ],
+      "points": 15,
+      "gates_llm": true
+    },
+    "senior_debt_rate": {
+      "description": "Must correctly identify the senior debt interest rate as a percentage",
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "valid_patterns": [
+        "[0-9]+\\.?[0-9]*%",
+        "[0-9]+\\.?[0-9]* percent"
+      ],
+      "points": 15,
+      "gates_llm": true
+    },
+    "revenue_growth_rate": {
+      "description": "Must correctly identify the revenue growth rate assumption as a percentage",
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "valid_patterns": [
+        "[0-9]+\\.?[0-9]*%",
+        "[0-9]+\\.?[0-9]* percent"
+      ],
+      "points": 15,
+      "gates_llm": true
+    },
+    "assumptions_summary": {
+      "description": "Must demonstrate understanding of how to distinguish assumption cells from calculated cells in an LBO model",
+      "type": "llm_judge",
+      "core_concepts": [
+        "hard-coded",
+        "input cells",
+        "blue font",
+        "formula",
+        "assumptions",
+        "driver cells"
+      ],
+      "points": 15
+    }
+  }
+}

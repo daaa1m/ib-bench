@@ -1,0 +1,17 @@
+# Documentation
+task:
+  id: e-016
+  type: summarise
+  category: pdf
+  description:
+    "LLM is provided a merger agreement and must summarize key economic terms
+    including price, consideration type, conditions, termination fees, and MAC
+    provisions. Expected answer: deal summary with all material terms. Tests
+    LLM's ability to parse legal documents for business terms."
+
+prompt:
+  notes: "LLM should focus on economic terms, not boilerplate legal language"
+
+input:
+  input-file-original: None
+  notes: "TODO: source public merger agreement from SEC"

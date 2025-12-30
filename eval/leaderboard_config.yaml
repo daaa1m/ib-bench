@@ -1,0 +1,8 @@
+# Leaderboard scoring configuration
+
+weights:
+  easy: 0.20
+  medium: 0.35
+  hard: 0.45
+
+benchmark_version: "1.0"

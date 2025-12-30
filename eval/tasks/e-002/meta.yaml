@@ -1,0 +1,17 @@
+# Documentation
+task:
+  id: e-002
+  type: summarise
+  category: pdf
+  description:
+    "LLM is provided a specialized financial article (Grant's Interest Rate
+    Observer) and asked to summarize the key points. Expected answer should
+    capture the main investment thesis and supporting arguments. Tests LLM's
+    ability to distill dense financial commentary."
+
+prompt:
+  notes: "LLM is asked to use best judgement on most important ideas to highlight"
+
+input:
+  input-file-original: "$human/grants-vol43-no22.pdf"
+  notes: "Used as-is without modification"

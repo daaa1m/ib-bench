@@ -1,0 +1,17 @@
+# Documentation
+task:
+  id: e-018
+  type: fix-error
+  category: excel
+  description:
+    "LLM is provided a cash flow model with incorrect NWC formula (wrong signs,
+    missing components, or incorrect period referencing). LLM must identify and
+    fix the error. Expected answer: corrected NWC formula with proper sign
+    convention. Tests LLM's understanding of working capital mechanics."
+
+prompt:
+  notes: "LLM should verify sign convention (increase in AR = cash outflow)"
+
+input:
+  input-file-original: None
+  notes: "TODO: create model with intentional NWC calculation errors"

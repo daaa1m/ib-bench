@@ -1,0 +1,72 @@
+{
+  "task_id": "e-002",
+  "rubric_hash": "796e16ce",
+  "scored_at": "2025-12-30T20:13:20.493686",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "accuracy",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 25,
+      "points_earned": 0,
+      "actual": "0.00",
+      "details": "Criterion not scored by judge"
+    },
+    {
+      "id": "completeness",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 25,
+      "points_earned": 0,
+      "actual": "0.00",
+      "details": "Criterion not scored by judge"
+    },
+    {
+      "id": "conciseness",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 0,
+      "actual": "0.00",
+      "details": "Criterion not scored by judge"
+    },
+    {
+      "id": "relevance",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 0,
+      "actual": "0.00",
+      "details": "Criterion not scored by judge"
+    },
+    {
+      "id": "commentary_quality",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 0,
+      "actual": "0.00",
+      "details": "Criterion not scored by judge"
+    },
+    {
+      "id": "professional_tone",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 0,
+      "actual": "0.00",
+      "details": "Criterion not scored by judge"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "task_id": "e-004",
+  "model": "claude-opus-4-5-20251101",
+  "timestamp": "2025-12-30T11:59:05.187218",
+  "input_files": [],
+  "raw_response": "{\"gaap_operating_income\": \"724\",\n\"non_gaap_operating_income\": \"1,715\",\n\"adjustments\": [\n{\"name\": \"Stock-based compensation\", \"amount\": \"403\"},\n{\"name\": \"Amortization of acquisition-related intangibles\", \"amount\": \"588\"}\n]}",
+  "parsed_response": {
+    "gaap_operating_income": "724",
+    "non_gaap_operating_income": "1,715",
+    "adjustments": [
+      {
+        "name": "Stock-based compensation",
+        "amount": "403"
+      },
+      {
+        "name": "Amortization of acquisition-related intangibles",
+        "amount": "588"
+      }
+    ]
+  },
+  "usage": {
+    "input_tokens": 675,
+    "output_tokens": 77,
+    "latency_ms": 3045.562267303467
+  }
+}

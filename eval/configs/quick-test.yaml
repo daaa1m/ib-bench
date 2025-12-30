@@ -1,0 +1,7 @@
+# Quick test config - run a few easy tasks
+provider: anthropic
+model: claude-sonnet-4-20250514
+tasks:
+  - e-001
+  - e-002
+parallel: 1

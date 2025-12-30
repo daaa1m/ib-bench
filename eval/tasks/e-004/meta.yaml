@@ -1,0 +1,18 @@
+# Documentation
+task:
+  id: e-004
+  type: extraction
+  category: web
+  description:
+    "LLM must reconcile AMD's Q3 2025 GAAP operating income to non-GAAP and
+    identify all reconciling line items without hints. Expected: GAAP OI $1,270m,
+    non-GAAP OI $2,238m, adjustments: SBC $419m, amortization $562m, acquisition
+    costs $42m, inventory recovery $(67)m, legal contingency $12m. Tests LLM's
+    ability to discover and extract reconciling items independently."
+
+prompt:
+  notes: "No hints given about adjustment names - LLM must discover them"
+
+input:
+  input-file-original: None
+  notes: "Web-based task, no input file provided"

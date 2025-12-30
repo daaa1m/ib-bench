@@ -1,0 +1,68 @@
+{
+  "task_id": "e-019",
+  "version": "1.0",
+  "total_points": 100,
+  "criteria": {
+    "covenant_summary": {
+      "description": "Must provide a comprehensive summary table of all financial covenants with names, definitions, thresholds, and testing frequency.",
+      "type": "llm_judge",
+      "core_concepts": [
+        "financial covenants",
+        "ratio",
+        "threshold",
+        "limit",
+        "compliance"
+      ],
+      "points": 30
+    },
+    "leverage_covenant": {
+      "description": "Must correctly extract the leverage ratio covenant including its definition (typically Total Debt / EBITDA) and the applicable threshold levels.",
+      "type": "llm_judge",
+      "core_concepts": [
+        "leverage",
+        "debt",
+        "EBITDA",
+        "ratio",
+        "maximum"
+      ],
+      "points": 25
+    },
+    "coverage_covenant": {
+      "description": "Must correctly extract the coverage ratio covenant (interest coverage or fixed charge coverage) including its definition and threshold levels.",
+      "type": "llm_judge",
+      "core_concepts": [
+        "coverage",
+        "interest",
+        "fixed charge",
+        "EBITDA",
+        "minimum"
+      ],
+      "points": 25
+    },
+    "testing_frequency": {
+      "description": "Must correctly identify how and when covenants are tested, including measurement period and testing dates.",
+      "type": "llm_judge",
+      "core_concepts": [
+        "quarterly",
+        "fiscal",
+        "trailing",
+        "twelve months",
+        "test",
+        "measurement"
+      ],
+      "points": 10
+    },
+    "extraction_methodology": {
+      "description": "Must describe a logical approach to locating and parsing covenant information from the credit agreement.",
+      "type": "llm_judge",
+      "core_concepts": [
+        "covenant section",
+        "definition",
+        "article",
+        "parsed",
+        "located"
+      ],
+      "points": 10
+    }
+  }
+}

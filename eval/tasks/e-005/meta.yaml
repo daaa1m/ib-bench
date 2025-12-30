@@ -1,0 +1,22 @@
+# Documentation
+task:
+  id: e-005
+  type: extraction
+  category: pdf
+  description:
+    "LLM is provided AMZN Q3 2025 earnings materials (10-Q, press release,
+    slides) and must extract key metrics AND write a one-page earnings summary.
+    Expected metrics: Revenue $180,169m, Operating Income $17,422m, Diluted EPS
+    $1.95, Q4 guidance $206-213B revenue, $21-26B operating income. Summary
+    should cover segment performance, growth trends, and strategic context.
+    Tests both extraction accuracy and analytical writing ability."
+
+prompt:
+  notes: "Two-part deliverable: metrics extraction + written summary. EPS must be diluted EPS."
+
+input:
+  input-file-original:
+    - "$human/AMZN-Q3-2025-10Q.pdf"
+    - "$human/AMZN-Q3-2025-Press-Release.pdf"
+    - "$human/AMZN-Q3-2025-Slides.pdf"
+  notes: "Three PDF files from Amazon Q3 2025 earnings"

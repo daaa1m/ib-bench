@@ -1,0 +1,43 @@
+{
+  "task_id": "e-012",
+  "version": "1.0",
+  "total_points": 100,
+  "criteria": {
+    "top_5_risks": {
+      "description": "Must provide exactly 5 risks prioritized by materiality, not document order. Each risk should include a clear title, concise summary, and actionable analyst implication.",
+      "type": "llm_judge",
+      "core_concepts": [
+        "materiality",
+        "prioritized",
+        "business impact",
+        "company-specific",
+        "not boilerplate",
+        "actionable implications"
+      ],
+      "points": 50
+    },
+    "prioritization_rationale": {
+      "description": "Must explain why these 5 risks were selected over others and the logic behind the ranking. Should demonstrate understanding of materiality assessment.",
+      "type": "llm_judge",
+      "core_concepts": [
+        "probability",
+        "magnitude",
+        "financial impact",
+        "ranking logic",
+        "materiality criteria"
+      ],
+      "points": 30
+    },
+    "methodology_notes": {
+      "description": "Must describe the analytical approach used to identify and prioritize risks from the S-1 Risk Factors section.",
+      "type": "llm_judge",
+      "core_concepts": [
+        "systematic review",
+        "risk identification",
+        "prioritization framework",
+        "analytical approach"
+      ],
+      "points": 20
+    }
+  }
+}

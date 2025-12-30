@@ -1,0 +1,17 @@
+# Documentation
+task:
+  id: e-017
+  type: extraction
+  category: web
+  description:
+    "LLM must find 5 comparable M&A transactions in a specified sector and
+    extract EV/EBITDA multiples for each deal. Expected answer: list of deals
+    with acquirer, target, date, and multiple. Tests LLM's ability to research
+    precedent transactions from public sources."
+
+prompt:
+  notes: "LLM should verify multiples from deal announcements or reputable sources"
+
+input:
+  input-file-original: None
+  notes: "Web-based task. TODO: specify sector and time range"
