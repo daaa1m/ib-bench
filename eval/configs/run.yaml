@@ -1,0 +1,3 @@
+# required fields
+provider: anthropic # anthorpic | openai | gemini
+model: 

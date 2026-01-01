@@ -1,0 +1,102 @@
+{
+  "task_id": "e-005",
+  "rubric_hash": "687a2a1c",
+  "scored_at": "2025-12-31T04:15:07.344656",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 94.25,
+  "score_percent": 94.25,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "q3_revenue",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 10,
+      "points_earned": 10,
+      "actual": "180,169",
+      "details": "Found '180,169' in response"
+    },
+    {
+      "id": "q3_operating_income",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 10,
+      "points_earned": 10,
+      "actual": "17,422",
+      "details": "Found '17,422' in response"
+    },
+    {
+      "id": "q3_diluted_eps",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 10,
+      "points_earned": 10,
+      "actual": "1.95",
+      "details": "Found '1.95' in response"
+    },
+    {
+      "id": "q4_revenue_guidance",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 10,
+      "points_earned": 10,
+      "actual": "206.0 - 213.0",
+      "details": "Found '206' in response"
+    },
+    {
+      "id": "q4_operating_income_guidance",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 10,
+      "points_earned": 10,
+      "actual": "21.0 - 26.0",
+      "details": "Found '21' in response"
+    },
+    {
+      "id": "summary_accuracy",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 15.0,
+      "actual": "1.00",
+      "details": "Score: 1.00 - All facts and figures in the summary are accurate and traceable to the source document. Q3 2025 revenue of $180,169M, operating income of $17,422M, diluted EPS of $1.95, Q4 guidance of $206.0-213.0B revenue and $21.0-26.0B operating income all match the 10-Q. Segment figures (North America $106,267M revenue, $4,789M OI; International $40,896M revenue, $1,199M OI; AWS $33,006M revenue, $11,434M OI) are all correct. The $2.5B FTC settlement, $1.8B severance costs, $10,186M other income, and Anthropic-related gains are all accurately cited from the source."
+    },
+    {
+      "id": "summary_completeness",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 11.25,
+      "actual": "0.75",
+      "details": "Score: 0.75 - The summary covers major topics including segment performance, revenue growth, margin trends (operating income essentially flat Y/Y despite double-digit top-line growth), and Q4 guidance. It addresses AWS as the profit engine with 20% Y/Y growth, North America and International performance, and key cost items. However, it lacks some details on strategic initiatives that were mentioned in the document, such as specific AWS infrastructure expansion metrics (3.8 gigawatts added), Trainium2 adoption, Project Rainier, and fulfillment network improvements for Prime delivery and same-day grocery expansion to 2,300+ communities. These operational highlights are mentioned but could be more specific."
+    },
+    {
+      "id": "summary_insight",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 8.5,
+      "actual": "0.85",
+      "details": "Score: 0.85 - The summary provides solid insights beyond restating numbers, including YoY comparisons (AWS +20%, North America +11%, International +14%), trend analysis (operating income flat despite double-digit revenue growth), and strategic implications (AI-driven AWS demand, infrastructure investment impact on profitability). It correctly identifies AWS as the key profit engine and frames the tension between growth investments and near-term profitability. It also contextualizes the non-operating gains and their impact on net income vs operating performance. However, it could have provided more insight on margin trends by segment or the impact of the FTC settlement and severance on underlying operating performance."
+    },
+    {
+      "id": "summary_structure",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 9.5,
+      "actual": "0.95",
+      "details": "Score: 0.95 - The summary is well-organized with clear sections: Q3 Financial Snapshot, Segment Performance and Key Drivers, Strategic/Operational Highlights, Costs/One-Time Items/Risks, and Q4 Outlook. The language is professional and suitable for senior bankers. The word count appears to be within the 300-500 word range (appears to be approximately 450 words). The flow is logical, moving from headline numbers to segment details to strategic context to outlook. Minor deduction for the Strategic/Operational Highlights section being somewhat brief given its importance, but overall structure is excellent."
+    }
+  ]
+}

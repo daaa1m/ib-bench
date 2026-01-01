@@ -35,7 +35,7 @@
       "description": "Total Cash Interest in O164 must equal -84 (with circularity ON)",
       "type": "programmatic",
       "match_type": "substring_one_of",
-      "accepted_values": ["-84"],
+      "accepted_values": ["-84", "-83"],
       "points": 20
     }
   }

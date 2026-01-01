@@ -15,4 +15,5 @@ dependencies = [
     "pdfminer-six>=20251227",
     "pdfplumber>=0.5.3",
     "six>=1.17.0",
+    "types-pyyaml>=6.0.12.20250915",
 ]

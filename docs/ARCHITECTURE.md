@@ -41,7 +41,7 @@ This lets you refine evaluation criteria without burning API credits.
           │ cached responses
           v
 ┌─────────────────────────────────────────────────────────────┐
-│       results/responses/{model}/{run_id}/*.json             │
+│         responses/{model}/{run_id}/*.json                   │
 └──────────────────────────┬──────────────────────────────────┘
                            │
           ┌────────────────┴────────────────┐
@@ -58,7 +58,7 @@ This lets you refine evaluation criteria without burning API credits.
           │
           v
 ┌─────────────────────────────────────────────────────────────┐
-│         results/scores/{model}/{run_id}/*.json              │
+│           scores/{model}/{run_id}/*.json                    │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -91,7 +91,7 @@ Read in this order to build understanding incrementally:
 | Order | File | Why | Focus On |
 |-------|------|-----|----------|
 | 9 | `eval/helpers.py:300-450` | `AnthropicRunner` | Files API, code exec |
-| 10 | `eval/helpers.py:450-550` | `OpenAIRunner` | Assistants API |
+| 10 | `eval/helpers.py:450-550` | `OpenAIRunner` | Responses API |
 | 11 | `eval/helpers.py:550-650` | `GeminiRunner` | Files API |
 | 12 | `eval/helpers.py:650-700` | `LLMJudge` | Claude-as-judge |
 
@@ -100,7 +100,7 @@ Read in this order to build understanding incrementally:
 | Order | File | Why |
 |-------|------|-----|
 | 13 | `eval/leaderboard.py` | How scores become rankings |
-| 14 | `eval/results/` | Output directory structure |
+| 14 | `eval/responses/`, `eval/scores/` | Output directory structure |
 
 ---
 
@@ -284,7 +284,7 @@ class Runner:
 | Runner | Provider | File Handling | Tools |
 |--------|----------|---------------|-------|
 | `AnthropicRunner` | Anthropic | Files API | Code execution |
-| `OpenAIRunner` | OpenAI | Assistants API | file_search, code_interpreter |
+| `OpenAIRunner` | OpenAI | Responses API | file_search, code_interpreter |
 | `GeminiRunner` | Google | Files API | Code execution |
 
 **File Type Routing:**
@@ -300,7 +300,7 @@ class Runner:
 ## Results Directory Structure
 
 ```
-eval/results/
+eval/
 ├── responses/                    # Expensive - PRESERVE
 │   └── {model}/
 │       └── {YYYYMMDD_HHMMSS}/
@@ -441,8 +441,8 @@ uv run python eval/leaderboard.py
 | Check env | `cat .env` |
 | View task | `cat eval/tasks/e-001/prompt.md` |
 | View rubric | `cat eval/tasks/e-001/rubric.json` |
-| Check response | `cat eval/results/responses/MODEL/RUN_ID/e-001.json` |
-| Check score | `cat eval/results/scores/MODEL/RUN_ID/e-001.json` |
+| Check response | `cat eval/responses/MODEL/RUN_ID/e-001.json` |
+| Check score | `cat eval/scores/MODEL/RUN_ID/e-001.json` |
 
 ### Rubric Match Types
 

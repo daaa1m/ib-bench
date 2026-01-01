@@ -1,0 +1,32 @@
+{
+  "task_id": "e-001",
+  "rubric_hash": "4ee50e89",
+  "scored_at": "2025-12-31T03:04:46.054338",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 100,
+  "score_percent": 100.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "error_location",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 55,
+      "points_earned": 55,
+      "actual": "LBO!L140 (Cash Flow Statement - Cash from Investing), copied across M140:P140",
+      "details": "Found '140' in response"
+    },
+    {
+      "id": "corrected_formula",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 45,
+      "points_earned": 45,
+      "actual": "=SUM(L138:L139)",
+      "details": "Matched pattern: SUM\\(.*138.*139.*\\)"
+    }
+  ]
+}

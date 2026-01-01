@@ -1,7 +1,6 @@
 # Test with OpenAI
 provider: openai
-model: gpt-4o
+model: gpt-5.2-2025-12-11
 tasks:
-  - e-001
-  - e-002
+  - e-006
 parallel: 1

@@ -1,0 +1,62 @@
+# Run Config Schema
+# This file documents the available fields for run config files.
+# See quick-test.yaml for an example.
+
+# Required fields
+# ----------------
+
+provider:
+  # LLM provider to use
+  # Required: yes
+  # Values: anthropic | openai | gemini
+  type: string
+  required: true
+  values:
+    - anthropic
+    - openai
+    - gemini
+
+model:
+  # Model identifier for the provider
+  # Required: yes
+  # Examples:
+  #   anthropic: claude-sonnet-4-20250514, claude-opus-4-5-20251101
+  #   openai: gpt-4o, gpt-4-turbo
+  #   gemini: gemini-2.5-flash, gemini-2.5-pro
+  type: string
+  required: true
+
+# Task selection (one of these is required)
+# -----------------------------------------
+
+tasks:
+  # Explicit list of task IDs to run
+  # Required: yes (unless 'filter' is set)
+  # Example:
+  #   tasks:
+  #     - e-001
+  #     - e-002
+  #     - m-001
+  type: list[string]
+  required: false
+
+filter:
+  # Task ID prefix to match
+  # Required: yes (unless 'tasks' is set)
+  # Examples:
+  #   filter: e-     # All easy tasks (e-001, e-002, ...)
+  #   filter: m-     # All medium tasks
+  #   filter: h-     # All hard tasks
+  type: string
+  required: false
+
+# Optional fields
+# ----------------
+
+parallel:
+  # Number of concurrent tasks to run
+  # Default: 1 (sequential)
+  # Higher values speed up runs but may hit rate limits
+  # Recommended: 3-5 for most providers
+  type: integer
+  default: 1

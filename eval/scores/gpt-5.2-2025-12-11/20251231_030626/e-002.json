@@ -1,0 +1,72 @@
+{
+  "task_id": "e-002",
+  "rubric_hash": "796e16ce",
+  "scored_at": "2025-12-31T03:44:30.545084",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 87.05,
+  "score_percent": 87.05,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "accuracy",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 25,
+      "points_earned": 23.0,
+      "actual": "0.92",
+      "details": "Score: 0.92 - The summary is highly accurate overall. Key facts are correctly cited: 45 PE-sponsored companies taken over in first 9 months (verified in article), FTI revenue/EPS figures for 3Q are accurate ($956.2m, $2.60 EPS, +3.3% and +41% respectively), segment revenue percentages match (corporate finance ~40%, econ consulting 20%, etc.), CFO resignation date is correct (Aug. 12), net debt of $364m and ~0.8x EBITDA match Sept. 30 figures, ratings Ba1/BBB- confirmed, buyback details ($846.1m, -14.1% share count, new $500m authorization) all accurate, CEO purchase of 7,500 shares/$1.1m verified. For Sampoerna: 92.4% PMI ownership, 100% dividend payout, net cash 5.1tn rupiah confirmed, 88% USD decline since Jan 2018 and 12.5% annual tax CAGR (2016-2024) are accurate. Puregold: 513 supermarkets, 31 S&R stores, S&R 47% of 1H25 EBITDA, 153-store Puremart acquisition for ~$10m (~$65k/store at book value) in Dec 2024, net cash 4bn pesos, all verified. Minor deduction: The summary states FTI trades at '~17.1x 2026E earnings' but article doesn't explicitly provide this calculation (though it's reasonable given context); the '5-year average P/E of ~24x (ended 2024)' is also not directly stated but implied. Philippines valuation comparisons (9.4x vs MSCI EM 16x) and PSE Index -10.7% USD performance are accurate."
+    },
+    {
+      "id": "completeness",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 25,
+      "points_earned": 22.0,
+      "actual": "0.88",
+      "details": "Score: 0.88 - The summary captures the vast majority of key points across all three segments: restructuring/credit cycle thesis with 45 PE takeovers and LME issues, FTI's operational performance (record 3Q, segment breakdowns, growth in high-demand areas), specific challenges (econ consulting Orszag departure and -$4.6m EBITDA swing, technology segment -17.1% EBITDA decline), valuation metrics, aggressive capital returns, M&A market outlook, and detailed coverage of Indonesia/Philippines opportunities. However, some relevant details are omitted: (1) FTI's founding history and evolution (Forensic Technologies International, 1982 founding, PwC restructuring acquisition for $250m in 2002), (2) competitive positioning details (toe-to-toe with Alvarez & Marsal and AlixPartners, creditor vs debtor side preferences), (3) specific examples like Serta Simmons case study and 'Serta blockers', (4) FTI's historical performance in crisis years (17.4% revenue growth in 2008, 2.9% in 2020), (5) Gunby's background at BCG and transformation of FTI culture, (6) analyst coverage details (3 analysts, 1 buy, 0 sell, 4.2% short interest), (7) Parkway Capital background and methodology ('buy growth at discount', 21.7% ROE vs S&P 18.9%), (8) Haier Smart Home prior recommendation and 121.7% return, (9) Seven Corp. details and vape crackdown impact. The summary prioritizes deal-relevant information appropriately but could have included more context on FTI's business model and track record."
+    },
+    {
+      "id": "conciseness",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 11.25,
+      "actual": "0.75",
+      "details": "Score: 0.75 - The summary is comprehensive but notably verbose. The 'reasoning' section (117 words) could be condensed significantly\u2014phrases like 'I treated the article as the full Grant's issue excerpt' and lengthy explanations of methodology add limited value. The main summary is dense with information but includes some redundancy: mentions 'restructuring/default activity' multiple times, restates 'deal flow implications' in multiple ways. Phrases like 'never mind the assorted troubles of fact and perception' and 'you wonder whose side it's on' from the original article are retained when tighter paraphrasing would suffice. The segment breakdowns are appropriately detailed for banking use, but some streamlining possible: 'Philip Morris International, Inc.' could be 'Philip Morris International (PMI)', 'a.k.a.' usage is informal. The summary runs quite long (~1,450 words total) when 1,000-1,200 would likely suffice without losing material information. The data-heavy approach is appropriate for the audience, but transitions and connective tissue could be tighter. Commentary section is appropriately brief (80 words)."
+    },
+    {
+      "id": "relevance",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 13.5,
+      "actual": "0.90",
+      "details": "Score: 0.90 - The summary leads with highly relevant material for investment banking: restructuring deal flow acceleration (45 PE takeovers, fastest pace in 6 years, >2x 2024), LME issues creating advisory demand, and FTI as a credit-cycle play. This is precisely what matters for RX/advisory coverage. The prioritization is excellent\u2014putting transaction volumes, defaults, and restructuring activity at the top, followed by company-specific operational details (record 3Q, segment performance), then valuation/capital allocation (buybacks, CEO purchase), and finally M&A catalysts. The Indonesia tobacco and Philippines retail sections are less immediately relevant to core IB deal flow but are appropriately framed as 'strategic/coverage implications' with emphasis on policy catalysts (tobacco tax freeze), valuation dislocations, and potential M&A/financing angles. Some less relevant details retained: the opening Federal Reserve/fiscal policy discussion from Grant's is omitted (appropriately), healthcare CPI methodology tangent is omitted (appropriately), but some qualitative color ('bartender in Bali' anecdote, 'pig in a python' metaphor) could be trimmed. The summary successfully extracts banking-relevant signal from a broader market commentary publication. Minor deduction for including some retailer operational details (mom-and-pop vs. modern retail transition, product-by-product pricing comparisons) that are more equity research than IB deal-relevant."
+    },
+    {
+      "id": "commentary_quality",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 8.5,
+      "actual": "0.85",
+      "details": "Score: 0.85 - Commentary is appropriately brief, clearly labeled as 'Commentary (clearly labeled):', and properly distinguished from article facts. The insight is relevant and actionable for banking coverage: connects (i) accelerating lender takeovers of sponsor-backed credits with (ii) proliferation of complex contested LMEs to identify specific service line demand (RX advisory, creditor-side mandates, disputes/forensics, strategic communications). Demonstrates understanding of market dynamics by noting that 'even if a subset of LMEs remain more legal-engineering-led than operationally led', acknowledging nuance in the opportunity. The commentary adds value by synthesizing the FTI discussion into clear coverage/mandate implications. However, it's somewhat conservative and could go further\u2014for example, could have commented on (1) relative attractiveness of FTI vs peers given public vs private comp set, (2) implications of management turnover for deal execution, (3) whether the Asia retail opportunities suggest broader sponsor interest in SEA consumer, (4) cross-border M&A angles given PMI ownership of Sampoerna. The reasoning section, while labeled separately, somewhat duplicates the commentary function by explaining prioritization\u2014this is helpful but blurs the line. No inappropriate speculation or mixing of fact and opinion in the main summary."
+    },
+    {
+      "id": "professional_tone",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 8.8,
+      "actual": "0.88",
+      "details": "Score: 0.88 - The summary demonstrates strong command of banking/finance terminology and maintains a professional, analytical tone throughout. Appropriate use of industry vocabulary: 'deal flow', 'RX advisory', 'creditor-side mandates', 'sponsor stress', 'LTM', 'EBITDA', 'LMEs', 'capital returns', 'activism relevance', 'disclosure dislocation'. Numbers are presented precisely with proper context (percentages, absolute figures, time periods). The structure is logical with clear headers and segmentation. However, some stylistic inconsistencies detract slightly: (1) occasional informal phrasing inherited from Grant's ('pig in a python', 'fancy paychecks', 'Goldilocks mix') that could be more clinical for senior banker communication\u2014though these add color and may be acceptable depending on audience, (2) 'framed as' and 'described as' constructions are slightly passive/academic when more direct language would work, (3) some sentences are quite long and could be broken up for clarity (the opening sentence of the FTI valuation section runs 82 words with multiple embedded clauses), (4) the reasoning section uses first person ('I treated', 'I pulled out') which is appropriate for methodology explanation but less formal than the main summary. Overall, the tone would be well-received in a banking context\u2014it's information-dense, not sensationalized, and properly sourced. Minor polish needed for top-tier consistency."
+    }
+  ]
+}

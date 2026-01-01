@@ -41,7 +41,7 @@ class TaskResult:
 def load_run(run_path: str, base_dir: Path = None) -> tuple[dict, list[TaskResult]]:
     """Load config and scores from a run."""
     if base_dir is None:
-        base_dir = Path(__file__).parent / "results"
+        base_dir = Path(__file__).parent
 
     # Parse MODEL/RUN_ID format
     parts = run_path.split("/")

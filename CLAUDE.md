@@ -24,25 +24,10 @@ GEMINI_API_KEY=...
 All Python scripts must be run with `uv run`:
 
 ```bash
-# Run with config file (recommended)
+# Run evaluation (config file required)
 uv run python eval/run.py --config configs/quick-test.yaml
 uv run python eval/run.py --config configs/full-easy.yaml
-
-# Override config with CLI args
-uv run python eval/run.py --config configs/quick-test.yaml --model gpt-4o
-uv run python eval/run.py --config configs/quick-test.yaml --parallel 5
-
-# Run without config (all CLI args)
-uv run python eval/run.py --tasks e-001 --model claude-sonnet-4-20250514
-uv run python eval/run.py --tasks e-001 e-002 --model claude-sonnet-4-20250514
-uv run python eval/run.py --filter e- --model claude-sonnet-4-20250514
-
-# Use different providers
-uv run python eval/run.py --tasks e-001 --provider openai --model gpt-4o
-uv run python eval/run.py --tasks e-001 --provider gemini --model gemini-2.5-flash
-
-# Run tasks in parallel (5 concurrent)
-uv run python eval/run.py --filter e- --model gemini-2.5-flash --parallel 5
+uv run python eval/run.py --config configs/quick-test.yaml --resume MODEL/RUN_ID
 
 # Score responses from a run
 uv run python eval/score.py RUN_ID
@@ -54,30 +39,39 @@ uv run python eval/leaderboard.py                      # CLI table
 uv run python eval/leaderboard.py --export results/    # Export JSON
 uv run python eval/leaderboard.py --weights 25,35,40   # Custom weights
 
+# Analyze a specific run
+uv run python eval/analyze.py MODEL/RUN_ID                        # Full dump
+uv run python eval/analyze.py MODEL/RUN_ID --compare MODEL2/RUN_ID2  # Compare runs
+
+# Mark a task as blocked (content filter)
+uv run python eval/mark_blocked.py MODEL/RUN_ID TASK_ID
+
 # Run tests
-uv run pytest eval/test_eval.py -v
+uv run pytest eval/tests/test_unit.py -v
 ```
 
 ### Config Files
 
-Config files live in `eval/configs/` and use YAML format:
+Config files live in `eval/configs/` and use YAML format. See `run.schema.yaml`
+for full documentation.
 
 ```yaml
 # eval/configs/quick-test.yaml
-provider: anthropic
-model: claude-sonnet-4-20250514
-tasks:
+provider: anthropic                # Required: anthropic | openai | gemini
+model: claude-sonnet-4-20250514    # Required: model identifier
+tasks:                             # Required: task list OR filter
   - e-001
   - e-002
-parallel: 1
+parallel: 1                        # Optional: concurrent tasks (default: 1)
 ```
 
-Available config options:
-- `provider`: anthropic, openai, or gemini
-- `model`: Model identifier
-- `tasks`: List of task IDs
-- `filter`: Task ID prefix (e.g., "e-" for all easy tasks)
-- `parallel`: Number of concurrent tasks
+Alternative using filter:
+```yaml
+provider: anthropic
+model: claude-sonnet-4-20250514
+filter: e-    # Run all easy tasks (e-001, e-002, ...)
+parallel: 5
+```
 
 ## Architecture
 
@@ -92,7 +86,9 @@ Available config options:
 
 - `eval/tasks/` - Task definitions (one folder per task: `e-001/`, `m-001/`,
   `h-001/`)
-- `eval/results/` - Run outputs organized by timestamp and model
+- `eval/responses/` - LLM outputs (expensive, preserve)
+- `eval/scores/` - Scoring outputs (cheap, regenerable)
+- `eval/tests/` - Unit and integration tests
 - `data-factory/` - Source data (human-generated and synthetic) for creating
   tasks
 
@@ -196,7 +192,7 @@ Derived automatically from rubric criteria:
 | Runner | Provider | File Handling | Tools |
 |--------|----------|---------------|-------|
 | `AnthropicRunner` | Anthropic | Files API | Code execution |
-| `OpenAIRunner` | OpenAI | Files API + Assistants | file_search, code_interpreter |
+| `OpenAIRunner` | OpenAI | Responses API | file_search, code_interpreter |
 | `GeminiRunner` | Google | Files API | Code execution |
 
 All runners support native file upload - no manual conversion needed.
@@ -214,13 +210,14 @@ All providers handle files natively via their respective APIs:
 ## Results Directory
 
 ```
-eval/results/
-├── responses/          # LLM outputs (expensive, preserve)
+eval/
+├── responses/              # LLM outputs (expensive, preserve)
 │   └── {model}/
 │       └── {run_id}/
 │           ├── config.json
-│           └── {task-id}.json
-└── scores/             # Scoring outputs (cheap, regenerable)
+│           ├── {task-id}.json
+│           └── {task-id}_output_1.xlsx  # Output files from code execution
+└── scores/                 # Scoring outputs (cheap, regenerable)
     └── {model}/
         └── {run_id}/
             ├── {task-id}.json  # includes rubric_hash, scored_at
@@ -229,6 +226,45 @@ eval/results/
 
 Responses are cached and reused. Scores can be regenerated freely when rubrics
 change. Score files include `rubric_hash` for audit trail.
+
+### Output File Capture
+
+When LLMs generate files via code execution (e.g., modified Excel spreadsheets),
+these are automatically captured and saved:
+
+- **AnthropicRunner**: Files from code execution container
+- **OpenAIRunner**: Files from `code_interpreter` tool
+- **GeminiRunner**: Inline data from responses
+
+Output files are saved as `{task-id}_output_{n}.{ext}` and tracked in the
+response JSON under `output_files`.
+
+### Response JSON Fields
+
+Each `{task-id}.json` contains:
+
+| Field | Description |
+|-------|-------------|
+| `raw_response` | Full text output from the model |
+| `parsed_response` | Extracted JSON (if any) |
+| `stop_reason` | Why generation stopped: `end_turn`, `max_tokens`, `stop_sequence`, `content_filter` |
+| `output_files` | List of generated file names (if any) |
+| `usage` | Token counts and latency |
+
+### Content Filter Handling
+
+When a model's content filter blocks a request (false positive on legitimate IB
+content), manually mark it as blocked:
+
+```bash
+# After seeing content filter error, mark the task as blocked
+uv run python eval/mark_blocked.py MODEL/RUN_ID TASK_ID
+```
+
+This creates a response with `stop_reason: "content_filter"`:
+
+- **Score phase**: Marked as `blocked: true`, 0 points, tracked separately
+- **Leaderboard**: Shows blocked count separately (e.g., "5/6 (1 blocked)")
 
 When using `--resume` or scoring, specify path as `MODEL/RUN_ID` (e.g.,
 `claude-opus-4-5-20251101/20251230_114140`).
@@ -239,9 +275,9 @@ The leaderboard aggregates scores across models and calculates a weighted overal
 score (max 100).
 
 **Per-task credit:**
-- 0 credit: < 50 points
-- 0.5 credit (half): 50-99 points
-- 1.0 credit (full): 100 points
+- 0 credit: < 50%
+- 0.5 credit (half): 50-89%
+- 1.0 credit (full): >= 90%
 
 **Tier score:** `(total credits / tasks completed) × 100`
 
@@ -252,6 +288,18 @@ flag.
 
 **JSON export** (`--export`) produces `leaderboard.json` suitable for frontend
 integration.
+
+## Run Analysis
+
+`eval/analyze.py` provides detailed diagnostics for a single run:
+
+- **Metadata**: model, provider, date, task counts
+- **Score Summary**: overall score, tier breakdown, credit counts
+- **Health Warnings**: broken rubrics, missing judges, JSON parse failures
+- **Task Breakdown**: grouped by credit tier (Full/Half/Partial/Fail)
+- **Patterns**: failure rates by criteria type and task category
+
+Use `--compare` to see score deltas between two runs.
 
 ## Task Workflow
 

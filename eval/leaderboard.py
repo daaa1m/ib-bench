@@ -35,6 +35,9 @@ class LeaderboardEntry:
     hard: TierScore
     run_id: str
     run_date: str
+    tasks_attempted: int
+    tasks_total: int
+    tasks_blocked: int = 0  # Content filter blocked
 
 
 def load_config(config_path: Path = None) -> dict:
@@ -79,13 +82,10 @@ def count_tasks_by_difficulty(tasks_dir: Path = None) -> dict[str, int]:
     return counts
 
 
-def find_latest_run(model_dir: Path) -> Path | None:
-    """Find the latest run directory for a model."""
+def find_all_runs(model_dir: Path) -> list[Path]:
+    """Find all run directories for a model, sorted oldest to newest."""
     runs = [d for d in model_dir.iterdir() if d.is_dir()]
-    if not runs:
-        return None
-    # Sort by name (timestamp format ensures correct ordering)
-    return sorted(runs, key=lambda x: x.name)[-1]
+    return sorted(runs, key=lambda x: x.name)
 
 
 def load_run_scores(run_dir: Path) -> list[dict]:
@@ -97,6 +97,30 @@ def load_run_scores(run_dir: Path) -> list[dict]:
         with open(score_file) as f:
             scores.append(json.load(f))
     return scores
+
+
+def load_all_scores_for_model(model_dir: Path) -> tuple[list[dict], Path | None]:
+    """Load scores from all runs, aggregating across runs.
+
+    Later runs override earlier runs for the same task.
+    Tasks only in earlier runs are kept.
+
+    Returns:
+        Tuple of (aggregated scores, latest run dir for metadata)
+    """
+    runs = find_all_runs(model_dir)
+    if not runs:
+        return [], None
+
+    # Aggregate scores: later runs override earlier ones for same task
+    scores_by_task: dict[str, dict] = {}
+    for run_dir in runs:
+        for score in load_run_scores(run_dir):
+            task_id = score.get("task_id")
+            if task_id:
+                scores_by_task[task_id] = score
+
+    return list(scores_by_task.values()), runs[-1]
 
 
 def get_provider_from_model(model: str) -> str:
@@ -116,15 +140,15 @@ def task_credit(points_earned: float, total_points: float) -> float:
 
     Returns:
         0.0 if score < 50%
-        0.5 if score >= 50% and < 100%
-        1.0 if score == 100%
+        0.5 if score >= 50% and < 90%
+        1.0 if score >= 90%
     """
     if total_points == 0:
         return 0.0
 
     percent = (points_earned / total_points) * 100
 
-    if percent >= 100:
+    if percent >= 90:
         return 1.0
     elif percent >= 50:
         return 0.5
@@ -134,22 +158,31 @@ def task_credit(points_earned: float, total_points: float) -> float:
 
 def calculate_entry(
     model: str,
-    run_dir: Path,
+    model_dir: Path,
     task_counts: dict[str, int],
     weights: dict[str, float],
-) -> LeaderboardEntry:
-    """Calculate leaderboard entry from a run's scores."""
-    scores = load_run_scores(run_dir)
+) -> LeaderboardEntry | None:
+    """Calculate leaderboard entry from all runs for a model."""
+    scores, latest_run = load_all_scores_for_model(model_dir)
+    if not scores or not latest_run:
+        return None
+
+    run_dir = latest_run  # Use latest run for metadata
 
     # Aggregate credits by difficulty (0, 0.5, or 1 per task)
     tier_credits = {"easy": 0.0, "medium": 0.0, "hard": 0.0}
     tier_completed = {"easy": 0, "medium": 0, "hard": 0}
+    tasks_blocked = 0
 
     for score in scores:
         task_id = score["task_id"]
         difficulty = get_difficulty(task_id)
         if difficulty not in tier_credits:
             continue
+
+        # Count blocked tasks (content filter)
+        if score.get("blocked", False):
+            tasks_blocked += 1
 
         points_earned = score.get("points_earned", 0)
         total_points = score.get("total_points", 100)
@@ -187,6 +220,10 @@ def calculate_entry(
     except (ValueError, IndexError):
         run_date = "unknown"
 
+    # Total tasks attempted
+    tasks_attempted = sum(tier_completed.values())
+    tasks_total = sum(task_counts.values())
+
     return LeaderboardEntry(
         model=model,
         provider=get_provider_from_model(model),
@@ -196,6 +233,9 @@ def calculate_entry(
         hard=hard,
         run_id=run_id,
         run_date=run_date,
+        tasks_attempted=tasks_attempted,
+        tasks_total=tasks_total,
+        tasks_blocked=tasks_blocked,
     )
 
 
@@ -205,7 +245,7 @@ def build_leaderboard(
 ) -> list[LeaderboardEntry]:
     """Build leaderboard from all scored runs."""
     if scores_dir is None:
-        scores_dir = Path(__file__).parent / "results" / "scores"
+        scores_dir = Path(__file__).parent / "scores"
 
     if not scores_dir.exists():
         return []
@@ -223,12 +263,9 @@ def build_leaderboard(
             continue
 
         model = model_dir.name
-        run_dir = find_latest_run(model_dir)
-        if not run_dir:
-            continue
-
-        entry = calculate_entry(model, run_dir, task_counts, weights)
-        entries.append(entry)
+        entry = calculate_entry(model, model_dir, task_counts, weights)
+        if entry:
+            entries.append(entry)
 
     # Sort by overall score descending
     entries.sort(key=lambda x: x.overall_score, reverse=True)
@@ -239,7 +276,7 @@ def build_leaderboard(
 def print_cli_table(entries: list[LeaderboardEntry], weights: dict[str, float]):
     """Print leaderboard as CLI table."""
     print("\nIB-bench Leaderboard")
-    print("=" * 80)
+    print("=" * 90)
     print()
 
     if not entries:
@@ -247,7 +284,7 @@ def print_cli_table(entries: list[LeaderboardEntry], weights: dict[str, float]):
         return
 
     # Header
-    header = f"{'Rank':<5} {'Model':<35} {'Overall':>7} {'Easy':>6} {'Med':>6} {'Hard':>6}"
+    header = f"{'Rank':<5} {'Model':<35} {'Overall':>7} {'Easy':>6} {'Med':>6} {'Hard':>6} {'Tasks':>8}"
     print(header)
     print("-" * len(header))
 
@@ -256,10 +293,12 @@ def print_cli_table(entries: list[LeaderboardEntry], weights: dict[str, float]):
         easy_str = f"{entry.easy.score:.1f}" if entry.easy.completed > 0 else "-"
         med_str = f"{entry.medium.score:.1f}" if entry.medium.completed > 0 else "-"
         hard_str = f"{entry.hard.score:.1f}" if entry.hard.completed > 0 else "-"
+        tasks_str = f"{entry.tasks_attempted}/{entry.tasks_total}"
+        blocked_str = f" ({entry.tasks_blocked} blocked)" if entry.tasks_blocked > 0 else ""
 
         print(
             f"{i:<5} {entry.model:<35} {entry.overall_score:>7.1f} "
-            f"{easy_str:>6} {med_str:>6} {hard_str:>6}"
+            f"{easy_str:>6} {med_str:>6} {hard_str:>6} {tasks_str:>8}{blocked_str}"
         )
 
     print()
@@ -307,6 +346,9 @@ def export_json(
                 },
                 "run_id": e.run_id,
                 "run_date": e.run_date,
+                "tasks_attempted": e.tasks_attempted,
+                "tasks_total": e.tasks_total,
+                "tasks_blocked": e.tasks_blocked,
             }
             for i, e in enumerate(entries, 1)
         ],

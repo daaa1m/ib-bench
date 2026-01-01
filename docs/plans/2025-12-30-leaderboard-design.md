@@ -119,7 +119,7 @@ benchmark_version: "1.0"
 
 ### Data Flow
 
-1. Scan `eval/results/scores/*/summary.json` for all runs
+1. Scan `eval/scores/*/summary.json` for all runs
 2. Group by model (latest run per model by default)
 3. Calculate tier scores from task results
 4. Compute weighted overall score
