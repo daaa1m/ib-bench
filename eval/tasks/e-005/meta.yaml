@@ -1,8 +1,11 @@
-# Documentation
 task:
   id: e-005
+  title: "Extract AMZN Q3 2025 earnings metrics and write summary"
   type: extraction
-  category: pdf
+  category:
+    - data-extraction
+    - document-review
+  input_type: multi
   description:
     "LLM is provided AMZN Q3 2025 earnings materials (10-Q, press release,
     slides) and must extract key metrics AND write a one-page earnings summary.

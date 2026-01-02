@@ -1,8 +1,11 @@
-# Documentation
 task:
   id: e-011
+  title: "Extract debt maturity schedule from 10-K"
   type: extraction
-  category: pdf
+  category:
+    - data-extraction
+    - due-diligence
+  input_type: pdf
   description:
     "LLM is provided a credit agreement or 10-K and must extract the complete
     debt maturity schedule showing principal amounts due by year. Expected

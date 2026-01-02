@@ -1,8 +1,10 @@
-# Documentation
 task:
   id: e-018
+  title: "Fix NWC formula errors in cash flow model"
   type: fix-error
-  category: excel
+  category:
+    - financial-analysis
+  input_type: excel
   description:
     "LLM is provided a cash flow model with incorrect NWC formula (wrong signs,
     missing components, or incorrect period referencing). LLM must identify and

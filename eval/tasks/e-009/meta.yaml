@@ -1,8 +1,11 @@
-# Documentation
 task:
   id: e-009
+  title: "Extract key assumptions from LBO model"
   type: extraction
-  category: excel
+  category:
+    - data-extraction
+    - financial-analysis
+  input_type: excel
   description:
     "LLM is provided an LBO model and must extract all key assumptions
     including entry/exit multiples, hold period, debt tranches, rates, and

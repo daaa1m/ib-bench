@@ -1,8 +1,10 @@
-# Documentation
 task:
   id: e-002
+  title: "Summarize Grant's Interest Rate Observer article"
   type: summarise
-  category: pdf
+  category:
+    - document-review
+  input_type: pdf
   description:
     "LLM is provided a specialized financial article (Grant's Interest Rate
     Observer) and asked to summarize the key points. Expected answer should

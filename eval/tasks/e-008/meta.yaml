@@ -1,8 +1,10 @@
-# Documentation
 task:
   id: e-008
+  title: "Summarize TSLA 10-K MD&A section"
   type: summarise
-  category: pdf
+  category:
+    - document-review
+  input_type: pdf
   description:
     "LLM is provided a 10-K filing and must summarize the MD&A section,
     focusing on key business drivers, significant trends, and management's

@@ -1,0 +1,32 @@
+{
+  "task_id": "e-010",
+  "version": "1.0",
+  "total_points": 100,
+  "criteria": {
+    "final_long_term_debt_2024E": {
+      "description": "Correct final Long Term Debt value (K29 in BS & CFS) after all fixes",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["504.9", "504.90", "504.9m", "$504.9", "504,9"],
+      "points": 25
+    },
+    "error_ocf_finance_costs": {
+      "description": "Identified that OCF (row 64 in BS & CFS) is missing the adjustment for finance costs, net",
+      "type": "llm_judge",
+      "core_concepts": ["row 64", "OCF", "operating cash flow", "finance costs", "adjustment"],
+      "points": 25
+    },
+    "error_rogue_value_k32": {
+      "description": "Identified the rogue -10 value in cell K32 of FS Calcs sheet that should not be there",
+      "type": "llm_judge",
+      "core_concepts": ["K32", "FS Calcs", "-10", "rogue", "hardcoded"],
+      "points": 25
+    },
+    "error_ppe_row_70": {
+      "description": "Identified that row 70 in BS & CFS is missing the addition of PPE incl leases (row 66)",
+      "type": "llm_judge",
+      "core_concepts": ["row 70", "PPE", "row 66", "leases", "missing"],
+      "points": 25
+    }
+  }
+}

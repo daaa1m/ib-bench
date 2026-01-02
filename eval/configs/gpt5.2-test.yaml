@@ -2,8 +2,5 @@
 provider: openai
 model: gpt-5.2-2025-12-11
 tasks:
-  - e-006
-  - e-007
-  - e-008
-  - e-009
-parallel: 2
+  - e-010
+parallel: 1

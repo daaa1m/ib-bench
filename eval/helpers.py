@@ -18,6 +18,12 @@ from dotenv import load_dotenv
 load_dotenv(Path(__file__).parent.parent / ".env")
 
 
+class JudgeParseError(Exception):
+    def __init__(self, message: str, raw_response: str = ""):
+        super().__init__(message)
+        self.raw_response = raw_response
+
+
 def retry_on_rate_limit(max_retries: int = 3, initial_wait: int = 60):
     """Decorator to retry on rate limit errors with exponential backoff.
 

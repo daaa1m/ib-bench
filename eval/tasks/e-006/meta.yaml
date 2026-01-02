@@ -1,8 +1,10 @@
-# Documentation
 task:
   id: e-006
+  title: "Add interest circularity to LBO model"
   type: fix-error
-  category: excel
+  category:
+    - financial-analysis
+  input_type: excel
   description:
     "LLM is provided an LBO model without interest circularity. LLM must add
     circularity by calculating interest from average of beginning and ending

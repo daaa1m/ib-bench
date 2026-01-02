@@ -102,6 +102,21 @@ def load_run_scores(run_dir: Path) -> list[dict]:
     return scores
 
 
+class HumanScoresPendingError(Exception):
+    """Raised when human-pending scores are found in leaderboard generation."""
+
+    def __init__(self, model: str, task_ids: list[str]):
+        self.model = model
+        self.task_ids = task_ids
+        tasks = ", ".join(task_ids[:5])
+        if len(task_ids) > 5:
+            tasks += f"... and {len(task_ids) - 5} more"
+        super().__init__(
+            f"Model '{model}' has {len(task_ids)} task(s) with human-pending scores: {tasks}. "
+            "Fill in scores and re-run scoring before generating leaderboard."
+        )
+
+
 def load_all_scores_for_model(model_dir: Path) -> tuple[list[dict], Path | None]:
     """Load scores from all runs, aggregating across runs.
 
@@ -110,18 +125,28 @@ def load_all_scores_for_model(model_dir: Path) -> tuple[list[dict], Path | None]
 
     Returns:
         Tuple of (aggregated scores, latest run dir for metadata)
+
+    Raises:
+        HumanScoresPendingError: If any scores have judge="human-pending"
     """
     runs = find_all_runs(model_dir)
     if not runs:
         return [], None
 
-    # Aggregate scores: later runs override earlier ones for same task
     scores_by_task: dict[str, dict] = {}
     for run_dir in runs:
         for score in load_run_scores(run_dir):
             task_id = score.get("task_id")
             if task_id:
                 scores_by_task[task_id] = score
+
+    pending_tasks = [
+        task_id
+        for task_id, score in scores_by_task.items()
+        if score.get("judge") == "human-pending"
+    ]
+    if pending_tasks:
+        raise HumanScoresPendingError(model_dir.name, pending_tasks)
 
     return list(scores_by_task.values()), runs[-1]
 

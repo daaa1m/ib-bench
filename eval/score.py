@@ -8,6 +8,12 @@ Usage:
     uv run python eval/score.py MODEL/RUN_ID --tasks e-001   # Score specific tasks
     uv run python eval/score.py MODEL/RUN_ID --rescore       # Rescore already-scored
     uv run python eval/score.py MODEL/RUN_ID --judge-model claude-opus-4-20250514  # Use specific judge
+    uv run python eval/score.py MODEL/RUN_ID --human         # Generate templates for human scoring
+
+Human scoring workflow:
+    1. Run with --human to generate templates (judge="human-pending", score=null)
+    2. Edit the score JSON files to fill in score (0.0-1.0) and reasoning
+    3. Re-run without --human to validate and finalize (judge="human")
 """
 
 import argparse
@@ -17,7 +23,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 
-from helpers import load_tasks, LLMJudge, get_rubric_hash, Task
+from helpers import load_tasks, LLMJudge, get_rubric_hash, Task, JudgeParseError
 
 
 @dataclass
@@ -119,14 +125,17 @@ def get_evaluation_type(rubric: dict) -> str:
 
 
 def score_task(
-    task: Task, response_data: dict, judge: LLMJudge | None = None
+    task: Task,
+    response_data: dict,
+    judge: LLMJudge | None = None,
+    human_judge: bool = False,
 ) -> TaskScore:
     """Score a response using rubric criteria.
 
     Scoring flow:
     1. Run ALL programmatic checks (regardless of failures)
     2. Check if any gates_llm=true criteria failed
-    3. If gates passed, run LLM judge criteria
+    3. If gates passed, run LLM judge criteria (or generate human templates)
     4. Calculate final score based on points
     """
     rubric = task.rubric
@@ -229,13 +238,11 @@ def score_task(
             )
         )
 
-    # Step 2: Run LLM criteria if gates passed
     llm_gated = False
     if llm_criteria:
         if gate_failed:
             llm_gated = True
             print("LLM evaluation GATED - programmatic gate criteria failed")
-            # Add skipped LLM criteria with 0 points
             for criterion_id, criterion in llm_criteria.items():
                 results.append(
                     CriterionResult(
@@ -250,30 +257,41 @@ def score_task(
                         points_earned=0,
                     )
                 )
-        else:
-            # Run LLM judge if available
-            if not judge:
-                # No judge provided - skip LLM criteria with 0 points
-                print("LLM evaluation SKIPPED - no judge provided")
-                for criterion_id, criterion in llm_criteria.items():
-                    results.append(
-                        CriterionResult(
-                            criterion_id=criterion_id,
-                            passed=False,
-                            criterion_type="llm_judge",
-                            match_type="llm_judge",
-                            expected=criterion.get("core_concepts", []),
-                            actual="[SKIPPED - no judge]",
-                            details="Skipped - no LLM judge provided",
-                            points=criterion.get("points", 0),
-                            points_earned=0,
-                        )
+        elif human_judge:
+            print("Generating human judge templates...")
+            for criterion_id, criterion in llm_criteria.items():
+                results.append(
+                    CriterionResult(
+                        criterion_id=criterion_id,
+                        passed=False,
+                        criterion_type="human_judge",
+                        match_type="human_judge",
+                        expected=criterion.get("description", ""),
+                        actual="[PENDING]",
+                        details=f"Human scoring required. Points: {criterion.get('points', 0)}",
+                        points=criterion.get("points", 0),
+                        points_earned=0,
                     )
-            else:
-                llm_results = score_llm_criteria(
-                    task, parsed_response, llm_criteria, judge
                 )
-                results.extend(llm_results)
+        elif not judge:
+            print("LLM evaluation SKIPPED - no judge provided")
+            for criterion_id, criterion in llm_criteria.items():
+                results.append(
+                    CriterionResult(
+                        criterion_id=criterion_id,
+                        passed=False,
+                        criterion_type="llm_judge",
+                        match_type="llm_judge",
+                        expected=criterion.get("core_concepts", []),
+                        actual="[SKIPPED - no judge]",
+                        details="Skipped - no LLM judge provided",
+                        points=criterion.get("points", 0),
+                        points_earned=0,
+                    )
+                )
+        else:
+            llm_results = score_llm_criteria(task, parsed_response, llm_criteria, judge)
+            results.extend(llm_results)
 
     # Calculate final score
     points_earned = sum(r.points_earned for r in results)
@@ -312,7 +330,26 @@ def score_llm_criteria(
     llm_rubric = {"criteria": criteria}
     response_text = json.dumps(parsed_response, indent=2)
 
-    judge_result = judge.score(llm_rubric, source_files, response_text)
+    try:
+        judge_result = judge.score(llm_rubric, source_files, response_text)
+    except JudgeParseError as e:
+        print(f"  ERROR: {e}")
+        for cid, criterion in criteria.items():
+            results.append(
+                CriterionResult(
+                    criterion_id=cid,
+                    passed=False,
+                    criterion_type="llm_judge",
+                    match_type="llm_judge",
+                    expected=criterion.get("core_concepts", []),
+                    actual="[JUDGE_ERROR]",
+                    details=f"Judge parse failed: {str(e)[:100]}",
+                    points=criterion.get("points", 0),
+                    points_earned=0,
+                )
+            )
+        return results
+
     scores = judge_result.get("scores", {})
 
     for cid, criterion in criteria.items():
@@ -321,9 +358,8 @@ def score_llm_criteria(
         if cid in scores:
             score_val = scores[cid].get("score", 0)
             reasoning = scores[cid].get("reasoning", "")
-            # Consider passed if score >= 0.6
             passed = score_val >= 0.6
-            points_earned = points * score_val  # Partial credit based on score
+            points_earned = points * score_val
             details = f"Score: {score_val:.2f} - {reasoning}"
         else:
             score_val = 0
@@ -346,6 +382,51 @@ def score_llm_criteria(
         )
 
     return results
+
+
+def validate_human_scores(
+    score_file: Path, existing_score: dict, task: Task | None
+) -> str:
+    """Validate and finalize human-pending scores.
+
+    Returns:
+        "complete" - all scores filled, file updated with judge="human"
+        "pending" - some scores still null
+    """
+    criteria = existing_score.get("criteria", [])
+    human_criteria = [c for c in criteria if c.get("type") == "human_judge"]
+
+    if not human_criteria:
+        return "complete"
+
+    all_filled = all(c.get("score") is not None for c in human_criteria)
+
+    if not all_filled:
+        return "pending"
+
+    for c in criteria:
+        if c.get("type") == "human_judge":
+            score_val = c.get("score", 0)
+            c["passed"] = score_val >= 0.6
+            c["points_earned"] = c["points"] * score_val
+            c["actual"] = f"{score_val:.2f}"
+            c["details"] = f"Human score: {score_val:.2f} - {c.get('reasoning', '')}"
+
+    total_points = existing_score.get("total_points", 100)
+    points_earned = sum(c.get("points_earned", 0) for c in criteria)
+    score_percent = (points_earned / total_points * 100) if total_points > 0 else 0
+    passed = score_percent >= 60
+
+    existing_score["judge"] = "human"
+    existing_score["points_earned"] = points_earned
+    existing_score["score_percent"] = score_percent
+    existing_score["passed"] = passed
+    existing_score["scored_at"] = datetime.now().isoformat()
+
+    with open(score_file, "w") as f:
+        json.dump(existing_score, f, indent=2)
+
+    return "complete"
 
 
 def find_runs(
@@ -441,11 +522,42 @@ def score_run(responses_dir: Path, scores_dir: Path, args):
         task_id = response_file.stem
         score_file = scores_dir / f"{task_id}.json"
 
-        # Skip if already scored (unless --rescore)
-        if score_file.exists() and not args.rescore:
-            print(f"Skipping {task_id} (already scored, use --rescore to override)")
-            summary["skipped"] += 1
-            continue
+        if score_file.exists():
+            with open(score_file) as f:
+                existing_score = json.load(f)
+
+            if existing_score.get("judge") == "human-pending":
+                result = validate_human_scores(
+                    score_file, existing_score, task_map.get(task_id)
+                )
+                if result == "complete":
+                    print(f"\n{task_id}: Human scores validated and finalized")
+                    summary["total"] += 1
+                    summary["passed"] += 1 if existing_score.get("passed") else 0
+                    summary["failed"] += 0 if existing_score.get("passed") else 1
+                    summary["total_points"] += existing_score.get("total_points", 0)
+                    summary["points_earned"] += existing_score.get("points_earned", 0)
+                    summary["results"].append(
+                        {
+                            "task_id": task_id,
+                            "passed": existing_score.get("passed"),
+                            "points_earned": existing_score.get("points_earned", 0),
+                            "total_points": existing_score.get("total_points", 0),
+                            "score_percent": existing_score.get("score_percent", 0),
+                        }
+                    )
+                    continue
+                elif result == "pending":
+                    print(
+                        f"Skipping {task_id} (human scores pending - fill in score file)"
+                    )
+                    summary["skipped"] += 1
+                    continue
+
+            if not args.rescore:
+                print(f"Skipping {task_id} (already scored, use --rescore to override)")
+                summary["skipped"] += 1
+                continue
 
         # Load response
         with open(response_file) as f:
@@ -499,14 +611,12 @@ def score_run(responses_dir: Path, scores_dir: Path, args):
         # Determine evaluation type from rubric
         eval_type = get_evaluation_type(task.rubric)
 
-        # Initialize judge if needed for LLM evaluation
-        if eval_type in ["llm", "hybrid"] and judge is None:
+        if eval_type in ["llm", "hybrid"] and judge is None and not args.human:
             print(f"Initializing LLM judge with model: {args.judge_model}")
             judge = LLMJudge(model=args.judge_model)
 
-        # Score
         print(f"\nScoring {task_id} (eval_type: {eval_type})...")
-        score = score_task(task, response_data, judge=judge)
+        score = score_task(task, response_data, judge=judge, human_judge=args.human)
         summary["total"] += 1
         summary["total_points"] += score.total_points
         summary["points_earned"] += score.points_earned
@@ -539,7 +649,34 @@ def score_run(responses_dir: Path, scores_dir: Path, args):
                 )
                 print(f"        Actual: {actual_preview}")
 
-        # Save score
+        has_human_judge = any(
+            r.criterion_type == "human_judge" for r in score.criteria_results
+        )
+        if has_human_judge:
+            judge_field = "human-pending"
+        elif args.human:
+            judge_field = None
+        else:
+            judge_field = args.judge_model
+
+        criteria_data = []
+        for r in score.criteria_results:
+            criterion_entry = {
+                "id": r.criterion_id,
+                "passed": r.passed,
+                "type": r.criterion_type,
+                "match_type": r.match_type,
+                "points": r.points,
+                "points_earned": r.points_earned,
+                "actual": r.actual,
+                "details": r.details,
+            }
+            if r.criterion_type == "human_judge":
+                criterion_entry["score"] = None
+                criterion_entry["reasoning"] = ""
+                criterion_entry["description"] = r.expected
+            criteria_data.append(criterion_entry)
+
         score_data = {
             "task_id": score.task_id,
             "rubric_hash": get_rubric_hash(task.rubric),
@@ -549,20 +686,10 @@ def score_run(responses_dir: Path, scores_dir: Path, args):
             "points_earned": score.points_earned,
             "score_percent": score.score_percent,
             "llm_gated": score.llm_gated,
-            "criteria": [
-                {
-                    "id": r.criterion_id,
-                    "passed": r.passed,
-                    "type": r.criterion_type,
-                    "match_type": r.match_type,
-                    "points": r.points,
-                    "points_earned": r.points_earned,
-                    "actual": r.actual,
-                    "details": r.details,
-                }
-                for r in score.criteria_results
-            ],
+            "criteria": criteria_data,
         }
+        if judge_field:
+            score_data["judge"] = judge_field
 
         with open(score_file, "w") as f:
             json.dump(score_data, f, indent=2)
@@ -624,6 +751,11 @@ def main():
         "--judge-model",
         default="claude-sonnet-4-5-20250929",
         help="Model to use for LLM-as-judge scoring",
+    )
+    parser.add_argument(
+        "--human",
+        action="store_true",
+        help="Generate templates for human scoring instead of LLM judge",
     )
     args = parser.parse_args()
 

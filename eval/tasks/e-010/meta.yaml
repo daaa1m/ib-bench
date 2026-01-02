@@ -1,4 +1,30 @@
-// fix multiple errors in excel model
-//  Which Excel file? (source from data-factory/human-generated/?)
-// 2. What errors are in it? (formula errors, incorrect references, logic bugs?)
-// ß3. Expected answers (specific cells, values, or fixes?)
+task:
+  id: e-010
+  title: "Find and fix multiple errors in an LBO model"
+  type: fix-error
+  category:
+    - financial-analysis
+  input_type: excel
+  description: |
+    Model contains 3 errors:
+    1. OCF (row 64 in "BS & CFS" sheet) is missing "adjustment of finance costs, net"
+    2. Cell K32 in "FS Calcs" sheet has a rogue -10 value that should not be there
+    3. Row 70 in "BS & CFS" sheet is missing addition of PPE incl leases (row 66)
+    
+    Expected answer after all fixes: 2024E Long Term Debt (K29 in "BS & CFS" sheet) = 504.9
+    
+    Tests ability to systematically audit a financial model and identify multiple errors
+    without being told how many exist.
+
+prompt:
+  notes: |
+    LLM is told there is "more than one error" but not the exact count.
+    Must report all errors found with locations and fixes.
+    Final validation is checking Long Term Debt equals expected value.
+
+input:
+  input-file-original: "$human/WILD-Model.xlsx"
+  notes: |
+    Excel model with intentionally introduced errors in:
+    - BS & CFS sheet (rows 64, 70, cell K29)
+    - FS Calcs sheet (cell K32)

@@ -1,8 +1,11 @@
-# Documentation
 task:
   id: e-019
+  title: "Extract credit agreement financial covenants"
   type: extraction
-  category: pdf
+  category:
+    - data-extraction
+    - due-diligence
+  input_type: pdf
   description:
     "LLM is provided a credit agreement and must extract financial covenants
     including specific ratios (leverage, coverage), threshold levels, and

@@ -1,0 +1,22 @@
+{
+  "total": 1,
+  "passed": 1,
+  "failed": 0,
+  "blocked": 0,
+  "skipped": 0,
+  "total_points": 100,
+  "points_earned": 96.99,
+  "results": [
+    {
+      "task_id": "e-007",
+      "passed": true,
+      "points_earned": 96.99,
+      "total_points": 100,
+      "score_percent": 96.99
+    }
+  ],
+  "overall_percent": 96.99,
+  "rubric_hashes": {
+    "e-007": "51b85292"
+  }
+}

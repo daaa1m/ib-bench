@@ -1,8 +1,11 @@
-# Documentation
 task:
   id: e-004
+  title: "Reconcile AMD GAAP to non-GAAP operating income"
   type: extraction
-  category: web
+  category:
+    - data-extraction
+    - financial-analysis
+  input_type: web
   description:
     "LLM must reconcile AMD's Q3 2025 GAAP operating income to non-GAAP and
     identify all reconciling line items without hints. Expected: GAAP OI $1,270m,

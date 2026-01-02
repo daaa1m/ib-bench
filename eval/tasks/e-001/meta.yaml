@@ -1,8 +1,10 @@
-# Documentation
 task:
   id: e-001
+  title: "Find the balance sheet error in an LBO model"
   type: fix-error
-  category: excel
+  category:
+    - financial-analysis
+  input_type: excel
   description:
     "LLM is provided an LBO model with an unbalanced balance sheet. LLM must
     identify the error source. Error is in row 140 where formula neglects to

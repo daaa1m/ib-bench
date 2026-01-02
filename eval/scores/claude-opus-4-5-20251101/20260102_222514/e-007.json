@@ -1,0 +1,122 @@
+{
+  "task_id": "e-007",
+  "rubric_hash": "51b85292",
+  "scored_at": "2026-01-03T01:15:56.445747",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 96.99,
+  "score_percent": 96.99,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "gs_rating",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 8,
+      "points_earned": 8,
+      "actual": "Buy",
+      "details": "Found 'Buy' in response"
+    },
+    {
+      "id": "gs_price_target",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 8,
+      "points_earned": 8,
+      "actual": "$330",
+      "details": "Found '330' in response"
+    },
+    {
+      "id": "jpm_rating",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 8,
+      "points_earned": 8,
+      "actual": "Overweight",
+      "details": "Found 'Overweight' in response"
+    },
+    {
+      "id": "jpm_price_target",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 8,
+      "points_earned": 8,
+      "actual": "$340",
+      "details": "Found '340' in response"
+    },
+    {
+      "id": "q3_search_growth",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 8,
+      "points_earned": 8,
+      "actual": "14.5%",
+      "details": "Found '14.5' in response"
+    },
+    {
+      "id": "q3_cloud_growth",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 8,
+      "points_earned": 8,
+      "actual": "34%",
+      "details": "Found '34' in response"
+    },
+    {
+      "id": "fy25_capex_guidance",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 8,
+      "points_earned": 8,
+      "actual": "$91-93 billion",
+      "details": "Found '91-93' in response"
+    },
+    {
+      "id": "key_drivers",
+      "passed": true,
+      "type": "human_judge",
+      "match_type": "human_judge",
+      "points": 14,
+      "points_earned": 12.04,
+      "actual": "0.86",
+      "details": "Human score: 0.86 - LLM mentioned revenue growth driven by AI related search and had vague commentary on margins",
+      "score": 0.86,
+      "reasoning": "LLM mentioned revenue growth driven by AI related search and had vague commentary on margins",
+      "description": "Key drivers should include Search/AI, Cloud, YouTube, and margin/capex themes"
+    },
+    {
+      "id": "summary_synthesis",
+      "passed": true,
+      "type": "human_judge",
+      "match_type": "human_judge",
+      "points": 15,
+      "points_earned": 15.0,
+      "actual": "1.00",
+      "details": "Human score: 1.00 - Good summary of both",
+      "score": 1.0,
+      "reasoning": "Good summary of both",
+      "description": "Summary must synthesize both GS and JPM views, not just repeat one"
+    },
+    {
+      "id": "summary_drivers",
+      "passed": true,
+      "type": "human_judge",
+      "match_type": "human_judge",
+      "points": 15,
+      "points_earned": 13.950000000000001,
+      "actual": "0.93",
+      "details": "Human score: 0.93 - Nuanced summary of the drivers",
+      "score": 0.93,
+      "reasoning": "Nuanced summary of the drivers",
+      "description": "Summary must reference model drivers and key financial metrics"
+    }
+  ],
+  "judge": "human"
+}

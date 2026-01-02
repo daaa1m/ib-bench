@@ -1,8 +1,11 @@
-# Documentation
 task:
   id: e-016
+  title: "Summarize merger agreement economic terms"
   type: summarise
-  category: pdf
+  category:
+    - document-review
+    - due-diligence
+  input_type: pdf
   description:
     "LLM is provided a merger agreement and must summarize key economic terms
     including price, consideration type, conditions, termination fees, and MAC

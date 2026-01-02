@@ -1,8 +1,11 @@
-# Documentation
 task:
   id: e-003
+  title: "Extract AMZN purchase obligations from SEC 10-K"
   type: extraction
-  category: web
+  category:
+    - data-extraction
+    - due-diligence
+  input_type: web
   description:
     "LLM must obtain AMZN's FY2024 10-K from SEC EDGAR or IR site and extract
     the next 24-month unconditional purchase obligations from Dec 31, 2024.

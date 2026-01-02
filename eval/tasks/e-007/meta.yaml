@@ -1,8 +1,11 @@
-# Documentation
 task:
   id: e-007
+  title: "Synthesize GS and JPM equity research on Alphabet"
   type: summarise
-  category: pdf
+  category:
+    - document-review
+    - financial-analysis
+  input_type: multi
   description:
     "LLM is provided two equity research reports (Goldman Sachs and JPMorgan) on
     Alphabet Q3'25 earnings plus both banks' financial models. LLM must synthesize

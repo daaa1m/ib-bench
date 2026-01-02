@@ -1,8 +1,10 @@
-# Documentation
 task:
   id: e-014
+  title: "Fix quarterly model date alignment errors"
   type: fix-error
-  category: excel
+  category:
+    - financial-analysis
+  input_type: excel
   description:
     "LLM is provided a quarterly model with date/period alignment errors where
     fiscal quarters don't match correctly. LLM must identify and fix the

@@ -1,1 +1,28 @@
-// generating a PIB from publicly available materials. use Moody's Corp
+// task is to generate a public information book (PIB) from publicly available materials
+// use "Solstice Advanced Materials" a newly spun off public company
+
+// key things to prompt
+1) find summary of transaction and distribution ratio
+2) find revenue and Business Segmentation break down by product line (e.g., Defense, Semiconductors).
+3) post spin pro forma capital structure (total capitalisation) and total equity
+4) present as a 1 page summary, include diagrams of revenue segmentation
+
+// key criteria to be judged on
+// 2) did LLM highlight any business risks below?
+"We have no operating history as an independent, publicly traded company, and our historical combined financial information is not necessarily representative of the results we would have achieved as an independent, publicly traded company and may not be a reliable indicator of our future results;
+•If we are unable to innovate and successfully introduce new products, or new technologies or processes reduce the demand for our products or the price at which we can sell products, our profitability could be adversely affected;
+•Raw material price fluctuations, inflation, scarcity, the ability of key suppliers to meet quality and delivery requirements, or catastrophic events can increase the cost of our products and services, impact our ability to meet commitments to customers and cause us to incur significant liabilities;
+•Our products and operations are subject to numerous and increasingly complex government regulations, which may be subject to change, and compliance with these regulations could require us to incur additional costs or to reformulate or discontinue certain of our products and could have a significant impact on our business, financial condition, results of operations and cash flows;
+•Global climate change and related regulations and changes in customer demand could negatively affect our business, financial condition, results of operations and cash flows;
+•We and our customers operate in a politically sensitive environment, and negative public and political perceptions of nuclear energy and radioactive materials could materially and adversely affect us, our customers, and the markets in which we operate;
+•A significant percentage of our sales and operations is in non-U.S. jurisdictions and is subject to the economic, political, regulatory, foreign exchange and other risks of international operations;
+•If significant tariffs or other restrictions continue to be placed on foreign imports by the U.S. and related countermeasures are taken by impacted foreign countries, our business, financial condition, results of operations and cash flows could be negatively affected;
+•We may not be able to obtain additional capital that we need in the future on favorable terms or at all;
+•We depend on the recruitment and retention of qualified personnel, and our failure to attract and retain such personnel, could adversely affect our business, financial condition, results of operations and cash flows;
+•Our operations and the prior operations of predecessor companies expose us to the risk of material environmental liabilities;
+•Chemical manufacturing is inherently hazardous and may result in accidents, which may disrupt our operations or expose us to significant losses, liabilities or reputational harm;
+•We face the risk of significant decommissioning and remediation expense in the event of a shut down of any manufacturing or other site, including sites in respect of which regulators, including the U.S. Nuclear Regulatory Commission (the “NRC”) and the EPA (pursuant to the Resource Conservation and Recovery Act (“RCRA”)), may require letters of credit or other financial assurance;
+•We cannot predict with certainty the outcome of litigation matters, government proceedings and other contingencies and uncertainties;
+We may be impacted by increasing stakeholder interest in public company performance, disclosure, and goal-setting with respect to environmental, social and governance (“ESG”) matters;
+•If our intellectual property were compromised or copied, if our competitors were to develop similar or superior intellectual property or technology or if we fail to maintain, protect, defend or enforce our intellectual property or to be successful in litigation related to our intellectual property or the intellectual property of others, our business, financial condition, results of operations and cash flows could be negatively affected"
+

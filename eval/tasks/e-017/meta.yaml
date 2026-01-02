@@ -1,8 +1,10 @@
-# Documentation
 task:
   id: e-017
+  title: "Find comparable M&A transactions with multiples"
   type: extraction
-  category: web
+  category:
+    - data-extraction
+  input_type: web
   description:
     "LLM must find 5 comparable M&A transactions in a specified sector and
     extract EV/EBITDA multiples for each deal. Expected answer: list of deals

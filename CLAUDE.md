@@ -38,6 +38,14 @@ uv run python eval/score.py RUN_ID --rescore
 uv run python eval/leaderboard.py                      # CLI table
 uv run python eval/leaderboard.py --export results/    # Export JSON
 
+# Export task metadata for frontend
+uv run python eval/export_tasks.py                     # Export to tmp/tasks.json
+uv run python eval/export_tasks.py output/             # Export to output/tasks.json
+
+# Export task results with scores per model
+uv run python eval/export_task_results.py              # Export to tmp/
+uv run python eval/export_task_results.py output/      # Export to output/
+
 # Analyze a specific run
 uv run python eval/analyze.py MODEL/RUN_ID                        # Full dump
 uv run python eval/analyze.py MODEL/RUN_ID --compare MODEL2/RUN_ID2  # Compare runs
@@ -107,11 +115,13 @@ Task IDs follow naming: `{difficulty}-{number}` where difficulty is `e` (easy),
 ### Meta Format
 
 ```yaml
-# Documentation
 task:
   id: e-001
+  title: "Find the balance sheet error in an LBO model"
   type: fix-error # fix-error, summarise, extraction, creating
-  category: excel # excel, pdf, web
+  category:       # IB domain(s) - can have multiple
+    - financial-analysis
+  input_type: excel # excel, pdf, web, multi
   description:
     "Brief explanation of what the task requires. The error or problem (if
     applicable). Expected answer with specific values. What capability this
@@ -124,6 +134,11 @@ input:
   input-file-original: "$human/source.xlsx" # Path, list of paths, or None
   notes: "Modifications made or notable aspects of input"
 ```
+
+**Fields:**
+- `title`: Human-readable task summary for frontend display
+- `category`: IB domain(s) - `financial-analysis`, `due-diligence`, `document-review`, `data-extraction`
+- `input_type`: Input format - `excel`, `pdf`, `web`, `multi` (for mixed inputs)
 
 **Path alias:** `$human` expands to `data-factory/human-generated/`
 

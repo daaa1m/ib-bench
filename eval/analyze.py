@@ -2,8 +2,9 @@
 Analyze a scored run with full diagnostic dump.
 
 Usage:
-    uv run python eval/analyze.py MODEL/RUN_ID
-    uv run python eval/analyze.py MODEL/RUN_ID --compare MODEL2/RUN_ID2
+    uv run python eval/analyze.py MODEL                      # Aggregate all runs for model
+    uv run python eval/analyze.py MODEL/RUN_ID               # Specific run only
+    uv run python eval/analyze.py MODEL --compare MODEL2     # Compare two models
 """
 
 import argparse
@@ -19,6 +20,7 @@ from helpers import load_tasks
 @dataclass
 class TaskResult:
     """Parsed result for a single task."""
+
     task_id: str
     points_earned: float
     total_points: float
@@ -38,53 +40,104 @@ class TaskResult:
             return "fail"
 
 
-def load_run(run_path: str, base_dir: Path = None) -> tuple[dict, list[TaskResult]]:
-    """Load config and scores from a run."""
+def load_run(
+    run_path: str, base_dir: Path | None = None
+) -> tuple[dict, list[TaskResult]]:
     if base_dir is None:
         base_dir = Path(__file__).parent
 
-    # Parse MODEL/RUN_ID format
     parts = run_path.split("/")
+
     if len(parts) == 2:
         model, run_id = parts
+        return _load_single_run(model, run_id, base_dir)
+    elif len(parts) == 1:
+        model = parts[0]
+        return _load_all_runs_for_model(model, base_dir)
     else:
-        # Try to find it as just run_id
-        raise ValueError(f"Expected MODEL/RUN_ID format, got: {run_path}")
+        raise ValueError(f"Expected MODEL or MODEL/RUN_ID format, got: {run_path}")
 
+
+def _load_single_run(
+    model: str, run_id: str, base_dir: Path
+) -> tuple[dict, list[TaskResult]]:
     scores_dir = base_dir / "scores" / model / run_id
     responses_dir = base_dir / "responses" / model / run_id
 
     if not scores_dir.exists():
         raise FileNotFoundError(f"Scores not found: {scores_dir}")
 
-    # Load config from responses dir
     config = {}
     config_file = responses_dir / "config.json"
     if config_file.exists():
         with open(config_file) as f:
             config = json.load(f)
 
-    # Add derived fields
     config["model"] = model
     config["run_id"] = run_id
 
-    # Load all score files
     results = []
     for score_file in sorted(scores_dir.glob("*.json")):
         if score_file.name == "summary.json":
             continue
         with open(score_file) as f:
             data = json.load(f)
-            results.append(TaskResult(
+            results.append(
+                TaskResult(
+                    task_id=data["task_id"],
+                    points_earned=data.get("points_earned", 0),
+                    total_points=data.get("total_points", 100),
+                    score_percent=data.get("score_percent", 0),
+                    criteria=data.get("criteria", []),
+                    llm_gated=data.get("llm_gated", False),
+                )
+            )
+
+    return config, results
+
+
+def _load_all_runs_for_model(
+    model: str, base_dir: Path
+) -> tuple[dict, list[TaskResult]]:
+    model_scores_dir = base_dir / "scores" / model
+
+    if not model_scores_dir.exists():
+        raise FileNotFoundError(f"No scores found for model: {model}")
+
+    run_dirs = sorted([d for d in model_scores_dir.iterdir() if d.is_dir()])
+    if not run_dirs:
+        raise FileNotFoundError(f"No runs found for model: {model}")
+
+    scores_by_task: dict[str, dict] = {}
+    for run_dir in run_dirs:
+        for score_file in run_dir.glob("*.json"):
+            if score_file.name == "summary.json":
+                continue
+            with open(score_file) as f:
+                data = json.load(f)
+                task_id = data.get("task_id")
+                if task_id:
+                    scores_by_task[task_id] = data
+
+    config = {
+        "model": model,
+        "run_id": f"(aggregated from {len(run_dirs)} runs)",
+    }
+
+    results = []
+    for data in scores_by_task.values():
+        results.append(
+            TaskResult(
                 task_id=data["task_id"],
                 points_earned=data.get("points_earned", 0),
                 total_points=data.get("total_points", 100),
                 score_percent=data.get("score_percent", 0),
                 criteria=data.get("criteria", []),
                 llm_gated=data.get("llm_gated", False),
-            ))
+            )
+        )
 
-    return config, results
+    return config, sorted(results, key=lambda r: r.task_id)
 
 
 def get_provider(model: str) -> str:
@@ -100,17 +153,20 @@ def get_provider(model: str) -> str:
 
 
 def get_task_category(task_id: str) -> str:
-    """Get category from task metadata."""
     tasks_dir = Path(__file__).parent / "tasks"
     task_dir = tasks_dir / task_id
     meta_file = task_dir / "meta.yaml"
 
     if meta_file.exists():
         import yaml
+
         with open(meta_file) as f:
             meta = yaml.safe_load(f)
             if isinstance(meta, dict):
-                return meta.get("task", {}).get("category", "unknown")
+                category = meta.get("task", {}).get("category", "unknown")
+                if isinstance(category, list):
+                    return category[0] if category else "unknown"
+                return category
     return "unknown"
 
 
@@ -209,7 +265,9 @@ def analyze_run(config: dict, results: list[TaskResult], total_tasks: int):
         tasks = by_difficulty[diff]
         if tasks:
             credits = calc_credits(tasks)
-            print(f"  {diff.capitalize():<9} {tier_scores[diff]:.1f}  ({credits:.1f} credits / {len(tasks)} tasks)")
+            print(
+                f"  {diff.capitalize():<9} {tier_scores[diff]:.1f}  ({credits:.1f} credits / {len(tasks)} tasks)"
+            )
         else:
             print(f"  {diff.capitalize():<9} -     (0 tasks attempted)")
 
@@ -231,30 +289,39 @@ def analyze_run(config: dict, results: list[TaskResult], total_tasks: int):
     # Check for 0% scores
     zero_scores = [r for r in results if r.score_percent == 0]
     if zero_scores:
-        warnings.append(f"⚠ {len(zero_scores)} tasks scored 0% - check rubrics or model output")
+        warnings.append(
+            f"⚠ {len(zero_scores)} tasks scored 0% - check rubrics or model output"
+        )
 
     # Check for LLM judge issues
     llm_skipped = []
     for r in results:
         for c in r.criteria:
-            if c.get("type") == "llm_judge" and "not scored" in c.get("details", "").lower():
+            if (
+                c.get("type") == "llm_judge"
+                and "not scored" in c.get("details", "").lower()
+            ):
                 llm_skipped.append(r.task_id)
                 break
     if llm_skipped:
         task_list = ", ".join(llm_skipped[:5])
         if len(llm_skipped) > 5:
-            task_list += f" (+{len(llm_skipped)-5} more)"
+            task_list += f" (+{len(llm_skipped) - 5} more)"
         warnings.append(f"⚠ LLM judge skipped on {task_list}")
 
     # Check for JSON parse failures
-    json_failures = [r for r in results if any(c.get("id") == "json_parse" for c in r.criteria)]
+    json_failures = [
+        r for r in results if any(c.get("id") == "json_parse" for c in r.criteria)
+    ]
     if json_failures:
         warnings.append(f"⚠ {len(json_failures)} tasks failed JSON parsing")
 
     # Check for gated LLM
     gated = [r for r in results if r.llm_gated]
     if gated:
-        warnings.append(f"⚠ {len(gated)} tasks had LLM evaluation gated (programmatic prereq failed)")
+        warnings.append(
+            f"⚠ {len(gated)} tasks had LLM evaluation gated (programmatic prereq failed)"
+        )
 
     if warnings:
         for w in warnings:
@@ -297,14 +364,16 @@ def analyze_run(config: dict, results: list[TaskResult], total_tasks: int):
                 ctype = c.get("type", "")[:4]
                 pts = c.get("points", 0)
                 details = c.get("details", "")
-                print(f"    \033[31m✗\033[0m {c['id']} ({ctype}, {pts}pts): {details[:50]}")
+                print(
+                    f"    \033[31m✗\033[0m {c['id']} ({ctype}, {pts}pts): {details[:50]}"
+                )
 
                 # Show expected vs actual for programmatic failures
                 if c.get("type") == "programmatic":
                     actual = c.get("actual", "")
                     if len(actual) > 60:
                         actual = actual[:60] + "..."
-                    print(f"      Actual: \"{actual}\"")
+                    print(f'      Actual: "{actual}"')
 
     # ══════════════════════════════════════════════════════════════════
     # PATTERNS
@@ -347,8 +416,9 @@ def analyze_run(config: dict, results: list[TaskResult], total_tasks: int):
     print()
 
 
-def compare_runs(config1: dict, results1: list[TaskResult],
-                 config2: dict, results2: list[TaskResult]):
+def compare_runs(
+    config1: dict, results1: list[TaskResult], config2: dict, results2: list[TaskResult]
+):
     """Print comparison between two runs."""
     print_header("COMPARISON")
     print(f"  Run 1: {config1['model']}/{config1['run_id']}")
@@ -398,8 +468,9 @@ def main():
 
     # Count total tasks
     tasks_dir = Path(__file__).parent / "tasks"
-    total_tasks = sum(1 for p in tasks_dir.iterdir()
-                      if p.is_dir() and not p.name.startswith("_"))
+    total_tasks = sum(
+        1 for p in tasks_dir.iterdir() if p.is_dir() and not p.name.startswith("_")
+    )
 
     # Load primary run
     config, results = load_run(args.run_path)

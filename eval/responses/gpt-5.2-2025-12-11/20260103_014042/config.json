@@ -1,0 +1,17 @@
+{
+  "provider": "openai",
+  "model": "gpt-5.2-2025-12-11",
+  "task_ids": [
+    "e-010"
+  ],
+  "parallel": 1,
+  "config_file": "configs/gpt5.2-test.yaml",
+  "started_at": "2026-01-03T01:40:42.185803",
+  "completed_at": "2026-01-03T01:41:55.812274",
+  "results_summary": [
+    {
+      "task_id": "e-010",
+      "status": "success"
+    }
+  ]
+}

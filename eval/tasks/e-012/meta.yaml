@@ -1,8 +1,11 @@
-# Documentation
 task:
   id: e-012
+  title: "Summarize S-1 top risk factors"
   type: summarise
-  category: pdf
+  category:
+    - document-review
+    - due-diligence
+  input_type: pdf
   description:
     "LLM is provided an S-1 filing and must summarize the top 5 risk factors
     with analyst implications. Expected answer: prioritized list of material

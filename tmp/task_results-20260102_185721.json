@@ -1,0 +1,345 @@
+{
+  "tasks": [
+    {
+      "id": "e-001",
+      "title": "Find the balance sheet error in an LBO model",
+      "type": "fix-error",
+      "category": [
+        "financial-analysis"
+      ],
+      "input_type": "excel",
+      "description": "LLM is provided an LBO model with an unbalanced balance sheet. LLM must identify the error source. Error is in row 140 where formula neglects to add values from row 138. Expected answer: row 140 cell reference with corrected formula. Tests LLM's ability to audit Excel formulae.",
+      "results": [
+        {
+          "model": "claude-opus-4-5-20251101",
+          "provider": "anthropic",
+          "score": 100,
+          "execution_time_ms": 157073,
+          "run_id": "20251230_114140",
+          "run_date": "2025-12-30",
+          "error_type": null
+        },
+        {
+          "model": "gpt-5.2-2025-12-11",
+          "provider": "openai",
+          "score": 100,
+          "execution_time_ms": 180556,
+          "run_id": "20251231_025909",
+          "run_date": "2025-12-31",
+          "error_type": null
+        }
+      ]
+    },
+    {
+      "id": "e-002",
+      "title": "Summarize Grant's Interest Rate Observer article",
+      "type": "summarise",
+      "category": [
+        "document-review"
+      ],
+      "input_type": "pdf",
+      "description": "LLM is provided a specialized financial article (Grant's Interest Rate Observer) and asked to summarize the key points. Expected answer should capture the main investment thesis and supporting arguments. Tests LLM's ability to distill dense financial commentary.",
+      "results": [
+        {
+          "model": "claude-opus-4-5-20251101",
+          "provider": "anthropic",
+          "score": 86,
+          "execution_time_ms": 30264,
+          "run_id": "20251230_114140",
+          "run_date": "2025-12-30",
+          "error_type": "other_error"
+        },
+        {
+          "model": "gpt-5.2-2025-12-11",
+          "provider": "openai",
+          "score": 87,
+          "execution_time_ms": 48882,
+          "run_id": "20251231_030626",
+          "run_date": "2025-12-31",
+          "error_type": "other_error"
+        }
+      ]
+    },
+    {
+      "id": "e-003",
+      "title": "Extract AMZN purchase obligations from SEC 10-K",
+      "type": "extraction",
+      "category": [
+        "data-extraction",
+        "due-diligence"
+      ],
+      "input_type": "web",
+      "description": "LLM must obtain AMZN's FY2024 10-K from SEC EDGAR or IR site and extract the next 24-month unconditional purchase obligations from Dec 31, 2024. Expected answer: USD 16,477m (USD 8,536m + USD 7,941m). Tests LLM's ability to navigate SEC filings and locate specific footnote data.",
+      "results": [
+        {
+          "model": "claude-opus-4-5-20251101",
+          "provider": "anthropic",
+          "score": 0,
+          "execution_time_ms": 4515,
+          "run_id": "20251230_114140",
+          "run_date": "2025-12-30",
+          "error_type": "incorrect_answer"
+        },
+        {
+          "model": "gpt-5.2-2025-12-11",
+          "provider": "openai",
+          "score": 0,
+          "execution_time_ms": 3327,
+          "run_id": "20251231_030626",
+          "run_date": "2025-12-31",
+          "error_type": "incorrect_answer"
+        }
+      ]
+    },
+    {
+      "id": "e-004",
+      "title": "Reconcile AMD GAAP to non-GAAP operating income",
+      "type": "extraction",
+      "category": [
+        "data-extraction",
+        "financial-analysis"
+      ],
+      "input_type": "web",
+      "description": "LLM must reconcile AMD's Q3 2025 GAAP operating income to non-GAAP and identify all reconciling line items without hints. Expected: GAAP OI $1,270m, non-GAAP OI $2,238m, adjustments: SBC $419m, amortization $562m, acquisition costs $42m, inventory recovery $(67)m, legal contingency $12m. Tests LLM's ability to discover and extract reconciling items independently.",
+      "results": [
+        {
+          "model": "claude-opus-4-5-20251101",
+          "provider": "anthropic",
+          "score": 0,
+          "execution_time_ms": 3046,
+          "run_id": "20251230_114140",
+          "run_date": "2025-12-30",
+          "error_type": "incorrect_answer"
+        },
+        {
+          "model": "gpt-5.2-2025-12-11",
+          "provider": "openai",
+          "score": 0,
+          "execution_time_ms": 2541,
+          "run_id": "20251231_030626",
+          "run_date": "2025-12-31",
+          "error_type": "incorrect_answer"
+        }
+      ]
+    },
+    {
+      "id": "e-005",
+      "title": "Extract AMZN Q3 2025 earnings metrics and write summary",
+      "type": "extraction",
+      "category": [
+        "data-extraction",
+        "document-review"
+      ],
+      "input_type": "multi",
+      "description": "LLM is provided AMZN Q3 2025 earnings materials (10-Q, press release, slides) and must extract key metrics AND write a one-page earnings summary. Expected metrics: Revenue $180,169m, Operating Income $17,422m, Diluted EPS $1.95, Q4 guidance $206-213B revenue, $21-26B operating income. Summary should cover segment performance, growth trends, and strategic context. Tests both extraction accuracy and analytical writing ability.",
+      "results": [
+        {
+          "model": "claude-opus-4-5-20251101",
+          "provider": "anthropic",
+          "score": 100,
+          "execution_time_ms": 147608,
+          "run_id": "20251230_114140",
+          "run_date": "2025-12-30",
+          "error_type": null
+        },
+        {
+          "model": "gpt-5.2-2025-12-11",
+          "provider": "openai",
+          "score": 94,
+          "execution_time_ms": 44931,
+          "run_id": "20251231_030626",
+          "run_date": "2025-12-31",
+          "error_type": null
+        }
+      ]
+    },
+    {
+      "id": "e-006",
+      "title": "Add interest circularity to LBO model",
+      "type": "fix-error",
+      "category": [
+        "financial-analysis"
+      ],
+      "input_type": "excel",
+      "description": "LLM is provided an LBO model without interest circularity. LLM must add circularity by calculating interest from average of beginning and ending debt balance with a circularity switch. Correctness verified by checking row 164 (Total Cash Interest) values with circ ON: K164=-112, L164=-102, M164=-98, N164=-92, O164=-84. Tests LLM's ability to implement circular references in Excel.",
+      "results": [
+        {
+          "model": "claude-opus-4-5-20251101",
+          "provider": "anthropic",
+          "score": 100,
+          "execution_time_ms": 185774,
+          "run_id": "20260101_094708",
+          "run_date": "2026-01-01",
+          "error_type": null
+        },
+        {
+          "model": "gpt-5.2-2025-12-11",
+          "provider": "openai",
+          "score": 0,
+          "execution_time_ms": 109374,
+          "run_id": "20260102_074636",
+          "run_date": "2026-01-02",
+          "error_type": "refused_by_provider"
+        }
+      ]
+    },
+    {
+      "id": "e-007",
+      "title": "Synthesize GS and JPM equity research on Alphabet",
+      "type": "summarise",
+      "category": [
+        "document-review",
+        "financial-analysis"
+      ],
+      "input_type": "multi",
+      "description": "LLM is provided two equity research reports (Goldman Sachs and JPMorgan) on Alphabet Q3'25 earnings plus both banks' financial models. LLM must synthesize both research views, extract key metrics (ratings, price targets), and identify key drivers from the models. Expected: GS Buy/$330, JPM OW/$340, Search +14.5%, Cloud +34%, capex $91-93bn. Tests LLM's ability to compare analyst views and extract model drivers.",
+      "results": [
+        {
+          "model": "gpt-5.2-2025-12-11",
+          "provider": "openai",
+          "score": 93,
+          "execution_time_ms": 188591,
+          "run_id": "20260102_074636",
+          "run_date": "2026-01-02",
+          "error_type": null
+        }
+      ]
+    },
+    {
+      "id": "e-008",
+      "title": "Summarize TSLA 10-K MD&A section",
+      "type": "summarise",
+      "category": [
+        "document-review"
+      ],
+      "input_type": "pdf",
+      "description": "LLM is provided a 10-K filing and must summarize the MD&A section, focusing on key business drivers, significant trends, and management's outlook. Expected answer should capture 3-5 main themes. Tests LLM's ability to extract management perspective from regulatory filings.",
+      "results": [
+        {
+          "model": "gpt-5.2-2025-12-11",
+          "provider": "openai",
+          "score": 0,
+          "execution_time_ms": 74677,
+          "run_id": "20260102_074636",
+          "run_date": "2026-01-02",
+          "error_type": "failed_by_llm_judge"
+        }
+      ]
+    },
+    {
+      "id": "e-009",
+      "title": "Extract key assumptions from LBO model",
+      "type": "extraction",
+      "category": [
+        "data-extraction",
+        "financial-analysis"
+      ],
+      "input_type": "excel",
+      "description": "LLM is provided an LBO model and must extract all key assumptions including entry/exit multiples, hold period, debt tranches, rates, and growth rates. Expected answer: complete list of driver cells and values. Tests LLM's ability to navigate complex models and identify inputs.",
+      "results": [
+        {
+          "model": "claude-opus-4-5-20251101",
+          "provider": "anthropic",
+          "score": 100,
+          "execution_time_ms": 106202,
+          "run_id": "20260102_105037",
+          "run_date": "2026-01-02",
+          "error_type": null
+        },
+        {
+          "model": "gpt-5.2-2025-12-11",
+          "provider": "openai",
+          "score": 0,
+          "execution_time_ms": 106728,
+          "run_id": "20260102_074636",
+          "run_date": "2026-01-02",
+          "error_type": "refused_by_provider"
+        }
+      ]
+    },
+    {
+      "id": "e-011",
+      "title": "Extract debt maturity schedule from 10-K",
+      "type": "extraction",
+      "category": [
+        "data-extraction",
+        "due-diligence"
+      ],
+      "input_type": "pdf",
+      "description": "LLM is provided a credit agreement or 10-K and must extract the complete debt maturity schedule showing principal amounts due by year. Expected answer: table of maturities by year matching source document. Tests LLM's ability to locate and parse debt footnote disclosures.",
+      "results": []
+    },
+    {
+      "id": "e-012",
+      "title": "Summarize S-1 top risk factors",
+      "type": "summarise",
+      "category": [
+        "document-review",
+        "due-diligence"
+      ],
+      "input_type": "pdf",
+      "description": "LLM is provided an S-1 filing and must summarize the top 5 risk factors with analyst implications. Expected answer: prioritized list of material risks with business impact assessment. Tests LLM's ability to prioritize and distill lengthy risk disclosures.",
+      "results": []
+    },
+    {
+      "id": "e-014",
+      "title": "Fix quarterly model date alignment errors",
+      "type": "fix-error",
+      "category": [
+        "financial-analysis"
+      ],
+      "input_type": "excel",
+      "description": "LLM is provided a quarterly model with date/period alignment errors where fiscal quarters don't match correctly. LLM must identify and fix the misalignment. Expected answer: corrected period labels and formula references. Tests LLM's ability to debug timeline issues in models.",
+      "results": []
+    },
+    {
+      "id": "e-016",
+      "title": "Summarize merger agreement economic terms",
+      "type": "summarise",
+      "category": [
+        "document-review",
+        "due-diligence"
+      ],
+      "input_type": "pdf",
+      "description": "LLM is provided a merger agreement and must summarize key economic terms including price, consideration type, conditions, termination fees, and MAC provisions. Expected answer: deal summary with all material terms. Tests LLM's ability to parse legal documents for business terms.",
+      "results": []
+    },
+    {
+      "id": "e-017",
+      "title": "Find comparable M&A transactions with multiples",
+      "type": "extraction",
+      "category": [
+        "data-extraction"
+      ],
+      "input_type": "web",
+      "description": "LLM must find 5 comparable M&A transactions in a specified sector and extract EV/EBITDA multiples for each deal. Expected answer: list of deals with acquirer, target, date, and multiple. Tests LLM's ability to research precedent transactions from public sources.",
+      "results": []
+    },
+    {
+      "id": "e-018",
+      "title": "Fix NWC formula errors in cash flow model",
+      "type": "fix-error",
+      "category": [
+        "financial-analysis"
+      ],
+      "input_type": "excel",
+      "description": "LLM is provided a cash flow model with incorrect NWC formula (wrong signs, missing components, or incorrect period referencing). LLM must identify and fix the error. Expected answer: corrected NWC formula with proper sign convention. Tests LLM's understanding of working capital mechanics.",
+      "results": []
+    },
+    {
+      "id": "e-019",
+      "title": "Extract credit agreement financial covenants",
+      "type": "extraction",
+      "category": [
+        "data-extraction",
+        "due-diligence"
+      ],
+      "input_type": "pdf",
+      "description": "LLM is provided a credit agreement and must extract financial covenants including specific ratios (leverage, coverage), threshold levels, and testing frequency. Expected answer: covenant table with definitions and limits. Tests LLM's ability to parse credit documentation.",
+      "results": []
+    }
+  ],
+  "generated_at": "2026-01-02T18:57:21.153124",
+  "task_count": 16,
+  "model_count": 2
+}
