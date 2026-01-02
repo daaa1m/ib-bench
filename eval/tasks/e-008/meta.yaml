@@ -13,5 +13,5 @@ prompt:
   notes: "LLM should prioritize forward-looking statements and risk factors"
 
 input:
-  input-file-original: None
-  notes: "TODO: source 10-K with substantive MD&A section"
+  input-file-original: "$human/TSLA-10k-FY24.pdf"
+  notes: "input file (TSLA FY24 10k) presented as-is"

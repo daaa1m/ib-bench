@@ -1,0 +1,22 @@
+{
+  "total": 1,
+  "passed": 1,
+  "failed": 0,
+  "blocked": 0,
+  "skipped": 0,
+  "total_points": 100,
+  "points_earned": 100,
+  "results": [
+    {
+      "task_id": "e-009",
+      "passed": true,
+      "points_earned": 100,
+      "total_points": 100,
+      "score_percent": 100.0
+    }
+  ],
+  "overall_percent": 100.0,
+  "rubric_hashes": {
+    "e-009": "c7730ed8"
+  }
+}

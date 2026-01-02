@@ -37,7 +37,6 @@ uv run python eval/score.py RUN_ID --rescore
 # Generate leaderboard
 uv run python eval/leaderboard.py                      # CLI table
 uv run python eval/leaderboard.py --export results/    # Export JSON
-uv run python eval/leaderboard.py --weights 25,35,40   # Custom weights
 
 # Analyze a specific run
 uv run python eval/analyze.py MODEL/RUN_ID                        # Full dump
@@ -283,8 +282,18 @@ score (max 100).
 
 **Overall score:** `Easy×0.20 + Medium×0.35 + Hard×0.45`
 
-Weights are configurable in `eval/leaderboard_config.yaml` or via `--weights` CLI
-flag.
+Configuration is in `eval/configs/leaderboard_config.yaml`:
+
+```yaml
+weights:
+  easy: 0.20
+  medium: 0.35
+  hard: 0.45
+
+models:              # Optional: filter to specific models
+  - claude-opus-4-5-20251101
+  - gpt-5.2-2025-12-11
+```
 
 **JSON export** (`--export`) produces `leaderboard.json` suitable for frontend
 integration.

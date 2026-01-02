@@ -46,32 +46,67 @@
       "description": "Q3 2025 Cloud growth must be approximately 33-34% YoY",
       "type": "programmatic",
       "match_type": "substring_one_of",
-      "accepted_values": ["34", "34%", "+34%", "33.5", "33.5%", "+33.5%", "33", "33%"],
+      "accepted_values": [
+        "34",
+        "34%",
+        "+34%",
+        "33.5",
+        "33.5%",
+        "+33.5%",
+        "33",
+        "33%"
+      ],
       "points": 8
     },
     "fy25_capex_guidance": {
       "description": "FY2025 capex guidance must be $91-93 billion range",
       "type": "programmatic",
       "match_type": "substring_one_of",
-      "accepted_values": ["91-93", "$91-93", "91-$93", "$91-$93", "91B-93B", "$91B-$93B", "91 billion to 93 billion", "91bn-93bn"],
+      "accepted_values": [
+        "91-93",
+        "$91-93",
+        "91-$93",
+        "$91-$93",
+        "91B-93B",
+        "$91B-$93B",
+        "91 billion to 93 billion",
+        "91bn-93bn"
+      ],
       "points": 8
     },
     "key_drivers": {
       "description": "Key drivers should include Search/AI, Cloud, YouTube, and margin/capex themes",
       "type": "llm_judge",
-      "core_concepts": ["Search growth", "AI Overviews", "Google Cloud", "YouTube", "margins", "capex"],
+      "core_concepts": [
+        "Search growth",
+        "AI Overviews",
+        "Google Cloud",
+        "YouTube",
+        "margins",
+        "capex"
+      ],
       "points": 14
     },
     "summary_synthesis": {
       "description": "Summary must synthesize both GS and JPM views, not just repeat one",
       "type": "llm_judge",
-      "core_concepts": ["Goldman Sachs view", "JPMorgan view", "comparison", "synthesis"],
+      "core_concepts": [
+        "Goldman Sachs view",
+        "JPMorgan view",
+        "comparison",
+        "synthesis"
+      ],
       "points": 15
     },
     "summary_drivers": {
       "description": "Summary must reference model drivers and key financial metrics",
       "type": "llm_judge",
-      "core_concepts": ["revenue drivers", "segment growth", "model assumptions", "valuation"],
+      "core_concepts": [
+        "revenue drivers",
+        "segment growth",
+        "model assumptions",
+        "valuation"
+      ],
       "points": 15
     }
   }

@@ -1,1 +1,4 @@
 // fix multiple errors in excel model
+//  Which Excel file? (source from data-factory/human-generated/?)
+// 2. What errors are in it? (formula errors, incorrect references, logic bugs?)
+// ß3. Expected answers (specific cells, values, or fixes?)

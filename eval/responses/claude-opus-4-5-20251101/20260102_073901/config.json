@@ -1,0 +1,29 @@
+{
+  "provider": "anthropic",
+  "model": "claude-opus-4-5-20251101",
+  "task_ids": [
+    "e-007",
+    "e-008",
+    "e-009"
+  ],
+  "parallel": 3,
+  "config_file": "configs/opus-test.yaml",
+  "started_at": "2026-01-02T07:39:01.293591",
+  "completed_at": "2026-01-02T07:42:05.725555",
+  "results_summary": [
+    {
+      "task_id": "e-007",
+      "status": "error",
+      "error": "Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'prompt is too long: 207459 tokens > 200000 maximum'}, 'request_id': 'req_011CWhYGdZW7uv1VnezorT3f'}"
+    },
+    {
+      "task_id": "e-008",
+      "status": "success"
+    },
+    {
+      "task_id": "e-009",
+      "status": "error",
+      "error": "Connection error."
+    }
+  ]
+}

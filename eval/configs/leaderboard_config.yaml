@@ -1,0 +1,15 @@
+# Leaderboard scoring configuration
+
+weights:
+  easy: 0.20
+  medium: 0.35
+  hard: 0.45
+
+benchmark_version: "1.0"
+
+# Models to include on leaderboard (optional)
+# If not specified or empty, all models in scores/ are included
+models:
+- claude-opus-4-5-20251101
+- gpt-5.2-2025-12-11
+# - claude-sonnet-4-20250514

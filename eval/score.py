@@ -299,27 +299,20 @@ def score_llm_criteria(
     """Score LLM judge criteria."""
     results = []
 
-    # Find source document for judge
-    source_file = None
-    for input_file in task.input_files:
-        if input_file.suffix in [".pdf", ".xlsx", ".xls"]:
-            source_file = input_file
-            break
+    source_files = [
+        f for f in task.input_files if f.suffix in [".pdf", ".xlsx", ".xls"]
+    ]
 
-    if not source_file:
+    if not source_files:
         raise ValueError(
             f"Task {task.id} has LLM judge criteria but no source document (PDF/Excel). "
             "Check task configuration."
         )
 
-    # Build mini-rubric for just LLM criteria
     llm_rubric = {"criteria": criteria}
-
-    # Get the response text to evaluate (use logical_explanation or full response)
     response_text = json.dumps(parsed_response, indent=2)
 
-    # Call LLM judge
-    judge_result = judge.score(llm_rubric, source_file, response_text)
+    judge_result = judge.score(llm_rubric, source_files, response_text)
     scores = judge_result.get("scores", {})
 
     for cid, criterion in criteria.items():
@@ -485,14 +478,16 @@ def score_run(responses_dir: Path, scores_dir: Path, args):
                 json.dump(score_data, f, indent=2)
 
             summary["total_points"] += total_points
-            summary["results"].append({
-                "task_id": task_id,
-                "passed": False,
-                "blocked": True,
-                "points_earned": 0,
-                "total_points": total_points,
-                "score_percent": 0,
-            })
+            summary["results"].append(
+                {
+                    "task_id": task_id,
+                    "passed": False,
+                    "blocked": True,
+                    "points_earned": 0,
+                    "total_points": total_points,
+                    "score_percent": 0,
+                }
+            )
             continue
 
         # Get task rubric

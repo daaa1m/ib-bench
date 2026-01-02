@@ -4,7 +4,8 @@ Generate leaderboard from scored runs.
 Usage:
     uv run python eval/leaderboard.py                      # CLI table
     uv run python eval/leaderboard.py --export results/    # Export JSON
-    uv run python eval/leaderboard.py --weights 25,35,40   # Custom weights
+
+Configuration (weights, models filter) is read from configs/leaderboard_config.yaml
 """
 
 import argparse
@@ -19,6 +20,7 @@ import yaml
 @dataclass
 class TierScore:
     """Score for a difficulty tier."""
+
     score: float  # 0-100
     completed: int
     total: int
@@ -27,6 +29,7 @@ class TierScore:
 @dataclass
 class LeaderboardEntry:
     """Single model entry on the leaderboard."""
+
     model: str
     provider: str
     overall_score: float
@@ -40,10 +43,10 @@ class LeaderboardEntry:
     tasks_blocked: int = 0  # Content filter blocked
 
 
-def load_config(config_path: Path = None) -> dict:
+def load_config(config_path: Path | None = None) -> dict:
     """Load leaderboard configuration."""
     if config_path is None:
-        config_path = Path(__file__).parent / "leaderboard_config.yaml"
+        config_path = Path(__file__).parent / "configs" / "leaderboard_config.yaml"
 
     if config_path.exists():
         with open(config_path) as f:
@@ -62,7 +65,7 @@ def get_difficulty(task_id: str) -> str:
     return {"e": "easy", "m": "medium", "h": "hard"}.get(prefix, "unknown")
 
 
-def count_tasks_by_difficulty(tasks_dir: Path = None) -> dict[str, int]:
+def count_tasks_by_difficulty(tasks_dir: Path | None = None) -> dict[str, int]:
     """Count total tasks per difficulty tier."""
     if tasks_dir is None:
         tasks_dir = Path(__file__).parent / "tasks"
@@ -216,7 +219,9 @@ def calculate_entry(
     # Extract run date from run_id (format: YYYYMMDD_HHMMSS)
     run_id = run_dir.name
     try:
-        run_date = datetime.strptime(run_id.split("_")[0], "%Y%m%d").strftime("%Y-%m-%d")
+        run_date = datetime.strptime(run_id.split("_")[0], "%Y%m%d").strftime(
+            "%Y-%m-%d"
+        )
     except (ValueError, IndexError):
         run_date = "unknown"
 
@@ -240,8 +245,9 @@ def calculate_entry(
 
 
 def build_leaderboard(
-    scores_dir: Path = None,
-    weights: dict[str, float] = None,
+    scores_dir: Path | None = None,
+    weights: dict[str, float] | None = None,
+    models: list[str] | None = None,
 ) -> list[LeaderboardEntry]:
     """Build leaderboard from all scored runs."""
     if scores_dir is None:
@@ -253,16 +259,22 @@ def build_leaderboard(
     config = load_config()
     if weights is None:
         weights = config["weights"]
+    if models is None:
+        models = config.get("models")
+
+    assert weights is not None
 
     task_counts = count_tasks_by_difficulty()
     entries = []
 
-    # Scan model directories
     for model_dir in scores_dir.iterdir():
         if not model_dir.is_dir():
             continue
 
         model = model_dir.name
+        if models and model not in models:
+            continue
+
         entry = calculate_entry(model, model_dir, task_counts, weights)
         if entry:
             entries.append(entry)
@@ -294,7 +306,9 @@ def print_cli_table(entries: list[LeaderboardEntry], weights: dict[str, float]):
         med_str = f"{entry.medium.score:.1f}" if entry.medium.completed > 0 else "-"
         hard_str = f"{entry.hard.score:.1f}" if entry.hard.completed > 0 else "-"
         tasks_str = f"{entry.tasks_attempted}/{entry.tasks_total}"
-        blocked_str = f" ({entry.tasks_blocked} blocked)" if entry.tasks_blocked > 0 else ""
+        blocked_str = (
+            f" ({entry.tasks_blocked} blocked)" if entry.tasks_blocked > 0 else ""
+        )
 
         print(
             f"{i:<5} {entry.model:<35} {entry.overall_score:>7.1f} "
@@ -302,7 +316,9 @@ def print_cli_table(entries: list[LeaderboardEntry], weights: dict[str, float]):
         )
 
     print()
-    print(f"Weights: Easy={weights['easy']*100:.0f}% Medium={weights['medium']*100:.0f}% Hard={weights['hard']*100:.0f}%")
+    print(
+        f"Weights: Easy={weights['easy'] * 100:.0f}% Medium={weights['medium'] * 100:.0f}% Hard={weights['hard'] * 100:.0f}%"
+    )
     print()
 
 
@@ -361,20 +377,6 @@ def export_json(
     print(f"Exported to: {output_file}")
 
 
-def parse_weights(weights_str: str) -> dict[str, float]:
-    """Parse weights from comma-separated string (e.g., '20,35,45')."""
-    parts = [float(x) for x in weights_str.split(",")]
-    if len(parts) != 3:
-        raise ValueError("Weights must be 3 comma-separated values (easy,medium,hard)")
-
-    total = sum(parts)
-    return {
-        "easy": parts[0] / total,
-        "medium": parts[1] / total,
-        "hard": parts[2] / total,
-    }
-
-
 def main():
     parser = argparse.ArgumentParser(description="Generate IB-bench leaderboard")
     parser.add_argument(
@@ -382,30 +384,18 @@ def main():
         type=Path,
         help="Export JSON to specified directory",
     )
-    parser.add_argument(
-        "--weights",
-        type=str,
-        help="Custom weights as 'easy,medium,hard' (e.g., '20,35,45')",
-    )
     args = parser.parse_args()
 
-    # Load or parse weights
-    if args.weights:
-        weights = parse_weights(args.weights)
-    else:
-        config = load_config()
-        weights = config["weights"]
-
-    # Build leaderboard
-    entries = build_leaderboard(weights=weights)
+    config = load_config()
+    entries = build_leaderboard()
 
     # Always print CLI table
-    print_cli_table(entries, weights)
+    print_cli_table(entries, config["weights"])
 
     # Export if requested
     if args.export:
         args.export.mkdir(parents=True, exist_ok=True)
-        export_json(entries, weights, args.export)
+        export_json(entries, config["weights"], args.export)
 
 
 if __name__ == "__main__":

@@ -47,11 +47,4 @@ Negative Constraints:
 Provide your response as a raw JSON object with the following keys. Do not
 include any markdown formatting, backticks, or preamble.
 
-`{
-  "entry_multiple": "Entry EV/EBITDA multiple (numeric value only)",
-  "exit_multiple": "Exit EV/EBITDA multiple (numeric value only)",
-  "hold_period_years": "Investment holding period in years (integer)",
-  "senior_debt_rate": "Senior debt interest rate as percentage (e.g., '8.0%')",
-  "revenue_growth_rate": "Revenue growth rate assumption as percentage (e.g., '5.0%')",
-  "assumptions_summary": "Brief summary of methodology used to identify assumptions vs calculated cells"
-}`
+`{   "entry_multiple": "Entry EV/EBITDA multiple on forward basis, i.e., EV / FY22 EBITDA (numeric value only)",   "exit_multiple": "Exit EV/EBITDA multiple (numeric value only)",   "hold_period_years": "Investment holding period in years (integer)",   "senior_debt_rate": "Senior debt interest rate as percentage (e.g., '8.0%')",   "revenue_growth_rate": "Revenue growth rate assumption as percentage (e.g., '5.0%')",   "assumptions_summary": "Brief summary of methodology used to identify assumptions vs calculated cells" }`

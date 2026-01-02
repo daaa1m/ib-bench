@@ -6,6 +6,7 @@ bankers. You have been provided with two equity research reports on Alphabet
 JPMorgan - along with each bank's financial model.
 
 Your deliverable has two parts:
+
 1. Extract key metrics from both research reports (ratings, price targets, key
    estimates)
 2. Write a summary note synthesizing both analysts' views and identifying the
@@ -27,6 +28,7 @@ Your deliverable has two parts:
 ## Constraints and Negative Constraints
 
 Constraints:
+
 - Include specific figures (price targets, growth rates, multiples) when citing
   analyst views
 - Reference both Goldman Sachs and JPMorgan perspectives
@@ -34,6 +36,7 @@ Constraints:
 - Summary should be 400-600 words, suitable for senior banker briefing
 
 Negative Constraints:
+
 - DO NOT simply repeat one analyst's view - must synthesize both
 - DO NOT include boilerplate disclosures from the research reports
 - DO NOT confuse metrics between the two banks

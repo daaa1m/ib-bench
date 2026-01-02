@@ -15,5 +15,5 @@ prompt:
   notes: "LLM given background on circularity. Scoring checks output values, not formula structure."
 
 input:
-  input-file-original: "$human/WM-LBO-Model-No-Circ.xlsx"
+  input-file-original: "$human/MRW-LBO-Model-No-Circ.xlsx"
   notes: "Model intentionally lacks circularity in interest calculation"

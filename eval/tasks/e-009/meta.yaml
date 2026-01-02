@@ -13,5 +13,5 @@ prompt:
   notes: "LLM should identify assumption cells vs calculated cells"
 
 input:
-  input-file-original: None
-  notes: "TODO: use existing LBO model from data-factory"
+  input-file-original: "$human/MRW-LBO-Model-No-Circ.xlsx"
+  notes: "presented as-is but the senior debt tranche extraction requires LLM to understand LIBOR+margin"

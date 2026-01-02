@@ -262,7 +262,9 @@ class AnthropicRunner:
             latency_ms = (time.time() - start) * 1000
             error_str = str(e).lower()
             # Check for content filter / policy violation errors
-            if "content" in error_str and ("policy" in error_str or "blocked" in error_str or "safety" in error_str):
+            if "content" in error_str and (
+                "policy" in error_str or "blocked" in error_str or "safety" in error_str
+            ):
                 print(f"  BLOCKED: Content filter triggered")
                 return LLMResponse(
                     raw_text="",
@@ -327,7 +329,9 @@ class AnthropicRunner:
         except Exception as e:
             error_str = str(e).lower()
             # Check for content filter / policy violation errors
-            if "content" in error_str and ("policy" in error_str or "blocked" in error_str or "safety" in error_str):
+            if "content" in error_str and (
+                "policy" in error_str or "blocked" in error_str or "safety" in error_str
+            ):
                 print(f"  BLOCKED: Content filter triggered")
                 content_filter_triggered = True
                 response = None
@@ -388,8 +392,12 @@ class AnthropicRunner:
                     output_files.append(
                         OutputFile(
                             filename=cf.filename,
-                            content=file_content.read() if hasattr(file_content, 'read') else file_content,
-                            mime_type=getattr(cf, 'mime_type', 'application/octet-stream'),
+                            content=file_content.read()
+                            if hasattr(file_content, "read")
+                            else file_content,
+                            mime_type=getattr(
+                                cf, "mime_type", "application/octet-stream"
+                            ),
                         )
                     )
             except Exception as e:
@@ -557,7 +565,12 @@ class OpenAIRunner:
             error_str = str(e).lower()
             # Check for content filter / policy violation errors
             # Note: "invalid prompt" has a space, not underscore
-            if "invalid_prompt" in error_str or "invalid prompt" in error_str or "flagged" in error_str or "usage policy" in error_str:
+            if (
+                "invalid_prompt" in error_str
+                or "invalid prompt" in error_str
+                or "flagged" in error_str
+                or "usage policy" in error_str
+            ):
                 print(f"  BLOCKED: Content filter triggered")
                 content_filter_triggered = True
                 response = None
@@ -607,16 +620,26 @@ class OpenAIRunner:
                                 for f in output.files:
                                     try:
                                         print(f"  Downloading output file: {f.name}")
-                                        file_content = self.client.files.content(f.file_id)
+                                        file_content = self.client.files.content(
+                                            f.file_id
+                                        )
                                         output_files.append(
                                             OutputFile(
                                                 filename=f.name,
-                                                content=file_content.read() if hasattr(file_content, 'read') else file_content,
-                                                mime_type=getattr(f, 'mime_type', 'application/octet-stream'),
+                                                content=file_content.read()
+                                                if hasattr(file_content, "read")
+                                                else file_content,
+                                                mime_type=getattr(
+                                                    f,
+                                                    "mime_type",
+                                                    "application/octet-stream",
+                                                ),
                                             )
                                         )
                                     except Exception as e:
-                                        print(f"  Warning: Failed to download file {f.name}: {e}")
+                                        print(
+                                            f"  Warning: Failed to download file {f.name}: {e}"
+                                        )
 
         # Extract usage info
         usage = response.usage
@@ -743,7 +766,9 @@ class GeminiRunner:
         if response.candidates:
             finish_reason = getattr(response.candidates[0], "finish_reason", None)
             if finish_reason and "safety" in str(finish_reason).lower():
-                print(f"  BLOCKED: Content filter triggered (finish_reason={finish_reason})")
+                print(
+                    f"  BLOCKED: Content filter triggered (finish_reason={finish_reason})"
+                )
                 usage = response.usage_metadata
                 return LLMResponse(
                     raw_text="",
@@ -763,22 +788,26 @@ class GeminiRunner:
 
         if response.candidates and response.candidates[0].content:
             for part in response.candidates[0].content.parts:
-                if hasattr(part, 'text') and part.text is not None:
+                if hasattr(part, "text") and part.text is not None:
                     response_text += part.text + "\n"
                 # Check for inline_data (files/images from code execution)
-                if hasattr(part, 'inline_data') and part.inline_data:
+                if hasattr(part, "inline_data") and part.inline_data:
                     file_counter += 1
-                    mime_type = getattr(part.inline_data, 'mime_type', 'application/octet-stream')
+                    mime_type = getattr(
+                        part.inline_data, "mime_type", "application/octet-stream"
+                    )
                     # Generate filename based on mime type
-                    ext = mime_type.split('/')[-1] if '/' in mime_type else 'bin'
-                    if ext == 'vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-                        ext = 'xlsx'
+                    ext = mime_type.split("/")[-1] if "/" in mime_type else "bin"
+                    if ext == "vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+                        ext = "xlsx"
                     filename = f"output_{file_counter}.{ext}"
                     print(f"  Found output file: {filename} ({mime_type})")
                     output_files.append(
                         OutputFile(
                             filename=filename,
-                            content=part.inline_data.data if hasattr(part.inline_data, 'data') else b'',
+                            content=part.inline_data.data
+                            if hasattr(part.inline_data, "data")
+                            else b"",
                             mime_type=mime_type,
                         )
                     )
@@ -923,12 +952,12 @@ class LLMJudge:
             tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
         )
 
-    def score(self, rubric: dict, source_file: Path, response_text: str) -> dict:
+    def score(self, rubric: dict, source_files: list[Path], response_text: str) -> dict:
         """Score a response against rubric criteria.
 
         Args:
             rubric: Rubric dict with criteria list
-            source_file: Path to source document (PDF, xlsx, etc.)
+            source_files: List of source documents (PDF, xlsx, etc.)
             response_text: The response text to evaluate
 
         Returns:
@@ -940,21 +969,26 @@ class LLMJudge:
                 "weighted_total": 0.85
             }
         """
-        # Format criteria for the prompt
         criteria = rubric.get("criteria", {})
         criteria_text = "\n".join(
             f"- **{cid}** ({spec.get('points', 0)} points): {spec['description']}"
             for cid, spec in criteria.items()
         )
 
-        # Upload source file via Files API
-        print(f"  Uploading {source_file.name} to Files API for judging...")
-        with open(source_file, "rb") as f:
-            file_obj = self.client.beta.files.upload(file=f)
+        file_objects = []
+        file_names = [f.name for f in source_files]
+        print(f"  Uploading {len(source_files)} file(s) to Files API for judging...")
+        for source_file in source_files:
+            with open(source_file, "rb") as f:
+                file_obj = self.client.beta.files.upload(file=f)
+                file_objects.append(file_obj)
 
-        # Build judge prompt
         criteria_ids = list(criteria.keys())
-        judge_prompt = f"""You are an expert evaluator for investment banking work products. Your task is to score a response against specific criteria.
+        files_list = ", ".join(file_names)
+        judge_prompt = f"""You are an expert evaluator for investment banking work products.
+
+## Source Documents
+{files_list}
 
 ## Response to Evaluate
 {response_text}
@@ -962,39 +996,35 @@ class LLMJudge:
 ## Evaluation Criteria
 {criteria_text}
 
-## Instructions
-1. Read the source document attached
-2. Score each criterion on a 0-1 scale (0 = completely fails, 1 = perfect)
-3. Provide brief reasoning for each score
+## Output Requirements
+- Score each criterion 0-1 (0=fails, 1=perfect)
+- Output ONLY valid JSON, nothing else
+- Do NOT print analysis, thinking, or explanations outside JSON
+- Do NOT use code execution to explore files - just read and score
 
-IMPORTANT: You MUST respond with ONLY a JSON object. No prose, no markdown, no explanation outside the JSON.
-
-Required JSON format:
+```json
 {{
   "scores": {{
-    "{criteria_ids[0]}": {{"score": 0.85, "reasoning": "explanation"}},
-    ...
+    "{criteria_ids[0]}": {{"score": 0.85, "reasoning": "brief reason"}},
+    ...include all: {criteria_ids}
   }}
 }}
+```"""
 
-All criteria IDs to include: {criteria_ids}"""
-
-        # Build message with file reference (requires code execution for large PDFs)
         content = [
-            {"type": "container_upload", "file_id": file_obj.id},
-            {"type": "text", "text": judge_prompt},
+            {"type": "container_upload", "file_id": fo.id} for fo in file_objects
         ]
+        content.append({"type": "text", "text": judge_prompt})
 
-        # Call API with code execution for large file handling (with retry on rate limit)
         start = time.time()
         try:
             response = self._call_api(content)
         finally:
-            # Cleanup uploaded file
-            try:
-                self.client.beta.files.delete(file_obj.id)
-            except Exception as e:
-                print(f"  Warning: Failed to delete judge file: {e}")
+            for fo in file_objects:
+                try:
+                    self.client.beta.files.delete(fo.id)
+                except Exception as e:
+                    print(f"  Warning: Failed to delete judge file {fo.id}: {e}")
 
         latency_ms = (time.time() - start) * 1000
         print(f"  Judge completed in {latency_ms:.0f}ms")

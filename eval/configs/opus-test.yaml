@@ -2,5 +2,5 @@
 provider: anthropic
 model: claude-opus-4-5-20251101
 tasks:
-  - e-006
-parallel: 1
+  - e-009
+parallel: 3

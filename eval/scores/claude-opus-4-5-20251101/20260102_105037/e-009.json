@@ -1,0 +1,62 @@
+{
+  "task_id": "e-009",
+  "rubric_hash": "c7730ed8",
+  "scored_at": "2026-01-02T10:54:24.685835",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 100,
+  "score_percent": 100.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "entry_multiple",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 18,
+      "points_earned": 18,
+      "actual": "7.9",
+      "details": "Found '7.9' in response"
+    },
+    {
+      "id": "exit_multiple",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 18,
+      "points_earned": 18,
+      "actual": "10",
+      "details": "Found '10' in response"
+    },
+    {
+      "id": "hold_period_years",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 18,
+      "points_earned": 18,
+      "actual": "5",
+      "details": "Found '5' in response"
+    },
+    {
+      "id": "senior_debt_rate",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 28,
+      "points_earned": 28,
+      "actual": "3.49%",
+      "details": "Found '3.49%' in response"
+    },
+    {
+      "id": "revenue_growth_rate",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 18,
+      "points_earned": 18,
+      "actual": "5.1%",
+      "details": "Found '5.1' in response"
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "task_id": "e-007",
+  "rubric_hash": "51b85292",
+  "scored_at": "2026-01-02T15:30:14.261962",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 92.94,
+  "score_percent": 92.94,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "gs_rating",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 8,
+      "points_earned": 8,
+      "actual": "Buy",
+      "details": "Found 'Buy' in response"
+    },
+    {
+      "id": "gs_price_target",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 8,
+      "points_earned": 8,
+      "actual": "330",
+      "details": "Found '330' in response"
+    },
+    {
+      "id": "jpm_rating",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 8,
+      "points_earned": 8,
+      "actual": "Overweight",
+      "details": "Found 'Overweight' in response"
+    },
+    {
+      "id": "jpm_price_target",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 8,
+      "points_earned": 8,
+      "actual": "340",
+      "details": "Found '340' in response"
+    },
+    {
+      "id": "q3_search_growth",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 8,
+      "points_earned": 8,
+      "actual": "14.5%",
+      "details": "Found '14.5' in response"
+    },
+    {
+      "id": "q3_cloud_growth",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 8,
+      "points_earned": 8,
+      "actual": "33.5%",
+      "details": "Found '33.5' in response"
+    },
+    {
+      "id": "fy25_capex_guidance",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 8,
+      "points_earned": 8,
+      "actual": "91-93",
+      "details": "Found '91-93' in response"
+    },
+    {
+      "id": "key_drivers",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 14,
+      "points_earned": 9.94,
+      "actual": "0.71",
+      "details": "Score: 0.71 - Response covers Search/AI, Cloud, and capex/margin themes comprehensively. However, YouTube is notably absent as a standalone key driver despite being highlighted in both GS and JPM reports (GS: YouTube +15% YoY, JPM: YouTube acceleration to 15%). The response mentions YouTube only within the Search discussion. GS explicitly called out 'YouTube complex (Ads + Subscriptions)' as a key theme, and JPM noted YouTube growth acceleration and living room monetization. Missing YouTube as a distinct driver is a material gap."
+    },
+    {
+      "id": "summary_synthesis",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 13.950000000000001,
+      "actual": "0.93",
+      "details": "Score: 0.93 - Excellent synthesis of both GS and JPM perspectives. The summary clearly attributes views to each firm (e.g., 'GS reiterates Buy and raises PT to $330...while JPM reiterates Overweight and raises PT to $340'), discusses their convergent views on Search resilience and AI as accelerant vs. disruptor, presents both firms' Cloud commentary, and addresses the capex debate. The summary integrates rather than juxtaposes the two reports, showing how they complement each other on the AI search narrative and valuation frameworks."
+    },
+    {
+      "id": "summary_drivers",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 13.05,
+      "actual": "0.87",
+      "details": "Score: 0.87 - Summary effectively references key financial metrics: Q3 Search +14.5% YoY, paid clicks and CPCs both +7% YoY, Cloud +34% YoY (GS) / +33.5% YoY (response), ~23% Cloud operating margins, $155bn backlog, FY25 capex $91-93bn, Q3 D&A +$1.6bn YoY (+41%). The summary also ties these to model drivers (Search monetization through AI transition, Cloud backlog-to-revenue conversion, capex/D&A path to FCF). Minor deduction: YouTube metrics are mentioned but not as prominently as warranted given both firms highlighted it, and the summary could have been more explicit about margin trajectory as a driver."
+    }
+  ]
+}
