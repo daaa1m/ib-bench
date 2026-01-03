@@ -48,6 +48,12 @@ def mock_sleep(mocker):
     return mocker.patch("time.sleep")
 
 
+@pytest.fixture(autouse=True)
+def mock_api_key(mocker):
+    """Ensure tests don't require real API key."""
+    mocker.patch.dict("os.environ", {"ANTHROPIC_API_KEY": "test-key"}, clear=False)
+
+
 class TestScoring:
     """Tests for LLMJudge.score() method."""
 
