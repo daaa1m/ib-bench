@@ -17,3 +17,9 @@ dependencies = [
     "six>=1.17.0",
     "types-pyyaml>=6.0.12.20250915",
 ]
+
+[tool.basedpyright]
+pythonVersion = "3.10"
+typeCheckingMode = "standard"
+include = ["eval"]
+exclude = ["eval/tests"]
