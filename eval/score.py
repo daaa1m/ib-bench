@@ -22,8 +22,57 @@ import re
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
+from typing import Any, Literal, TypedDict, cast
 
-from helpers import load_tasks, LLMJudge, get_rubric_hash, Task, JudgeParseError
+from helpers import (
+    JudgeParseError,
+    LLMJudge,
+    Rubric,
+    RubricCriterion,
+    Task,
+    get_rubric_hash,
+    load_tasks,
+)
+
+EvalType = Literal["programmatic", "llm", "hybrid"]
+ValidationResult = Literal["complete", "pending"]
+
+
+class CriterionData(TypedDict, total=False):
+    id: str
+    passed: bool
+    type: str
+    match_type: str
+    points: float
+    points_earned: float
+    actual: str
+    details: str
+    score: float | None
+    reasoning: str
+    description: str
+
+
+class ScoreData(TypedDict, total=False):
+    task_id: str
+    rubric_hash: str
+    scored_at: str
+    passed: bool
+    blocked: bool
+    total_points: float
+    points_earned: float
+    score_percent: float
+    llm_gated: bool
+    judge: str
+    criteria: list[CriterionData]
+
+
+class SummaryResult(TypedDict, total=False):
+    task_id: str
+    passed: bool
+    blocked: bool
+    points_earned: float
+    total_points: float
+    score_percent: float
 
 
 @dataclass
@@ -103,14 +152,7 @@ def evaluate_regex_pattern(
     return True, "All required elements present"
 
 
-def get_evaluation_type(rubric: dict) -> str:
-    """Determine evaluation type from rubric criteria.
-
-    Returns:
-        "programmatic" - only programmatic criteria
-        "llm" - only llm_judge criteria
-        "hybrid" - mix of both
-    """
+def get_evaluation_type(rubric: Rubric) -> EvalType:
     criteria = rubric.get("criteria", {})
 
     has_programmatic = any(c.get("type") == "programmatic" for c in criteria.values())
@@ -181,7 +223,7 @@ def score_task(
 
     # Step 1: Run ALL programmatic checks
     for criterion_id, criterion in programmatic_criteria.items():
-        match_type = criterion.get("match_type")
+        match_type = criterion.get("match_type") or "unknown"
         points = criterion.get("points", 0)
         gates_llm = criterion.get("gates_llm", False)
         search_full_response = criterion.get("search_full_response", False)
@@ -217,7 +259,7 @@ def score_task(
         else:
             passed = False
             details = f"Unknown match_type: {match_type}"
-            expected = criterion
+            expected = dict(criterion)
 
         # Check if this failure gates LLM
         if not passed and gates_llm:
@@ -327,7 +369,7 @@ def score_llm_criteria(
             "Check task configuration."
         )
 
-    llm_rubric = {"criteria": criteria}
+    llm_rubric = cast(Rubric, {"criteria": criteria})
     response_text = json.dumps(parsed_response, indent=2)
 
     try:
