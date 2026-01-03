@@ -54,7 +54,10 @@ uv run python eval/analyze.py MODEL/RUN_ID --compare MODEL2/RUN_ID2  # Compare r
 uv run python eval/mark_blocked.py MODEL/RUN_ID TASK_ID
 
 # Run tests
-uv run pytest eval/tests/test_unit.py -v
+uv run pytest tests/ -v                         # All tests
+uv run pytest tests/unit/ -v                    # Unit tests (no I/O)
+uv run pytest tests/mock/ -v                    # Mock API tests
+uv run pytest tests/mock/test_anthropic_runner.py -v  # Specific file
 ```
 
 ### Config Files
@@ -95,7 +98,7 @@ parallel: 5
   `h-001/`)
 - `eval/responses/` - LLM outputs (expensive, preserve)
 - `eval/scores/` - Scoring outputs (cheap, regenerable)
-- `eval/tests/` - Unit and integration tests
+- `tests/` - Test suite (unit/, mock/, integration/, live/)
 - `data-factory/` - Source data (human-generated and synthetic) for creating
   tasks
 
