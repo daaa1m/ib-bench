@@ -12,30 +12,55 @@ import asyncio
 import json
 from datetime import datetime
 from pathlib import Path
+from typing import Any, TypedDict, cast
 
 import yaml
 
 from helpers import (
-    load_tasks,
-    get_runner,
-    create_run_directory,
-    Task,
     AnthropicRunner,
-    OpenAIRunner,
     GeminiRunner,
+    OpenAIRunner,
+    Provider,
+    Task,
+    create_run_directory,
+    get_runner,
+    load_tasks,
 )
 
-# Type alias for any runner
 Runner = AnthropicRunner | OpenAIRunner | GeminiRunner
 
 
-def load_config(config_path: Path) -> dict:
+class UsageData(TypedDict):
+    input_tokens: int
+    output_tokens: int
+    latency_ms: float
+
+
+class ResponseData(TypedDict):
+    task_id: str
+    model: str
+    timestamp: str
+    input_files: list[str]
+    output_files: list[str]
+    raw_response: str
+    parsed_response: dict[str, Any] | None
+    stop_reason: str
+    usage: UsageData
+
+
+class TaskResult(TypedDict, total=False):
+    task_id: str
+    status: str
+    error: str
+
+
+def load_config(config_path: Path) -> dict[str, Any]:
     """Load configuration from YAML file."""
     with open(config_path) as f:
         return yaml.safe_load(f) or {}
 
 
-def run_task(task: Task, runner: Runner, run_dir: Path) -> dict:
+def run_task(task: Task, runner: Runner, run_dir: Path) -> ResponseData:
     """Execute a single task and save the response."""
     print(f"Running task {task.id}...")
 
@@ -54,15 +79,16 @@ def run_task(task: Task, runner: Runner, run_dir: Path) -> dict:
     if response.output_files:
         for i, out_file in enumerate(response.output_files):
             # Use original filename or generate one
-            ext = out_file.filename.split('.')[-1] if '.' in out_file.filename else 'bin'
-            output_path = run_dir / f"{task.id}_output_{i+1}.{ext}"
+            ext = (
+                out_file.filename.split(".")[-1] if "." in out_file.filename else "bin"
+            )
+            output_path = run_dir / f"{task.id}_output_{i + 1}.{ext}"
             with open(output_path, "wb") as f:
                 f.write(out_file.content)
             output_file_paths.append(output_path.name)
             print(f"  Saved output file: {output_path.name}")
 
-    # Prepare response data
-    response_data = {
+    response_data: ResponseData = {
         "task_id": task.id,
         "model": response.model,
         "timestamp": datetime.now().isoformat(),
@@ -93,7 +119,7 @@ def run_task(task: Task, runner: Runner, run_dir: Path) -> dict:
 
 async def run_task_async(
     task: Task, runner: Runner, run_dir: Path, semaphore: asyncio.Semaphore
-) -> dict:
+) -> TaskResult:
     """Execute a single task asynchronously with rate limiting."""
     async with semaphore:
         print(f"Running task {task.id}...")
@@ -109,8 +135,12 @@ async def run_task_async(
         output_file_paths = []
         if response.output_files:
             for i, out_file in enumerate(response.output_files):
-                ext = out_file.filename.split('.')[-1] if '.' in out_file.filename else 'bin'
-                output_path = run_dir / f"{task.id}_output_{i+1}.{ext}"
+                ext = (
+                    out_file.filename.split(".")[-1]
+                    if "." in out_file.filename
+                    else "bin"
+                )
+                output_path = run_dir / f"{task.id}_output_{i + 1}.{ext}"
                 with open(output_path, "wb") as f:
                     f.write(out_file.content)
                 output_file_paths.append(output_path.name)
@@ -145,16 +175,21 @@ async def run_task_async(
 
 async def run_tasks_parallel(
     tasks: list[Task], runner: Runner, run_dir: Path, max_concurrent: int
-) -> list:
+) -> list[TaskResult]:
     """Run multiple tasks concurrently with rate limiting."""
     semaphore = asyncio.Semaphore(max_concurrent)
 
-    async def safe_run(task):
+    async def safe_run(task: Task) -> TaskResult:
         try:
             return await run_task_async(task, runner, run_dir, semaphore)
         except Exception as e:
             print(f"  ERROR {task.id}: {e}")
-            return {"task_id": task.id, "status": "error", "error": str(e)}
+            result: TaskResult = {
+                "task_id": task.id,
+                "status": "error",
+                "error": str(e),
+            }
+            return result
 
     results = await asyncio.gather(*[safe_run(t) for t in tasks])
     return list(results)
@@ -216,8 +251,7 @@ Examples:
 
     print(f"Found {len(tasks)} task(s) to run")
 
-    # Initialize runner
-    runner = get_runner(provider, model)
+    runner = get_runner(cast(Provider, provider), model)
     model_name = runner.model
 
     # Create or resume run directory
@@ -275,17 +309,18 @@ Examples:
         )
     else:
         print(f"Running {len(tasks_to_run)} task(s) sequentially...")
-        results = []
+        results: list[TaskResult] = []
         for task in tasks_to_run:
             try:
                 run_task(task, runner, run_dir)
-                results.append({"task_id": task.id, "status": "success"})
+                result: TaskResult = {"task_id": task.id, "status": "success"}
+                results.append(result)
             except Exception as e:
                 print(f"  ERROR: {e}")
-                results.append({"task_id": task.id, "status": "error", "error": str(e)})
+                result = {"task_id": task.id, "status": "error", "error": str(e)}
+                results.append(result)
 
-    # Clean up if no successful responses
-    successful = [r for r in results if r["status"] == "success"]
+    successful = [r for r in results if r.get("status") == "success"]
     if not successful and not args.resume:
         import shutil
 
@@ -293,11 +328,9 @@ Examples:
         shutil.rmtree(run_dir)
         return
 
-    # Update config with completion info
-    # Merge existing results with new results (existing first, then new)
-    existing_task_ids = {r["task_id"] for r in existing_results}
+    existing_task_ids = {r.get("task_id") for r in existing_results}
     merged_results = existing_results + [
-        r for r in results if r["task_id"] not in existing_task_ids
+        r for r in results if r.get("task_id") not in existing_task_ids
     ]
 
     run_config["completed_at"] = datetime.now().isoformat()
