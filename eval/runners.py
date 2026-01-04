@@ -1,78 +1,12 @@
 """LLM provider runners for IB-bench evaluation pipeline."""
 
-import json
 import os
-import re
 import time
 from dataclasses import dataclass
-from functools import wraps
 from pathlib import Path
 from typing import Any, cast
 
-from helpers import Task
-
-
-def retry_on_rate_limit(max_retries: int = 3, initial_wait: int = 60):
-    """Decorator to retry on rate limit errors with exponential backoff."""
-
-    def decorator(func):
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            last_exception = None
-            wait_time = initial_wait
-
-            for attempt in range(max_retries + 1):
-                try:
-                    return func(*args, **kwargs)
-                except Exception as e:
-                    error_str = str(e)
-                    if "429" in error_str or "rate_limit" in error_str.lower():
-                        last_exception = e
-                        if attempt < max_retries:
-                            print(
-                                f"  Rate limited. Waiting {wait_time}s before retry ({attempt + 1}/{max_retries})..."
-                            )
-                            time.sleep(wait_time)
-                            wait_time *= 2
-                        else:
-                            print(
-                                f"  Rate limited. Max retries ({max_retries}) exceeded."
-                            )
-                            raise
-                    else:
-                        raise
-
-            if last_exception is not None:
-                raise last_exception
-            raise RuntimeError("Retry loop completed without success or exception")
-
-        return wrapper
-
-    return decorator
-
-
-def _extract_json(text: str) -> dict[str, Any] | None:
-    """Extract JSON object from response text."""
-    try:
-        return json.loads(text.strip())
-    except json.JSONDecodeError:
-        pass
-
-    json_match = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.DOTALL)
-    if json_match:
-        try:
-            return json.loads(json_match.group(1))
-        except json.JSONDecodeError:
-            pass
-
-    json_match = re.search(r"\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}", text, re.DOTALL)
-    if json_match:
-        try:
-            return json.loads(json_match.group(0))
-        except json.JSONDecodeError:
-            pass
-
-    return None
+from helpers import Task, _extract_json, retry_on_rate_limit
 
 
 @dataclass

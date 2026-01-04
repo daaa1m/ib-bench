@@ -103,6 +103,111 @@ class TaskScore:
     llm_gated: bool = False  # True if LLM was skipped due to gate failure
 
 
+def _build_json_parse_failure(
+    task: Task, response_data: dict[str, Any], total_points: float
+) -> TaskScore:
+    """
+    Build a TaskScore for JSON parse failures.
+
+    :param task: Task metadata
+    :param response_data: Raw response data dict
+    :param total_points: Total rubric points
+    :returns: TaskScore with a json_parse failure criterion
+    """
+    raw_preview = response_data.get("raw_response", "")[:100]
+    return TaskScore(
+        task_id=task.id,
+        passed=False,
+        criteria_results=[
+            CriterionResult(
+                criterion_id="json_parse",
+                passed=False,
+                criterion_type="programmatic",
+                match_type="json",
+                expected="valid JSON",
+                actual=raw_preview,
+                details="Failed to parse JSON from response",
+                points=total_points,
+                points_earned=0,
+            )
+        ],
+        total_points=total_points,
+        points_earned=0,
+        score_percent=0,
+    )
+
+
+def _evaluate_programmatic_criteria(
+    parsed_response: dict[str, Any], criteria: dict[str, RubricCriterion]
+) -> tuple[list[CriterionResult], bool]:
+    """
+    Evaluate programmatic criteria and track LLM gating.
+
+    :param parsed_response: Parsed JSON response
+    :param criteria: Programmatic criteria mapping
+    :returns: (criterion results, gate_failed)
+    """
+    results: list[CriterionResult] = []
+    gate_failed = False
+
+    for criterion_id, criterion in criteria.items():
+        match_type = criterion.get("match_type") or "unknown"
+        points = criterion.get("points", 0)
+        gates_llm = criterion.get("gates_llm", False)
+        search_full_response = criterion.get("search_full_response", False)
+
+        if search_full_response:
+            actual_value = json.dumps(parsed_response)
+        else:
+            actual_value = str(parsed_response.get(criterion_id, ""))
+
+        if match_type == "substring_one_of":
+            accepted_values = criterion.get("accepted_values", [])
+            forbidden = criterion.get("forbidden_elements", [])
+            passed, details = evaluate_substring_one_of(
+                actual_value, accepted_values, forbidden
+            )
+            expected = accepted_values
+
+        elif match_type == "regex_pattern":
+            patterns = criterion.get("valid_patterns", [])
+            required = criterion.get("required_elements", [])
+            forbidden = criterion.get("forbidden_elements", [])
+            passed, details = evaluate_regex_pattern(
+                actual_value, patterns, required, forbidden
+            )
+            expected = {
+                "patterns": patterns,
+                "required": required,
+                "forbidden": forbidden,
+            }
+
+        else:
+            passed = False
+            details = f"Unknown match_type: {match_type}"
+            expected = dict(criterion)
+
+        if not passed and gates_llm:
+            gate_failed = True
+            details += " [GATES LLM]"
+
+        results.append(
+            CriterionResult(
+                criterion_id=criterion_id,
+                passed=passed,
+                criterion_type="programmatic",
+                match_type=match_type,
+                expected=expected,
+                actual=actual_value,
+                details=details,
+                points=points,
+                points_earned=points if passed else 0,
+            )
+        )
+
+    return results, gate_failed
+
+
 def evaluate_substring_one_of(
     value: str,
     accepted_values: list[str],
@@ -168,7 +273,7 @@ def get_evaluation_type(rubric: Rubric) -> EvalType:
 
 def score_task(
     task: Task,
-    response_data: dict,
+    response_data: dict[str, Any],
     judge: LLMJudge | None = None,
     human_judge: bool = False,
 ) -> TaskScore:
@@ -187,29 +292,9 @@ def score_task(
 
     # Handle JSON parse failure
     if not parsed_response:
-        return TaskScore(
-            task_id=task.id,
-            passed=False,
-            criteria_results=[
-                CriterionResult(
-                    criterion_id="json_parse",
-                    passed=False,
-                    criterion_type="programmatic",
-                    match_type="json",
-                    expected="valid JSON",
-                    actual=response_data.get("raw_response", "")[:100],
-                    details="Failed to parse JSON from response",
-                    points=total_points,
-                    points_earned=0,
-                )
-            ],
-            total_points=total_points,
-            points_earned=0,
-            score_percent=0,
-        )
+        return _build_json_parse_failure(task, response_data, total_points)
 
-    results = []
-    gate_failed = False
+    results: list[CriterionResult] = []
 
     # Separate criteria by type
     programmatic_criteria = {
@@ -222,63 +307,10 @@ def score_task(
     }
 
     # Step 1: Run ALL programmatic checks
-    for criterion_id, criterion in programmatic_criteria.items():
-        match_type = criterion.get("match_type") or "unknown"
-        points = criterion.get("points", 0)
-        gates_llm = criterion.get("gates_llm", False)
-        search_full_response = criterion.get("search_full_response", False)
-
-        # Get value to evaluate: full response JSON or specific field
-        if search_full_response:
-            actual_value = json.dumps(parsed_response)
-        else:
-            actual_value = str(parsed_response.get(criterion_id, ""))
-
-        # Evaluate based on match type
-        if match_type == "substring_one_of":
-            accepted_values = criterion.get("accepted_values", [])
-            forbidden = criterion.get("forbidden_elements", [])
-            passed, details = evaluate_substring_one_of(
-                actual_value, accepted_values, forbidden
-            )
-            expected = accepted_values
-
-        elif match_type == "regex_pattern":
-            patterns = criterion.get("valid_patterns", [])
-            required = criterion.get("required_elements", [])
-            forbidden = criterion.get("forbidden_elements", [])
-            passed, details = evaluate_regex_pattern(
-                actual_value, patterns, required, forbidden
-            )
-            expected = {
-                "patterns": patterns,
-                "required": required,
-                "forbidden": forbidden,
-            }
-
-        else:
-            passed = False
-            details = f"Unknown match_type: {match_type}"
-            expected = dict(criterion)
-
-        # Check if this failure gates LLM
-        if not passed and gates_llm:
-            gate_failed = True
-            details += " [GATES LLM]"
-
-        results.append(
-            CriterionResult(
-                criterion_id=criterion_id,
-                passed=passed,
-                criterion_type="programmatic",
-                match_type=match_type,
-                expected=expected,
-                actual=actual_value,
-                details=details,
-                points=points,
-                points_earned=points if passed else 0,
-            )
-        )
+    programmatic_results, gate_failed = _evaluate_programmatic_criteria(
+        parsed_response, programmatic_criteria
+    )
+    results.extend(programmatic_results)
 
     llm_gated = False
     if llm_criteria:
@@ -354,7 +386,10 @@ def score_task(
 
 
 def score_llm_criteria(
-    task: Task, parsed_response: dict, criteria: dict, judge: LLMJudge
+    task: Task,
+    parsed_response: dict[str, Any],
+    criteria: dict[str, RubricCriterion],
+    judge: LLMJudge,
 ) -> list[CriterionResult]:
     """Score LLM judge criteria."""
     results = []
