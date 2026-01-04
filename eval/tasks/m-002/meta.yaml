@@ -1,1 +1,28 @@
-// update a model with latest quarterly and annual numbers - use $human/KEX-model.xlsx
+# yaml-language-server: $schema=../../schema/meta.schema.json
+
+task:
+  id: m-002
+  title:
+    "Update Kirby Corp financial model with latest quarterly and annual data"
+  type: creating
+  category:
+    - financial-analysis
+  input_type: multi
+  description:
+    "Update an existing DCF model for Kirby Corp (KEX) with latest quarterly and
+    annual figures from SEC filings. Model has two key sheets: Model Shell
+    (operating model) and Marine DCF (valuation of Marine Transport segment).
+    LLM must update both sheets while preserving structure. Success requires
+    model balance (row 84 = 0) and no #REF errors. Expected answer: E27 in
+    Marine DCF reflects updated TEV. Rubric is programmatic."
+
+prompt:
+  notes:
+    "LLM told to update only necessary cells, preserve structure, update both
+    Model Shell and Marine DCF sheets, verify balance and no #REF errors. Output
+    is Excel file plus JSON with reasoning_steps, changes_made, cell_value_E27."
+
+input:
+  input-file-original:
+    - "$human/KEX-Model-TODO.xlsx"
+  notes: "TODO: Need source PDF (10-K or 10-Q) with data for model update."

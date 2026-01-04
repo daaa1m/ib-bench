@@ -6,7 +6,7 @@
    doggedly documented
 4. **One way to do things**: if there are two ways to do something in your
    codebase, pick one and delete the other—unless there's a genuine reason for
-   both. Consistency beats local optimisation
+   both
 
 ---
 
@@ -20,7 +20,7 @@ For edge cases:
 - Document with a comment if it's complex ("does not handle X")
 - Raise an informative error if it's unrecoverable
 
-The goal is **auditable honesty**, not false completeness.
+The goal is **audit-able honesty**, not false completeness.
 
 ---
 
@@ -41,8 +41,7 @@ If the types are right and the output is right, the implementation is right.
 
 ### Docstrings state scope, not mechanics
 
-Use RST format (linters and IDEs parse it). Say what the function handles and
-what it doesn't.
+Use RST format. Say what the function handles and what it doesn't.
 
 ```python
 def calculate_irr(cashflows: list[float], periods_per_year: int = 1) -> float:
@@ -117,8 +116,9 @@ class Example:
 ### Write idiomatically
 
 Don't fight the language or libraries. If pandas wants mutation, let it—but keep
-the mutation contained. Code should look like normal Python, not a functional
-programming exercise.
+the mutation contained. **Important: Code should look like normal Python when
+writing Python (and likewise for Typescript, Svelte etc.), not a functional
+programming exercise.**
 
 ---
 
@@ -169,7 +169,7 @@ raise ValueError(
 )
 ```
 
-When you can't proceed, tell the user what to do next.
+Tell the user what to do next in your error message and how to debug.
 
 ---
 

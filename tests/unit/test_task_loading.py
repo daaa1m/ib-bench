@@ -14,7 +14,8 @@ import yaml
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "eval"))
 
-from helpers import LLMResponse, Task, create_run_directory, load_task, load_tasks
+from helpers import Task, create_run_directory, load_task, load_tasks
+from runners import LLMResponse
 
 
 # =============================================================================
@@ -216,7 +217,7 @@ class TestLLMResponse:
 
     def test_response_with_output_files(self):
         """Response with output files from code execution."""
-        from helpers import OutputFile
+        from runners import OutputFile
 
         output_file = OutputFile(
             filename="output.xlsx",

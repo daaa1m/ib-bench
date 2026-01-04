@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=../../schema/meta.schema.json
 task:
   id: e-004
   title: "Reconcile AMD GAAP to non-GAAP operating income"

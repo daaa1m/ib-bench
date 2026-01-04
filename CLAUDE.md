@@ -1,23 +1,8 @@
-# CLAUDE.md
-
-This file provides guidance to Claude Code (claude.ai/code) when working with
-code in this repository.
-
 ## Project Overview
 
 IB-bench is an LLM benchmark for testing investment banking analyst tasks (Excel
 modeling, document analysis, data extraction). Inspired by SWE-bench but focused
 on IB-specific work.
-
-## Environment Setup
-
-Create `.env` with API keys:
-
-```
-ANTHROPIC_API_KEY=sk-ant-...
-OPENAI_API_KEY=sk-...
-GEMINI_API_KEY=...
-```
 
 ## Commands
 
@@ -67,19 +52,20 @@ for full documentation.
 
 ```yaml
 # eval/configs/quick-test.yaml
-provider: anthropic                # Required: anthropic | openai | gemini
-model: claude-sonnet-4-20250514    # Required: model identifier
-tasks:                             # Required: task list OR filter
+provider: anthropic # Required: anthropic | openai | gemini
+model: claude-sonnet-4-20250514 # Required: model identifier
+tasks: # Required: task list OR filter
   - e-001
   - e-002
-parallel: 1                        # Optional: concurrent tasks (default: 1)
+parallel: 1 # Optional: concurrent tasks (default: 1)
 ```
 
 Alternative using filter:
+
 ```yaml
 provider: anthropic
 model: claude-sonnet-4-20250514
-filter: e-    # Run all easy tasks (e-001, e-002, ...)
+filter: e- # Run all easy tasks (e-001, e-002, ...)
 parallel: 5
 ```
 
@@ -99,7 +85,7 @@ parallel: 5
 - `eval/responses/` - LLM outputs (expensive, preserve)
 - `eval/scores/` - Scoring outputs (cheap, regenerable)
 - `tests/` - Test suite (unit/, mock/, integration/, live/)
-- `data-factory/` - Source data (human-generated and synthetic) for creating
+- `data-warehouse/` - Source data (human-generated and synthetic) for creating
   tasks
 
 ### Task Anatomy
@@ -122,7 +108,7 @@ task:
   id: e-001
   title: "Find the balance sheet error in an LBO model"
   type: fix-error # fix-error, summarise, extraction, creating
-  category:       # IB domain(s) - can have multiple
+  category: # IB domain(s) - can have multiple
     - financial-analysis
   input_type: excel # excel, pdf, web, multi
   description:
@@ -139,13 +125,16 @@ input:
 ```
 
 **Fields:**
+
 - `title`: Human-readable task summary for frontend display
-- `category`: IB domain(s) - `financial-analysis`, `due-diligence`, `document-review`, `data-extraction`
+- `category`: IB domain(s) - `financial-analysis`, `due-diligence`,
+  `document-review`, `data-extraction`
 - `input_type`: Input format - `excel`, `pdf`, `web`, `multi` (for mixed inputs)
 
-**Path alias:** `$human` expands to `data-factory/human-generated/`
+**Path alias:** `$human` expands to `data-warehouse/human-generated/`
 
 **Multiple inputs:** `input-file-original` can be a list:
+
 ```yaml
 input:
   input-file-original:
@@ -190,9 +179,11 @@ Rubrics are self-describing - evaluation type is derived from criteria types:
   (saves cost). Only use when rubric has LLM judge criteria.
 
 **Criterion ID alignment:**
+
 - **Programmatic criteria**: ID must match the JSON output key exactly
-- **LLM-judge criteria**: Can be evaluation dimensions (e.g., `summary_synthesis`,
-  `summary_drivers`) that assess qualities of an output field like `summary`
+- **LLM-judge criteria**: Can be evaluation dimensions (e.g.,
+  `summary_synthesis`, `summary_drivers`) that assess qualities of an output
+  field like `summary`
 
 ### Evaluation Types
 
@@ -202,15 +193,23 @@ Derived automatically from rubric criteria:
 - **LLM Judge**: All criteria have `type: "llm_judge"`
 - **Hybrid**: Mix of both types
 
+### Core Modules
+
+| Module              | Contents                                         |
+| ------------------- | ------------------------------------------------ |
+| `eval/helpers.py`   | Type definitions, task loading, utilities        |
+| `eval/runners.py`   | LLM provider runners (Anthropic, OpenAI, Gemini) |
+| `eval/llm_judge.py` | LLM-as-judge scorer for evaluation               |
+
 ### Model Runners
 
-`eval/helpers.py` contains three runner classes:
+`eval/runners.py` contains three runner classes:
 
-| Runner | Provider | File Handling | Tools |
-|--------|----------|---------------|-------|
-| `AnthropicRunner` | Anthropic | Files API | Code execution |
-| `OpenAIRunner` | OpenAI | Responses API | file_search, code_interpreter |
-| `GeminiRunner` | Google | Files API | Code execution |
+| Runner            | Provider  | File Handling | Tools                         |
+| ----------------- | --------- | ------------- | ----------------------------- |
+| `AnthropicRunner` | Anthropic | Files API     | Code execution                |
+| `OpenAIRunner`    | OpenAI    | Responses API | file_search, code_interpreter |
+| `GeminiRunner`    | Google    | Files API     | Code execution                |
 
 All runners support native file upload - no manual conversion needed.
 
@@ -218,11 +217,11 @@ All runners support native file upload - no manual conversion needed.
 
 All providers handle files natively via their respective APIs:
 
-| Type | Anthropic | OpenAI | Gemini |
-|------|-----------|--------|--------|
-| `.pdf` | Files API | file_search | Files API |
-| `.xlsx` | Code execution | code_interpreter | Code execution |
-| `.png/.jpg` | Native vision | code_interpreter | Files API |
+| Type        | Anthropic      | OpenAI           | Gemini         |
+| ----------- | -------------- | ---------------- | -------------- |
+| `.pdf`      | Files API      | file_search      | Files API      |
+| `.xlsx`     | Code execution | code_interpreter | Code execution |
+| `.png/.jpg` | Native vision  | code_interpreter | Files API      |
 
 ## Results Directory
 
@@ -260,13 +259,13 @@ response JSON under `output_files`.
 
 Each `{task-id}.json` contains:
 
-| Field | Description |
-|-------|-------------|
-| `raw_response` | Full text output from the model |
-| `parsed_response` | Extracted JSON (if any) |
-| `stop_reason` | Why generation stopped: `end_turn`, `max_tokens`, `stop_sequence`, `content_filter` |
-| `output_files` | List of generated file names (if any) |
-| `usage` | Token counts and latency |
+| Field             | Description                                                                         |
+| ----------------- | ----------------------------------------------------------------------------------- |
+| `raw_response`    | Full text output from the model                                                     |
+| `parsed_response` | Extracted JSON (if any)                                                             |
+| `stop_reason`     | Why generation stopped: `end_turn`, `max_tokens`, `stop_sequence`, `content_filter` |
+| `output_files`    | List of generated file names (if any)                                               |
+| `usage`           | Token counts and latency                                                            |
 
 ### Content Filter Handling
 
@@ -288,10 +287,11 @@ When using `--resume` or scoring, specify path as `MODEL/RUN_ID` (e.g.,
 
 ## Leaderboard
 
-The leaderboard aggregates scores across models and calculates a weighted overall
-score (max 100).
+The leaderboard aggregates scores across models and calculates a weighted
+overall score (max 100).
 
 **Per-task credit:**
+
 - 0 credit: < 50%
 - 0.5 credit (half): 50-89%
 - 1.0 credit (full): >= 90%
@@ -308,7 +308,7 @@ weights:
   medium: 0.35
   hard: 0.45
 
-models:              # Optional: filter to specific models
+models: # Optional: filter to specific models
   - claude-opus-4-5-20251101
   - gpt-5.2-2025-12-11
 ```
@@ -351,3 +351,23 @@ Use `.claude/skills/review-ib-task.md` to validate task quality:
 - Category-input consistency
 - Expected answer traceability
 - Overall coherence
+
+### Notifications
+
+When you complete a task, encounter an error, or need my input, use the notify
+via Telegram tool with:
+
+- type: completed | waiting | error | info
+- task: brief description
+- details: what was done
+- nextSteps: what you need from me (if anything)
+
+Only send a Telegram notification when:
+
+- A task takes longer than 2-3 minutes
+- You're blocked and waiting for my input
+- An error occurs that stops progress
+
+Don't notify for quick tasks or routine completions.
+
+Don't forget to send a notification.

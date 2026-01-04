@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=../../schema/meta.schema.json
 task:
   id: e-007
   title: "Synthesize GS and JPM equity research on Alphabet"

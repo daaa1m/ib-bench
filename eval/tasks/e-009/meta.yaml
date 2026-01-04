@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=../../schema/meta.schema.json
 task:
   id: e-009
   title: "Extract key assumptions from LBO model"

@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=../../schema/meta.schema.json
 task:
   id: e-002
   title: "Summarize Grant's Interest Rate Observer article"

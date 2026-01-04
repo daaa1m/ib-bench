@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=../../schema/meta.schema.json
 task:
   id: e-008
   title: "Summarize TSLA 10-K MD&A section"

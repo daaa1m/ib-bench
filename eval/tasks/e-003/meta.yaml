@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=../../schema/meta.schema.json
 task:
   id: e-003
   title: "Extract AMZN purchase obligations from SEC 10-K"

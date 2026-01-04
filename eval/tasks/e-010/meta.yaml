@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=../../schema/meta.schema.json
 task:
   id: e-010
   title: "Find and fix multiple errors in an LBO model"

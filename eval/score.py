@@ -26,13 +26,13 @@ from typing import Any, Literal, TypedDict, cast
 
 from helpers import (
     JudgeParseError,
-    LLMJudge,
     Rubric,
     RubricCriterion,
     Task,
     get_rubric_hash,
     load_tasks,
 )
+from llm_judge import LLMJudge
 
 EvalType = Literal["programmatic", "llm", "hybrid"]
 ValidationResult = Literal["complete", "pending"]

@@ -16,16 +16,8 @@ from typing import Any, TypedDict, cast
 
 import yaml
 
-from helpers import (
-    AnthropicRunner,
-    GeminiRunner,
-    OpenAIRunner,
-    Provider,
-    Task,
-    create_run_directory,
-    get_runner,
-    load_tasks,
-)
+from helpers import Provider, Task, create_run_directory, get_runner, load_tasks
+from runners import AnthropicRunner, GeminiRunner, OpenAIRunner
 
 Runner = AnthropicRunner | OpenAIRunner | GeminiRunner
 

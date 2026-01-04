@@ -1,10 +1,10 @@
 # Repository Guidelines
 
 ## Project Structure & Module Organization
-- Top-level: `eval/` (evaluation runner/tests), `data-factory/` (datasets), `reference-files/` (docs), `pyproject.toml` + `uv.lock` (dependencies).
-- Within `data-factory/`: `synthetic/` holds generated spreadsheets, `human-generated/` stores source PDFs/XLSX, `financial-modelling/` contains modeling plans/notes.
+- Top-level: `eval/` (evaluation runner/tests), `data-warehouse/` (datasets), `reference-files/` (docs), `pyproject.toml` + `uv.lock` (dependencies).
+- Within `data-warehouse/`: `synthetic/` holds generated spreadsheets, `human-generated/` stores source PDFs/XLSX, `financial-modelling/` contains modeling plans/notes.
 - Tests live in `eval/test_eval.py`; task configs/assets live in `eval/tasks/`; cached outputs under `eval/results/`.
-- Keep large binary inputs in `data-factory/`; avoid checking binaries into `eval/` code paths.
+- Keep large binary inputs in `data-warehouse/`; avoid checking binaries into `eval/` code paths.
 
 ## Build, Test, and Development Commands
 - `uv run pytest eval/test_eval.py -v` — run the full test suite.
@@ -32,5 +32,5 @@
 
 ## Security & Configuration Tips
 - Keep API keys (Anthropic/OpenAI/Gemini) in `.env`; loaded via `python-dotenv`; never commit secrets.
-- Treat `eval/results/` outputs and `data-factory/` sources as sensitive; scrub or regenerate before sharing externally.
+- Treat `eval/results/` outputs and `data-warehouse/` sources as sensitive; scrub or regenerate before sharing externally.
 - Document provenance when adding files to `human-generated/` or `synthetic/`; ensure redistribution rights and size appropriateness for the repo.

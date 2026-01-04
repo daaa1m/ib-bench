@@ -19,7 +19,8 @@ import yaml
 # Add eval directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent / "eval"))
 
-from helpers import LLMResponse, OutputFile, Task
+from helpers import Task
+from runners import LLMResponse, OutputFile
 
 
 # =============================================================================

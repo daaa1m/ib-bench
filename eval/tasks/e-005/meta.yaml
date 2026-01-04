@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=../../schema/meta.schema.json
 task:
   id: e-005
   title: "Extract AMZN Q3 2025 earnings metrics and write summary"
