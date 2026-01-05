@@ -2,13 +2,11 @@
 Generate leaderboard from scored runs.
 
 Usage:
-    uv run python eval/leaderboard.py                      # CLI table
-    uv run python eval/leaderboard.py --export results/    # Export JSON
+    uv run python eval/leaderboard.py
 
 Configuration (weights, models filter) is read from configs/leaderboard_config.yaml
 """
 
-import argparse
 import json
 from dataclasses import dataclass
 from datetime import datetime
@@ -403,24 +401,9 @@ def export_json(
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Generate IB-bench leaderboard")
-    parser.add_argument(
-        "--export",
-        type=Path,
-        help="Export JSON to specified directory",
-    )
-    args = parser.parse_args()
-
     config = load_config()
     entries = build_leaderboard()
-
-    # Always print CLI table
     print_cli_table(entries, config["weights"])
-
-    # Export if requested
-    if args.export:
-        args.export.mkdir(parents=True, exist_ok=True)
-        export_json(entries, config["weights"], args.export)
 
 
 if __name__ == "__main__":

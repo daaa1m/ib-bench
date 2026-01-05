@@ -29,6 +29,9 @@ from helpers import (
     Rubric,
     RubricCriterion,
     Task,
+    build_error_report,
+    check_cell_value,
+    extract_task_section,
     get_rubric_hash,
     load_tasks,
 )
@@ -38,6 +41,7 @@ EvalType = Literal["programmatic", "llm", "hybrid"]
 ValidationResult = Literal["complete", "pending"]
 
 
+# schema for each dict in the list of criteria for scoring
 class CriterionData(TypedDict, total=False):
     id: str
     passed: bool
@@ -52,6 +56,7 @@ class CriterionData(TypedDict, total=False):
     description: str
 
 
+# schema for scores/{model}/{run-id}/{task.json}
 class ScoreData(TypedDict, total=False):
     task_id: str
     rubric_hash: str
@@ -66,6 +71,7 @@ class ScoreData(TypedDict, total=False):
     criteria: list[CriterionData]
 
 
+# schema for the scores/{model}/{run-id}/summary.json
 class SummaryResult(TypedDict, total=False):
     task_id: str
     passed: bool
@@ -137,14 +143,55 @@ def _build_json_parse_failure(
     )
 
 
+def _evaluate_excel_cell(
+    criterion: RubricCriterion,
+    output_files: list[str] | None,
+    run_dir: Path | None,
+) -> tuple[bool, Any, str, dict[str, Any]]:
+    """
+    Evaluate excel_cell_value criterion.
+
+    :param criterion: Criterion spec with cell, expected, tolerance, sheet
+    :param output_files: List of output file names
+    :param run_dir: Directory containing output files
+    :returns: (passed, actual_value, details, expected_dict)
+    """
+    cell = criterion.get("cell", "")
+    expected_val = criterion.get("expected", 0)
+    tolerance = criterion.get("tolerance", 0)
+    sheet = criterion.get("sheet")
+    expected = {"cell": cell, "expected": expected_val, "tolerance": tolerance}
+
+    if not output_files or not run_dir:
+        return False, None, "No output files available for excel check", expected
+
+    xlsx_files = [f for f in output_files if f.endswith(".xlsx")]
+    if not xlsx_files:
+        return False, None, "No xlsx output file found", expected
+
+    xlsx_path = run_dir / xlsx_files[0]
+    if not xlsx_path.exists():
+        return False, None, f"Output file not found: {xlsx_path}", expected
+
+    passed, actual, details = check_cell_value(
+        xlsx_path, cell, expected_val, sheet=sheet, tolerance=tolerance
+    )
+    return passed, actual, details, expected
+
+
 def _evaluate_programmatic_criteria(
-    parsed_response: dict[str, Any], criteria: dict[str, RubricCriterion]
+    parsed_response: dict[str, Any],
+    criteria: dict[str, RubricCriterion],
+    output_files: list[str] | None = None,
+    run_dir: Path | None = None,
 ) -> tuple[list[CriterionResult], bool]:
     """
     Evaluate programmatic criteria and track LLM gating.
 
     :param parsed_response: Parsed JSON response
     :param criteria: Programmatic criteria mapping
+    :param output_files: List of output file names (for excel checks)
+    :param run_dir: Directory containing output files
     :returns: (criterion results, gate_failed)
     """
     results: list[CriterionResult] = []
@@ -161,7 +208,12 @@ def _evaluate_programmatic_criteria(
         else:
             actual_value = str(parsed_response.get(criterion_id, ""))
 
-        if match_type == "substring_one_of":
+        if match_type == "excel_cell_value":
+            passed, actual_value, details, expected = _evaluate_excel_cell(
+                criterion, output_files, run_dir
+            )
+
+        elif match_type == "substring_one_of":
             accepted_values = criterion.get("accepted_values", [])
             forbidden = criterion.get("forbidden_elements", [])
             passed, details = evaluate_substring_one_of(
@@ -276,6 +328,7 @@ def score_task(
     response_data: dict[str, Any],
     judge: LLMJudge | None = None,
     human_judge: bool = False,
+    run_dir: Path | None = None,
 ) -> TaskScore:
     """Score a response using rubric criteria.
 
@@ -297,6 +350,10 @@ def score_task(
     results: list[CriterionResult] = []
 
     # Separate criteria by type
+    # Human judge replaces LLM judge at runtime (same criteria, different evaluator).
+    # Renaming llm_judge->judge would require rubric schema changes + migration.
+    # Current naming is clearer: rubric says "llm_judge", score output shows actual
+    # evaluator used ("human" vs model name). Keep as-is unless doing broader refactor.
     programmatic_criteria = {
         cid: spec
         for cid, spec in criteria.items()
@@ -307,8 +364,9 @@ def score_task(
     }
 
     # Step 1: Run ALL programmatic checks
+    output_files = response_data.get("output_files", [])
     programmatic_results, gate_failed = _evaluate_programmatic_criteria(
-        parsed_response, programmatic_criteria
+        parsed_response, programmatic_criteria, output_files, run_dir
     )
     results.extend(programmatic_results)
 
@@ -316,7 +374,7 @@ def score_task(
     if llm_criteria:
         if gate_failed:
             llm_gated = True
-            print("LLM evaluation GATED - programmatic gate criteria failed")
+            print("  LLM evaluation GATED - programmatic gate criteria failed")
             for criterion_id, criterion in llm_criteria.items():
                 results.append(
                     CriterionResult(
@@ -332,7 +390,7 @@ def score_task(
                     )
                 )
         elif human_judge:
-            print("Generating human judge templates...")
+            print("  Generating human judge templates...")
             for criterion_id, criterion in llm_criteria.items():
                 results.append(
                     CriterionResult(
@@ -348,7 +406,7 @@ def score_task(
                     )
                 )
         elif not judge:
-            print("LLM evaluation SKIPPED - no judge provided")
+            print("  LLM evaluation SKIPPED - no judge provided")
             for criterion_id, criterion in llm_criteria.items():
                 results.append(
                     CriterionResult(
@@ -397,7 +455,9 @@ def score_llm_criteria(
     source_files = [
         f for f in task.input_files if f.suffix in [".pdf", ".xlsx", ".xls"]
     ]
-
+    # to be explicit, we expect LLM Judge to always need an input to refer to
+    # LLMJudge is never asked to judge a no-input-file task
+    # might need to change if input task is all web-based
     if not source_files:
         raise ValueError(
             f"Task {task.id} has LLM judge criteria but no source document (PDF/Excel). "
@@ -408,7 +468,10 @@ def score_llm_criteria(
     response_text = json.dumps(parsed_response, indent=2)
 
     try:
-        judge_result = judge.score(llm_rubric, source_files, response_text)
+        task_section = extract_task_section(task.prompt)
+        judge_result = judge.score(
+            llm_rubric, source_files, response_text, task_section
+        )
     except JudgeParseError as e:
         print(f"  ERROR: {e}")
         for cid, criterion in criteria.items():
@@ -461,9 +524,7 @@ def score_llm_criteria(
     return results
 
 
-def validate_human_scores(
-    score_file: Path, existing_score: dict, task: Task | None
-) -> str:
+def validate_human_scores(score_file: Path, existing_score: dict) -> str:
     """Validate and finalize human-pending scores.
 
     Returns:
@@ -604,9 +665,7 @@ def score_run(responses_dir: Path, scores_dir: Path, args):
                 existing_score = json.load(f)
 
             if existing_score.get("judge") == "human-pending":
-                result = validate_human_scores(
-                    score_file, existing_score, task_map.get(task_id)
-                )
+                result = validate_human_scores(score_file, existing_score)
                 if result == "complete":
                     print(f"\n{task_id}: Human scores validated and finalized")
                     summary["total"] += 1
@@ -682,7 +741,7 @@ def score_run(responses_dir: Path, scores_dir: Path, args):
         # Get task rubric
         task = task_map.get(task_id)
         if not task:
-            print(f"Warning: No task found for {task_id}")
+            print(f"  Warning: No task found for {task_id}")
             continue
 
         # Determine evaluation type from rubric
@@ -693,7 +752,27 @@ def score_run(responses_dir: Path, scores_dir: Path, args):
             judge = LLMJudge(model=args.judge_model)
 
         print(f"\nScoring {task_id} (eval_type: {eval_type})...")
-        score = score_task(task, response_data, judge=judge, human_judge=args.human)
+        try:
+            score = score_task(
+                task,
+                response_data,
+                judge=judge,
+                human_judge=args.human,
+                run_dir=responses_dir,
+            )
+        except Exception as e:
+            details, error_summary, next_steps = build_error_report(e, args.verbose)
+
+            print(f"\n{task_id}: ERROR during scoring")
+            print(f"  {error_summary}")
+            if next_steps:
+                print("  Next steps:")
+                for step in next_steps:
+                    print(f"    - {step}")
+            if args.verbose:
+                print("  Details:")
+                print(json.dumps(details, indent=2))
+            raise
         summary["total"] += 1
         summary["total_points"] += score.total_points
         summary["points_earned"] += score.points_earned
@@ -708,7 +787,7 @@ def score_run(responses_dir: Path, scores_dir: Path, args):
         # Show score details
         gated_note = " [LLM GATED]" if score.llm_gated else ""
         print(
-            f"  Result: {status} ({score.points_earned:.1f}/{score.total_points:.1f} points, {score.score_percent:.1f}%){gated_note}"
+            f"Result: {status} ({score.points_earned:.1f}/{score.total_points:.1f} points, {score.score_percent:.1f}%){gated_note}"
         )
 
         # Print criterion details
@@ -833,6 +912,11 @@ def main():
         "--human",
         action="store_true",
         help="Generate templates for human scoring instead of LLM judge",
+    )
+    parser.add_argument(
+        "--verbose",
+        action="store_true",
+        help="Show full API error details on failure",
     )
     args = parser.parse_args()
 

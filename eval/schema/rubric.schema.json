@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ib-bench/schema/rubric.schema.json",
+  "title": "IB-bench Rubric",
+  "type": "object",
+  "required": ["task_id", "version", "total_points", "criteria"],
+  "additionalProperties": false,
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "pattern": "^[emh]-\\d{3}$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+    "total_points": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "criteria": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/criterion"
+      },
+      "minProperties": 1
+    }
+  },
+  "$defs": {
+    "criterion": {
+      "type": "object",
+      "required": ["description", "type", "points"],
+      "properties": {
+        "description": {
+          "type": "string",
+          "minLength": 10
+        },
+        "type": {
+          "type": "string",
+          "enum": ["programmatic", "llm_judge"]
+        },
+        "points": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "gates_llm": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "type": { "const": "programmatic" } }
+          },
+          "then": {
+            "required": ["match_type"],
+            "properties": {
+              "match_type": {
+                "type": "string",
+                "enum": ["substring_one_of", "regex_pattern", "excel_cell_value"]
+              }
+            },
+            "allOf": [
+              {
+                "if": {
+                  "properties": { "match_type": { "const": "substring_one_of" } }
+                },
+                "then": {
+                  "required": ["accepted_values"],
+                  "properties": {
+                    "accepted_values": {
+                      "type": "array",
+                      "items": { "type": "string" },
+                      "minItems": 1
+                    },
+                    "forbidden_elements": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    },
+                    "search_full_response": {
+                      "type": "boolean",
+                      "default": false
+                    }
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": { "match_type": { "const": "regex_pattern" } }
+                },
+                "then": {
+                  "properties": {
+                    "valid_patterns": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    },
+                    "required_elements": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    },
+                    "forbidden_elements": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    },
+                    "search_full_response": {
+                      "type": "boolean",
+                      "default": false
+                    }
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": { "match_type": { "const": "excel_cell_value" } }
+                },
+                "then": {
+                  "required": ["cell", "expected"],
+                  "properties": {
+                    "cell": {
+                      "type": "string",
+                      "pattern": "^[A-Z]+[0-9]+$",
+                      "description": "Cell reference (e.g., A3, B8, AA100)"
+                    },
+                    "expected": {
+                      "type": "number",
+                      "description": "Expected numeric value"
+                    },
+                    "tolerance": {
+                      "type": "number",
+                      "default": 0,
+                      "minimum": 0,
+                      "description": "Allowed difference from expected (default: 0 = exact match)"
+                    },
+                    "sheet": {
+                      "type": "string",
+                      "description": "Sheet name (defaults to active sheet)"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": { "type": { "const": "llm_judge" } }
+          },
+          "then": {
+            "properties": {
+              "core_concepts": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Key concepts the response should address"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

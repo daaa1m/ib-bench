@@ -6,7 +6,7 @@ import time
 from pathlib import Path
 from typing import Any
 
-from helpers import Rubric, _extract_json, retry_on_rate_limit
+from helpers import Rubric, extract_json, retry_on_rate_limit
 
 
 class LLMJudge:
@@ -35,7 +35,11 @@ class LLMJudge:
         return self._client
 
     def _build_prompt(
-        self, criteria: dict, response_text: str, file_names: list[str]
+        self,
+        criteria: dict,
+        response_text: str,
+        file_names: list[str],
+        task_prompt: str,
     ) -> str:
         """
         Build the evaluation prompt for the judge.
@@ -43,8 +47,12 @@ class LLMJudge:
         :param criteria: Dict of criterion_id -> criterion spec
         :param response_text: The LLM response to evaluate
         :param file_names: Names of source files for context
+        :param task_prompt: The ## Task section from prompt.md (not full prompt)
         :returns: Formatted prompt string
         """
+        prompt_path = Path(__file__).parent / "prompts" / "llm_judge.md"
+        template = prompt_path.read_text()
+
         criteria_text = "\n".join(
             f"- **{cid}** ({spec.get('points', 0)} points): {spec.get('description', '')}"
             for cid, spec in criteria.items()
@@ -52,35 +60,20 @@ class LLMJudge:
         criteria_ids = list(criteria.keys())
         files_list = ", ".join(file_names)
 
-        return f"""You are an expert evaluator for investment banking work products.
-
-## Source Documents
-{files_list}
-
-## Response to Evaluate
-{response_text}
-
-## Evaluation Criteria
-{criteria_text}
-
-## Output Requirements
-- Score each criterion 0-1 (0=fails, 1=perfect)
-- Output ONLY valid JSON, nothing else
-- Do NOT print analysis, thinking, or explanations outside JSON
-- Do NOT use code execution to explore files - just read and score
-
-```json
-{{
-  "scores": {{
-    "{criteria_ids[0]}": {{"score": 0.85, "reasoning": "brief reason"}},
-    ...include all: {criteria_ids}
-  }}
-}}
-```"""
+        # WARNING: {} in task_prompt/response_text/criteria_text will cause
+        # KeyError since str.format() interprets them as placeholders
+        return template.format(
+            task_prompt=task_prompt,
+            files_list=files_list,
+            response_text=response_text,
+            criteria_text=criteria_text,
+            example_criterion=criteria_ids[0],
+            criteria_ids=criteria_ids,
+        )
 
     def _extract_response_text(self, response: Any) -> str:
         """
-        Extract text content from API response.
+        Extract text content from API response (LLM judge's API call).
 
         Handles both direct text blocks and code execution stdout.
 
@@ -107,7 +100,7 @@ class LLMJudge:
 
     def _parse_prose_scores(self, text: str, criteria_ids: list[str]) -> dict | None:
         """
-        Fallback parser for prose format scores.
+        Fallback parser for prose format scores if _parse_response() fails.
 
         :param text: Raw response text
         :param criteria_ids: List of criterion IDs to look for
@@ -161,9 +154,10 @@ class LLMJudge:
         :param criteria_ids: List of criterion IDs to extract
         :returns: Dict with "scores" key, or None if parsing fails
 
-        Tries JSON extraction first, falls back to prose parsing.
+        Tries JSON extraction first, falls back to prose parsing in
+        _parse_prose_scores().
         """
-        parsed = _extract_json(raw_text)
+        parsed = extract_json(raw_text)
         if parsed and parsed.get("scores"):
             return parsed
 
@@ -247,7 +241,11 @@ class LLMJudge:
         return self._extract_response_text(response)
 
     def score(
-        self, rubric: Rubric, source_files: list[Path], response_text: str
+        self,
+        rubric: Rubric,
+        source_files: list[Path],
+        response_text: str,
+        task_prompt: str,
     ) -> dict[str, Any]:
         """
         Score a response against rubric criteria.
@@ -255,6 +253,7 @@ class LLMJudge:
         :param rubric: Rubric dict with "criteria" key
         :param source_files: List of source document paths (PDF, xlsx, etc.)
         :param response_text: The LLM response to evaluate
+        :param task_prompt: The original task prompt given to the LLM
         :returns: Dict with "scores" (per-criterion) and "weighted_total" (0.0-1.0)
 
         Pipeline: build_prompt -> call_judge -> parse_response -> calculate_weighted
@@ -263,7 +262,7 @@ class LLMJudge:
         criteria_ids = list(criteria.keys())
         file_names = [f.name for f in source_files]
 
-        prompt = self._build_prompt(criteria, response_text, file_names)
+        prompt = self._build_prompt(criteria, response_text, file_names, task_prompt)
         raw_text = self._call_judge(source_files, prompt)
         parsed = self._parse_response(raw_text, criteria_ids)
 

@@ -20,23 +20,19 @@ uv run python eval/score.py RUN_ID --tasks e-001
 uv run python eval/score.py RUN_ID --rescore
 
 # Generate leaderboard
-uv run python eval/leaderboard.py                      # CLI table
-uv run python eval/leaderboard.py --export results/    # Export JSON
+uv run python eval/leaderboard.py
 
-# Export task metadata for frontend
-uv run python eval/export_tasks.py                     # Export to tmp/tasks.json
-uv run python eval/export_tasks.py output/             # Export to output/tasks.json
-
-# Export task results with scores per model
-uv run python eval/export_task_results.py              # Export to tmp/
-uv run python eval/export_task_results.py output/      # Export to output/
+# Export scripts (for frontend consumption)
+uv run python eval/export-scripts/export_leaderboard.py           # Export to tmp/
+uv run python eval/export-scripts/export_leaderboard.py output/   # Export to output/
+uv run python eval/export-scripts/export_tasks.py                 # Export to tmp/
+uv run python eval/export-scripts/export_tasks.py output/         # Export to output/
+uv run python eval/export-scripts/export_task_results.py          # Export to tmp/
+uv run python eval/export-scripts/export_task_results.py output/  # Export to output/
 
 # Analyze a specific run
 uv run python eval/analyze.py MODEL/RUN_ID                        # Full dump
 uv run python eval/analyze.py MODEL/RUN_ID --compare MODEL2/RUN_ID2  # Compare runs
-
-# Mark a task as blocked (content filter)
-uv run python eval/mark_blocked.py MODEL/RUN_ID TASK_ID
 
 # Run tests
 uv run pytest tests/ -v                         # All tests
@@ -269,16 +265,10 @@ Each `{task-id}.json` contains:
 
 ### Content Filter Handling
 
-When a model's content filter blocks a request (false positive on legitimate IB
-content), manually mark it as blocked:
+Content filter blocks are handled automatically by runners. When triggered:
 
-```bash
-# After seeing content filter error, mark the task as blocked
-uv run python eval/mark_blocked.py MODEL/RUN_ID TASK_ID
-```
-
-This creates a response with `stop_reason: "content_filter"`:
-
+- Runners return `LLMResponse(stop_reason="content_filter")` instead of raising
+- Response is saved normally with `stop_reason: "content_filter"`
 - **Score phase**: Marked as `blocked: true`, 0 points, tracked separately
 - **Leaderboard**: Shows blocked count separately (e.g., "5/6 (1 blocked)")
 
