@@ -2,9 +2,9 @@
 Analyze a scored run with full diagnostic dump.
 
 Usage:
-    uv run python eval/analyze.py MODEL                      # Aggregate all runs for model
-    uv run python eval/analyze.py MODEL/RUN_ID               # Specific run only
-    uv run python eval/analyze.py MODEL --compare MODEL2     # Compare two models
+    uv run python eval/results/analyze.py MODEL                      # Aggregate all runs for model
+    uv run python eval/results/analyze.py MODEL/RUN_ID               # Specific run only
+    uv run python eval/results/analyze.py MODEL --compare MODEL2     # Compare two models
 """
 
 import argparse
@@ -42,7 +42,7 @@ def load_run(
     run_path: str, base_dir: Path | None = None
 ) -> tuple[dict, list[TaskResult]]:
     if base_dir is None:
-        base_dir = Path(__file__).parent
+        base_dir = Path(__file__).parent.parent
 
     parts = run_path.split("/")
 
@@ -151,7 +151,7 @@ def get_provider(model: str) -> str:
 
 
 def get_task_category(task_id: str) -> str:
-    tasks_dir = Path(__file__).parent / "tasks"
+    tasks_dir = Path(__file__).parent.parent / "tasks"
     task_dir = tasks_dir / task_id
     meta_file = task_dir / "meta.yaml"
 
@@ -230,7 +230,7 @@ def analyze_run(config: dict, results: list[TaskResult], total_tasks: int):
 
     # Count task totals per difficulty
     task_counts = {"easy": 0, "medium": 0, "hard": 0}
-    tasks_dir = Path(__file__).parent / "tasks"
+    tasks_dir = Path(__file__).parent.parent / "tasks"
     for task_path in tasks_dir.iterdir():
         if not task_path.is_dir() or task_path.name.startswith("_"):
             continue
@@ -465,7 +465,7 @@ def main():
     args = parser.parse_args()
 
     # Count total tasks
-    tasks_dir = Path(__file__).parent / "tasks"
+    tasks_dir = Path(__file__).parent.parent / "tasks"
     total_tasks = sum(
         1 for p in tasks_dir.iterdir() if p.is_dir() and not p.name.startswith("_")
     )

@@ -2,9 +2,12 @@
 
 import os
 import re
+import sys
 import time
 from pathlib import Path
 from typing import Any
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from helpers import Rubric, extract_json, retry_on_rate_limit
 
@@ -50,7 +53,7 @@ class LLMJudge:
         :param task_prompt: The ## Task section from prompt.md (not full prompt)
         :returns: Formatted prompt string
         """
-        prompt_path = Path(__file__).parent / "prompts" / "llm_judge.md"
+        prompt_path = Path(__file__).parent / "llm_judge.md"
         template = prompt_path.read_text()
 
         criteria_text = "\n".join(

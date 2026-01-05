@@ -2,7 +2,7 @@
 Generate leaderboard from scored runs.
 
 Usage:
-    uv run python eval/leaderboard.py
+    uv run python eval/results/leaderboard.py
 
 Configuration (weights, models filter) is read from configs/leaderboard_config.yaml
 """
@@ -44,7 +44,9 @@ class LeaderboardEntry:
 def load_config(config_path: Path | None = None) -> dict:
     """Load leaderboard configuration."""
     if config_path is None:
-        config_path = Path(__file__).parent / "configs" / "leaderboard_config.yaml"
+        config_path = (
+            Path(__file__).parent.parent / "configs" / "leaderboard_config.yaml"
+        )
 
     if config_path.exists():
         with open(config_path) as f:
@@ -66,7 +68,7 @@ def get_difficulty(task_id: str) -> str:
 def count_tasks_by_difficulty(tasks_dir: Path | None = None) -> dict[str, int]:
     """Count total tasks per difficulty tier."""
     if tasks_dir is None:
-        tasks_dir = Path(__file__).parent / "tasks"
+        tasks_dir = Path(__file__).parent.parent / "tasks"
 
     counts = {"easy": 0, "medium": 0, "hard": 0}
 
@@ -274,7 +276,7 @@ def build_leaderboard(
 ) -> list[LeaderboardEntry]:
     """Build leaderboard from all scored runs."""
     if scores_dir is None:
-        scores_dir = Path(__file__).parent / "scores"
+        scores_dir = Path(__file__).parent.parent / "scores"
 
     if not scores_dir.exists():
         return []
