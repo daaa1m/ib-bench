@@ -249,6 +249,14 @@ def extract_json(text: str) -> dict[str, Any] | None:
     return None
 
 
+def extract_task_section(prompt: str) -> str:
+    """Extract the ## Task section from a prompt.md file."""
+    match = re.search(r"## Task\s*\n(.*?)(?=\n## |\Z)", prompt, re.DOTALL)
+    if not match:
+        raise ValueError("Prompt missing required '## Task' section")
+    return match.group(1).strip()
+
+
 def _truncate_text(text: str, max_len: int = 300) -> str:
     if len(text) <= max_len:
         return text

@@ -31,6 +31,7 @@ from helpers import (
     Task,
     build_error_report,
     check_cell_value,
+    extract_task_section,
     get_rubric_hash,
     load_tasks,
 )
@@ -469,7 +470,10 @@ def score_llm_criteria(
     response_text = json.dumps(parsed_response, indent=2)
 
     try:
-        judge_result = judge.score(llm_rubric, source_files, response_text, task.prompt)
+        task_section = extract_task_section(task.prompt)
+        judge_result = judge.score(
+            llm_rubric, source_files, response_text, task_section
+        )
     except JudgeParseError as e:
         print(f"  ERROR: {e}")
         for cid, criterion in criteria.items():

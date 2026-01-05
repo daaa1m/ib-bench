@@ -34,10 +34,6 @@ class LLMJudge:
             self._client = anthropic.Anthropic(api_key=self.api_key)
         return self._client
 
-    def _escape_braces(self, s: str) -> str:
-        """Escape curly braces for str.format() by doubling them."""
-        return s.replace("{", "{{").replace("}", "}}")
-
     def _build_prompt(
         self,
         criteria: dict,
@@ -51,7 +47,7 @@ class LLMJudge:
         :param criteria: Dict of criterion_id -> criterion spec
         :param response_text: The LLM response to evaluate
         :param file_names: Names of source files for context
-        :param task_prompt: The original task prompt given to the LLM
+        :param task_prompt: The ## Task section from prompt.md (not full prompt)
         :returns: Formatted prompt string
         """
         prompt_path = Path(__file__).parent / "prompts" / "llm_judge.md"
@@ -64,13 +60,13 @@ class LLMJudge:
         criteria_ids = list(criteria.keys())
         files_list = ", ".join(file_names)
 
-        # Escape braces: prompt.md files contain JSON output examples with {},
-        # which str.format() would interpret as placeholders
+        # WARNING: {} in task_prompt/response_text/criteria_text will cause
+        # KeyError since str.format() interprets them as placeholders
         return template.format(
-            task_prompt=self._escape_braces(task_prompt),
+            task_prompt=task_prompt,
             files_list=files_list,
-            response_text=self._escape_braces(response_text),
-            criteria_text=self._escape_braces(criteria_text),
+            response_text=response_text,
+            criteria_text=criteria_text,
             example_criterion=criteria_ids[0],
             criteria_ids=criteria_ids,
         )

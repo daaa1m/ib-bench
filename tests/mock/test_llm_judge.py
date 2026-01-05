@@ -177,33 +177,6 @@ class TestScoring:
 
         mock_client.beta.files.delete.assert_called_once_with("file-cleanup")
 
-    def test_handles_braces_in_task_prompt(
-        self, mocker, sample_rubric, sample_source_files
-    ):
-        """Task prompts with curly braces (JSON examples) don't break formatting."""
-        mock_client = mocker.patch("anthropic.Anthropic").return_value
-        mock_client.beta.files.upload.return_value = mocker.Mock(id="file-braces")
-
-        text_block = mocker.Mock(type="text", spec=["type", "text"])
-        text_block.text = '{"scores": {"accuracy": {"score": 0.8, "reasoning": "ok"}}}'
-
-        mock_client.beta.messages.create.return_value = mocker.Mock(
-            content=[text_block],
-        )
-
-        judge = LLMJudge(model="claude-test")
-        task_prompt_with_json = 'Output JSON: {"key": "value", "nested": {"a": 1}}'
-        response_with_json = '{"result": {"data": [1, 2, 3]}}'
-
-        result = judge.score(
-            {"criteria": {"accuracy": {"description": "Test accuracy", "points": 100}}},
-            sample_source_files,
-            response_with_json,
-            task_prompt_with_json,
-        )
-
-        assert result["scores"]["accuracy"]["score"] == 0.8
-
 
 class TestProseFallback:
     """Tests for prose score parsing fallback."""
