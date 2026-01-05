@@ -3,32 +3,61 @@
   "version": "1.0",
   "total_points": 100,
   "criteria": {
-    "cell_value_E27": {
-      "description": "TEV value in Marine DCF E27 must match expected value after update",
-      "type": "programmatic",
-      "match_type": "substring_one_of",
-      "accepted_values": ["TODO: Add expected TEV value after source PDF is added"],
-      "points": 50,
-      "gates_llm": true
-    },
     "model_balanced": {
-      "description": "Model must remain balanced (row 84 shows OK)",
+      "description": "Model must remain balanced (Total Assets = Total L&SE)",
       "type": "programmatic",
       "match_type": "substring_one_of",
       "accepted_values": ["true", "True", "yes", "Yes"],
+      "points": 15,
+      "gates_llm": true
+    },
+    "aq60_value": {
+      "description": "Total Assets in AQ60 must equal 5866",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["5866"],
       "points": 20
     },
-    "changes_made": {
-      "description": "Must document specific cells changed with old/new values and filing source",
-      "type": "llm_judge",
-      "core_concepts": ["cell reference", "old value", "new value", "SEC filing"],
+    "aq83_value": {
+      "description": "Total L&SE in AQ83 must equal 5866 (matching AQ60)",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["5866"],
       "points": 15
     },
-    "reasoning_steps": {
-      "description": "Must explain methodology for identifying which values to update",
-      "type": "llm_judge",
-      "core_concepts": ["SEC filing", "revenue", "EBIT", "update"],
+    "lqa_label": {
+      "description": "G2 must be updated to show 2Q24 for LQA",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["2Q24"],
+      "points": 10
+    },
+    "aq31_value": {
+      "description": "Cell AQ31 must equal 124",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["124"],
       "points": 15
+    },
+    "aq93_value": {
+      "description": "Cell AQ93 must equal 824",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["824"],
+      "points": 10
+    },
+    "aq112_value": {
+      "description": "Cell AQ112 must equal 3330",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["3330"],
+      "points": 10
+    },
+    "reasoning_steps": {
+      "description": "Must explain how data was sourced from SEC filings and which cells were updated",
+      "type": "llm_judge",
+      "core_concepts": ["10-Q", "SEC", "2Q24", "Marine Transportation"],
+      "points": 5
     }
   }
 }

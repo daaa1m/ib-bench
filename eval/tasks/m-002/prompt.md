@@ -1,76 +1,60 @@
 ## Task
 
 You are an investment banking analyst responsible for maintaining financial
-models. Your task is to update the Kirby Corporation (NYSE: KEX) DCF model with
-the latest quarterly and annual financial data from the provided SEC filing.
+models. Your task is to update the Kirby Corporation (NYSE: KEX) financial model
+with 2Q24 quarterly data.
 
-You are given:
+You are given an Excel model (`input.xlsx`) containing the existing DCF
+valuation with one sheet: **Model Shell** which has operating model with
+historical and projected financials.
 
-1. An Excel model (`input.xlsx`) containing the existing DCF valuation
-2. A PDF with the latest SEC filing data to use for updates
-
-The model has two key sheets:
-
-- **Model Shell**: Operating model with historical and projected financials
-- **Marine DCF**: DCF valuation for the Marine Transportation segment
+You must source the 2Q24 data yourself from Kirby Corp's SEC filings (10-Q) and
+company reports for the Marine Transportation segment.
 
 ## Methodology & Process
 
-1. **Review the SEC filing** to identify the latest reported figures for:
-   - Revenue (Inland and Coastal)
-   - EBIT and EBITDA
-   - D&A (Depreciation & Amortization)
-   - Any updated guidance or projections
+1. **Source the 2Q24 data** from SEC EDGAR or Kirby Corp investor relations:
+   - Find the 2Q24 10-Q filing for Kirby Corporation
+   - Identify Marine Transportation segment figures for 2Q24
 
-2. **Update the Model Shell** with new historical data:
-   - Input actual figures for the most recent completed periods
+2. **Update the Model Shell** with 2Q24 data:
+   - Update the 2Q24 column (column AQ) with actual figures
+   - Update the LQA (Last Quarter Annualised) label in G2 to reflect 2Q24
    - Preserve all existing formulas and model structure
-   - Do not modify projection assumptions unless filing provides new guidance
 
-3. **Update the Marine DCF** sheet:
-   - Ensure updated actuals flow through to the DCF
-   - Verify cash flow calculations reflect new data
-   - Check that TEV calculation in E27 updates correctly
-
-4. **Validate the model**:
-   - Confirm balance sheet check (row 84 of Model Shell) shows "OK"
+3. **Validate the model**:
+   - Confirm Total Assets (row 60) equals Total Liabilities & Equity (row 83)
    - Verify no #REF or other formula errors exist
    - Ensure all formulas remain intact
 
 ## Constraints
 
-- Update ONLY cells that need new data values
+- Update ONLY cells that need new data values in column AQ
+- Update G2 to show "2Q24" for LQA reference
 - Preserve all existing formulas and model structure
-- Maintain consistent formatting with existing cells
-- Use values exactly as reported in the SEC filing
+- Use values exactly as reported in SEC filings
 
 ## Negative Constraints
 
-- DO NOT change the structure or layout of any sheet
+- DO NOT change the structure or layout of the sheet
 - DO NOT modify formulas - only update hard-coded input values
 - DO NOT add or delete rows or columns
-- DO NOT change projection assumptions unless explicitly stated in filing
 - NO conversational filler or unnecessary commentary
 
 ## Output Format
 
-Return your analysis as a raw JSON object with the following keys. Do not
+Provide your response as a raw JSON object with the following keys. Do not
 include any markdown formatting, backticks, or preamble.
 
-```json
-{
-  "reasoning_steps": "Step-by-step explanation of how you identified and updated each value",
-  "changes_made": [
-    {
-      "cell": "Sheet!Cell",
-      "old_value": "X",
-      "new_value": "Y",
-      "source": "Filing reference"
-    }
-  ],
-  "model_balanced": true,
-  "cell_value_E27": "Updated TEV value from Marine DCF E27"
-}
-```
+`{
+  "reasoning_steps": "Step-by-step explanation of how you sourced and updated the data",
+  "lqa_label": "The value you set in cell G2",
+  "aq31_value": "The value in cell AQ31 after update",
+  "aq60_value": "Total Assets value in AQ60",
+  "aq83_value": "Total L&SE value in AQ83",
+  "aq93_value": "The value in cell AQ93 after update",
+  "aq112_value": "The value in cell AQ112 after update",
+  "model_balanced": true
+}`
 
 Also return the updated Excel file with all changes applied.
