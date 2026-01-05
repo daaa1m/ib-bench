@@ -60,9 +60,14 @@ def load_config(config_path: Path) -> dict[str, Any]:
 
 
 def _select_input_files(task: Task) -> list[Path]:
-    """Find input files we currently support for run execution."""
+    """Find input files we currently support for run execution.
+
+    Excludes files starting with '_' (convention for reference-only files).
+    """
     return [
-        f for f in task.input_files if f.suffix.lower() in [".xlsx", ".pdf", ".xls"]
+        f
+        for f in task.input_files
+        if f.suffix.lower() in [".xlsx", ".pdf", ".xls"] and not f.name.startswith("_")
     ]
 
 

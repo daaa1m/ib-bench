@@ -452,7 +452,9 @@ def score_llm_criteria(
     results = []
 
     source_files = [
-        f for f in task.input_files if f.suffix in [".pdf", ".xlsx", ".xls"]
+        f
+        for f in task.input_files
+        if f.suffix in [".pdf", ".xlsx", ".xls"] and not f.name.startswith("_")
     ]
     # to be explicit, we expect LLM Judge to always need an input to refer to
     # LLMJudge is never asked to judge a no-input-file task
