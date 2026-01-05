@@ -34,6 +34,10 @@ class LLMJudge:
             self._client = anthropic.Anthropic(api_key=self.api_key)
         return self._client
 
+    def _escape_braces(self, s: str) -> str:
+        """Escape curly braces for str.format() by doubling them."""
+        return s.replace("{", "{{").replace("}", "}}")
+
     def _build_prompt(
         self,
         criteria: dict,
@@ -61,10 +65,10 @@ class LLMJudge:
         files_list = ", ".join(file_names)
 
         return template.format(
-            task_prompt=task_prompt,
+            task_prompt=self._escape_braces(task_prompt),
             files_list=files_list,
-            response_text=response_text,
-            criteria_text=criteria_text,
+            response_text=self._escape_braces(response_text),
+            criteria_text=self._escape_braces(criteria_text),
             example_criterion=criteria_ids[0],
             criteria_ids=criteria_ids,
         )
