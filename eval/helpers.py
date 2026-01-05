@@ -222,7 +222,7 @@ def get_rubric_hash(rubric: Rubric) -> str:
     return hashlib.sha256(content.encode()).hexdigest()[:8]
 
 
-def _extract_json(text: str) -> dict[str, Any] | None:
+def extract_json(text: str) -> dict[str, Any] | None:
     """Extract JSON object from response text."""
     # Try direct parse first
     try:
@@ -249,6 +249,128 @@ def _extract_json(text: str) -> dict[str, Any] | None:
     return None
 
 
+def _truncate_text(text: str, max_len: int = 300) -> str:
+    if len(text) <= max_len:
+        return text
+    return text[: max_len - 3] + "..."
+
+
+def extract_error_details(error: Exception) -> dict[str, Any]:
+    """Extract useful, JSON-serializable error details from API exceptions."""
+    details: dict[str, Any] = {
+        "error_type": error.__class__.__name__,
+        "message": str(error) or repr(error),
+    }
+
+    for attr in ("status_code", "status", "code", "type", "request_id", "param"):
+        value = getattr(error, attr, None)
+        if value not in (None, ""):
+            details[attr] = value
+
+    retryable = getattr(error, "retryable", None)
+    if retryable is not None:
+        details["retryable"] = retryable
+
+    body = getattr(error, "body", None)
+    if body not in (None, ""):
+        details["response_body"] = body
+
+    response = getattr(error, "response", None)
+    if response is not None:
+        status_code = getattr(response, "status_code", None)
+        if status_code and "status_code" not in details:
+            details["status_code"] = status_code
+
+        headers = getattr(response, "headers", None)
+        if headers and "request_id" not in details:
+            request_id = headers.get("x-request-id") or headers.get("request-id")
+            if request_id:
+                details["request_id"] = request_id
+
+        response_text = getattr(response, "text", None)
+        if response_text and "response_body" not in details:
+            details["response_body"] = response_text
+
+    if "response_body" in details:
+        details["response_body"] = _truncate_text(str(details["response_body"]), 2000)
+
+    return details
+
+
+def format_error_summary(details: dict[str, Any], verbose: bool = False) -> str:
+    """Build a short, user-facing error summary."""
+    error_type = details.get("error_type", "Error")
+    message = details.get("message", "")
+    if not verbose:
+        message = _truncate_text(str(message), 240)
+
+    parts = [f"{error_type}: {message}" if message else str(error_type)]
+
+    status_code = details.get("status_code") or details.get("status")
+    if status_code:
+        parts.append(f"status={status_code}")
+
+    error_code = details.get("code") or details.get("error_code")
+    if error_code:
+        parts.append(f"code={error_code}")
+
+    request_id = details.get("request_id")
+    if request_id:
+        parts.append(f"request_id={request_id}")
+
+    if verbose and details.get("response_body"):
+        parts.append(f"response_body={details['response_body']}")
+
+    return " | ".join(parts)
+
+
+def suggest_next_steps(details: dict[str, Any]) -> list[str]:
+    """Suggest next steps based on error details."""
+    message = str(details.get("message", "")).lower()
+    status_code = str(details.get("status_code") or details.get("status") or "")
+
+    steps = []
+
+    if "rate limit" in message or status_code == "429":
+        steps.append("Reduce --parallel and retry later")
+        steps.append("Check provider quota limits")
+    elif (
+        "api key" in message
+        or "authentication" in message
+        or status_code
+        in {
+            "401",
+            "403",
+        }
+    ):
+        steps.append("Verify API key environment variables (.env or shell)")
+        steps.append("Check account permissions for the model")
+    elif "not found" in message and "model" in message:
+        steps.append("Verify the model name in the config")
+    elif "timeout" in message or "timed out" in message:
+        steps.append("Retry the request")
+        steps.append("Reduce input size or lower --parallel")
+    elif "invalid" in message or status_code == "400":
+        steps.append("Inspect task prompt and input files for invalid content")
+
+    if not steps:
+        steps.append("Re-run with --verbose to see full error details")
+
+    return steps
+
+
+def build_error_report(
+    error: Exception, verbose: bool
+) -> tuple[dict[str, Any], str, list[str]]:
+    """Build error details, summary, and next steps for reporting."""
+    details = extract_error_details(error)
+    summary = format_error_summary(details, verbose=False)
+    next_steps = suggest_next_steps(details)
+    if verbose:
+        next_steps = [step for step in next_steps if "--verbose" not in step]
+    return details, summary, next_steps
+
+
 def get_runner(provider: Provider, model: str):
     """Factory function to get the appropriate runner.
 
@@ -262,6 +384,7 @@ def get_runner(provider: Provider, model: str):
         return OpenAIRunner(model=model)
     elif provider == "gemini":
         return GeminiRunner(model=model)
+    # this catches errors if we add a new provider but forget to update here
     else:
         raise ValueError(f"Unknown provider: {provider}")
 
@@ -279,3 +402,85 @@ def create_run_directory(model: str, base_dir: Path | None = None) -> Path:
     run_dir.mkdir(parents=True, exist_ok=True)
 
     return run_dir
+
+
+def check_workbook_errors(xlsx_path: Path) -> tuple[bool, list[str]]:
+    """
+    Check if workbook contains any #REF! or other formula errors.
+
+    :param xlsx_path: Path to Excel file
+    :returns: (has_errors, list of error descriptions)
+    """
+    import openpyxl
+
+    try:
+        wb = openpyxl.load_workbook(xlsx_path, data_only=False)
+    except Exception as e:
+        return True, [f"Failed to open Excel file: {e}"]
+
+    errors = []
+    error_values = {"#REF!", "#VALUE!", "#NAME?", "#DIV/0!", "#NULL!", "#N/A", "#NUM!"}
+
+    for sheet_name in wb.sheetnames:
+        ws = wb[sheet_name]
+        for row in ws.iter_rows():
+            for cell in row:
+                if cell.value in error_values:
+                    errors.append(f"{sheet_name}!{cell.coordinate}: {cell.value}")
+
+    return len(errors) > 0, errors
+
+
+def check_cell_value(
+    xlsx_path: Path,
+    cell: str,
+    expected: float,
+    sheet: str | None = None,
+    tolerance: float = 0,
+) -> tuple[bool, Any, str]:
+    """
+    Check if cell equals expected value within tolerance.
+
+    :param xlsx_path: Path to Excel file
+    :param cell: Cell reference (e.g., "A3", "B8")
+    :param expected: Expected numeric value
+    :param sheet: Sheet name (defaults to active sheet)
+    :param tolerance: Allowed difference (default 0 = exact match)
+    :returns: (passed, actual_value, details)
+
+    Does not handle: Named ranges, formulas (reads computed values only).
+    """
+    import openpyxl
+
+    try:
+        wb = openpyxl.load_workbook(xlsx_path, data_only=True)
+    except Exception as e:
+        return False, None, f"Failed to open Excel file: {e}"
+
+    try:
+        ws = wb[sheet] if sheet else wb.active
+    except KeyError:
+        return False, None, f"Sheet '{sheet}' not found"
+
+    if ws is None:
+        return False, None, "No active sheet found"
+
+    actual = ws[cell].value
+
+    if actual is None:
+        return False, None, f"Cell {cell} is empty"
+
+    try:
+        actual_num = float(actual)
+    except (TypeError, ValueError):
+        return False, actual, f"Cell {cell} is not numeric: {actual}"
+
+    diff = abs(actual_num - expected)
+    passed = diff <= tolerance
+
+    if passed:
+        details = f"Cell {cell} = {actual_num} (expected {expected})"
+    else:
+        details = f"Cell {cell} = {actual_num}, expected {expected} (diff: {diff})"
+
+    return passed, actual_num, details

@@ -81,7 +81,9 @@ class TestScoring:
         )
 
         judge = LLMJudge(model="claude-test")
-        result = judge.score(sample_rubric, sample_source_files, '{"answer": "test"}')
+        result = judge.score(
+            sample_rubric, sample_source_files, '{"answer": "test"}', "Test task prompt"
+        )
 
         assert "scores" in result
         assert result["scores"]["accuracy"]["score"] == 0.85
@@ -111,7 +113,9 @@ class TestScoring:
         )
 
         judge = LLMJudge(model="claude-test")
-        result = judge.score(sample_rubric, sample_source_files, '{"answer": "test"}')
+        result = judge.score(
+            sample_rubric, sample_source_files, '{"answer": "test"}', "Test task prompt"
+        )
 
         # accuracy: 1.0 * 60 = 60, clarity: 0.5 * 40 = 20
         # weighted = (60 + 20) / (60 + 40) = 0.8
@@ -146,6 +150,7 @@ class TestScoring:
             {"criteria": {"accuracy": {"description": "Test accuracy", "points": 100}}},
             sample_source_files,
             '{"answer": "test"}',
+            "Test task prompt",
         )
 
         assert result["scores"]["accuracy"]["score"] == 0.7
@@ -167,6 +172,7 @@ class TestScoring:
             {"criteria": {"accuracy": {"description": "Test accuracy", "points": 100}}},
             sample_source_files,
             '{"answer": "test"}',
+            "Test task prompt",
         )
 
         mock_client.beta.files.delete.assert_called_once_with("file-cleanup")
@@ -195,7 +201,9 @@ class TestProseFallback:
         )
 
         judge = LLMJudge(model="claude-test")
-        result = judge.score(sample_rubric, sample_source_files, '{"answer": "test"}')
+        result = judge.score(
+            sample_rubric, sample_source_files, '{"answer": "test"}', "Test task prompt"
+        )
 
         assert result["scores"]["accuracy"]["score"] == 0.85
         assert result["scores"]["clarity"]["score"] == 0.70
@@ -214,7 +222,9 @@ class TestProseFallback:
         )
 
         judge = LLMJudge(model="claude-test")
-        result = judge.score(sample_rubric, sample_source_files, '{"answer": "test"}')
+        result = judge.score(
+            sample_rubric, sample_source_files, '{"answer": "test"}', "Test task prompt"
+        )
 
         assert result["scores"] == {}
         assert result["weighted_total"] == 0.0

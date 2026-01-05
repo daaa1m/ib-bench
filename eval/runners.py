@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, cast
 
-from helpers import Task, _extract_json, retry_on_rate_limit
+from helpers import Task, extract_json, retry_on_rate_limit
 
 
 @dataclass
@@ -77,7 +77,7 @@ class AnthropicRunner:
             if "content" in error_str and (
                 "policy" in error_str or "blocked" in error_str or "safety" in error_str
             ):
-                print(f"  BLOCKED: Content filter triggered")
+                print("  BLOCKED: Content filter triggered")
                 return LLMResponse(
                     raw_text="",
                     parsed_json=None,
@@ -94,11 +94,11 @@ class AnthropicRunner:
 
         first_block = response.content[0]
         raw_text: str = getattr(first_block, "text", "")
-        parsed_json = _extract_json(raw_text)
+        parsed_json = extract_json(raw_text)
         stop_reason = response.stop_reason or "unknown"
 
         if stop_reason == "max_tokens":
-            print(f"  WARNING: Output truncated (hit max_tokens limit)")
+            print("  WARNING: Output truncated (hit max_tokens limit)")
 
         return LLMResponse(
             raw_text=raw_text,
@@ -115,7 +115,7 @@ class AnthropicRunner:
         """Run with file upload - uploads files via Files API and uses code execution."""
         file_ids = []
         for input_file in input_files:
-            print(f"  Uploading {input_file.name} to Files API...")
+            print(f"Uploading {input_file.name} to Files API...")
             with open(input_file, "rb") as f:
                 file_obj = self.client.beta.files.upload(file=f)
                 file_ids.append(file_obj.id)
@@ -141,7 +141,7 @@ class AnthropicRunner:
             if "content" in error_str and (
                 "policy" in error_str or "blocked" in error_str or "safety" in error_str
             ):
-                print(f"  BLOCKED: Content filter triggered")
+                print("  BLOCKED: Content filter triggered")
                 content_filter_triggered = True
                 response = None
             else:
@@ -172,6 +172,8 @@ class AnthropicRunner:
         output_files: list[OutputFile] = []
         container_id = None
 
+        # API response may contain multiple blocks (text response, code execution etc)
+        # we iterate over to get raw_text which has all text output plus all code execution
         for block in response.content:
             block_text = getattr(block, "text", None)
             if block_text:
@@ -189,6 +191,9 @@ class AnthropicRunner:
                         elif item_text:
                             raw_text += item_text + "\n"
 
+        # Code execution runs in an ephemeral container. Any files the model
+        # creates/modifies (e.g., Excel outputs) exist only there and vanish
+        # when the container is cleaned up. We retrieve them here before that happens.
         if container_id:
             try:
                 container_files = self.client.beta.files.list(
@@ -214,11 +219,11 @@ class AnthropicRunner:
             except Exception as e:
                 print(f"  Warning: Failed to retrieve container files: {e}")
 
-        parsed_json = _extract_json(raw_text)
+        parsed_json = extract_json(raw_text)
         stop_reason = response.stop_reason or "unknown"
 
         if stop_reason == "max_tokens":
-            print(f"  WARNING: Output truncated (hit max_tokens limit)")
+            print("  WARNING: Output truncated (hit max_tokens limit)")
 
         return LLMResponse(
             raw_text=raw_text,
@@ -258,12 +263,15 @@ class OpenAIRunner:
             file = self.client.files.create(file=f, purpose="user_data")
         return file.id
 
+    # OpenAI's file_search tool requires files to be indexed in a vector store
+    # before querying. We create a temp store, add files, then poll until
+    # indexing completes (async on their end).
     def _create_vector_store(self, file_ids: list[str]) -> str:
         """Create a vector store with uploaded files for file_search."""
         vs = self.client.vector_stores.create(name="ib-bench-temp")
         for fid in file_ids:
             self.client.vector_stores.files.create(vector_store_id=vs.id, file_id=fid)
-        print("  Waiting for vector store indexing...")
+        print("Waiting for vector store indexing...")
         while True:
             vs_status = self.client.vector_stores.retrieve(vs.id)
             if vs_status.file_counts.completed == len(file_ids):
@@ -289,12 +297,13 @@ class OpenAIRunner:
 
         pdf_files = [f for f in files if f.suffix.lower() == ".pdf"]
         code_files = [f for f in files if f.suffix.lower() in [".xlsx", ".xls", ".csv"]]
+        # we've not implemented image input on run.py yet TODO
         image_files = [
             f for f in files if f.suffix.lower() in [".png", ".jpg", ".jpeg"]
         ]
 
         if pdf_files:
-            print(f"  Uploading {len(pdf_files)} PDF(s) for file search...")
+            print(f"Uploading {len(pdf_files)} PDF(s) for file search...")
             pdf_file_ids = []
             for pdf in pdf_files:
                 fid = self._upload_file(pdf)
@@ -310,7 +319,7 @@ class OpenAIRunner:
 
         code_file_ids = []
         if code_files:
-            print(f"  Uploading {len(code_files)} file(s) for code interpreter...")
+            print(f"Uploading {len(code_files)} file(s) for code interpreter...")
             for cf in code_files:
                 fid = self._upload_file(cf)
                 code_file_ids.append(fid)
@@ -325,7 +334,7 @@ class OpenAIRunner:
         input_content = []
 
         for img in image_files:
-            print(f"  Encoding {img.name} as base64...")
+            print(f"Encoding {img.name} as base64...")
             with open(img, "rb") as f:
                 img_data = base64.b64encode(f.read()).decode("utf-8")
             ext = img.suffix.lower().replace(".", "")
@@ -349,7 +358,7 @@ class OpenAIRunner:
         else:
             api_input = [{"role": "user", "content": input_content}]
 
-        print("  Running Responses API...")
+        print("Running Responses API...")
         content_filter_triggered = False
         try:
             response = self.client.responses.create(
@@ -367,7 +376,7 @@ class OpenAIRunner:
                 or "flagged" in error_str
                 or "usage policy" in error_str
             ):
-                print(f"  BLOCKED: Content filter triggered")
+                print("  BLOCKED: Content filter triggered")
                 content_filter_triggered = True
                 response = None
             else:
@@ -442,9 +451,9 @@ class OpenAIRunner:
         stop_reason = getattr(response, "stop_reason", None) or "unknown"
         if stop_reason == "length":
             stop_reason = "max_tokens"
-            print(f"  WARNING: Output truncated (hit max_tokens limit)")
+            print("  WARNING: Output truncated (hit max_tokens limit)")
 
-        parsed_json = _extract_json(response_text)
+        parsed_json = extract_json(response_text)
 
         return LLMResponse(
             raw_text=response_text.strip(),
@@ -484,7 +493,7 @@ class GeminiRunner:
 
     def _upload_file(self, path: Path) -> object:
         """Upload file to Gemini Files API."""
-        print(f"  Uploading {path.name} to Gemini Files API...")
+        print(f"Uploading {path.name} to Gemini Files API...")
         return self.client.files.upload(file=str(path))
 
     @retry_on_rate_limit(max_retries=3, initial_wait=60)
@@ -520,7 +529,7 @@ class GeminiRunner:
         except Exception as e:
             error_str = str(e).lower()
             if "safety" in error_str or "blocked" in error_str or "policy" in error_str:
-                print(f"  BLOCKED: Content filter triggered")
+                print("  BLOCKED: Content filter triggered")
                 content_filter_triggered = True
                 response = None
             else:
@@ -605,9 +614,9 @@ class GeminiRunner:
             if finish_reason:
                 stop_reason = str(finish_reason).lower().replace("finishreason.", "")
                 if stop_reason == "max_tokens":
-                    print(f"  WARNING: Output truncated (hit max_tokens limit)")
+                    print("  WARNING: Output truncated (hit max_tokens limit)")
 
-        parsed_json = _extract_json(response_text)
+        parsed_json = extract_json(response_text)
 
         return LLMResponse(
             raw_text=response_text.strip(),

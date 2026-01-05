@@ -13,7 +13,6 @@ from pathlib import Path
 from typing import Any, Callable
 
 import pytest
-import vcr
 import yaml
 
 # Add eval directory to path for imports
