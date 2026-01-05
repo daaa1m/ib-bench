@@ -20,7 +20,7 @@ uv run python eval/score.py RUN_ID --tasks e-001
 uv run python eval/score.py RUN_ID --rescore
 
 # Generate leaderboard
-uv run python eval/leaderboard.py
+uv run python eval/results/leaderboard.py
 
 # Export scripts (for frontend consumption)
 uv run python eval/export-scripts/export_leaderboard.py           # Export to tmp/
@@ -31,8 +31,8 @@ uv run python eval/export-scripts/export_task_results.py          # Export to tm
 uv run python eval/export-scripts/export_task_results.py output/  # Export to output/
 
 # Analyze a specific run
-uv run python eval/analyze.py MODEL/RUN_ID                        # Full dump
-uv run python eval/analyze.py MODEL/RUN_ID --compare MODEL2/RUN_ID2  # Compare runs
+uv run python eval/results/analyze.py MODEL/RUN_ID                        # Full dump
+uv run python eval/results/analyze.py MODEL/RUN_ID --compare MODEL2/RUN_ID2  # Compare runs
 
 # Run tests
 uv run pytest tests/ -v                         # All tests
@@ -191,11 +191,13 @@ Derived automatically from rubric criteria:
 
 ### Core Modules
 
-| Module              | Contents                                         |
-| ------------------- | ------------------------------------------------ |
-| `eval/helpers.py`   | Type definitions, task loading, utilities        |
-| `eval/runners.py`   | LLM provider runners (Anthropic, OpenAI, Gemini) |
-| `eval/llm_judge.py` | LLM-as-judge scorer for evaluation               |
+| Module                        | Contents                                         |
+| ----------------------------- | ------------------------------------------------ |
+| `eval/helpers.py`             | Type definitions, task loading, utilities        |
+| `eval/runners.py`             | LLM provider runners (Anthropic, OpenAI, Gemini) |
+| `eval/llm-judge/llm_judge.py` | LLM-as-judge scorer for evaluation               |
+| `eval/results/leaderboard.py` | Leaderboard generation and export                |
+| `eval/results/analyze.py`     | Run analysis and comparison                      |
 
 ### Model Runners
 
@@ -308,7 +310,7 @@ integration.
 
 ## Run Analysis
 
-`eval/analyze.py` provides detailed diagnostics for a single run:
+`eval/results/analyze.py` provides detailed diagnostics for a single run:
 
 - **Metadata**: model, provider, date, task counts
 - **Score Summary**: overall score, tier breakdown, credit counts
