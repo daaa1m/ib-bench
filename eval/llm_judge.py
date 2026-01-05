@@ -64,6 +64,8 @@ class LLMJudge:
         criteria_ids = list(criteria.keys())
         files_list = ", ".join(file_names)
 
+        # Escape braces: prompt.md files contain JSON output examples with {},
+        # which str.format() would interpret as placeholders
         return template.format(
             task_prompt=self._escape_braces(task_prompt),
             files_list=files_list,
