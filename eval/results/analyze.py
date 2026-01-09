@@ -138,14 +138,23 @@ def _load_all_runs_for_model(
     return config, sorted(results, key=lambda r: r.task_id)
 
 
+DIFFICULTY_MAP = {"e": "easy", "m": "medium", "h": "hard"}
+
+
+def get_difficulty(task_id: str) -> str:
+    """Get difficulty tier from task ID prefix."""
+    prefix = task_id.split("-")[0]
+    return DIFFICULTY_MAP.get(prefix, "unknown")
+
+
 def get_provider(model: str) -> str:
     """Infer provider from model name."""
     model_lower = model.lower()
     if "claude" in model_lower:
         return "anthropic"
-    elif "gpt" in model_lower or "o1" in model_lower:
+    if "gpt" in model_lower or "o1" in model_lower:
         return "openai"
-    elif "gemini" in model_lower:
+    if "gemini" in model_lower:
         return "google"
     return "unknown"
 
@@ -176,6 +185,17 @@ def print_header(title: str):
 def print_separator():
     """Print major separator."""
     print("\n" + "═" * 70)
+
+
+def calc_credits(task_results: list[TaskResult]) -> float:
+    """Calculate total credits from task results."""
+    credits = 0.0
+    for r in task_results:
+        if r.score_percent >= 100:
+            credits += 1.0
+        elif r.score_percent >= 50:
+            credits += 0.5
+    return credits
 
 
 def analyze_run(config: dict, results: list[TaskResult], total_tasks: int):
@@ -211,22 +231,11 @@ def analyze_run(config: dict, results: list[TaskResult], total_tasks: int):
     print_header("SCORE SUMMARY")
 
     # Group by difficulty
-    by_difficulty = {"easy": [], "medium": [], "hard": []}
+    by_difficulty: dict[str, list[TaskResult]] = {"easy": [], "medium": [], "hard": []}
     for r in results:
-        prefix = r.task_id.split("-")[0]
-        diff = {"e": "easy", "m": "medium", "h": "hard"}.get(prefix, "unknown")
+        diff = get_difficulty(r.task_id)
         if diff in by_difficulty:
             by_difficulty[diff].append(r)
-
-    # Calculate credits
-    def calc_credits(task_results):
-        credits = 0
-        for r in task_results:
-            if r.score_percent >= 100:
-                credits += 1.0
-            elif r.score_percent >= 50:
-                credits += 0.5
-        return credits
 
     # Count task totals per difficulty
     task_counts = {"easy": 0, "medium": 0, "hard": 0}
@@ -234,9 +243,8 @@ def analyze_run(config: dict, results: list[TaskResult], total_tasks: int):
     for task_path in tasks_dir.iterdir():
         if not task_path.is_dir() or task_path.name.startswith("_"):
             continue
-        prefix = task_path.name.split("-")[0]
-        diff = {"e": "easy", "m": "medium", "h": "hard"}.get(prefix)
-        if diff:
+        diff = get_difficulty(task_path.name)
+        if diff in task_counts:
             task_counts[diff] += 1
 
     # Calculate scores
@@ -368,7 +376,7 @@ def analyze_run(config: dict, results: list[TaskResult], total_tasks: int):
 
                 # Show expected vs actual for programmatic failures
                 if c.get("type") == "programmatic":
-                    actual = c.get("actual", "")
+                    actual = str(c.get("actual", ""))
                     if len(actual) > 60:
                         actual = actual[:60] + "..."
                     print(f'      Actual: "{actual}"')

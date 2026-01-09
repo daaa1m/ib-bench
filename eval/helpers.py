@@ -224,25 +224,43 @@ def get_rubric_hash(rubric: Rubric) -> str:
 
 def extract_json(text: str) -> dict[str, Any] | None:
     """Extract JSON object from response text."""
-    # Try direct parse first
     try:
         return json.loads(text.strip())
     except json.JSONDecodeError:
         pass
 
-    # Try to find JSON in code blocks
-    json_match = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.DOTALL)
-    if json_match:
+    code_block = re.search(r"```(?:json)?\s*(.*?)\s*```", text, re.DOTALL)
+    if code_block:
+        content = code_block.group(1)
         try:
-            return json.loads(json_match.group(1))
+            return json.loads(content)
         except json.JSONDecodeError:
-            pass
+            missing = content.count("{") - content.count("}")
+            if missing > 0:
+                try:
+                    return json.loads(content + "}" * missing)
+                except json.JSONDecodeError:
+                    pass
 
-    # Try to find raw JSON object
-    json_match = re.search(r"\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}", text, re.DOTALL)
-    if json_match:
+    start = text.find("{")
+    if start == -1:
+        return None
+
+    depth = 0
+    for i, char in enumerate(text[start:], start):
+        if char == "{":
+            depth += 1
+        elif char == "}":
+            depth -= 1
+            if depth == 0:
+                try:
+                    return json.loads(text[start : i + 1])
+                except json.JSONDecodeError:
+                    break
+
+    if depth > 0:
         try:
-            return json.loads(json_match.group(0))
+            return json.loads(text[start:] + "}" * depth)
         except json.JSONDecodeError:
             pass
 
@@ -386,15 +404,16 @@ def get_runner(provider: Provider, model: str):
     """
     from runners import AnthropicRunner, GeminiRunner, OpenAIRunner
 
-    if provider == "anthropic":
-        return AnthropicRunner(model=model)
-    elif provider == "openai":
-        return OpenAIRunner(model=model)
-    elif provider == "gemini":
-        return GeminiRunner(model=model)
-    # this catches errors if we add a new provider but forget to update here
-    else:
+    runners = {
+        "anthropic": AnthropicRunner,
+        "openai": OpenAIRunner,
+        "gemini": GeminiRunner,
+    }
+
+    runner_class = runners.get(provider)
+    if runner_class is None:
         raise ValueError(f"Unknown provider: {provider}")
+    return runner_class(model=model)
 
 
 def create_run_directory(model: str, base_dir: Path | None = None) -> Path:
@@ -426,23 +445,34 @@ def check_workbook_errors(xlsx_path: Path) -> tuple[bool, list[str]]:
     except Exception as e:
         return True, [f"Failed to open Excel file: {e}"]
 
-    errors = []
-    error_values = {"#REF!", "#VALUE!", "#NAME?", "#DIV/0!", "#NULL!", "#N/A", "#NUM!"}
+    try:
+        errors = []
+        error_values = {
+            "#REF!",
+            "#VALUE!",
+            "#NAME?",
+            "#DIV/0!",
+            "#NULL!",
+            "#N/A",
+            "#NUM!",
+        }
 
-    for sheet_name in wb.sheetnames:
-        ws = wb[sheet_name]
-        for row in ws.iter_rows():
-            for cell in row:
-                if cell.value in error_values:
-                    errors.append(f"{sheet_name}!{cell.coordinate}: {cell.value}")
+        for sheet_name in wb.sheetnames:
+            ws = wb[sheet_name]
+            for row in ws.iter_rows():
+                for cell in row:
+                    if cell.value in error_values:
+                        errors.append(f"{sheet_name}!{cell.coordinate}: {cell.value}")
 
-    return len(errors) > 0, errors
+        return len(errors) > 0, errors
+    finally:
+        wb.close()
 
 
 def check_cell_value(
     xlsx_path: Path,
     cell: str,
-    expected: float,
+    expected: float | str,
     sheet: str | None = None,
     tolerance: float = 0,
 ) -> tuple[bool, Any, str]:
@@ -451,9 +481,9 @@ def check_cell_value(
 
     :param xlsx_path: Path to Excel file
     :param cell: Cell reference (e.g., "A3", "B8")
-    :param expected: Expected numeric value
+    :param expected: Expected value (numeric with tolerance, or string for exact match)
     :param sheet: Sheet name (defaults to active sheet)
-    :param tolerance: Allowed difference (default 0 = exact match)
+    :param tolerance: Allowed difference for numeric (default 0 = exact match)
     :returns: (passed, actual_value, details)
 
     Does not handle: Named ranges, formulas (reads computed values only).
@@ -466,29 +496,158 @@ def check_cell_value(
         return False, None, f"Failed to open Excel file: {e}"
 
     try:
-        ws = wb[sheet] if sheet else wb.active
-    except KeyError:
-        return False, None, f"Sheet '{sheet}' not found"
+        try:
+            ws = wb[sheet] if sheet else wb.active
+        except KeyError:
+            return False, None, f"Sheet '{sheet}' not found"
 
-    if ws is None:
-        return False, None, "No active sheet found"
+        if ws is None:
+            return False, None, "No active sheet found"
 
-    actual = ws[cell].value
+        actual = ws[cell].value
 
-    if actual is None:
-        return False, None, f"Cell {cell} is empty"
+        if actual is None:
+            return False, None, f"Cell {cell} is empty"
+
+        # String comparison (case-insensitive)
+        if isinstance(expected, str):
+            actual_str = str(actual).strip()
+            expected_str = expected.strip()
+            passed = actual_str.upper() == expected_str.upper()
+            if passed:
+                details = f"Cell {cell} = '{actual_str}' (expected '{expected_str}')"
+            else:
+                details = f"Cell {cell} = '{actual_str}', expected '{expected_str}'"
+            return passed, actual_str, details
+
+        # Numeric comparison
+        try:
+            actual_num = float(actual)
+        except (TypeError, ValueError):
+            return False, actual, f"Cell {cell} is not numeric: {actual}"
+
+        diff = abs(actual_num - expected)
+        passed = diff <= tolerance
+
+        if passed:
+            details = f"Cell {cell} = {actual_num} (expected {expected})"
+        else:
+            details = f"Cell {cell} = {actual_num}, expected {expected} (diff: {diff})"
+
+        return passed, actual_num, details
+    finally:
+        wb.close()
+
+
+BLUE_RGB = "0000FF"
+GREEN_RGB = "00FF00"
+RED_RGB = "FF0000"
+BLUE_THEME_INDICES = {4, 5}
+GREEN_THEME_INDICES = {6, 9}
+RED_THEME_INDICES = {1, 2}
+
+
+def _is_font_color(font, rgb_suffix: str, theme_indices: set[int]) -> bool:
+    """Check if font matches a color by RGB suffix or theme index."""
+    if font.color is None:
+        return False
+    if font.color.rgb and str(font.color.rgb).upper().endswith(rgb_suffix):
+        return True
+    return font.color.theme in theme_indices
+
+
+def _is_blue(font) -> bool:
+    return _is_font_color(font, BLUE_RGB, BLUE_THEME_INDICES)
+
+
+def _is_green(font) -> bool:
+    return _is_font_color(font, GREEN_RGB, GREEN_THEME_INDICES)
+
+
+def _is_red(font) -> bool:
+    return _is_font_color(font, RED_RGB, RED_THEME_INDICES)
+
+
+def _has_external_workbook_ref(formula: str) -> bool:
+    """Detect [workbook.xlsx]Sheet!Cell syntax."""
+    if not formula or not isinstance(formula, str):
+        return False
+    return "[" in formula and "]" in formula
+
+
+def _has_cross_sheet_ref(formula: str) -> bool:
+    """Detect Sheet!Cell syntax (same workbook, different sheet)."""
+    if not formula or not isinstance(formula, str):
+        return False
+    return "!" in formula and not _has_external_workbook_ref(formula)
+
+
+def check_formatting_conventions(
+    xlsx_path: Path,
+    cells: list[str] | None = None,
+    sheet: str | None = None,
+) -> tuple[bool, list[str]]:
+    """
+    Check IB Excel formatting conventions:
+    - Blue: hardcoded numbers
+    - Green: cross-sheet refs (same workbook)
+    - Red: external workbook refs
+    """
+    import openpyxl
 
     try:
-        actual_num = float(actual)
-    except (TypeError, ValueError):
-        return False, actual, f"Cell {cell} is not numeric: {actual}"
+        wb = openpyxl.load_workbook(xlsx_path, data_only=False)
+    except Exception as e:
+        return False, [f"Failed to open Excel file: {e}"]
 
-    diff = abs(actual_num - expected)
-    passed = diff <= tolerance
+    try:
+        try:
+            ws = wb[sheet] if sheet else wb.active
+        except KeyError:
+            return False, [f"Sheet '{sheet}' not found"]
 
-    if passed:
-        details = f"Cell {cell} = {actual_num} (expected {expected})"
-    else:
-        details = f"Cell {cell} = {actual_num}, expected {expected} (diff: {diff})"
+        if ws is None:
+            return False, ["No active sheet found"]
 
-    return passed, actual_num, details
+        violations: list[str] = []
+
+        def check_cell(cell):
+            val = cell.value
+            font = cell.font
+
+            if val is None:
+                return
+
+            is_formula = isinstance(val, str) and val.startswith("=")
+
+            if is_formula:
+                if _has_external_workbook_ref(val) and not _is_red(font):
+                    violations.append(
+                        f"{cell.coordinate}: external workbook ref should be red"
+                    )
+                elif _has_cross_sheet_ref(val) and not _is_green(font):
+                    violations.append(
+                        f"{cell.coordinate}: cross-sheet ref should be green"
+                    )
+            else:
+                if isinstance(val, (int, float)) and not _is_blue(font):
+                    violations.append(
+                        f"{cell.coordinate}: hardcoded number should be blue"
+                    )
+
+        if cells:
+            for cell_ref in cells:
+                if ":" in cell_ref:
+                    for row in ws[cell_ref]:
+                        for cell in row if hasattr(row, "__iter__") else [row]:
+                            check_cell(cell)
+                else:
+                    check_cell(ws[cell_ref])
+        else:
+            for row in ws.iter_rows():
+                for cell in row:
+                    check_cell(cell)
+
+        return len(violations) == 0, violations
+    finally:
+        wb.close()

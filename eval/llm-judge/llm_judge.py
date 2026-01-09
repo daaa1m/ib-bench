@@ -87,14 +87,16 @@ class LLMJudge:
         for block in response.content:
             if hasattr(block, "text") and block.text:
                 text_blocks.append(block.text)
-            if hasattr(block, "type") and block.type == "code_execution_result":
-                if hasattr(block, "content"):
-                    for item in block.content:
-                        if hasattr(item, "stdout") and item.stdout:
-                            text_blocks.append(item.stdout)
-                        elif hasattr(item, "text") and item.text:
-                            text_blocks.append(item.text)
+            elif hasattr(block, "type") and block.type == "code_execution_result":
+                for item in getattr(block, "content", []):
+                    stdout = getattr(item, "stdout", None)
+                    text = getattr(item, "text", None)
+                    if stdout:
+                        text_blocks.append(stdout)
+                    elif text:
+                        text_blocks.append(text)
 
+        # Prioritize blocks containing JSON scores
         for text in text_blocks:
             if '{"scores"' in text or '"scores":' in text:
                 return text
@@ -209,19 +211,21 @@ class LLMJudge:
         """
         Upload files, call the judge API, and return response text.
 
-        :param source_files: List of source document paths
+        :param source_files: List of source document paths (can be empty for web tasks)
         :param prompt: The evaluation prompt
         :returns: Raw response text from the judge
 
         Handles file upload/cleanup. Files are deleted after the call.
         """
         file_objects = []
-        print(f"  Uploading {len(source_files)} file(s) to Files API for judging...")
-
-        for source_file in source_files:
-            with open(source_file, "rb") as f:
-                file_obj = self.client.beta.files.upload(file=f)
-                file_objects.append(file_obj)
+        if source_files:
+            print(
+                f"  Uploading {len(source_files)} file(s) to Files API for judging..."
+            )
+            for source_file in source_files:
+                with open(source_file, "rb") as f:
+                    file_obj = self.client.beta.files.upload(file=f)
+                    file_objects.append(file_obj)
 
         content: list[dict[str, Any]] = [
             {"type": "container_upload", "file_id": fo.id} for fo in file_objects
