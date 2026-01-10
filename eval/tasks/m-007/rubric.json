@@ -1,0 +1,77 @@
+{
+  "task_id": "m-007",
+  "version": "1.2",
+  "total_points": 110,
+  "criteria": {
+    "formatting": {
+      "description": "IB formatting conventions: blue for hardcoded numbers, green for cross-sheet refs, red for external workbook refs",
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "sheet": "Mgmt Return Analysis",
+      "points": 10
+    },
+    "mgmt_equity_15x": {
+      "description": "Management equity at 15x should be ~249 (rollover only, no sweet equity)",
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "valid_patterns": ["24[5-9]|25[0-3]"],
+      "points": 10
+    },
+    "mgmt_equity_15_5x": {
+      "description": "Management equity at 15.5x should be ~259 (rollover only, no sweet equity)",
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "valid_patterns": ["25[5-9]|26[0-3]"],
+      "points": 10
+    },
+    "mgmt_equity_16x": {
+      "description": "Management equity at 16x should be ~449 (sweet equity kicks in: rollover ~269 + sweet ~180)",
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "valid_patterns": ["44[5-9]|45[0-3]"],
+      "points": 15
+    },
+    "mgmt_equity_16_5x": {
+      "description": "Management equity at 16.5x should be ~469",
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "valid_patterns": ["46[5-9]|47[0-3]"],
+      "points": 10
+    },
+    "mgmt_equity_17x": {
+      "description": "Management equity at 17x should be ~490",
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "valid_patterns": ["48[5-9]|49[0-4]"],
+      "points": 10
+    },
+    "mgmt_equity_17_5x": {
+      "description": "Management equity at 17.5x should be ~510",
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "valid_patterns": ["50[5-9]|51[0-4]"],
+      "points": 10
+    },
+    "mgmt_equity_18x": {
+      "description": "Management equity at 18x should be ~530",
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "valid_patterns": ["52[5-9]|53[0-4]"],
+      "points": 10
+    },
+    "mgmt_equity_18_5x": {
+      "description": "Management equity at 18.5x should be ~550",
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "valid_patterns": ["54[5-9]|55[0-4]"],
+      "points": 10
+    },
+    "mgmt_equity_19x": {
+      "description": "Management equity at 19x should be ~570",
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "valid_patterns": ["56[5-9]|57[0-4]"],
+      "points": 15
+    }
+  }
+}

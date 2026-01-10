@@ -2,7 +2,6 @@
 Shared fixtures and configuration for all tests.
 
 This module provides:
-- VCR configuration for integration tests
 - Mock response factories for API runners
 - Sample task/rubric fixtures for unit and mock tests
 """
@@ -20,37 +19,6 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "eval"))
 
 from helpers import Task
 from runners import LLMResponse, OutputFile
-
-
-# =============================================================================
-# VCR Configuration (for integration tests)
-# =============================================================================
-
-
-@pytest.fixture(scope="module")
-def vcr_config():
-    """VCR configuration for recording/replaying API calls."""
-    return {
-        "filter_headers": [
-            ("authorization", "REDACTED"),
-            ("x-api-key", "REDACTED"),
-            ("api-key", "REDACTED"),
-        ],
-        "filter_post_data_parameters": [
-            ("api_key", "REDACTED"),
-        ],
-        "record_mode": "once",  # Record once, replay forever
-        "match_on": ["method", "scheme", "host", "port", "path"],
-        "cassette_library_dir": str(
-            Path(__file__).parent / "integration" / "cassettes"
-        ),
-    }
-
-
-@pytest.fixture(scope="module")
-def vcr_cassette_dir():
-    """Directory for VCR cassettes."""
-    return str(Path(__file__).parent / "integration" / "cassettes")
 
 
 # =============================================================================
@@ -350,14 +318,3 @@ def mock_gemini_response(mocker):
 
     return _make_response
 
-
-# =============================================================================
-# Test Markers Configuration
-# =============================================================================
-
-
-def pytest_configure(config):
-    """Register custom markers."""
-    config.addinivalue_line("markers", "live: mark test as requiring live API access")
-    config.addinivalue_line("markers", "vcr: mark test as using VCR cassettes")
-    config.addinivalue_line("markers", "slow: mark test as slow running")

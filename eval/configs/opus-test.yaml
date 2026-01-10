@@ -1,6 +1,15 @@
-# Test Claude Opus 4.5 on ready tasks
+# Test Claude Opus 4.5 on remaining ready tasks
 provider: anthropic
 model: claude-opus-4-5-20251101
 tasks:
-  - e-001
-parallel: 1
+  - e-011
+  - e-012
+  - e-014
+  - e-016
+  - e-017
+  - e-018
+  - e-019
+  - m-003
+  - m-005
+  - m-008
+parallel: 3

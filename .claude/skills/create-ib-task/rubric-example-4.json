@@ -1,0 +1,65 @@
+{
+  "task_id": "m-001",
+  "version": "1.1",
+  "total_points": 110,
+  "criteria": {
+    "formatting": {
+      "description": "IB formatting conventions: blue for hardcoded numbers, green for cross-sheet refs, red for external workbook refs",
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "sheet": "Marine DCF",
+      "points": 10
+    },
+    "k8_value": {
+      "description": "Cell K8 must equal 1572 (EBITDA from LQA)",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "cell": "K8",
+      "expected": 1572,
+      "tolerance": 1,
+      "sheet": "Marine DCF",
+      "points": 20,
+      "gates_llm": true
+    },
+    "l2_value": {
+      "description": "Cell L2 must equal 1 (first projection year indicator)",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "cell": "L2",
+      "expected": 1,
+      "tolerance": 0,
+      "sheet": "Marine DCF",
+      "points": 15
+    },
+    "k17_value": {
+      "description": "Cell K17 must equal 12",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "cell": "K17",
+      "expected": 12,
+      "tolerance": 1,
+      "sheet": "Marine DCF",
+      "points": 15
+    },
+    "k20_value": {
+      "description": "Cell K20 must equal -240",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "cell": "K20",
+      "expected": -240,
+      "tolerance": 1,
+      "sheet": "Marine DCF",
+      "points": 20
+    },
+    "e27_value": {
+      "description": "Cell E27 (DCF valuation result) must equal 5864",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "cell": "E27",
+      "expected": 5864,
+      "tolerance": 1,
+      "sheet": "Marine DCF",
+      "points": 30
+    }
+  }
+}

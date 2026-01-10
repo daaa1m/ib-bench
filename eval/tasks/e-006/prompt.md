@@ -52,12 +52,20 @@ Negative Constraints:
 - DO NOT change the debt amortization schedule logic
 - NO conversational filler
 
+## Formatting Requirements
+
+Apply standard IB Excel formatting conventions to all cells you modify:
+
+- **Blue font**: Hardcoded numbers (values you type directly)
+- **Green font**: Formulas referencing another sheet in the same workbook
+- **Red font**: Formulas referencing an external workbook
+
 ## Output Format
 
 You must provide TWO outputs:
 
 **1. Modified Excel File**: Save and return the modified Excel workbook with
-circularity implemented and the circularity switch turned ON.
+circularity implemented, circularity switch turned ON, and IB formatting conventions applied.
 
 **2. JSON Summary**: After implementing changes, report the Total Cash Interest
 values from row 164 (with circularity ON). Provide as a raw JSON object with the

@@ -1,1 +1,27 @@
-// check error in copying model historical financials. use homemade GOOG model
+# yaml-language-server: $schema=../../schema/meta.schema.json
+
+task:
+  id: m-003
+  title: "Build LBO model from scratch for Reverse Logistics Group"
+  type: creating
+  category:
+    - financial-analysis
+  input_type: excel
+  description:
+    "Complete modelling test: build functional LBO model for RLG including
+    5-year operating forecast (2021-2025), valuation with EV-to-Equity bridge,
+    Sources & Uses, MOIC/IRR calculations with Year 5 exit, and return
+    sensitivity tables. Evaluated on functionality, assumptions, completion,
+    and accuracy. LLM judge task - outputs compared against golden solution."
+
+prompt:
+  notes:
+    "All instructions embedded in prompt (PDF not uploaded to save compute).
+    LLM given input Excel with RLG financials. Complex task with multiple valid
+    approaches - scored by LLM judge against golden solution."
+
+input:
+  input-file-original: "$human/Modelling-Test.xlsx"
+  notes:
+    "Input Excel contains RLG historical financials. Golden solution provided
+    separately for judge reference."

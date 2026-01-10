@@ -4,66 +4,40 @@ IB-bench is an LLM benchmark for testing investment banking analyst tasks (Excel
 modeling, document analysis, data extraction). Inspired by SWE-bench but focused
 on IB-specific work.
 
-## Commands
+## Core Development Rules
 
-All Python scripts must be run with `uv run`:
+- NEVER run a script with an API call, namely eval/run.py or eval/score.py (with
+  an LLM judge) without specific instructions from the user
 
-```bash
-# Run evaluation (config file required)
-uv run python eval/run.py --config configs/quick-test.yaml
-uv run python eval/run.py --config configs/full-easy.yaml
-uv run python eval/run.py --config configs/quick-test.yaml --resume MODEL/RUN_ID
+## Package Management
 
-# Score responses from a run
-uv run python eval/score.py RUN_ID
-uv run python eval/score.py RUN_ID --tasks e-001
-uv run python eval/score.py RUN_ID --rescore
+- Always run scripts using: `uv run script.py`
+- Always add packages using: `uv add package`
+- Upgrading: `uv add --dev package --upgrade-package package`
+- Running tools: `uv run tool`
+- FORBIDDEN: `uv pip install`, `@latest` syntax
 
-# Generate leaderboard
-uv run python eval/results/leaderboard.py
+### Testing framework
 
-# Export scripts (for frontend consumption)
-uv run python eval/export-scripts/export_leaderboard.py           # Export to tmp/
-uv run python eval/export-scripts/export_leaderboard.py output/   # Export to output/
-uv run python eval/export-scripts/export_tasks.py                 # Export to tmp/
-uv run python eval/export-scripts/export_tasks.py output/         # Export to output/
-uv run python eval/export-scripts/export_task_results.py          # Export to tmp/
-uv run python eval/export-scripts/export_task_results.py output/  # Export to output/
+- Framework `uv run pytest`
+- Test after a big change in code and before pushing to origin
+- Async testing: use anyio, not asyncio
+- Coverage: test edge cases and errors
+- New features require tests
+- Bug fixes require regression tests
 
-# Analyze a specific run
-uv run python eval/results/analyze.py MODEL/RUN_ID                        # Full dump
-uv run python eval/results/analyze.py MODEL/RUN_ID --compare MODEL2/RUN_ID2  # Compare runs
+### Notification System
 
-# Run tests
-uv run pytest tests/ -v                         # All tests
-uv run pytest tests/unit/ -v                    # Unit tests (no I/O)
-uv run pytest tests/mock/ -v                    # Mock API tests
-uv run pytest tests/mock/test_anthropic_runner.py -v  # Specific file
-```
-
-### Config Files
-
-Config files live in `eval/configs/` and use YAML format. See `run.schema.yaml`
-for full documentation.
-
-```yaml
-# eval/configs/quick-test.yaml
-provider: anthropic # Required: anthropic | openai | gemini
-model: claude-sonnet-4-20250514 # Required: model identifier
-tasks: # Required: task list OR filter
-  - e-001
-  - e-002
-parallel: 1 # Optional: concurrent tasks (default: 1)
-```
-
-Alternative using filter:
-
-```yaml
-provider: anthropic
-model: claude-sonnet-4-20250514
-filter: e- # Run all easy tasks (e-001, e-002, ...)
-parallel: 5
-```
+- If you a complete a task, or encounter an error, or need my input use the
+  notify via Telegram MCP with
+  - type: completed | waiting | error | info
+  - task: brief description
+  - details: what was done
+  - nextSteps: what you need from me (if anything)
+- Only send a Telegram notification for when the task takes longer than 3
+  minutes - do not send notifications for quick tasks or routine completions
+- NEVER push to main `git push origin main` without explicit permission from the
+  user
 
 ## Architecture
 
@@ -169,7 +143,8 @@ Rubrics are self-describing - evaluation type is derived from criteria types:
 **Key fields:**
 
 - `type`: `"programmatic"` or `"llm_judge"` (determines evaluation method)
-- `match_type`: For programmatic - `"substring_one_of"` or `"regex_pattern"`
+- `match_type`: For programmatic - `"substring_one_of"`, `"regex_pattern"`,
+  `"excel_cell_value"`, or `"excel_formatting"`
 - `points`: Score weight for this criterion
 - `gates_llm`: If `true` and this criterion fails, LLM criteria are skipped
   (saves cost). Only use when rubric has LLM judge criteria.
@@ -180,6 +155,39 @@ Rubrics are self-describing - evaluation type is derived from criteria types:
 - **LLM-judge criteria**: Can be evaluation dimensions (e.g.,
   `summary_synthesis`, `summary_drivers`) that assess qualities of an output
   field like `summary`
+
+**Excel-specific match types:**
+
+```json
+{
+  "cell_check": {
+    "type": "programmatic",
+    "match_type": "excel_cell_value",
+    "cell": "K8",
+    "expected": 1572,
+    "tolerance": 1,
+    "sheet": "Marine DCF",
+    "points": 20
+  },
+  "formatting": {
+    "type": "programmatic",
+    "match_type": "excel_formatting",
+    "sheet": "LBO",
+    "points": 10
+  }
+}
+```
+
+**IB Formatting Conventions** (checked by `excel_formatting`):
+
+- **Blue font**: Hardcoded numbers (values typed directly)
+- **Green font**: Formulas referencing another sheet in the same workbook
+- **Red font**: Formulas referencing an external workbook
+
+**Excel scoring limitation:** Code execution environments (Claude, OpenAI,
+Gemini) save Excel files without recalculating formulas. If the model's output
+Excel shows `#VALUE!` errors but formulas are correct, prefer scoring via JSON
+output using `regex_pattern` match type instead of `excel_cell_value`.
 
 ### Evaluation Types
 
@@ -324,42 +332,10 @@ Use `--compare` to see score deltas between two runs.
 
 ### Creating Tasks
 
-Use `.claude/skills/create-ib-task.md`:
+Use `.claude/skills/create-ib-task/SKILL.md`:
 
 1. Populate `meta.yaml` with task details and expected answer
 2. Run the skill to generate `prompt.md` and `rubric.json`
 
 The skill ensures criterion IDs match JSON output keys and proper point
 allocation.
-
-### Reviewing Tasks
-
-Use `.claude/skills/review-ib-task.md` to validate task quality:
-
-- Structural completeness (all required files exist)
-- Criterion ID alignment between prompt and rubric
-- Rubric quality (points sum, accepted_values variants)
-- Prompt quality (all required sections)
-- Category-input consistency
-- Expected answer traceability
-- Overall coherence
-
-### Notifications
-
-When you complete a task, encounter an error, or need my input, use the notify
-via Telegram tool with:
-
-- type: completed | waiting | error | info
-- task: brief description
-- details: what was done
-- nextSteps: what you need from me (if anything)
-
-Only send a Telegram notification when:
-
-- A task takes longer than 2-3 minutes
-- You're blocked and waiting for my input
-- An error occurs that stops progress
-
-Don't notify for quick tasks or routine completions.
-
-Don't forget to send a notification.

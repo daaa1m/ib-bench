@@ -1,0 +1,73 @@
+{
+  "task_id": "m-003",
+  "rubric_hash": "85f1a812",
+  "scored_at": "2026-01-07T06:52:09.903308",
+  "passed": false,
+  "total_points": 110,
+  "points_earned": 28.5,
+  "score_percent": 25.90909090909091,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "formatting",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "points": 10,
+      "points_earned": 10,
+      "actual": [],
+      "details": "Formatting conventions followed"
+    },
+    {
+      "id": "model_functionality",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 0.0,
+      "actual": "0.00",
+      "details": "Score: 0.00 - No Excel model file was provided. The analyst only submitted JSON output with summary numbers. The task explicitly required building a functional LBO model from scratch with working formulas and proper linkages. Without an actual model file, there are no formulas to evaluate, no cell references to check, and no way to assess functionality. This is a complete failure to deliver the core deliverable."
+    },
+    {
+      "id": "operating_forecast",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 6.0,
+      "actual": "0.30",
+      "details": "Score: 0.30 - Only two summary numbers provided (2025 revenue: \u20ac227.4m, 2025 EBITDA: \u20ac31.0m) with no supporting detail. No year-by-year forecast for 2021-2024, no segment-level projections despite input data having four segments (AMS Europe, ECS Europe, Americas & Asia, Others), no cost structure breakdown, and no margin analysis. The implied 6.6% revenue CAGR and 13.6% 2025 EBITDA margin are plausible but cannot be verified. Major deficiency - attempted but completely insufficient."
+    },
+    {
+      "id": "transaction_structure",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 0.0,
+      "actual": "0.00",
+      "details": "Score: 0.00 - No Sources & Uses table provided. Only an entry equity value of \u20ac138.5m is stated, which appears incorrect (should be ~\u20ac168m based on 10x multiple on \u20ac18.6m EBITDA less \u20ac17.4m net debt). No debt structure details, no transaction fees, no financing breakdown, no EV-to-Equity bridge shown. Cannot determine leverage multiple or debt/equity split. Complete failure to provide this critical component of an LBO model."
+    },
+    {
+      "id": "returns_analysis",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 25,
+      "points_earned": 12.5,
+      "actual": "0.50",
+      "details": "Score: 0.50 - IRR of 15.8% and MOIC of 2.09x are provided and are mathematically consistent with each other over a 5-year hold period. However, these cannot be verified without seeing the underlying model, cash flow assumptions, debt paydown schedule, or exit calculation. The entry equity value of \u20ac138.5m appears understated by ~\u20ac30m, which would significantly impact returns if corrected. Numbers are in a reasonable range for PE deals but lack any supporting detail or verification. Meets absolute minimum threshold as a starting point only."
+    },
+    {
+      "id": "sensitivity_analysis",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 0.0,
+      "actual": "0.00",
+      "details": "Score: 0.00 - No sensitivity tables provided whatsoever. The task explicitly required two meaningful sensitivity tables showing IRR impact from key variables such as entry/exit multiples, revenue growth, or margins. This is completely missing. The investment thesis mentions risks but provides no quantitative sensitivity analysis. Complete failure on this requirement."
+    }
+  ],
+  "judge": "claude-sonnet-4-5-20250929"
+}

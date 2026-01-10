@@ -1,0 +1,77 @@
+{
+  "task_id": "e-006",
+  "rubric_hash": "90282b04",
+  "scored_at": "2026-01-07T07:27:59.670408",
+  "passed": true,
+  "total_points": 110,
+  "points_earned": 100,
+  "score_percent": 90.9090909090909,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "formatting",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "points": 10,
+      "points_earned": 0,
+      "actual": [
+        "F5: hardcoded number should be blue",
+        "F198: hardcoded number should be blue",
+        "J198: hardcoded number should be blue"
+      ],
+      "details": "Formatting violations: F5: hardcoded number should be blue; F198: hardcoded number should be blue; J198: hardcoded number should be blue"
+    },
+    {
+      "id": "K164",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 20,
+      "points_earned": 20,
+      "actual": "-112",
+      "details": "Found '-112' in response"
+    },
+    {
+      "id": "L164",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 20,
+      "points_earned": 20,
+      "actual": "-102",
+      "details": "Found '-102' in response"
+    },
+    {
+      "id": "M164",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 20,
+      "points_earned": 20,
+      "actual": "-98",
+      "details": "Found '-98' in response"
+    },
+    {
+      "id": "N164",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 20,
+      "points_earned": 20,
+      "actual": "-92",
+      "details": "Found '-92' in response"
+    },
+    {
+      "id": "O164",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 20,
+      "points_earned": 20,
+      "actual": "-83",
+      "details": "Found '-83' in response"
+    }
+  ],
+  "judge": "claude-sonnet-4-5-20250929"
+}

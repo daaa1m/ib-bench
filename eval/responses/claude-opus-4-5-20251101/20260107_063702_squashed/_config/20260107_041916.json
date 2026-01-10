@@ -1,0 +1,17 @@
+{
+  "provider": "anthropic",
+  "model": "claude-opus-4-5-20251101",
+  "task_ids": [
+    "m-004"
+  ],
+  "parallel": 3,
+  "config_file": "configs/opus-test.yaml",
+  "started_at": "2026-01-07T04:19:16.653764",
+  "completed_at": "2026-01-07T04:20:16.587715",
+  "results_summary": [
+    {
+      "task_id": "m-004",
+      "status": "success"
+    }
+  ]
+}

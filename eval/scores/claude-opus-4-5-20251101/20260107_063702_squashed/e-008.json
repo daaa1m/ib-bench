@@ -1,0 +1,63 @@
+{
+  "task_id": "e-008",
+  "rubric_hash": "9240d228",
+  "scored_at": "2026-01-07T07:26:25.881125",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "key_themes",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 30,
+      "points_earned": 0,
+      "actual": "0.00",
+      "details": "Criterion not scored by judge"
+    },
+    {
+      "id": "business_drivers",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 25,
+      "points_earned": 0,
+      "actual": "0.00",
+      "details": "Criterion not scored by judge"
+    },
+    {
+      "id": "trends_and_outlook",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 25,
+      "points_earned": 0,
+      "actual": "0.00",
+      "details": "Criterion not scored by judge"
+    },
+    {
+      "id": "risk_factors",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 0,
+      "actual": "0.00",
+      "details": "Criterion not scored by judge"
+    },
+    {
+      "id": "accuracy",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 0,
+      "actual": "0.00",
+      "details": "Criterion not scored by judge"
+    }
+  ],
+  "judge": "claude-sonnet-4-5-20250929"
+}

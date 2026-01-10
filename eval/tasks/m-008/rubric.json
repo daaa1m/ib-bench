@@ -1,0 +1,66 @@
+{
+  "task_id": "m-008",
+  "version": "1.0",
+  "total_points": 100,
+  "criteria": {
+    "thesis_quality": {
+      "description": "Investment thesis is compelling, specific to this company, and supported by data from the materials",
+      "type": "llm_judge",
+      "core_concepts": [
+        "specific to company",
+        "supported by data",
+        "compelling narrative",
+        "value drivers identified",
+        "growth story clear"
+      ],
+      "points": 25
+    },
+    "risk_identification": {
+      "description": "Key risks are correctly identified, appropriately prioritized, and include realistic mitigants",
+      "type": "llm_judge",
+      "core_concepts": [
+        "major risks identified",
+        "severity appropriate",
+        "specific to deal",
+        "mitigants realistic",
+        "not generic"
+      ],
+      "points": 25
+    },
+    "valuation_judgment": {
+      "description": "Valuation view is reasonable for the sector/situation with appropriate rationale and consideration of deal dynamics",
+      "type": "llm_judge",
+      "core_concepts": [
+        "reasonable multiple",
+        "sector-appropriate",
+        "rationale provided",
+        "considers deal dynamics"
+      ],
+      "points": 15
+    },
+    "projection_critique": {
+      "description": "Management projections are critically assessed with specific concerns or validations rather than generic acceptance",
+      "type": "llm_judge",
+      "core_concepts": [
+        "critical assessment",
+        "specific concerns",
+        "revenue growth evaluated",
+        "margin assumptions questioned",
+        "not blindly accepting"
+      ],
+      "points": 15
+    },
+    "actionability": {
+      "description": "Diligence items are specific and actionable, recommendation is clear with supporting rationale",
+      "type": "llm_judge",
+      "core_concepts": [
+        "specific diligence items",
+        "actionable questions",
+        "clear recommendation",
+        "rationale supports conclusion",
+        "IC-ready"
+      ],
+      "points": 20
+    }
+  }
+}

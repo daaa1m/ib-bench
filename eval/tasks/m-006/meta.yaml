@@ -1,1 +1,26 @@
-// build out model drivers, w assumptions and business assessment. justifiy each assumption. use WMT / Albertsons model
+# yaml-language-server: $schema=../../schema/meta.schema.json
+
+task:
+  id: m-006
+  title: "Find and fix three errors in EuropeCo LBO model"
+  type: fix-error
+  category:
+    - financial-analysis
+  input_type: excel
+  description: >
+    Audit EuropeCo LBO model containing 3 intentional errors. LLM must find all
+    three errors, explain each issue, and fix the model. Expected correct values
+    after fix: L166 (MOIC) = 2.3, L156 (EoP cash) = 27.7, L164 (Exit EqV) =
+    339.5. Tests systematic model auditing skills.
+
+prompt:
+  notes: >
+    Model has 3 errors causing balance sheet break and incorrect returns. LLM
+    must identify error locations as cell references, explain fixes, and return
+    corrected model.
+
+input:
+  input-file-original: "$human/EuropeCo-LBO.xlsx"
+  notes: >
+    EuropeCo LBO model with 3 errors introduced. Broken values visible in
+    returns section - MOIC shows 0.99x instead of 2.3x.

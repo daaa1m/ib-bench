@@ -1,8 +1,14 @@
 {
   "task_id": "e-006",
-  "version": "1.0",
-  "total_points": 100,
+  "version": "1.1",
+  "total_points": 110,
   "criteria": {
+    "formatting": {
+      "description": "IB formatting conventions: blue for hardcoded numbers, green for cross-sheet refs, red for external workbook refs",
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "points": 10
+    },
     "K164": {
       "description": "Total Cash Interest in K164 must equal -112 (with circularity ON)",
       "type": "programmatic",

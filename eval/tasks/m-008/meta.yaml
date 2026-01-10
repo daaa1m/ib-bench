@@ -1,4 +1,29 @@
-// extraction/pdf+excel - Populate 3-statement model from 10-K
-// provide: empty model template with structure, company 10-K
-// LLM must extract 3 years of historicals and input into correct cells
-// tests: reading comprehension, cell mapping, ensuring statements balance
+# yaml-language-server: $schema=../../schema/meta.schema.json
+
+task:
+  id: m-008
+  title: "Write PE investment memo from case study materials"
+  type: summarise
+  category:
+    - financial-analysis
+    - document-review
+  input_type: pdf
+  description:
+    "Complete the qualitative portion of a PE case study. Given background
+    materials on a healthcare analytics company (Project Iceberg), write a
+    1-page investment memo covering investment thesis, key risks, valuation
+    view, and diligence priorities. Tests LLM's ability to synthesize financial
+    information into actionable investment recommendations."
+
+prompt:
+  notes:
+    "LLM given case study background PDF with company info and financials.
+    Must produce investment memo suitable for IC discussion. Scored by LLM
+    judge on thesis quality, risk identification, and actionability."
+
+input:
+  input-file-original:
+    - "$human/real-data/TPG - Case Study Background.pdf"
+  notes:
+    "TPG case study materials for Project Iceberg (healthcare I&A company).
+    Contains company description, historical financials, and deal parameters."

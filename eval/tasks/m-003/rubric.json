@@ -1,0 +1,76 @@
+{
+  "task_id": "m-003",
+  "version": "1.2",
+  "total_points": 110,
+  "criteria": {
+    "formatting": {
+      "description": "IB formatting conventions: blue for hardcoded numbers, green for cross-sheet refs, red for external workbook refs",
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "points": 10
+    },
+    "model_functionality": {
+      "description": "Model is functional with working formulas, proper linkages between sections, and no circular reference errors or broken formulas",
+      "type": "llm_judge",
+      "core_concepts": [
+        "working formulas",
+        "linked sections",
+        "no errors",
+        "calculations flow correctly",
+        "inputs drive outputs"
+      ],
+      "points": 20
+    },
+    "operating_forecast": {
+      "description": "5-year operating forecast (2021-2025) with reasonable revenue growth by segment, appropriate cost structure, and EBITDA margins consistent with golden solution range",
+      "type": "llm_judge",
+      "core_concepts": [
+        "5-year forecast",
+        "segment revenue growth",
+        "Europe AMS ~7%",
+        "Europe ECS ~5%",
+        "Americas Asia higher growth",
+        "variable vs fixed costs",
+        "EBITDA margin progression"
+      ],
+      "points": 20
+    },
+    "transaction_structure": {
+      "description": "Complete Sources & Uses table with reasonable debt levels, proper EV-to-Equity bridge, and transaction fees",
+      "type": "llm_judge",
+      "core_concepts": [
+        "sources and uses balance",
+        "debt financing",
+        "equity contribution",
+        "EV to equity bridge",
+        "transaction fees",
+        "leverage ratios"
+      ],
+      "points": 20
+    },
+    "returns_analysis": {
+      "description": "Correct IRR and MOIC calculations based on Year 5 exit, with values in reasonable range compared to golden solution",
+      "type": "llm_judge",
+      "core_concepts": [
+        "IRR calculation",
+        "MOIC calculation",
+        "Year 5 exit",
+        "exit equity value",
+        "returns in reasonable range"
+      ],
+      "points": 25
+    },
+    "sensitivity_analysis": {
+      "description": "Two meaningful sensitivity tables showing IRR impact from key variables (entry/exit multiple, growth, margins)",
+      "type": "llm_judge",
+      "core_concepts": [
+        "two sensitivity tables",
+        "IRR sensitivities",
+        "entry multiple sensitivity",
+        "exit multiple sensitivity",
+        "data tables functional"
+      ],
+      "points": 15
+    }
+  }
+}
