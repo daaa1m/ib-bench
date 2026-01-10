@@ -3,64 +3,94 @@
   "version": "1.0",
   "total_points": 100,
   "criteria": {
-    "thesis_quality": {
-      "description": "Investment thesis is compelling, specific to this company, and supported by data from the materials",
+    "executive_summary": {
+      "description": "Executive summary is IC-ready: concise, prioritized, and clearly states the recommended stance",
       "type": "llm_judge",
       "core_concepts": [
-        "specific to company",
-        "supported by data",
-        "compelling narrative",
-        "value drivers identified",
-        "growth story clear"
+        "4-6 crisp bullets",
+        "states Invest/Pass/Conditional",
+        "highlights 2-3 key drivers",
+        "mentions valuation / entry level",
+        "mentions key risks",
+        "not a slide-by-slide recap"
       ],
-      "points": 25
+      "points": 10
     },
-    "risk_identification": {
-      "description": "Key risks are correctly identified, appropriately prioritized, and include realistic mitigants",
+    "state_of_company": {
+      "description": "Accurately summarizes the company’s current state and the drivers of underperformance as presented in the activist deck",
       "type": "llm_judge",
       "core_concepts": [
-        "major risks identified",
-        "severity appropriate",
-        "specific to deal",
-        "mitigants realistic",
-        "not generic"
-      ],
-      "points": 25
-    },
-    "valuation_judgment": {
-      "description": "Valuation view is reasonable for the sector/situation with appropriate rationale and consideration of deal dynamics",
-      "type": "llm_judge",
-      "core_concepts": [
-        "reasonable multiple",
-        "sector-appropriate",
-        "rationale provided",
-        "considers deal dynamics"
+        "underperformance framing",
+        "where problems are concentrated (segments/geographies)",
+        "references specific evidence from deck (e.g., margins, volumes, TSR)",
+        "separates symptoms vs root causes",
+        "uses correct timeframes (LTM/NTM/long-term)"
       ],
       "points": 15
     },
-    "projection_critique": {
-      "description": "Management projections are critically assessed with specific concerns or validations rather than generic acceptance",
+    "activist_thesis": {
+      "description": "Explains the activist’s thesis clearly, including the key claims and supporting evidence from the presentation",
       "type": "llm_judge",
       "core_concepts": [
-        "critical assessment",
-        "specific concerns",
-        "revenue growth evaluated",
-        "margin assumptions questioned",
-        "not blindly accepting"
+        "clear articulation of what’s wrong",
+        "why prior strategy failed",
+        "uses deck-specific claims",
+        "distinguishes beverages vs foods issues",
+        "credible linkage to value creation"
       ],
       "points": 15
     },
-    "actionability": {
-      "description": "Diligence items are specific and actionable, recommendation is clear with supporting rationale",
+    "value_creation_plan": {
+      "description": "Value creation initiatives are actionable, logically connected to outcomes, and supported by deck evidence",
       "type": "llm_judge",
       "core_concepts": [
-        "specific diligence items",
-        "actionable questions",
-        "clear recommendation",
-        "rationale supports conclusion",
-        "IC-ready"
+        "at least 4 initiatives",
+        "initiative -> mechanism -> outcome",
+        "operational and/or portfolio actions",
+        "execution sequencing or milestones",
+        "evidence anchored to deck",
+        "acknowledges feasibility and tradeoffs"
+      ],
+      "points": 15
+    },
+    "valuation_recommendation": {
+      "description": "Provides a clear invest/pass recommendation with an explicit entry valuation/multiple and a defensible margin-of-safety framework consistent with deck valuation discussion",
+      "type": "llm_judge",
+      "core_concepts": [
+        "clear stance (Invest/Pass/Conditional)",
+        "explicit recommended entry multiple or valuation range",
+        "ties to deck’s multiple framework (e.g., NTM P/E vs peers/history)",
+        "addresses post-stake price move",
+        "upside framing tied to initiatives",
+        "downside framing and conditions to invest"
       ],
       "points": 20
+    },
+    "risk_assessment": {
+      "description": "Identifies key risks and execution challenges with realistic mitigants/signposts, grounded in issues raised by the deck",
+      "type": "llm_judge",
+      "core_concepts": [
+        "at least 5 risks",
+        "execution risk (timing/complexity)",
+        "strategic risk (portfolio choices)",
+        "operational risk (SKU complexity, bottling/franchise structure)",
+        "governance / credibility risk",
+        "mitigants or signposts"
+      ],
+      "points": 20
+    },
+    "presentation_quality": {
+      "description": "Overall work product quality: structured, specific, and professional; uses only the deck as a source and avoids unsupported claims",
+      "type": "llm_judge",
+      "core_concepts": [
+        "clean structure and headings",
+        "specific not generic",
+        "consistent units and timeframes",
+        "no external sources or post-deck facts",
+        "actionable and senior-readable",
+        "clear open questions"
+      ],
+      "points": 5
     }
   }
 }
