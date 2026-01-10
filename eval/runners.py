@@ -512,48 +512,27 @@ class OpenAIRunner:
             for item in response.output:
                 item_type = getattr(item, "type", None)
                 if item_type == "code_interpreter_call":
-                    item_container_id = getattr(item, "container_id", None)
-                    print(f"  DEBUG code_interpreter container_id: {item_container_id}")
-                    if item_container_id:
-                        try:
-                            container_files_resp = self.client.containers.files.list(
-                                container_id=item_container_id
-                            )
-                            print(
-                                f"  DEBUG container files count: {len(container_files_resp.data)}"
-                            )
-                            for cf in container_files_resp.data:
-                                cf_id = getattr(cf, "id", None)
-                                if not cf_id:
-                                    continue
-                                try:
-                                    file_info = self.client.containers.files.retrieve(
-                                        cf_id, container_id=item_container_id
+                    # Use outputs list (not container listing) to get only generated files
+                    outputs = getattr(item, "outputs", None) or []
+                    for output in outputs:
+                        files_list = getattr(output, "files", None) or []
+                        for f in files_list:
+                            try:
+                                print(f"  Downloading output file: {f.name}")
+                                file_content = self.client.files.content(f.file_id)
+                                output_files.append(
+                                    OutputFile(
+                                        filename=f.name,
+                                        content=cast(bytes, _read_file_content(file_content)),
+                                        mime_type=getattr(
+                                            f,
+                                            "mime_type",
+                                            "application/octet-stream",
+                                        ),
                                     )
-                                    filename = getattr(
-                                        file_info, "filename", None
-                                    ) or getattr(file_info, "name", f"output_{cf_id}")
-                                    print(f"  Downloading output file: {filename}")
-                                    file_content = (
-                                        self.client.containers.files.content.retrieve(
-                                            cf_id, container_id=item_container_id
-                                        )
-                                    )
-                                    output_files.append(
-                                        OutputFile(
-                                            filename=filename,
-                                            content=cast(bytes, _read_file_content(file_content)),
-                                            mime_type=getattr(
-                                                file_info,
-                                                "mime_type",
-                                                "application/octet-stream",
-                                            ),
-                                        )
-                                    )
-                                except Exception as e:
-                                    print(f"  Warning: Failed to download {cf_id}: {e}")
-                        except Exception as e:
-                            print(f"  Warning: Failed to list container files: {e}")
+                                )
+                            except Exception as e:
+                                print(f"  Warning: Failed to download file {f.name}: {e}")
 
         usage = response.usage
         input_tokens = usage.input_tokens if usage else 0
