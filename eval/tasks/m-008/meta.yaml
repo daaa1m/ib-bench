@@ -2,28 +2,31 @@
 
 task:
   id: m-008
-  title: "Write PE investment memo from case study materials"
+  title: "Analyze activist presentation and recommend co-investment (PepsiCo)"
   type: summarise
   category:
-    - financial-analysis
     - document-review
-  input_type: pdf
-  description:
-    "Complete the qualitative portion of a PE case study. Given background
-    materials on a healthcare analytics company (Project Iceberg), write a
-    1-page investment memo covering investment thesis, key risks, valuation
-    view, and diligence priorities. Tests LLM's ability to synthesize financial
-    information into actionable investment recommendations."
+    - due-diligence
+    - financial-analysis
+  input_type: web
+  description: >
+    Review an activist investor presentation on PepsiCo and produce an IC-ready
+    summary of (1) the company’s current state, (2) the activist’s key claims
+    and proposed initiatives, (3) the value creation opportunity and valuation
+    implications, and (4) key risks. The output must include a clear
+    recommendation on whether to invest alongside the activist and, if
+    investing, at what valuation / entry multiple given the stock has moved
+    after the stake reveal.
 
 prompt:
-  notes:
-    "LLM given case study background PDF with company info and financials.
-    Must produce investment memo suitable for IC discussion. Scored by LLM
-    judge on thesis quality, risk identification, and actionability."
+  notes: >
+    The only permitted source is Elliott’s "Perspectives on PepsiCo"
+    presentation hosted at
+    https://elliottletters.com/wp-content/uploads/Elliotts-Perspectives-on-PepsiCo-Presentation.pdf.
+    The LLM must NOT use any other sources. Rubric is purely LLM-judged and
+    emphasizes professional presentation quality (structure, clarity,
+    specificity, and actionability) plus valuation recommendation and risks.
 
 input:
-  input-file-original:
-    - "$human/real-data/TPG - Case Study Background.pdf"
-  notes:
-    "TPG case study materials for Project Iceberg (healthcare I&A company).
-    Contains company description, historical financials, and deal parameters."
+  input-file-original: null
+  notes: None

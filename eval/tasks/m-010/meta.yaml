@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/meta.schema.json
+
+task:
+  id: m-010
+  title: "Update equity model with 3Q25 actuals (Moody's)"
+  type: creating
+  category:
+    - financial-analysis
+    - data-extraction
+  input_type: multi
+  description: >
+    Update an existing equity research-style model that currently contains 3Q25E
+    estimates so it reflects 3Q25 actual reported results from the provided 3Q25
+    10-Q. The model updates are confined to the 3Q25 column in each statement:
+    column BT in the Segments tab, column BO in the IS tab, and column BB in the
+    BS & CFS tab. Tests the ability to extract the correct figures from a filing,
+    map them into an existing model structure, preserve formulas and formatting,
+    and ensure the model balances (e.g., Total Assets equals Total Liabilities +
+    Equity).
+
+prompt:
+  notes: >
+    The model is already built; only the 3Q25 column needs to be updated from
+    estimates to actuals using the attached 3Q25 10-Q. The LLM must preserve the
+    model structure, keep formulas intact where appropriate, apply IB formatting,
+    and verify the balance sheet ties after the update.
+
+input:
+  input-file-original: null
+  notes: >
+    Task includes two attached inputs in the task folder:
+    - input-1.xlsx: the equity model containing 3Q25E columns to update
+    - input-2.pdf: the 3Q25 10-Q used as the source of actuals

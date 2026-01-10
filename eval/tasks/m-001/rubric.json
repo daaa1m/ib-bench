@@ -1,7 +1,7 @@
 {
   "task_id": "m-001",
   "version": "1.2",
-  "total_points": 110,
+  "total_points": 100,
   "criteria": {
     "formatting": {
       "description": "IB formatting conventions: blue for hardcoded numbers, green for cross-sheet refs, red for external workbook refs",
@@ -18,7 +18,7 @@
       "expected": 1572,
       "tolerance": 1,
       "sheet": "Marine DCF",
-      "points": 20
+      "points": 18
     },
     "l2_value": {
       "description": "Cell L2 must equal 1 (first projection year indicator)",
@@ -28,7 +28,7 @@
       "expected": 1,
       "tolerance": 0,
       "sheet": "Marine DCF",
-      "points": 15
+      "points": 14
     },
     "k17_value": {
       "description": "Cell K17 must equal 12",
@@ -38,7 +38,7 @@
       "expected": 12,
       "tolerance": 1,
       "sheet": "Marine DCF",
-      "points": 15
+      "points": 14
     },
     "k20_value": {
       "description": "Cell K20 must equal -240",
@@ -48,7 +48,7 @@
       "expected": -240,
       "tolerance": 1,
       "sheet": "Marine DCF",
-      "points": 20
+      "points": 18
     },
     "e27_value": {
       "description": "Cell E27 (DCF valuation result) must equal 5864",
@@ -58,7 +58,7 @@
       "expected": 5864,
       "tolerance": 1,
       "sheet": "Marine DCF",
-      "points": 30
+      "points": 26
     }
   }
 }

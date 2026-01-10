@@ -1,0 +1,123 @@
+{
+  "task_id": "m-010",
+  "version": "1.0",
+  "total_points": 100,
+  "criteria": {
+    "formatting_segments": {
+      "description": "IB formatting conventions applied to modified cells in Segments 3Q25 column",
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "sheet": "Segments",
+      "cells": ["BT1:BT300"],
+      "points": 4
+    },
+    "formatting_is": {
+      "description": "IB formatting conventions applied to modified cells in IS 3Q25 column",
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "sheet": "IS",
+      "cells": ["BO1:BO250"],
+      "points": 3
+    },
+    "formatting_bs_cfs": {
+      "description": "IB formatting conventions applied to modified cells in BS & CFS 3Q25 column",
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "sheet": "BS & CFS",
+      "cells": ["BB1:BB250"],
+      "points": 3
+    },
+    "segments_total_revenue_bt150": {
+      "description": "Segments total revenue for 3Q25 matches reported actuals",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["2007", "2,007"],
+      "points": 18,
+      "gates_llm": true
+    },
+    "segments_mis_revenue_bt31": {
+      "description": "Segments MIS (ratings) revenue for 3Q25 matches reported actuals",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["1098", "1,098"],
+      "points": 14
+    },
+    "segments_ma_revenue_bt95": {
+      "description": "Segments MA revenue for 3Q25 matches reported actuals",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["909"],
+      "points": 9
+    },
+    "is_net_income_bo62": {
+      "description": "Income statement GAAP net income attributable to company for 3Q25 matches reported actuals",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["646"],
+      "points": 9
+    },
+    "is_interest_expense_net_bo54": {
+      "description": "Income statement interest expense, net for 3Q25 matches reported actuals (negative)",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["-58", "(58)"],
+      "points": 5
+    },
+    "bs_cash_bb10": {
+      "description": "Balance sheet cash and cash equivalents for 3Q25 matches reported actuals",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["2181", "2,181"],
+      "points": 5
+    },
+    "bs_total_assets_bb21": {
+      "description": "Balance sheet total assets for 3Q25 matches reported actuals",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["15415", "15,415"],
+      "points": 5
+    },
+    "bs_total_liabilities_bb36": {
+      "description": "Balance sheet total liabilities for 3Q25 matches reported actuals",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["11303", "11,303"],
+      "points": 4
+    },
+    "bs_total_equity_bb38": {
+      "description": "Balance sheet total shareholders' equity for 3Q25 matches reported actuals",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["4112", "4,112"],
+      "points": 4
+    },
+    "bs_total_debt_bb31": {
+      "description": "Balance sheet total debt for 3Q25 matches reported actuals",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["6983", "6,983"],
+      "points": 4
+    },
+    "bs_balance_sheet_ties": {
+      "description": "Balance sheet ties after update (Total Assets equals Total Liabilities and Equity)",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["true"],
+      "points": 9,
+      "gates_llm": true
+    },
+    "reasoning_steps": {
+      "description": "Reasoning steps clearly describe how actuals were sourced from the 10-Q, mapped into the correct columns, and validated (ties/checks)",
+      "type": "llm_judge",
+      "core_concepts": [
+        "3Q25 actuals",
+        "10-Q sourcing",
+        "updated columns BT/BO/BB",
+        "balance sheet ties",
+        "revenue ties",
+        "no structural changes"
+      ],
+      "points": 4
+    }
+  }
+}
