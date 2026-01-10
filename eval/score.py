@@ -34,6 +34,7 @@ from helpers import (
     Task,
     build_error_report,
     check_cell_value,
+    check_formatting_conventions,
     extract_task_section,
     get_rubric_hash,
     load_tasks,
@@ -182,6 +183,40 @@ def _evaluate_excel_cell(
     return passed, actual, details, expected
 
 
+def _evaluate_excel_formatting(
+    criterion: RubricCriterion,
+    output_files: list[str] | None,
+    run_dir: Path | None,
+) -> tuple[bool, Any, str, dict[str, Any]]:
+    cells = criterion.get("cells")
+    sheet = criterion.get("sheet")
+    expected: dict[str, Any] = {"cells": cells, "sheet": sheet}
+
+    if not output_files or not run_dir:
+        return False, None, "No output files available for formatting check", expected
+
+    xlsx_files = [f for f in output_files if f.endswith(".xlsx")]
+    if not xlsx_files:
+        return False, None, "No xlsx output file found", expected
+
+    xlsx_path = run_dir / xlsx_files[0]
+    if not xlsx_path.exists():
+        return False, None, f"Output file not found: {xlsx_path}", expected
+
+    passed, violations = check_formatting_conventions(
+        xlsx_path, cells=cells, sheet=sheet
+    )
+
+    if passed:
+        details = "Formatting conventions followed"
+    else:
+        details = f"Formatting violations: {'; '.join(violations[:5])}"
+        if len(violations) > 5:
+            details += f" (+{len(violations) - 5} more)"
+
+    return passed, violations, details, expected
+
+
 def _evaluate_programmatic_criteria(
     parsed_response: dict[str, Any],
     criteria: dict[str, RubricCriterion],
@@ -213,6 +248,11 @@ def _evaluate_programmatic_criteria(
 
         if match_type == "excel_cell_value":
             passed, actual_value, details, expected = _evaluate_excel_cell(
+                criterion, output_files, run_dir
+            )
+
+        elif match_type == "excel_formatting":
+            passed, actual_value, details, expected = _evaluate_excel_formatting(
                 criterion, output_files, run_dir
             )
 
@@ -322,8 +362,30 @@ def get_evaluation_type(rubric: Rubric) -> EvalType:
         return "hybrid"
     elif has_llm:
         return "llm"
-    else:
-        return "programmatic"
+    return "programmatic"
+
+
+def _build_skipped_llm_criteria(
+    criteria: dict[str, RubricCriterion],
+    criterion_type: str,
+    actual: str,
+    details: str,
+) -> list[CriterionResult]:
+    """Build CriterionResult list for skipped LLM criteria."""
+    return [
+        CriterionResult(
+            criterion_id=cid,
+            passed=False,
+            criterion_type=criterion_type,
+            match_type="llm_judge",
+            expected=criterion.get("core_concepts", []),
+            actual=actual,
+            details=details,
+            points=criterion.get("points", 0),
+            points_earned=0,
+        )
+        for cid, criterion in criteria.items()
+    ]
 
 
 def score_task(
@@ -378,23 +440,14 @@ def score_task(
         if gate_failed:
             llm_gated = True
             print("  LLM evaluation GATED - programmatic gate criteria failed")
-            for criterion_id, criterion in llm_criteria.items():
-                results.append(
-                    CriterionResult(
-                        criterion_id=criterion_id,
-                        passed=False,
-                        criterion_type="llm_judge",
-                        match_type="llm_judge",
-                        expected=criterion.get("core_concepts", []),
-                        actual="[SKIPPED - gated]",
-                        details="Skipped due to programmatic gate failure",
-                        points=criterion.get("points", 0),
-                        points_earned=0,
-                    )
-                )
+            results.extend(_build_skipped_llm_criteria(
+                llm_criteria, "llm_judge", "[SKIPPED - gated]",
+                "Skipped due to programmatic gate failure"
+            ))
         elif human_judge:
             print("  Generating human judge templates...")
             for criterion_id, criterion in llm_criteria.items():
+                points = criterion.get("points", 0)
                 results.append(
                     CriterionResult(
                         criterion_id=criterion_id,
@@ -403,27 +456,17 @@ def score_task(
                         match_type="human_judge",
                         expected=criterion.get("description", ""),
                         actual="[PENDING]",
-                        details=f"Human scoring required. Points: {criterion.get('points', 0)}",
-                        points=criterion.get("points", 0),
+                        details=f"Human scoring required. Points: {points}",
+                        points=points,
                         points_earned=0,
                     )
                 )
         elif not judge:
             print("  LLM evaluation SKIPPED - no judge provided")
-            for criterion_id, criterion in llm_criteria.items():
-                results.append(
-                    CriterionResult(
-                        criterion_id=criterion_id,
-                        passed=False,
-                        criterion_type="llm_judge",
-                        match_type="llm_judge",
-                        expected=criterion.get("core_concepts", []),
-                        actual="[SKIPPED - no judge]",
-                        details="Skipped - no LLM judge provided",
-                        points=criterion.get("points", 0),
-                        points_earned=0,
-                    )
-                )
+            results.extend(_build_skipped_llm_criteria(
+                llm_criteria, "llm_judge", "[SKIPPED - no judge]",
+                "Skipped - no LLM judge provided"
+            ))
         else:
             llm_results = score_llm_criteria(task, parsed_response, llm_criteria, judge)
             results.extend(llm_results)
@@ -458,14 +501,6 @@ def score_llm_criteria(
     source_files = [
         f for f in task.input_files if f.suffix in [".pdf", ".xlsx", ".xls"]
     ]
-    # to be explicit, we expect LLM Judge to always need an input to refer to
-    # LLMJudge is never asked to judge a no-input-file task
-    # might need to change if input task is all web-based
-    if not source_files:
-        raise ValueError(
-            f"Task {task.id} has LLM judge criteria but no source document (PDF/Excel). "
-            "Check task configuration."
-        )
 
     llm_rubric = cast(Rubric, {"criteria": criteria})
     response_text = json.dumps(parsed_response, indent=2)
@@ -800,11 +835,10 @@ def score_run(responses_dir: Path, scores_dir: Path, args):
             print(
                 f"    [{icon}] {type_tag} {result.criterion_id}: {result.details} ({result.points_earned:.1f}/{result.points:.1f})"
             )
-            if not result.passed and result.actual != "[SKIPPED - gated]":
+            if not result.passed and result.actual not in (None, "[SKIPPED - gated]"):
+                actual_str = str(result.actual)
                 actual_preview = (
-                    result.actual[:80] + "..."
-                    if len(result.actual) > 80
-                    else result.actual
+                    actual_str[:80] + "..." if len(actual_str) > 80 else actual_str
                 )
                 print(f"        Actual: {actual_preview}")
 
