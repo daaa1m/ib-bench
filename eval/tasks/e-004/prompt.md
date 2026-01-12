@@ -52,7 +52,8 @@ Negative Constraints:
 Provide your response as a raw JSON object with the following keys. Do not
 include any markdown formatting, backticks, or preamble.
 
-`{
+```json
+{
   "gaap_operating_income": "GAAP operating income in millions USD",
   "non_gaap_operating_income": "Non-GAAP operating income in millions USD",
   "adjustments": [
@@ -60,4 +61,5 @@ include any markdown formatting, backticks, or preamble.
     {"name": "Second adjustment line item", "amount": "Amount in millions USD"},
     "... include all reconciling line items"
   ]
-}`
+}
+```

@@ -58,4 +58,17 @@ all errors fixed and IB formatting conventions applied.
 object with the following keys. Do not include any markdown formatting,
 backticks, or preamble.
 
-`{   "reasoning_steps": "Brief explanation of how you identified the errors",   "error_1_location": "Cell or range where first error was found",   "error_1_fix": "Description of what was wrong and how you fixed it",   "error_2_location": "Cell or range where second error was found",   "error_2_fix": "Description of what was wrong and how you fixed it",   "error_3_location": "Cell or range where third error was found",   "error_3_fix": "Description of what was wrong and how you fixed it",   "l166_moic": "Value in cell L166 (MOIC) after fixes",   "l156_eop_cash": "Value in cell L156 (EoP cash) after fixes",   "l164_exit_equity": "Value in cell L164 (Exit equity) after fixes" }`
+```json
+{
+  "reasoning_steps": "Brief explanation of how you identified the errors",
+  "error_1_location": "Cell or range where first error was found",
+  "error_1_fix": "Description of what was wrong and how you fixed it",
+  "error_2_location": "Cell or range where second error was found",
+  "error_2_fix": "Description of what was wrong and how you fixed it",
+  "error_3_location": "Cell or range where third error was found",
+  "error_3_fix": "Description of what was wrong and how you fixed it",
+  "l166_moic": "Value in cell L166 (MOIC) after fixes",
+  "l156_eop_cash": "Value in cell L156 (EoP cash) after fixes",
+  "l164_exit_equity": "Value in cell L164 (Exit equity) after fixes"
+}
+```

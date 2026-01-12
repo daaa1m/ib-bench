@@ -97,7 +97,8 @@ following the formatting conventions above.
 **2. JSON Summary**: Provide your response as a raw JSON object with the
 following keys. Do not include any markdown formatting, backticks, or preamble.
 
-`{
+```json
+{
   "entry_ev_multiple": "Your proposed entry EV/EBITDA multiple",
   "entry_equity_value": "Total equity investment required (in millions)",
   "exit_ev_multiple": "Assumed exit EV/EBITDA multiple",
@@ -106,4 +107,5 @@ following keys. Do not include any markdown formatting, backticks, or preamble.
   "revenue_2025": "Projected 2025 revenue (in millions)",
   "ebitda_2025": "Projected 2025 EBITDA (in millions)",
   "investment_thesis": "2-3 sentence summary of why this is/isn't an attractive investment"
-}`
+}
+```

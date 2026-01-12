@@ -49,10 +49,12 @@ Negative Constraints:
 Provide your response as a raw JSON object with the following keys. Do not
 include any markdown formatting, backticks, or preamble.
 
-`{
+```json
+{
   "error_location": "The specific cell reference(s) or row(s) where the misalignment occurs",
   "current_value": "The current incorrect period label or formula",
   "corrected_value": "The corrected period label or formula",
   "quarterly_sum_check": "Verification that quarterly data sums to annual totals (PASS/FAIL with details)",
   "explanation": "A concise explanation of the period alignment error and why the fix resolves it"
-}`
+}
+```

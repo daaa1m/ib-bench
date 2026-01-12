@@ -1,2 +1,28 @@
-// given a sample<D-F20> LBO model and memo, LLM is asked to generate another
-one on a public company
+# yaml-language-server: $schema=../../schema/meta.schema.json
+
+task:
+  id: h-001
+  title: "Update WildBrain model for new revenue segmentation"
+  type: creating
+  category:
+    - financial-analysis
+    - data-extraction
+  input_type: excel
+  description: >
+    Update a WildBrain model that is three years out of date and reflects a
+    legacy revenue segmentation. Refresh the Quarterly data, update RevBuild
+    Calcs and related FS/Debt calcs, and roll the changes through P&L, BS & CFS,
+    Output, and Summary while keeping the model balanced. Tests ability to update
+    multi-sheet models with changed segment definitions and maintain integrity.
+
+prompt:
+  notes: >
+    input.xlsx contains the outdated WildBrain model. Update all sheets except
+    Reference, reconcile the new segmentation, and return the updated workbook
+    with a JSON summary.
+
+input:
+  input-file-original: null
+  notes: >
+    Task folder includes input.xlsx (outdated WildBrain model) with multiple
+    sheets, including Reference (do not edit).

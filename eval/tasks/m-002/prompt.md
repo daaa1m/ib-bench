@@ -51,4 +51,15 @@ changes applied to the Marine DCF sheet.
    following keys. Do not include any markdown formatting, backticks, or
    preamble.
 
-`{   "reasoning_steps": "Step-by-step explanation of how you sourced and updated the data",   "lqa_label": "The value you set in cell G2",   "aq31_value": "The value in cell AQ31 after update",   "aq60_value": "Total Assets value in AQ60",   "aq83_value": "Total L&SE value in AQ83",   "aq93_value": "The value in cell AQ93 after update",   "aq112_value": "The value in cell AQ112 after update",   "model_balanced": true }`
+```json
+{
+  "reasoning_steps": "Step-by-step explanation of how you sourced and updated the data",
+  "lqa_label": "The value you set in cell G2",
+  "aq31_value": "The value in cell AQ31 after update",
+  "aq60_value": "Total Assets value in AQ60",
+  "aq83_value": "Total L&SE value in AQ83",
+  "aq93_value": "The value in cell AQ93 after update",
+  "aq112_value": "The value in cell AQ112 after update",
+  "model_balanced": true
+}
+```

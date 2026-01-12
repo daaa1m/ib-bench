@@ -88,7 +88,8 @@ Provide a clear recommendation:
 Provide your response as a raw JSON object with the following keys. Do not
 include any markdown formatting, backticks, or preamble.
 
-`{
+```json
+{
   "investment_thesis": "3-4 sentence summary of why this is attractive",
   "key_risks": [
     {"risk": "Risk description", "severity": "High/Medium/Low", "mitigation": "How to address"},
@@ -100,4 +101,5 @@ include any markdown formatting, backticks, or preamble.
   "top_diligence_items": ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"],
   "recommendation": "Proceed/Pass/Conditional",
   "recommendation_rationale": "2-3 sentences supporting your recommendation"
-}`
+}
+```

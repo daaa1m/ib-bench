@@ -30,7 +30,9 @@ Negative Constraints:
 
 Provide your response as a raw JSON object with the following keys. Do not include any markdown formatting, backticks, or preamble.
 
-`{
+```json
+{
   "reasoning": "Your analysis process - how you identified key points, what you prioritized and why",
   "summary": "The summary in flowing prose paragraphs. Use your best judgement on the appropriate length."
-}`
+}
+```

@@ -45,7 +45,8 @@ Negative Constraints:
 Provide your response as a raw JSON object with the following keys. Do not include
 any markdown formatting, backticks, or preamble.
 
-`{
+```json
+{
   "top_5_risks": [
     {
       "rank": 1,
@@ -57,4 +58,5 @@ any markdown formatting, backticks, or preamble.
   ],
   "prioritization_rationale": "Brief explanation of why these 5 risks were selected and how they were ranked",
   "methodology_notes": "Brief description of how you identified and prioritized the risks"
-}`
+}
+```

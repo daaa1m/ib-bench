@@ -1,0 +1,43 @@
+{
+  "task_id": "h-001",
+  "version": "1.0",
+  "total_points": 100,
+  "criteria": {
+    "quarterly_updates": {
+      "description": "Quarterly sheet is updated for the latest three years with correct values and segmentation",
+      "type": "human_judge",
+      "points": 20,
+      "scoring_guide": "1.0 = all relevant quarterly rows updated correctly; 0.5 = partial or minor errors; 0 = missing/incorrect updates"
+    },
+    "revbuild_segmentation_updates": {
+      "description": "RevBuild Calcs reflects the new revenue segmentation and feeds the model correctly",
+      "type": "human_judge",
+      "points": 25,
+      "scoring_guide": "1.0 = segmentation change correctly implemented and flows through; 0.5 = partial mapping or linkage issues; 0 = not updated"
+    },
+    "financial_statements_updates": {
+      "description": "P&L and BS & CFS (including FS/Debt calcs) are updated and consistent with the new segmentation",
+      "type": "human_judge",
+      "points": 25,
+      "scoring_guide": "1.0 = statements updated and internally consistent; 0.5 = partial updates or inconsistencies; 0 = missing/incorrect"
+    },
+    "output_summary_updates": {
+      "description": "Output and Summary sheets reflect the updated model results",
+      "type": "human_judge",
+      "points": 15,
+      "scoring_guide": "1.0 = output/summary refreshed correctly; 0.5 = partial refresh; 0 = not updated"
+    },
+    "model_integrity_checks": {
+      "description": "Model ties and reconciliation checks are validated after updates",
+      "type": "human_judge",
+      "points": 10,
+      "scoring_guide": "1.0 = ties/reconciliations explicitly confirmed; 0.5 = partial checks; 0 = no validation"
+    },
+    "formatting": {
+      "description": "IB formatting conventions and existing model style are followed for modified cells",
+      "type": "human_judge",
+      "points": 5,
+      "scoring_guide": "1.0 = formatting consistent and correct; 0.5 = minor issues; 0 = incorrect formatting"
+    }
+  }
+}

@@ -64,4 +64,19 @@ For each company, provide:
 Provide your response as a raw JSON object with the following keys. Do not
 include any markdown formatting, backticks, or preamble.
 
-`{   "methodology": "Brief description of search approach and sources used",   "targets": [     {       "company_name": "Company legal name",       "headquarters": "City, Country",       "estimated_revenue": "€XXM-€XXXM or specific estimate",       "key_products": "Primary product categories",       "ownership": "PE sponsor name or Family/Founder-owned",       "rationale": "Why this is a relevant target"     }   ],   "data_limitations": "Note any limitations in data availability or confidence level" }`
+```json
+{
+  "methodology": "Brief description of search approach and sources used",
+  "targets": [
+    {
+      "company_name": "Company legal name",
+      "headquarters": "City, Country",
+      "estimated_revenue": "€XXM-€XXXM or specific estimate",
+      "key_products": "Primary product categories",
+      "ownership": "PE sponsor name or Family/Founder-owned",
+      "rationale": "Why this is a relevant target"
+    }
+  ],
+  "data_limitations": "Note any limitations in data availability or confidence level"
+}
+```

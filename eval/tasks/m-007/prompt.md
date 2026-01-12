@@ -63,7 +63,8 @@ changes applied to the Mgmt Return Analysis sheet, following the formatting conv
 JSON object with the following keys. Do not include any markdown formatting,
 backticks, or preamble.
 
-`{
+```json
+{
   "mgmt_equity_15x": "Management equity value at exit for 15.0x multiple",
   "mgmt_equity_15_5x": "Management equity value at exit for 15.5x multiple",
   "mgmt_equity_16x": "Management equity value at exit for 16.0x multiple",
@@ -73,4 +74,5 @@ backticks, or preamble.
   "mgmt_equity_18x": "Management equity value at exit for 18.0x multiple",
   "mgmt_equity_18_5x": "Management equity value at exit for 18.5x multiple",
   "mgmt_equity_19x": "Management equity value at exit for 19.0x multiple"
-}`
+}
+```
