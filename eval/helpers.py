@@ -38,6 +38,7 @@ class RubricCriterion(TypedDict, total=False):
     gates_llm: bool
     search_full_response: bool
     core_concepts: list[str]
+    scoring_guide: str
 
 
 class Rubric(TypedDict, total=False):

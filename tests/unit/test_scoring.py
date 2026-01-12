@@ -187,6 +187,21 @@ class TestGetEvaluationType:
         }
         assert get_evaluation_type(rubric) == "hybrid"
 
+    def test_human_only(self):
+        """Rubric with only human_judge criteria."""
+        rubric = {"criteria": {"quality": {"type": "human_judge", "points": 100}}}
+        assert get_evaluation_type(rubric) == "human"
+
+    def test_programmatic_and_human(self):
+        """Rubric with programmatic + human_judge criteria."""
+        rubric = {
+            "criteria": {
+                "check1": {"type": "programmatic", "match_type": "substring_one_of"},
+                "quality": {"type": "human_judge", "points": 20},
+            }
+        }
+        assert get_evaluation_type(rubric) == "hybrid"
+
     def test_empty_criteria(self):
         """Empty criteria defaults to programmatic."""
         rubric = {"criteria": {}}
@@ -411,3 +426,66 @@ class TestScoreTask:
         assert score.passed is True
         assert score.points_earned == 100
         assert score.score_percent == 100.0
+
+    def test_human_judge_templates_created(self):
+        """Human judge criteria yield human scoring templates."""
+        rubric = {
+            "task_id": "test",
+            "total_points": 100,
+            "criteria": {
+                "summary": {
+                    "type": "human_judge",
+                    "description": "Assess summary quality",
+                    "points": 100,
+                    "scoring_guide": "1.0 = complete, 0.5 = partial, 0 = missing",
+                }
+            },
+        }
+        task = Task(
+            id="test",
+            task_dir=Path("."),
+            task_type="summarise",
+            category="test",
+            description="Test",
+            prompt="",
+            rubric=rubric,
+            input_files=[],
+        )
+        response_data = {"parsed_response": {"summary": "text"}}
+
+        score = score_task(task, response_data, judge=None)
+
+        assert any(r.criterion_type == "human_judge" for r in score.criteria_results)
+
+    def test_llm_parse_failure_falls_back_to_human(self):
+        """LLM judge parse failure creates human templates."""
+        rubric = {
+            "task_id": "test",
+            "total_points": 100,
+            "criteria": {
+                "quality": {
+                    "type": "llm_judge",
+                    "description": "Assess quality",
+                    "points": 100,
+                }
+            },
+        }
+        task = Task(
+            id="test",
+            task_dir=Path("."),
+            task_type="summarise",
+            category="test",
+            description="Test",
+            prompt="## Task\nTest prompt",
+            rubric=rubric,
+            input_files=[],
+        )
+        response_data = {"parsed_response": {"quality": "text"}}
+
+        class DummyJudge:
+            def score(self, rubric, source_files, response_text, task_prompt):
+                return {"scores": {}, "raw_response": "nope"}
+
+        score = score_task(task, response_data, judge=DummyJudge())
+
+        assert any(r.criterion_type == "human_judge" for r in score.criteria_results)
