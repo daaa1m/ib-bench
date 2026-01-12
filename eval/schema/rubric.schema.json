@@ -37,7 +37,7 @@
         },
         "type": {
           "type": "string",
-          "enum": ["programmatic", "llm_judge"]
+          "enum": ["programmatic", "llm_judge", "human_judge"]
         },
         "points": {
           "type": "integer",
@@ -46,6 +46,9 @@
         "gates_llm": {
           "type": "boolean",
           "default": false
+        },
+        "scoring_guide": {
+          "type": "string"
         }
       },
       "allOf": [
@@ -152,6 +155,19 @@
                 "type": "array",
                 "items": { "type": "string" },
                 "description": "Key concepts the response should address"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "type": { "const": "human_judge" } }
+          },
+          "then": {
+            "properties": {
+              "scoring_guide": {
+                "type": "string",
+                "minLength": 1
               }
             }
           }

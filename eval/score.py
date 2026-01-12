@@ -11,8 +11,10 @@ Usage:
     uv run python eval/score.py MODEL/RUN_ID --human         # Generate templates for human scoring
 
 Human scoring workflow:
-    1. Run with --human to generate templates (judge="human-pending", score=null)
-    2. Edit the score JSON files to fill in score (0.0-1.0) and reasoning
+    1. Templates are generated when --human is used, when a rubric has
+       human_judge criteria, or when LLM judge parsing fails
+    2. Edit the score JSON files (score 0.0-1.0 + reasoning). See the
+       accompanying *_human.md helper file for guidance
     3. Re-run without --human to validate and finalize (judge="human")
 """
 
@@ -41,7 +43,7 @@ from helpers import (
 )
 from llm_judge import LLMJudge
 
-EvalType = Literal["programmatic", "llm", "hybrid"]
+EvalType = Literal["programmatic", "llm", "human", "hybrid"]
 ValidationResult = Literal["complete", "pending"]
 
 
@@ -58,6 +60,7 @@ class CriterionData(TypedDict, total=False):
     score: float | None
     reasoning: str
     description: str
+    scoring_guide: str
 
 
 # schema for scores/{model}/{run-id}/{task.json}
@@ -357,11 +360,16 @@ def get_evaluation_type(rubric: Rubric) -> EvalType:
 
     has_programmatic = any(c.get("type") == "programmatic" for c in criteria.values())
     has_llm = any(c.get("type") == "llm_judge" for c in criteria.values())
+    has_human = any(c.get("type") == "human_judge" for c in criteria.values())
 
     if has_programmatic and has_llm:
         return "hybrid"
-    elif has_llm:
+    if has_llm:
         return "llm"
+    if has_programmatic and has_human:
+        return "hybrid"
+    if has_human:
+        return "human"
     return "programmatic"
 
 
@@ -380,6 +388,27 @@ def _build_skipped_llm_criteria(
             match_type="llm_judge",
             expected=criterion.get("core_concepts", []),
             actual=actual,
+            details=details,
+            points=criterion.get("points", 0),
+            points_earned=0,
+        )
+        for cid, criterion in criteria.items()
+    ]
+
+
+def _build_human_criteria(
+    criteria: dict[str, RubricCriterion],
+    details: str,
+) -> list[CriterionResult]:
+    """Build CriterionResult list for human scoring templates."""
+    return [
+        CriterionResult(
+            criterion_id=cid,
+            passed=False,
+            criterion_type="human_judge",
+            match_type="human_judge",
+            expected=criterion.get("description", ""),
+            actual="[PENDING]",
             details=details,
             points=criterion.get("points", 0),
             points_earned=0,
@@ -427,6 +456,9 @@ def score_task(
     llm_criteria = {
         cid: spec for cid, spec in criteria.items() if spec.get("type") == "llm_judge"
     }
+    human_criteria = {
+        cid: spec for cid, spec in criteria.items() if spec.get("type") == "human_judge"
+    }
 
     # Step 1: Run ALL programmatic checks
     output_files = response_data.get("output_files", [])
@@ -440,38 +472,46 @@ def score_task(
         if gate_failed:
             llm_gated = True
             print("  LLM evaluation GATED - programmatic gate criteria failed")
-            results.extend(_build_skipped_llm_criteria(
-                llm_criteria, "llm_judge", "[SKIPPED - gated]",
-                "Skipped due to programmatic gate failure"
-            ))
+            results.extend(
+                _build_skipped_llm_criteria(
+                    llm_criteria,
+                    "llm_judge",
+                    "[SKIPPED - gated]",
+                    "Skipped due to programmatic gate failure",
+                )
+            )
         elif human_judge:
             print("  Generating human judge templates...")
-            for criterion_id, criterion in llm_criteria.items():
-                points = criterion.get("points", 0)
-                results.append(
-                    CriterionResult(
-                        criterion_id=criterion_id,
-                        passed=False,
-                        criterion_type="human_judge",
-                        match_type="human_judge",
-                        expected=criterion.get("description", ""),
-                        actual="[PENDING]",
-                        details=f"Human scoring required. Points: {points}",
-                        points=points,
-                        points_earned=0,
-                    )
+            results.extend(
+                _build_human_criteria(
+                    llm_criteria,
+                    "Human scoring required (human judge requested)",
                 )
+            )
         elif not judge:
             print("  LLM evaluation SKIPPED - no judge provided")
-            results.extend(_build_skipped_llm_criteria(
-                llm_criteria, "llm_judge", "[SKIPPED - no judge]",
-                "Skipped - no LLM judge provided"
-            ))
+            results.extend(
+                _build_skipped_llm_criteria(
+                    llm_criteria,
+                    "llm_judge",
+                    "[SKIPPED - no judge]",
+                    "Skipped - no LLM judge provided",
+                )
+            )
         else:
             llm_results = score_llm_criteria(task, parsed_response, llm_criteria, judge)
             results.extend(llm_results)
 
+    if human_criteria:
+        results.extend(
+            _build_human_criteria(
+                human_criteria,
+                "Human scoring required (rubric specifies human judge)",
+            )
+        )
+
     # Calculate final score
+
     points_earned = sum(r.points_earned for r in results)
     score_percent = (points_earned / total_points * 100) if total_points > 0 else 0
 
@@ -512,23 +552,17 @@ def score_llm_criteria(
         )
     except JudgeParseError as e:
         print(f"  ERROR: {e}")
-        for cid, criterion in criteria.items():
-            results.append(
-                CriterionResult(
-                    criterion_id=cid,
-                    passed=False,
-                    criterion_type="llm_judge",
-                    match_type="llm_judge",
-                    expected=criterion.get("core_concepts", []),
-                    actual="[JUDGE_ERROR]",
-                    details=f"Judge parse failed: {str(e)[:100]}",
-                    points=criterion.get("points", 0),
-                    points_earned=0,
-                )
-            )
-        return results
+        return _build_human_criteria(
+            criteria,
+            f"Human scoring required (LLM judge parse failed: {str(e)[:100]})",
+        )
 
     scores = judge_result.get("scores", {})
+    if not scores:
+        return _build_human_criteria(
+            criteria,
+            "Human scoring required (LLM judge did not return scores)",
+        )
 
     for cid, criterion in criteria.items():
         points = criterion.get("points", 0)
@@ -603,6 +637,49 @@ def validate_human_scores(score_file: Path, existing_score: dict) -> str:
         json.dump(existing_score, f, indent=2)
 
     return "complete"
+
+
+def write_human_template(
+    template_path: Path,
+    score_file: Path,
+    task: Task,
+    response_file: Path,
+    criteria: list[CriterionData],
+) -> None:
+    human_criteria = [c for c in criteria if c.get("type") == "human_judge"]
+    if not human_criteria:
+        return
+
+    input_files = ", ".join(f.name for f in task.input_files) or "(none)"
+    prompt_path = task.task_dir / "prompt.md"
+
+    lines = [
+        f"# Human Scoring Template: {task.id}",
+        "",
+        "## Files",
+        f"- Score JSON: {score_file.name}",
+        f"- Response JSON: {response_file}",
+        f"- Prompt: {prompt_path}",
+        f"- Inputs: {input_files}",
+        "",
+        "## How to Score",
+        "- Open the score JSON file and fill in `score` (0-1) and `reasoning` for each criterion.",
+        "- Use the scoring guide below as the anchor for your judgment.",
+        "",
+        "## Criteria",
+    ]
+
+    for criterion in human_criteria:
+        lines.extend(
+            [
+                f"### {criterion.get('id')} ({criterion.get('points', 0)} pts)",
+                f"Description: {criterion.get('description', '')}",
+                f"Scoring guide: {criterion.get('scoring_guide', '')}",
+                "",
+            ]
+        )
+
+    template_path.write_text("\n".join(lines))
 
 
 def find_runs(
@@ -784,8 +861,12 @@ def score_run(responses_dir: Path, scores_dir: Path, args):
 
         # Determine evaluation type from rubric
         eval_type = get_evaluation_type(task.rubric)
+        has_llm_criteria = any(
+            c.get("type") == "llm_judge"
+            for c in task.rubric.get("criteria", {}).values()
+        )
 
-        if eval_type in ["llm", "hybrid"] and judge is None and not args.human:
+        if has_llm_criteria and judge is None and not args.human:
             print(f"Initializing LLM judge with model: {args.judge_model}")
             judge = LLMJudge(model=args.judge_model)
 
@@ -853,6 +934,7 @@ def score_run(responses_dir: Path, scores_dir: Path, args):
             judge_field = args.judge_model
 
         criteria_data = []
+        rubric_criteria = task.rubric.get("criteria", {})
         for r in score.criteria_results:
             criterion_entry = {
                 "id": r.criterion_id,
@@ -865,9 +947,16 @@ def score_run(responses_dir: Path, scores_dir: Path, args):
                 "details": r.details,
             }
             if r.criterion_type == "human_judge":
+                criterion_spec = rubric_criteria.get(r.criterion_id, {})
+                scoring_guide = criterion_spec.get("scoring_guide") or (
+                    "Score 0-1 based on completeness and accuracy versus the criterion description."
+                )
                 criterion_entry["score"] = None
                 criterion_entry["reasoning"] = ""
-                criterion_entry["description"] = r.expected
+                criterion_entry["description"] = criterion_spec.get(
+                    "description", r.expected
+                )
+                criterion_entry["scoring_guide"] = scoring_guide
             criteria_data.append(criterion_entry)
 
         score_data = {
@@ -883,9 +972,23 @@ def score_run(responses_dir: Path, scores_dir: Path, args):
         }
         if judge_field:
             score_data["judge"] = judge_field
+        template_path = None
+        if has_human_judge:
+            template_path = score_file.with_suffix(".human.md")
+            score_data["response_file"] = str(response_file)
+            score_data["human_template"] = str(template_path)
 
         with open(score_file, "w") as f:
             json.dump(score_data, f, indent=2)
+
+        if template_path:
+            write_human_template(
+                template_path,
+                score_file,
+                task,
+                response_file,
+                criteria_data,
+            )
 
         summary["results"].append(
             {
@@ -948,7 +1051,7 @@ def main():
     parser.add_argument(
         "--human",
         action="store_true",
-        help="Generate templates for human scoring instead of LLM judge",
+        help="Generate templates for human scoring (forces human templates for LLM criteria)",
     )
     parser.add_argument(
         "--verbose",
