@@ -1,54 +1,67 @@
 ## Task
 
-You are an investment banking analyst tasked with researching precedent M&A
-transactions for a client pitch. Your assignment is to identify 5 comparable
-transactions in the enterprise software sector from the past 3 years and extract
-EV/EBITDA multiples for each deal.
+You are an investment banking analyst tasked with building a transaction
+comparables sheet for E&P oil & gas M&A in H2 2025. You are provided with
+`input.xlsx`, which contains the `M&A Deals` sheet template. Populate 10
+qualifying transactions announced between July 1 and December 31, 2025.
+
+Each transaction must meet these criteria:
+- E&P oil & gas industry
+- Deal value >= USD 100m
+- Corporate acquisitions or asset sales
+
+Your deliverable includes the completed Excel model and a JSON summary.
 
 ## Methodology & Process
 
-1. **Search for Precedent Transactions:** Use web search to identify M&A
-   transactions in the enterprise software sector announced between January 2022
-   and December 2024
-2. **Filter for Relevance:** Focus on acquisitions where the target is an
-   enterprise software company (SaaS, infrastructure software, or enterprise
-   applications)
-3. **Verify Deal Details:** For each transaction, confirm the acquirer, target,
-   announcement date, and deal value from reputable sources (press releases,
-   financial news, deal databases)
-4. **Extract EV/EBITDA Multiples:** Find the reported or calculated EV/EBITDA
-   multiple for each deal. If not directly stated, note if it was derived from
-   disclosed financials
-5. **Cite Sources:** Document the source URL or publication for each data point
+1. Identify qualifying H2 2025 E&P transactions using public sources.
+2. For each transaction, extract the date, target or asset name, acquirer,
+   seller (if applicable), deal value in USD millions, and payment type.
+3. Populate the template rows in `M&A Deals` with 10 transactions.
+4. Validate that each transaction meets the industry, date, and size filters.
 
 ## Constraints and Negative Constraints
 
 Constraints:
-
-- Include only completed or announced deals, not rumors or speculation
-- Report EV/EBITDA multiples as decimal numbers (e.g., "15.2x" or "15.2")
-- Use reputable sources: company press releases, SEC filings, major financial
-  news outlets, or established deal databases
-- Include deal value context where available (helps validate multiple accuracy)
+- Use headless LibreOffice to recalculate the workbook; do not rely on calculations outside the spreadsheet.
+- Modify only the `M&A Deals` sheet in `input.xlsx`.
+- Fill exactly 10 rows (rows 2-11).
+- Use USD millions and numeric values for deal value.
+- For asset sales, include the seller; for corporate deals, seller may be blank.
+- Use only public sources for deal details.
 
 Negative Constraints:
-
-- DO NOT include private equity buyouts unless EV/EBITDA multiple is publicly
-  disclosed
-- DO NOT include deals where the target is primarily a hardware company
-- DO NOT fabricate or estimate multiples without source documentation
-- DO NOT include deals under $500 million enterprise value (too small for comps)
-- NO conversational filler
+- DO NOT include transactions outside H2 2025.
+- DO NOT include deals under USD 100m.
+- DO NOT include non-E&P industries.
+- NO conversational filler.
 
 ## Output Format
 
-Provide your response as a raw JSON object with the following keys. Do not
-include any markdown formatting, backticks, or preamble.
+You must provide TWO outputs:
 
-```json
-{
-  "transactions": "Array of 5 transaction objects, each containing: acquirer (string), target (string), announcement_date (YYYY-MM format), ev_ebitda_multiple (number or string with 'x'), enterprise_value_millions (number, optional)",
-  "sources": "Array of source URLs or publication references used to verify the deals and multiples",
-  "methodology": "Brief explanation of how deals were selected and multiples verified"
-}
-```
+**1. Modified Excel File**: Save and return the updated Excel workbook with all
+changes applied to the `M&A Deals` sheet.
+
+**2. JSON Summary**: Provide your response as a raw JSON object with the
+following keys. Do not include any markdown formatting, backticks, or preamble.
+
+`{
+  "deal_list": [
+    {
+      "date": "MM/DD/YYYY",
+      "target_or_asset": "Target or asset name",
+      "acquirer": "Acquirer name",
+      "seller": "Seller name or blank",
+      "deal_value_usd_mm": "Deal value in USD millions",
+      "payment_type": "Cash/Stock/Hybrid",
+      "source": "URL"
+    }
+  ],
+  "source_urls": ["URL1", "URL2"],
+  "reasoning_steps": [
+    "Step 1: How you screened for qualifying deals",
+    "Step 2: How you verified deal values and payment types",
+    "Step 3: How you validated industry and timing"
+  ]
+}`

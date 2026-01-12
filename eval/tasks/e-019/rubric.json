@@ -3,66 +3,88 @@
   "version": "1.0",
   "total_points": 100,
   "criteria": {
-    "covenant_summary": {
-      "description": "Must provide a comprehensive summary table of all financial covenants with names, definitions, thresholds, and testing frequency.",
+    "debt_incurrence": {
+      "description": "Captures debt incurrence tests, key baskets, leverage thresholds, and non-guarantor caps from Section 4.05",
       "type": "llm_judge",
       "core_concepts": [
-        "financial covenants",
-        "ratio",
-        "threshold",
-        "limit",
-        "compliance"
+        "Senior Leverage Ratio",
+        "3.50x",
+        "Credit Facility basket",
+        "2,250M",
+        "greater of",
+        "75% EBITDA",
+        "First Lien Leverage",
+        "3.00x",
+        "Secured Leverage",
+        "6.00x",
+        "400M",
+        "40% EBITDA",
+        "50M",
+        "5% EBITDA",
+        "non-guarantor cap"
       ],
-      "points": 30
+      "points": 35
     },
-    "leverage_covenant": {
-      "description": "Must correctly extract the leverage ratio covenant including its definition (typically Total Debt / EBITDA) and the applicable threshold levels.",
+    "restricted_payments": {
+      "description": "Captures RP starter and builder baskets, general basket, leverage-based exception, and EoD blocker from Section 4.06",
       "type": "llm_judge",
       "core_concepts": [
-        "leverage",
-        "debt",
-        "EBITDA",
-        "ratio",
-        "maximum"
+        "starter basket",
+        "300M",
+        "builder basket",
+        "cumulative EBITDA",
+        "1.70",
+        "interest expense",
+        "Q1 2021",
+        "general RP basket",
+        "150M",
+        "15% EBITDA",
+        "Total Leverage",
+        "4.50x",
+        "event of default"
       ],
       "points": 25
     },
-    "coverage_covenant": {
-      "description": "Must correctly extract the coverage ratio covenant (interest coverage or fixed charge coverage) including its definition and threshold levels.",
+    "asset_sales": {
+      "description": "Captures asset sale cash consideration requirement, reinvestment timing, excess proceeds threshold, offer price, and collateral waterfall from Section 4.16",
       "type": "llm_judge",
       "core_concepts": [
-        "coverage",
-        "interest",
-        "fixed charge",
-        "EBITDA",
-        "minimum"
+        "75% cash",
+        "50M",
+        "5% EBITDA",
+        "450 days",
+        "180-day extension",
+        "100M threshold",
+        "100% of principal",
+        "accrued interest",
+        "First Lien Obligations"
       ],
-      "points": 25
+      "points": 20
     },
-    "testing_frequency": {
-      "description": "Must correctly identify how and when covenants are tested, including measurement period and testing dates.",
+    "change_of_control": {
+      "description": "Captures change of control offer price, timing, and drag-along mechanics from Section 4.11",
       "type": "llm_judge",
       "core_concepts": [
-        "quarterly",
-        "fiscal",
-        "trailing",
-        "twelve months",
-        "test",
-        "measurement"
+        "101%",
+        "principal",
+        "accrued interest",
+        "notice within 60 days",
+        "20-60 business days",
+        "90% tender",
+        "drag-along"
       ],
-      "points": 10
+      "points": 15
     },
-    "extraction_methodology": {
-      "description": "Must describe a logical approach to locating and parsing covenant information from the credit agreement.",
+    "liens_and_other": {
+      "description": "Captures equal and ratable liens, future guarantor trigger, and negative pledge from Sections 4.07-4.10",
       "type": "llm_judge",
       "core_concepts": [
-        "covenant section",
-        "definition",
-        "article",
-        "parsed",
-        "located"
+        "equal and ratable",
+        "future guarantor",
+        "250M",
+        "negative pledge"
       ],
-      "points": 10
+      "points": 5
     }
   }
 }

@@ -6,7 +6,7 @@
     "deal_structure": {
       "description": "Does the summary correctly identify the transaction type (merger, tender offer, etc.), the parties (acquirer, target), and the form of consideration (cash, stock, mixed)?",
       "type": "llm_judge",
-      "core_concepts": ["merger type", "acquirer", "target", "consideration", "cash", "stock"],
+      "core_concepts": ["Compass", "Anywhere", "merger type", "acquirer", "target", "consideration", "cash", "stock"],
       "points": 15
     },
     "purchase_price": {

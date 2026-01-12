@@ -1,62 +1,48 @@
 ## Task
 
-You are an investment banking analyst reviewing a credit agreement for a
-leveraged finance transaction. Your task is to extract and organize the
-financial covenants from the attached credit agreement.
+You are an investment banking analyst reviewing AMC Entertainment’s high-yield
+bond indenture. Your task is to extract the key covenant terms from the
+agreement provided in `input.pdf`.
 
-The credit agreement contains financial covenant provisions that impose
-restrictions on the borrower. You must identify and extract these covenants,
-including their definitions, threshold levels, and testing requirements.
+Focus on the following sections:
+- Debt Incurrence (Section 4.05)
+- Restricted Payments (Section 4.06)
+- Asset Sales (Section 4.16)
+- Change of Control (Section 4.11)
+- Liens & Other Covenants (Sections 4.07–4.10)
 
 ## Methodology & Process
 
-Follow these steps to systematically extract the covenant information:
-
-1. **Locate Covenant Section:** Navigate to the financial covenants section of
-   the credit agreement. This is typically found in the "Affirmative Covenants"
-   or "Financial Covenants" article.
-
-2. **Identify Each Covenant:** For each financial covenant, extract:
-   - The covenant name (e.g., Maximum Leverage Ratio, Minimum Interest Coverage)
-   - The specific ratio or metric definition
-   - The numeric threshold or limit
-   - Testing frequency (quarterly, annually, etc.)
-
-3. **Parse Ratio Definitions:** Carefully read how each ratio is defined:
-   - Numerator components
-   - Denominator components
-   - Any adjustments or exclusions
-
-4. **Extract Compliance Levels:** Note the specific threshold levels required
-   for compliance, including any step-downs or changes over time.
-
-5. **Document Testing Requirements:** Identify how and when covenants are
-   measured (fiscal quarter-end, trailing twelve months, etc.).
+1. Read the specified covenant sections in the indenture.
+2. Extract ratio tests, basket sizes, thresholds, and timing requirements.
+3. Note any “greater of” basket mechanics and required conditions (e.g., no EoD).
+4. Summarize each section in a concise, structured format.
 
 ## Constraints and Negative Constraints
 
 Constraints:
-- Extract exact threshold values as stated in the agreement
-- Preserve the precise language used for ratio definitions
-- Include all material financial covenants
+- Use only the information contained in `input.pdf`.
+- Provide specific numeric thresholds and formulas when stated.
+- Use precise covenant terminology (e.g., “Total Leverage Ratio”).
 
 Negative Constraints:
-- DO NOT paraphrase or simplify covenant definitions
-- DO NOT include non-financial covenants (reporting, insurance, etc.)
-- DO NOT infer thresholds not explicitly stated
-- NO conversational filler
+- DO NOT speculate or fill gaps with assumptions.
+- DO NOT include unrelated boilerplate provisions.
+- NO conversational filler.
 
 ## Output Format
 
 Provide your response as a raw JSON object with the following keys. Do not
 include any markdown formatting, backticks, or preamble.
 
-```json
-{
-  "covenant_summary": "A structured table or list of all financial covenants with their names, definitions, thresholds, and testing frequency",
-  "leverage_covenant": "The leverage ratio covenant details including definition and threshold(s)",
-  "coverage_covenant": "The interest coverage or fixed charge coverage covenant details including definition and threshold(s)",
-  "testing_frequency": "How and when covenants are tested (e.g., quarterly on trailing twelve months basis)",
-  "extraction_methodology": "Brief description of how you located and parsed the covenant information"
-}
-```
+`{
+  "debt_incurrence": "Concise summary of the general test, key baskets, and leverage thresholds",
+  "restricted_payments": "Concise summary of RP baskets, builder mechanics, and ratio tests",
+  "asset_sales": "Concise summary of cash requirements, reinvestment timing, and excess proceeds mechanics",
+  "change_of_control": "Concise summary of offer price, timing, and tender mechanics",
+  "liens_and_other": "Concise summary of equal-and-ratable, guarantor triggers, and lien limitations",
+  "reasoning_steps": [
+    "Step 1: How you located the covenant sections",
+    "Step 2: How you extracted ratios and basket mechanics"
+  ]
+}`

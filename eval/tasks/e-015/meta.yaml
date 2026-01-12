@@ -1,1 +1,27 @@
-// create a summary of all the acquistions done by roll ups. 
+# yaml-language-server: $schema=../../schema/meta.schema.json
+
+task:
+  id: e-015
+  title: "Identify U.S. biotech M&A targets by tier"
+  type: creating
+  category:
+    - financial-analysis
+    - due-diligence
+  input_type: web
+  description: >
+    As of January 1, 2026, list 10 potential U.S. biotech M&A targets: 5 Tier 1
+    (30-50% probability) and 5 Tier 2 (15-30% probability). Provide market cap
+    and strategic rationale for each. Preferred Tier 1 names: ELVN, KRYS, MDGL,
+    RVMD, CGON, CYTK, VERA. Preferred Tier 2 names: RYTM, SLNO, XENE, ARWR,
+    DNLI, INSM, RAPP, RLAY, SMMT. Tests ability to screen targets and justify
+    strategic fit.
+
+prompt:
+  notes: >
+    Use web sources to estimate market caps and provide concise strategic
+    rationales. Selections should be consistent with the candidate lists unless
+    a strong rationale supports an alternative.
+
+input:
+  input-file-original: null
+  notes: Web research only; no local inputs.

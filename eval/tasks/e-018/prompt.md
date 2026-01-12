@@ -1,62 +1,57 @@
 ## Task
 
-You are an investment banking analyst tasked with auditing a cash flow model
-that contains an error in the Net Working Capital (NWC) calculation. The model
-currently produces incorrect Free Cash Flow figures due to an NWC formula error
-involving wrong signs, missing components, or incorrect period referencing.
+You are an investment banking analyst tasked with fixing a broken 3-statement
+model. The Balance Sheet does not tie because of a formula error in the cash flow
+linkages. Your job is to identify the error, correct it, and explain the fix.
 
-Your goal is to identify the specific cell(s) containing the NWC error and
-provide a corrected formula that properly reflects working capital mechanics.
+You are provided with `input.xlsx` (the model). Your deliverable includes the
+corrected Excel model and a JSON summary.
 
 ## Methodology & Process
 
-To diagnose the NWC error, apply the following systematic checks:
+1. Identify the first period where the balance sheet check fails.
+2. Trace the cash flow statement linkages, focusing on working capital changes.
+3. Locate the incorrect formula and determine the correct sign/structure.
+4. Fix the formula and confirm the balance sheet ties.
 
-1. **Identify the NWC Calculation Section:** Locate where Change in NWC flows
-   into the Cash Flow Statement or FCF calculation.
-
-2. **Verify Sign Convention:** Remember the fundamental rule:
-   - Increase in Current Assets (e.g., AR, Inventory) = Cash Outflow (negative)
-   - Decrease in Current Assets = Cash Inflow (positive)
-   - Increase in Current Liabilities (e.g., AP) = Cash Inflow (positive)
-   - Decrease in Current Liabilities = Cash Outflow (negative)
-
-3. **Check Period Referencing:** Ensure the formula calculates the change
-   correctly (Current Period - Prior Period) and is applied consistently.
-
-4. **Component Verification:** Confirm all relevant NWC components are included:
-   - Accounts Receivable
-   - Inventory
-   - Prepaid Expenses (if applicable)
-   - Accounts Payable
-   - Accrued Liabilities (if applicable)
-
-5. **Trace the Impact:** Verify how the NWC change flows through to FCF and
-   confirm the correction resolves any downstream calculation errors.
-
-## Constraints & Negative Constraints
+## Constraints and Negative Constraints
 
 Constraints:
-- Focus exclusively on the NWC calculation error
-- Provide the exact cell reference(s) where the error occurs
-- Your corrected formula must use proper Excel syntax
+- Use headless LibreOffice to recalculate the workbook; do not rely on calculations outside the spreadsheet.
+- Modify only the `BS & CFS` sheet in `input.xlsx`.
+- Correct the formula error without changing the model structure.
+- Preserve existing formulas and references outside the fix.
 
 Negative Constraints:
-- DO NOT modify any cells outside the NWC calculation
-- DO NOT change the structure or layout of the model
-- DO NOT use hard-coded values to fix the formula
-- NO conversational filler
+- DO NOT hard-code plugs to force the balance sheet to tie.
+- DO NOT change assumptions or unrelated lines.
+- NO conversational filler.
+
+## Formatting Requirements
+
+Apply standard IB Excel formatting conventions to all cells you modify:
+
+- **Blue font**: Hardcoded numbers (values you type directly)
+- **Green font**: Formulas referencing another sheet in the same workbook
+- **Red font**: Formulas referencing an external workbook
 
 ## Output Format
 
-Provide your findings as a raw JSON object with the following keys. Do not
-include any markdown formatting, backticks, or preamble.
+You must provide TWO outputs:
 
-```json
-{
-  "error_location": "The specific Cell or Row ID containing the NWC error",
-  "current_formula": "The exact formula currently in the cell",
-  "corrected_formula": "The corrected Excel formula with proper NWC mechanics",
-  "explanation": "A concise explanation of what was wrong and why the fix is correct"
-}
-```
+**1. Modified Excel File**: Save and return the updated Excel workbook with all
+changes applied to the `BS & CFS` sheet.
+
+**2. JSON Summary**: Provide your response as a raw JSON object with the
+following keys. Do not include any markdown formatting, backticks, or preamble.
+
+`{
+  "error_location": "Cell or row reference where the formula is wrong",
+  "current_formula": "The incorrect formula currently in the model",
+  "corrected_formula": "The corrected formula you applied",
+  "explanation": "Why the sign/structure was wrong and how the fix resolves it",
+  "reasoning_steps": [
+    "Step 1: How you found the break",
+    "Step 2: How you validated the corrected linkage"
+  ]
+}`
