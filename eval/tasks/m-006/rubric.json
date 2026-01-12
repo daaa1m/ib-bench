@@ -1,14 +1,14 @@
 {
   "task_id": "m-006",
   "version": "1.2",
-  "total_points": 110,
+  "total_points": 100,
   "criteria": {
     "formatting": {
       "description": "IB formatting conventions: blue for hardcoded numbers, green for cross-sheet refs, red for external workbook refs",
       "type": "programmatic",
       "match_type": "excel_formatting",
       "sheet": "LBO",
-      "points": 10
+      "points": 5
     },
     "error_1_location": {
       "description": "Must identify L159 (exit EBITDA reference) as error location",
@@ -29,21 +29,21 @@
       "type": "programmatic",
       "match_type": "substring_one_of",
       "accepted_values": ["H141", "141", "sweep"],
-      "points": 15
+      "points": 14
     },
     "l166_moic": {
       "description": "MOIC should be approximately 2.3 after fixes",
       "type": "programmatic",
       "match_type": "regex_pattern",
       "valid_patterns": ["2\\.[2-4]"],
-      "points": 25
+      "points": 22
     },
     "l164_exit_equity": {
       "description": "Exit equity should be approximately 340 after fixes",
       "type": "programmatic",
       "match_type": "regex_pattern",
       "valid_patterns": ["33[0-9]|34[0-9]|35[0-5]"],
-      "points": 20
+      "points": 19
     },
     "l156_eop_cash": {
       "description": "EoP cash should be approximately 27-35 after fixes",

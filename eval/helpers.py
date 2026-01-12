@@ -593,6 +593,13 @@ def check_formatting_conventions(
     - Blue: hardcoded numbers
     - Green: cross-sheet refs (same workbook)
     - Red: external workbook refs
+
+    Known limitations:
+    - Theme/tint colors are not resolved; theme indices are heuristic.
+    - Conditional formatting colors are not evaluated.
+    - Cross-sheet detection relies on explicit "Sheet!Cell" syntax and may miss
+      INDIRECT/named ranges.
+    - External workbook detection only checks for "[workbook]" syntax.
     """
     import openpyxl
 

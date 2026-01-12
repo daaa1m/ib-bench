@@ -1,7 +1,7 @@
 {
   "task_id": "m-003",
   "version": "1.2",
-  "total_points": 110,
+  "total_points": 100,
   "criteria": {
     "formatting": {
       "description": "IB formatting conventions: blue for hardcoded numbers, green for cross-sheet refs, red for external workbook refs",
@@ -19,7 +19,7 @@
         "calculations flow correctly",
         "inputs drive outputs"
       ],
-      "points": 20
+      "points": 18
     },
     "operating_forecast": {
       "description": "5-year operating forecast (2021-2025) with reasonable revenue growth by segment, appropriate cost structure, and EBITDA margins consistent with golden solution range",
@@ -33,7 +33,7 @@
         "variable vs fixed costs",
         "EBITDA margin progression"
       ],
-      "points": 20
+      "points": 18
     },
     "transaction_structure": {
       "description": "Complete Sources & Uses table with reasonable debt levels, proper EV-to-Equity bridge, and transaction fees",
@@ -46,7 +46,7 @@
         "transaction fees",
         "leverage ratios"
       ],
-      "points": 20
+      "points": 18
     },
     "returns_analysis": {
       "description": "Correct IRR and MOIC calculations based on Year 5 exit, with values in reasonable range compared to golden solution",
@@ -58,7 +58,7 @@
         "exit equity value",
         "returns in reasonable range"
       ],
-      "points": 25
+      "points": 23
     },
     "sensitivity_analysis": {
       "description": "Two meaningful sensitivity tables showing IRR impact from key variables (entry/exit multiple, growth, margins)",
@@ -70,7 +70,7 @@
         "exit multiple sensitivity",
         "data tables functional"
       ],
-      "points": 15
+      "points": 13
     }
   }
 }

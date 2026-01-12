@@ -42,6 +42,14 @@ company reports for the Marine Transportation segment.
 - DO NOT use manual "plugs" or hard-codes to force the model to balance
 - NO conversational filler
 
+## Formatting Requirements
+
+Apply standard IB Excel formatting conventions to all cells you modify:
+
+- **Blue font**: Hardcoded numbers (values you type directly)
+- **Green font**: Formulas referencing another sheet in the same workbook
+- **Red font**: Formulas referencing an external workbook
+
 ## Output Format
 
 **1. Modified Excel File**: Save and return the updated Excel workbook with all

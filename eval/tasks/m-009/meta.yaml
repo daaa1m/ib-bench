@@ -1,1 +1,33 @@
-// task is to fill in an excel sheet with data about mgmt guidance for ADT
+# yaml-language-server: $schema=../../schema/meta.schema.json
+
+task:
+  id: m-009
+  title: "Extract and populate ADT management guidance history"
+  type: extraction
+  category:
+    - data-extraction
+    - financial-analysis
+  input_type: multi
+  description: >
+    Extract ADT Inc.'s historical management guidance from public earnings
+    releases and populate an Excel template. The task covers guidance for Total
+    Revenue, Adj. EBITDA, Adj. EPS, and FCF before special items across
+    quarterly earnings events from 2018 to 2025. Tests the ability to correctly
+    map guidance to the appropriate fiscal year period (not the quarter when
+    guidance was issued) and handle metrics that were introduced at different
+    times (e.g., FCF guidance started in 2024, EPS guidance started in 2022).
+
+prompt:
+  notes: >
+    LLM must search for ADT earnings releases, extract guidance figures, and
+    correctly associate each guidance with the fiscal year being guided for (not
+    the quarter when it was announced). Requires reasoning about which guidance
+    applies to which period.
+
+input:
+  input-file-original: null
+  notes: >
+    LLM must fetch guidance data from web sources (SEC filings, investor
+    relations, earnings releases). The input.xlsx provides the template
+    structure with dates, events, and guidance periods already filled in - LLM
+    only needs to fill the Low/High values for each metric.

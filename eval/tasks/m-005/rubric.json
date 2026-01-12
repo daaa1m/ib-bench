@@ -1,7 +1,7 @@
 {
   "task_id": "m-005",
   "version": "2.0",
-  "total_points": 110,
+  "total_points": 100,
   "criteria": {
     "formatting": {
       "description": "IB formatting conventions: blue for hardcoded numbers, green for cross-sheet refs, red for external workbook refs",
@@ -16,7 +16,7 @@
       "cell": "P22",
       "expected": 20855,
       "tolerance": 100,
-      "points": 25,
+      "points": 23,
       "gates_llm": true
     },
     "f28_service_q4_index_2023": {
@@ -26,7 +26,7 @@
       "cell": "F28",
       "expected": 1.076,
       "tolerance": 0.01,
-      "points": 20
+      "points": 18
     },
     "g30_auto_credit_2023": {
       "description": "Cell G30 (2023 total auto credit revenue) must equal 1790",
@@ -35,7 +35,7 @@
       "cell": "G30",
       "expected": 1790,
       "tolerance": 10,
-      "points": 20
+      "points": 18
     },
     "p32_gross_profit_q4e": {
       "description": "Cell P32 (Q4 2025 gross profit ex auto credits) must equal ~3469",
@@ -44,7 +44,7 @@
       "cell": "P32",
       "expected": 3469,
       "tolerance": 100,
-      "points": 20
+      "points": 18
     },
     "c32_gross_profit_q1_2023": {
       "description": "Cell C32 (Q1 2023 gross profit ex auto credits) must equal 3990",
@@ -53,7 +53,7 @@
       "cell": "C32",
       "expected": 3990,
       "tolerance": 20,
-      "points": 15
+      "points": 13
     }
   }
 }
