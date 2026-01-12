@@ -1,1 +1,28 @@
-// given a 3 statement model and memo generate another one on a public company
+# yaml-language-server: $schema=../../schema/meta.schema.json
+
+task:
+  id: h-003
+  title: "Build 3-statement model and co-investment view for Phillips 66"
+  type: creating
+  category:
+    - financial-analysis
+    - due-diligence
+    - document-review
+  input_type: multi
+  description: >
+    Given an activist investor presentation on Phillips 66, obtain FY24 10-K and
+    FY25 Q1/Q2/Q3 financials, build a full 3-statement model, incorporate value
+    creation drivers from the deck, run a returns analysis, and recommend whether
+    to invest alongside the activist. Tests sourcing public financials, modeling,
+    and disciplined IC-style recommendation.
+
+prompt:
+  notes: >
+    input.pdf is Elliott’s Streamline 66 presentation. The model must incorporate
+    the deck’s value-creation levers and be anchored to public filings (FY24 10-K,
+    FY25 Q1/Q2/Q3 10-Qs). The rubric is human-judged with no programmatic checks.
+
+input:
+  input-file-original: "input.pdf"
+  notes: "Activist presentation provided; use public filings for financials"
+
