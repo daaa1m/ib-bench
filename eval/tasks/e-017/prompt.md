@@ -45,8 +45,10 @@ Negative Constraints:
 Provide your response as a raw JSON object with the following keys. Do not
 include any markdown formatting, backticks, or preamble.
 
-`{
+```json
+{
   "transactions": "Array of 5 transaction objects, each containing: acquirer (string), target (string), announcement_date (YYYY-MM format), ev_ebitda_multiple (number or string with 'x'), enterprise_value_millions (number, optional)",
   "sources": "Array of source URLs or publication references used to verify the deals and multiples",
   "methodology": "Brief explanation of how deals were selected and multiples verified"
-}`
+}
+```

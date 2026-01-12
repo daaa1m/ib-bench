@@ -1,0 +1,49 @@
+{
+  "task_id": "h-002",
+  "version": "1.0",
+  "total_points": 100,
+  "criteria": {
+    "historical_updates": {
+      "description": "Historical inputs are populated correctly for the last three fiscal years with credible sourcing",
+      "type": "human_judge",
+      "points": 20,
+      "scoring_guide": "1.0 = correct and complete historicals with sources; 0.5 = partial or minor errors; 0 = missing/incorrect"
+    },
+    "assumptions_summary": {
+      "description": "Entry, leverage, and projection assumptions are reasonable and internally consistent",
+      "type": "human_judge",
+      "points": 15,
+      "scoring_guide": "1.0 = clear, defensible assumptions; 0.5 = partially reasonable; 0 = unrealistic or missing"
+    },
+    "returns_summary": {
+      "description": "Returns analysis (IRR/MOIC) and exit assumptions are coherent and supported by the model",
+      "type": "human_judge",
+      "points": 15,
+      "scoring_guide": "1.0 = returns computed and consistent; 0.5 = partial or inconsistent; 0 = missing/incorrect"
+    },
+    "business_assessment": {
+      "description": "Business assessment covers market position, strengths/weaknesses, risks, and competitive landscape",
+      "type": "human_judge",
+      "points": 25,
+      "scoring_guide": "1.0 = thorough, specific assessment; 0.5 = surface-level; 0 = missing/irrelevant"
+    },
+    "recommendation": {
+      "description": "Go/No-Go recommendation is clear and supported by rationale and next steps",
+      "type": "human_judge",
+      "points": 10,
+      "scoring_guide": "1.0 = clear decision with rationale; 0.5 = vague; 0 = missing"
+    },
+    "model_integrity_checks": {
+      "description": "Model ties and reconciliation checks are validated after updates",
+      "type": "human_judge",
+      "points": 10,
+      "scoring_guide": "1.0 = checks explicitly confirmed; 0.5 = partial checks; 0 = no validation"
+    },
+    "formatting": {
+      "description": "IB formatting conventions and existing model style are followed for modified cells",
+      "type": "human_judge",
+      "points": 5,
+      "scoring_guide": "1.0 = formatting consistent and correct; 0.5 = minor issues; 0 = incorrect formatting"
+    }
+  }
+}

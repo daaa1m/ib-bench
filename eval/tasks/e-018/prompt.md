@@ -52,4 +52,11 @@ Negative Constraints:
 Provide your findings as a raw JSON object with the following keys. Do not
 include any markdown formatting, backticks, or preamble.
 
-`{ "error_location": "The specific Cell or Row ID containing the NWC error", "current_formula": "The exact formula currently in the cell", "corrected_formula": "The corrected Excel formula with proper NWC mechanics", "explanation": "A concise explanation of what was wrong and why the fix is correct" }`
+```json
+{
+  "error_location": "The specific Cell or Row ID containing the NWC error",
+  "current_formula": "The exact formula currently in the cell",
+  "corrected_formula": "The corrected Excel formula with proper NWC mechanics",
+  "explanation": "A concise explanation of what was wrong and why the fix is correct"
+}
+```

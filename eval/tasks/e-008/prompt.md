@@ -33,10 +33,12 @@ Negative Constraints:
 
 Provide your response as a raw JSON object with the following keys. Do not include any markdown formatting, backticks, or preamble.
 
-`{
+```json
+{
   "reasoning": "Your analysis process - how you identified the key themes and what you prioritized",
   "key_themes": "3-5 bullet points capturing the main themes from the MD&A",
   "business_drivers": "Summary of the key business drivers management discusses",
   "trends_and_outlook": "Summary of significant trends and management's forward-looking outlook",
   "risk_factors": "Key risks and uncertainties management emphasizes in the MD&A"
-}`
+}
+```

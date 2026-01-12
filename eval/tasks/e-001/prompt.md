@@ -49,4 +49,12 @@ To diagnose the error, apply the following systematic accounting checks:
 Provide your findings in a raw JSON object with the following keys. Do not
 include any markdown formatting, backticks, or preamble.
 
-`{   "error_location": "The specific Cell or Row ID",   "current_formula": "The exact formula found in the sheet",   "corrected_formula": "The corrected Excel formula",   "logical_explanation": "A concise explanation of the accounting error",   "audit_steps_followed": ["Step 1", "Step 2", "List of diagnostic steps used from the instructions"] }`
+```json
+{
+  "error_location": "The specific Cell or Row ID",
+  "current_formula": "The exact formula found in the sheet",
+  "corrected_formula": "The corrected Excel formula",
+  "logical_explanation": "A concise explanation of the accounting error",
+  "audit_steps_followed": ["Step 1", "Step 2", "List of diagnostic steps used from the instructions"]
+}
+```

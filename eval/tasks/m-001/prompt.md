@@ -54,4 +54,13 @@ changes applied to the Marine DCF sheet, following the formatting conventions ab
 JSON object with the following keys. Do not include any markdown formatting,
 backticks, or preamble.
 
-`{   "reasoning_steps": "Brief explanation of how you identified and applied the LQA values",   "k8_value": "Value in cell K8 after update",   "l2_value": "Value in cell L2 after update",   "k17_value": "Value in cell K17 after update",   "k20_value": "Value in cell K20 after update",   "e27_value": "Value in cell E27 (DCF result)" }`
+```json
+{
+  "reasoning_steps": "Brief explanation of how you identified and applied the LQA values",
+  "k8_value": "Value in cell K8 after update",
+  "l2_value": "Value in cell L2 after update",
+  "k17_value": "Value in cell K17 after update",
+  "k20_value": "Value in cell K20 after update",
+  "e27_value": "Value in cell E27 (DCF result)"
+}
+```

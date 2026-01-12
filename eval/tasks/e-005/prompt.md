@@ -45,11 +45,13 @@ Negative Constraints:
 Provide your response as a raw JSON object with the following keys. Do not
 include any markdown formatting, backticks, or preamble.
 
-`{
+```json
+{
   "q3_revenue": "Q3 2025 total net sales in millions USD",
   "q3_operating_income": "Q3 2025 operating income in millions USD",
   "q3_diluted_eps": "Q3 2025 diluted earnings per share",
   "q4_revenue_guidance": "Q4 2025 revenue guidance range in billions USD (e.g., '206.0 - 213.0')",
   "q4_operating_income_guidance": "Q4 2025 operating income guidance range in billions USD",
   "summary": "One-page earnings summary for senior bankers"
-}`
+}
+```

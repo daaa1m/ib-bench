@@ -42,7 +42,7 @@ Negative Constraints:
 Provide your response as a raw JSON object with the following keys. Do not
 include any markdown formatting, backticks, or preamble.
 
-```
+```json
 {
   "purchase_obligations_24m": "The total purchase obligations due within 24 months in millions USD (numeric format)",
   "source_reference": "Cite the exact section, page, or table from the 10-K where you found this data"

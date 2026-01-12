@@ -51,10 +51,12 @@ Negative Constraints:
 Provide your response as a raw JSON object with the following keys. Do not
 include any markdown formatting, backticks, or preamble.
 
-`{
+```json
+{
   "covenant_summary": "A structured table or list of all financial covenants with their names, definitions, thresholds, and testing frequency",
   "leverage_covenant": "The leverage ratio covenant details including definition and threshold(s)",
   "coverage_covenant": "The interest coverage or fixed charge coverage covenant details including definition and threshold(s)",
   "testing_frequency": "How and when covenants are tested (e.g., quarterly on trailing twelve months basis)",
   "extraction_methodology": "Brief description of how you located and parsed the covenant information"
-}`
+}
+```

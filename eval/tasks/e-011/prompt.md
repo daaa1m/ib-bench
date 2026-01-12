@@ -46,7 +46,8 @@ Negative Constraints:
 Provide your response as a raw JSON object with the following keys. Do not
 include any markdown formatting, backticks, or preamble.
 
-`{
+```json
+{
   "maturity_schedule": {
     "year_1": "Amount for first maturity year (include year label, e.g., '2024: $X million')",
     "year_2": "Amount for second maturity year",
@@ -59,4 +60,5 @@ include any markdown formatting, backticks, or preamble.
   "units": "Units of measurement (e.g., 'millions USD', 'thousands USD')",
   "source_location": "Specific footnote number and page reference where data was found",
   "methodology": "Brief description of how you located and verified the maturity schedule"
-}`
+}
+```

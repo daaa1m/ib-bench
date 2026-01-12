@@ -75,11 +75,13 @@ formatting conventions above.
 JSON object with the following keys. Do not include any markdown formatting,
 backticks, or preamble.
 
-`{
+```json
+{
   "p22_total_cogs_q4e": "Value in cell P22 (Q4 2025 estimated total COGS)",
   "f28_service_q4_index_2023": "Value in cell F28 (Service Q4 seasonal index for 2023)",
   "g30_auto_credit_2023": "Value in cell G30 (2023 total auto credit revenue)",
   "p32_gross_profit_q4e": "Value in cell P32 (Q4 2025 gross profit ex auto credits)",
   "c32_gross_profit_q1_2023": "Value in cell C32 (Q1 2023 gross profit ex auto credits)",
   "data_sources": "Brief description of sources used for Tesla financial data"
-}`
+}
+```

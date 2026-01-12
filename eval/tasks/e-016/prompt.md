@@ -35,7 +35,8 @@ Negative Constraints:
 
 Provide your response as a raw JSON object with the following keys. Do not include any markdown formatting, backticks, or preamble.
 
-`{
+```json
+{
   "deal_structure": "Transaction type, parties, and form of consideration",
   "purchase_price": "Per-share price and implied total equity value if stated",
   "conditions_to_closing": "Key closing conditions including regulatory and shareholder requirements",
@@ -43,4 +44,5 @@ Provide your response as a raw JSON object with the following keys. Do not inclu
   "mac_provisions": "MAC/MAE definition scope and key carve-outs",
   "other_material_terms": "Any other economically significant provisions (go-shop, financing conditions, etc.)",
   "reasoning": "Your analysis approach and how you identified the key terms"
-}`
+}
+```

@@ -71,11 +71,13 @@ circularity implemented, circularity switch turned ON, and IB formatting convent
 values from row 164 (with circularity ON). Provide as a raw JSON object with the
 following keys. Do not include any markdown formatting, backticks, or preamble.
 
-`{
+```json
+{
   "K164": "Total Cash Interest value in cell K164 (rounded to nearest integer)",
   "L164": "Total Cash Interest value in cell L164 (rounded to nearest integer)",
   "M164": "Total Cash Interest value in cell M164 (rounded to nearest integer)",
   "N164": "Total Cash Interest value in cell N164 (rounded to nearest integer)",
   "O164": "Total Cash Interest value in cell O164 (rounded to nearest integer)",
   "implementation_notes": "Brief explanation of changes made"
-}`
+}
+```
