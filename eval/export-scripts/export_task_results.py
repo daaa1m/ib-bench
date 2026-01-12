@@ -2,8 +2,10 @@
 Export task results with scores per model for analysis.
 
 Usage:
-    uv run python eval/export_task_results.py                 # Export to tmp/
-    uv run python eval/export_task_results.py output/         # Export to output/
+    uv run eval/export-scripts/export_task_results.py
+        # Export to eval/export-scripts/task-results/task_results-<timestamp>.json
+    uv run eval/export-scripts/export_task_results.py output/
+        # Export to output/task_results-<timestamp>.json
 """
 
 import argparse
@@ -234,14 +236,15 @@ def get_model_results(
     return list(results_by_task.values())
 
 
-def export_task_results(output_dir: str = "tmp") -> Path:
+def export_task_results(output_dir: str | None = None) -> Path:
     """Export task results with scores per model. Returns path to exported file."""
-    eval_dir = Path(__file__).parent
+    eval_dir = Path(__file__).resolve().parents[1]
     tasks_dir = eval_dir / "tasks"
     scores_dir = eval_dir / "scores"
     responses_dir = eval_dir / "responses"
 
-    output_path = Path(output_dir)
+    default_output_dir = Path(__file__).parent / "task-results"
+    output_path = Path(output_dir) if output_dir else default_output_dir
     output_path.mkdir(parents=True, exist_ok=True)
 
     config = load_config()
@@ -301,14 +304,15 @@ def export_task_results(output_dir: str = "tmp") -> Path:
 
 
 def main():
+    default_output_dir = Path(__file__).parent / "task-results"
     parser = argparse.ArgumentParser(
         description="Export task results with scores per model"
     )
     parser.add_argument(
         "output_dir",
         nargs="?",
-        default="tmp",
-        help="Output directory (default: tmp)",
+        default=None,
+        help=f"Output directory (default: {default_output_dir})",
     )
     args = parser.parse_args()
 

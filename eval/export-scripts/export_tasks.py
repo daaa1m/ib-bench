@@ -2,8 +2,10 @@
 Export task metadata to JSON for frontend consumption.
 
 Usage:
-    uv run python eval/export_tasks.py                 # Export to tmp/tasks.json
-    uv run python eval/export_tasks.py output/         # Export to output/tasks.json
+    uv run eval/export-scripts/export_tasks.py
+        # Export to eval/export-scripts/tasks/tasks-<timestamp>.json
+    uv run eval/export-scripts/export_tasks.py output/
+        # Export to output/tasks-<timestamp>.json
 """
 
 import argparse
@@ -14,9 +16,11 @@ from pathlib import Path
 import yaml
 
 
-def export_tasks_meta(output_dir: str = "tmp") -> Path:
-    tasks_dir = Path(__file__).parent / "tasks"
-    output_path = Path(output_dir)
+def export_tasks_meta(output_dir: str | None = None) -> Path:
+    eval_dir = Path(__file__).resolve().parents[1]
+    tasks_dir = eval_dir / "tasks"
+    default_output_dir = Path(__file__).parent / "tasks"
+    output_path = Path(output_dir) if output_dir else default_output_dir
     output_path.mkdir(parents=True, exist_ok=True)
 
     tasks = []
@@ -93,9 +97,13 @@ def export_tasks_meta(output_dir: str = "tmp") -> Path:
 
 
 def main():
+    default_output_dir = Path(__file__).parent / "tasks"
     parser = argparse.ArgumentParser(description="Export task metadata to JSON")
     parser.add_argument(
-        "output_dir", nargs="?", default="tmp", help="Output directory (default: tmp)"
+        "output_dir",
+        nargs="?",
+        default=None,
+        help=f"Output directory (default: {default_output_dir})",
     )
     args = parser.parse_args()
 
