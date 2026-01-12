@@ -1,1 +1,28 @@
-// generate DD questions for a meeting with mgmt. after reviewing materials.
+# yaml-language-server: $schema=../../schema/meta.schema.json
+
+task:
+  id: e-013
+  title: "Draft management diligence questions for Dollar General"
+  type: creating
+  category:
+    - due-diligence
+    - financial-analysis
+  input_type: web
+  description: >
+    Create 10 management diligence questions for Dollar General using current
+    public information. Questions must cover margin drivers (shrink, damages,
+    media network, private label, distribution efficiency), SG&A drivers
+    (incentive comp, retail labor, repairs/maintenance), inventory management and
+    SKU rationalization, store productivity, pricing/markdowns/competitor
+    dynamics, digital delivery channels (DoorDash, Uber, owned channel), and
+    low-income consumer/SNAP exposure. Tests ability to turn market context into
+    focused DD questions.
+
+prompt:
+  notes: >
+    Use web sources for recent Dollar General performance and industry context.
+    Provide 10 prioritized questions with rationale and sources.
+
+input:
+  input-file-original: null
+  notes: Web research only; no local inputs.

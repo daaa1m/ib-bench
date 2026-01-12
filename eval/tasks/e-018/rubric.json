@@ -4,36 +4,53 @@
   "total_points": 100,
   "criteria": {
     "error_location": {
-      "description": "Must identify the specific cell or row containing the NWC formula error.",
+      "description": "Identifies the Change in NWC line in BS & CFS as the error location",
       "type": "programmatic",
       "match_type": "substring_one_of",
-      "accepted_values": [],
-      "points": 40,
-      "gates_llm": true
+      "accepted_values": [
+        "Row 61",
+        "61",
+        "Chg in NWC",
+        "BS & CFS Row 61",
+        "I61",
+        "J61"
+      ],
+      "points": 45
     },
     "corrected_formula": {
-      "description": "Must provide a corrected NWC formula with proper sign convention and period referencing.",
+      "description": "Provides the corrected sign for the Change in NWC formula",
       "type": "programmatic",
       "match_type": "regex_pattern",
-      "required_elements": [],
-      "forbidden_elements": ["#REF!", "#VALUE!", "#NAME?"],
-      "valid_patterns": [],
-      "points": 45,
-      "gates_llm": true
+      "valid_patterns": [
+        "H41-I41",
+        "I41-J41",
+        "J41-K41",
+        "-\(I41-H41\)",
+        "-\(J41-I41\)"
+      ],
+      "points": 40
     },
     "explanation": {
-      "description": "Must explain the NWC error and why the fix is correct, demonstrating understanding of working capital mechanics.",
-      "type": "llm_judge",
-      "core_concepts": [
-        "sign convention",
-        "working capital",
-        "cash flow",
-        "increase",
-        "decrease",
-        "current assets",
-        "current liabilities"
+      "description": "Explains that the sign was reversed in the working capital change",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": [
+        "sign",
+        "reversed",
+        "inverted",
+        "negative",
+        "should be subtracted",
+        "should be added"
       ],
-      "points": 15
+      "points": 10
+    },
+    "formatting": {
+      "description": "IB formatting conventions: blue for hardcoded numbers, green for cross-sheet refs, red for external workbook refs",
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "sheet": "BS & CFS",
+      "cells": ["I61:K61"],
+      "points": 5
     }
   }
 }

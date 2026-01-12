@@ -3,39 +3,32 @@
   "version": "1.0",
   "total_points": 100,
   "criteria": {
-    "transactions": {
-      "description": "Must provide 5 valid M&A transactions in enterprise software sector with complete deal information (acquirer, target, date, EV/EBITDA multiple). Deals should be real, from reputable sources, and within the specified timeframe (2022-2024). Each transaction should include a reasonable EV/EBITDA multiple (typically 10-40x for software companies).",
+    "deal_list": {
+      "description": "Ten qualifying H2 2025 E&P transactions with correct dates, parties, values, and payment types. Full credit for matches to the golden solution; partial credit for correct but non-listed transactions.",
       "type": "llm_judge",
       "core_concepts": [
-        "5 transactions provided",
-        "enterprise software sector",
-        "acquirer and target identified",
-        "announcement date in 2022-2024 range",
-        "EV/EBITDA multiple included",
-        "multiples in reasonable range for software (10-40x)",
-        "real verifiable deals"
+        "10 transactions",
+        "H2 2025",
+        "E&P oil & gas",
+        "deal value >= 100m",
+        "date",
+        "target or asset",
+        "acquirer",
+        "seller",
+        "payment type",
+        "deal value"
       ],
-      "points": 50
+      "points": 80
     },
-    "sources": {
-      "description": "Must cite reputable sources for the deal information. Sources should be verifiable and include company press releases, SEC filings, major financial news outlets (Bloomberg, Reuters, WSJ, etc.), or established deal databases. At least one source per deal is expected.",
+    "source_urls": {
+      "description": "Uses credible sources to support each transaction",
       "type": "llm_judge",
       "core_concepts": [
-        "sources provided",
-        "reputable financial sources",
-        "verifiable URLs or publications",
-        "sufficient coverage for 5 deals"
-      ],
-      "points": 30
-    },
-    "methodology": {
-      "description": "Must explain the approach used to identify and verify the comparable transactions. Should demonstrate understanding of what makes transactions comparable and how multiples were validated.",
-      "type": "llm_judge",
-      "core_concepts": [
-        "deal selection criteria explained",
-        "verification approach described",
-        "sector relevance considered",
-        "data quality awareness"
+        "press release",
+        "SEC filing",
+        "investor presentation",
+        "credible news",
+        "source URLs"
       ],
       "points": 20
     }

@@ -1,0 +1,68 @@
+{
+  "task_id": "e-015",
+  "version": "1.0",
+  "total_points": 100,
+  "criteria": {
+    "tier_1_targets": {
+      "description": "Tier 1 list includes 5 plausible U.S. biotech targets with market caps and strategic rationales; preference for the provided Tier 1 candidate list with partial credit for off-list names if rationale is strong",
+      "type": "llm_judge",
+      "core_concepts": [
+        "ELVN",
+        "KRYS",
+        "MDGL",
+        "RVMD",
+        "CGON",
+        "CYTK",
+        "VERA",
+        "5 targets",
+        "30-50% probability",
+        "U.S. biotech",
+        "market cap",
+        "strategic rationale"
+      ],
+      "points": 45
+    },
+    "tier_2_targets": {
+      "description": "Tier 2 list includes 5 plausible U.S. biotech targets with market caps and strategic rationales; preference for the provided Tier 2 candidate list with partial credit for off-list names if rationale is strong",
+      "type": "llm_judge",
+      "core_concepts": [
+        "RYTM",
+        "SLNO",
+        "XENE",
+        "ARWR",
+        "DNLI",
+        "INSM",
+        "RAPP",
+        "RLAY",
+        "SMMT",
+        "5 targets",
+        "15-30% probability",
+        "U.S. biotech",
+        "market cap",
+        "strategic rationale"
+      ],
+      "points": 35
+    },
+    "source_urls": {
+      "description": "Provides credible source URLs for market cap estimates and target context",
+      "type": "llm_judge",
+      "core_concepts": [
+        "source URLs",
+        "market cap",
+        "company context",
+        "credible sources"
+      ],
+      "points": 10
+    },
+    "selection_methodology": {
+      "description": "Explains the screening and tiering logic",
+      "type": "llm_judge",
+      "core_concepts": [
+        "screening criteria",
+        "tiering logic",
+        "probability range"
+      ],
+      "points": 10
+    }
+  }
+}

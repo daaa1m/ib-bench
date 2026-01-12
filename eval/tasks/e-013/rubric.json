@@ -1,0 +1,66 @@
+{
+  "task_id": "e-013",
+  "version": "1.0",
+  "total_points": 100,
+  "criteria": {
+    "questions": {
+      "description": "Ten ranked diligence questions that are specific, actionable, and tied to Dollar General’s current issues, each with a rationale and source",
+      "type": "llm_judge",
+      "core_concepts": [
+        "10 questions",
+        "ranked priority",
+        "specific to Dollar General",
+        "actionable management diligence",
+        "includes rationale",
+        "uses sources"
+      ],
+      "points": 55
+    },
+    "topic_coverage": {
+      "description": "Questions cover all required topic areas: margins/shrink/damages/media network/private label/distribution, SG&A drivers, inventory/SKU, store productivity, pricing/markdowns/competition, digital delivery, and low-income/SNAP exposure",
+      "type": "llm_judge",
+      "core_concepts": [
+        "shrink",
+        "damages",
+        "media network",
+        "private label",
+        "distribution efficiency",
+        "SG&A drivers",
+        "labor or incentive comp",
+        "repairs and maintenance",
+        "inventory management",
+        "SKU rationalization",
+        "store productivity",
+        "pricing and markdowns",
+        "competitor pricing",
+        "digital delivery",
+        "DoorDash or Uber",
+        "low-income consumer",
+        "SNAP"
+      ],
+      "points": 25
+    },
+    "source_support": {
+      "description": "Uses credible, relevant sources to ground the questions",
+      "type": "llm_judge",
+      "core_concepts": [
+        "earnings release",
+        "transcript",
+        "investor presentation",
+        "credible news",
+        "source URLs"
+      ],
+      "points": 10
+    },
+    "methodology_notes": {
+      "description": "Explains the approach used to identify and prioritize the questions",
+      "type": "llm_judge",
+      "core_concepts": [
+        "source review",
+        "issue identification",
+        "prioritization logic"
+      ],
+      "points": 10
+    }
+  }
+}

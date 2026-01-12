@@ -1,20 +1,28 @@
+# yaml-language-server: $schema=../../schema/meta.schema.json
+
 task:
   id: e-019
-  title: "Extract credit agreement financial covenants"
+  title: "Extract AMC HY indenture covenant terms"
   type: extraction
   category:
-    - data-extraction
+    - document-review
     - due-diligence
+    - data-extraction
   input_type: pdf
-  description:
-    "LLM is provided a credit agreement and must extract financial covenants
-    including specific ratios (leverage, coverage), threshold levels, and
-    testing frequency. Expected answer: covenant table with definitions and
-    limits. Tests LLM's ability to parse credit documentation."
+  description: >
+    Extract key covenant terms from AMC Entertainment's high-yield indenture.
+    Focus on debt incurrence, restricted payments, asset sales, change of
+    control, and liens/guarantor provisions with specific ratios, baskets,
+    thresholds, and timelines. Tests ability to parse indentures for material
+    covenant mechanics.
 
 prompt:
-  notes: "LLM should capture both ratio definitions and numeric thresholds"
+  notes: >
+    Use only the attached indenture in input.pdf and focus on the specified
+    covenant sections.
 
 input:
-  input-file-original: None
-  notes: "TODO: source credit agreement with clear covenant section"
+  input-file-original: null
+  notes: >
+    input.pdf is the AMC Entertainment HY bond indenture used for covenant
+    extraction.
