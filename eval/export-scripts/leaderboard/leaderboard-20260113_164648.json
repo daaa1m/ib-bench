@@ -1,0 +1,73 @@
+{
+  "leaderboard_version": "1.0",
+  "generated_at": "2026-01-13T16:46:48.933694",
+  "benchmark_version": "1.0",
+  "weights": {
+    "easy": 0.2,
+    "medium": 0.35,
+    "hard": 0.45
+  },
+  "task_counts": {
+    "easy": 20,
+    "medium": 10,
+    "hard": 3
+  },
+  "entries": [
+    {
+      "rank": 1,
+      "model": "claude-opus-4-5-20251101",
+      "provider": "anthropic",
+      "overall_score": 46.0,
+      "scores_by_difficulty": {
+        "easy": {
+          "score": 50.0,
+          "completed": 10,
+          "total": 20
+        },
+        "medium": {
+          "score": 43.8,
+          "completed": 8,
+          "total": 10
+        },
+        "hard": {
+          "score": 0.0,
+          "completed": 0,
+          "total": 3
+        }
+      },
+      "run_id": "20260113_065322",
+      "run_date": "2026-01-13",
+      "tasks_attempted": 18,
+      "tasks_total": 33,
+      "tasks_blocked": 0
+    },
+    {
+      "rank": 2,
+      "model": "gpt-5.2-2025-12-11",
+      "provider": "openai",
+      "overall_score": 12.2,
+      "scores_by_difficulty": {
+        "easy": {
+          "score": 35.0,
+          "completed": 10,
+          "total": 20
+        },
+        "medium": {
+          "score": 0.0,
+          "completed": 5,
+          "total": 10
+        },
+        "hard": {
+          "score": 0.0,
+          "completed": 0,
+          "total": 3
+        }
+      },
+      "run_id": "20260113_153414",
+      "run_date": "2026-01-13",
+      "tasks_attempted": 15,
+      "tasks_total": 33,
+      "tasks_blocked": 7
+    }
+  ]
+}

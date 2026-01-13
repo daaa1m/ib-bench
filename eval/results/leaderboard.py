@@ -355,6 +355,7 @@ def export_json(
     entries: list[LeaderboardEntry],
     weights: dict[str, float],
     output_path: Path,
+    output_file: Path | None = None,
 ):
     """Export leaderboard as JSON."""
     config = load_config()
@@ -399,11 +400,11 @@ def export_json(
         ],
     }
 
-    output_file = output_path / "leaderboard.json"
-    with open(output_file, "w") as f:
+    resolved_output_file = output_file or (output_path / "leaderboard.json")
+    with open(resolved_output_file, "w") as f:
         json.dump(data, f, indent=2)
 
-    print(f"Exported to: {output_file}")
+    print(f"Exported to: {resolved_output_file}")
 
 
 def main():
