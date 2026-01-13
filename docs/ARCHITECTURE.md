@@ -74,7 +74,7 @@ Read in this order to build understanding incrementally:
 |-------|------|-----|------|
 | 1 | `CLAUDE.md` | Project overview, commands, conventions | 5 min |
 | 2 | `eval/tasks/e-001/` | Example task structure (all 4 files) | 5 min |
-| 3 | `eval/configs/quick-test.yaml` | How runs are configured | 2 min |
+| 3 | `eval/configs/quick-test.yaml` | Config file (copy from `eval/configs.example/`) | 2 min |
 
 ### Level 2: Main Pipeline
 
@@ -355,6 +355,8 @@ eval/
 ## Cheat Sheet
 
 ### Running Tasks
+
+Copy `eval/configs.example/` to `eval/configs/` before running.
 
 ```bash
 # Single task

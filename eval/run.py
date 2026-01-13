@@ -5,6 +5,8 @@ Usage:
     uv run python eval/run.py --config configs/quick-test.yaml
     uv run python eval/run.py --config configs/full-easy.yaml
     uv run python eval/run.py --config configs/quick-test.yaml --resume MODEL/RUN_ID
+
+Config examples live in eval/configs.example. Copy to eval/configs for local overrides.
 """
 
 import argparse

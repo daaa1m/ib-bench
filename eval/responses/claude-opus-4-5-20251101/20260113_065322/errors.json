@@ -1,0 +1,42 @@
+{
+  "errors": [
+    {
+      "task_id": "m-009",
+      "timestamp": "2026-01-13T06:56:26.587376",
+      "provider": "anthropic",
+      "model": "claude-opus-4-5-20251101",
+      "summary": "APIConnectionError: Connection error.",
+      "details": {
+        "error_type": "APIConnectionError",
+        "message": "Connection error."
+      },
+      "next_steps": [
+        "Re-run with --verbose to see full error details",
+        "Retry with --resume claude-opus-4-5-20251101/20260113_065322"
+      ],
+      "input_files": [
+        "input.xlsx"
+      ]
+    },
+    {
+      "task_id": "m-010",
+      "timestamp": "2026-01-13T06:56:28.044648",
+      "provider": "anthropic",
+      "model": "claude-opus-4-5-20251101",
+      "summary": "APIConnectionError: Connection error.",
+      "details": {
+        "error_type": "APIConnectionError",
+        "message": "Connection error."
+      },
+      "next_steps": [
+        "Re-run with --verbose to see full error details",
+        "Retry with --resume claude-opus-4-5-20251101/20260113_065322"
+      ],
+      "input_files": [
+        "input-1.xlsx",
+        "input-2.pdf"
+      ]
+    }
+  ],
+  "count": 2
+}

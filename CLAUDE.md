@@ -300,7 +300,7 @@ overall score (max 100).
 
 **Overall score:** `Easy×0.20 + Medium×0.35 + Hard×0.45`
 
-Configuration is in `eval/configs/leaderboard_config.yaml`:
+Configuration is in `eval/configs/leaderboard_config.yaml` (copy from `eval/configs.example/` if needed):
 
 ```yaml
 weights:
