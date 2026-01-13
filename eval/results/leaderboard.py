@@ -234,15 +234,17 @@ def calculate_entry(
     medium = tier_score("medium")
     hard = tier_score("hard")
 
-    # Calculate weighted overall score
-    overall_weights = weights
-    if hard.completed == 0:
-        overall_weights = {"easy": 0.35, "medium": 0.65, "hard": 0.0}
+    easy_raw = (tier_credits["easy"] / easy.completed) * 100 if easy.completed else 0.0
+    medium_raw = (
+        (tier_credits["medium"] / medium.completed) * 100 if medium.completed else 0.0
+    )
+    hard_raw = (tier_credits["hard"] / hard.completed) * 100 if hard.completed else 0.0
 
+    # Calculate weighted overall score
     overall = (
-        easy.score * overall_weights["easy"]
-        + medium.score * overall_weights["medium"]
-        + hard.score * overall_weights["hard"]
+        easy_raw * weights["easy"]
+        + medium_raw * weights["medium"]
+        + hard_raw * weights["hard"]
     )
 
     # Extract run date from run_id (format: YYYYMMDD_HHMMSS)

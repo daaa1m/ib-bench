@@ -19,6 +19,7 @@ Constraints:
 - Clearly state units and timeframes (e.g., USD millions, FY24A, FY25E).
 - Create a new Excel workbook with these sheets: `Summary`, `Income Statement`, `Balance Sheet`, `Cash Flow`, `Assumptions`, `Returns`.
 - Ensure the three statements tie and the model is internally consistent.
+- Use headless LibreOffice to recalculate the workbook; do not rely on calculations outside the spreadsheet.
 
 Negative Constraints:
 - DO NOT use any sources beyond the deck and filings.

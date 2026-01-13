@@ -134,6 +134,7 @@ When the task requires the LLM to create or modify an Excel file:
    ```
 3. **Specify which sheets/cells** should be modified or created
 4. **Include verification values** in JSON (e.g., `"cell_A1_value": "..."`) to confirm implementation
+5. **Add a constraint**: "Use headless LibreOffice to recalculate the workbook; do not rely on calculations outside the spreadsheet."
 
 ### Excel Formatting Conventions (REQUIRED for Excel output tasks):
 

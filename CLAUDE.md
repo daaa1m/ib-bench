@@ -9,6 +9,10 @@ on IB-specific work.
 - NEVER run a script with an API call, namely eval/run.py or eval/score.py (with
   an LLM judge) without specific instructions from the user
 
+## Authorization Rules
+
+- Do NOT create new git branches, stash changes, or raise PRs unless the user explicitly instructs you to do so.
+
 ## Package Management
 
 - Always run scripts using: `uv run script.py`

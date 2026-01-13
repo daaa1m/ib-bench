@@ -26,6 +26,7 @@ valuation. Focus exclusively on the **Marine DCF** sheet for editing.
 - Preserve all existing assumptions (discount rate, terminal growth, etc.)
 - Preserve the model structure
 - Use LQA values as the basis for FY2024 actuals
+- Use headless LibreOffice to recalculate the workbook; do not rely on calculations outside the spreadsheet.
 
 ## Negative Constraints
 

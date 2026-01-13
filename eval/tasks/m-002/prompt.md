@@ -33,6 +33,7 @@ company reports for the Marine Transportation segment.
 - Update ONLY cells that need new data values in column AQ and G
 - Preserve all existing formulas and model structure
 - Use values exactly as reported in SEC filings
+- Use headless LibreOffice to recalculate the workbook; do not rely on calculations outside the spreadsheet.
 
 ## Negative Constraints
 

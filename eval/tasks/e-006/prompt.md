@@ -45,6 +45,7 @@ Constraints:
 - The circularity switch must be clearly labeled and easy to find
 - Interest calculation must use AVERAGE or (Begin + End) / 2 formula structure
 - Preserve all existing model functionality
+- Use headless LibreOffice to recalculate the workbook; do not rely on calculations outside the spreadsheet.
 
 Negative Constraints:
 - DO NOT hard-code any values

@@ -254,8 +254,6 @@ def analyze_run(config: dict, results: list[TaskResult], total_tasks: int):
     weights = leaderboard_config.get(
         "weights", {"easy": 0.20, "medium": 0.35, "hard": 0.45}
     )
-    if not by_difficulty["hard"]:
-        weights = {"easy": 0.35, "medium": 0.65, "hard": 0.0}
     tier_scores = {}
     for diff in ["easy", "medium", "hard"]:
         tasks = by_difficulty[diff]
