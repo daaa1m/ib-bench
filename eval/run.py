@@ -108,7 +108,7 @@ def _build_response_data(
     input_files: list[Path],
     output_file_paths: list[str],
 ) -> ResponseData:
-    return {
+    response_data: ResponseData = {
         "task_id": task_id,
         "model": response.model,
         "timestamp": datetime.now().isoformat(),
@@ -123,6 +123,7 @@ def _build_response_data(
             "latency_ms": response.latency_ms,
         },
     }
+    return response_data
 
 
 def _write_response_json(
