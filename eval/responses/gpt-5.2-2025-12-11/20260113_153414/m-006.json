@@ -1,0 +1,17 @@
+{
+  "task_id": "m-006",
+  "model": "gpt-5.2-2025-12-11",
+  "timestamp": "2026-01-13T15:35:06.625881",
+  "input_files": [
+    "input-1.xlsx"
+  ],
+  "output_files": [],
+  "raw_response": "",
+  "parsed_response": null,
+  "stop_reason": "content_filter",
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_ms": 51810.98389625549
+  }
+}

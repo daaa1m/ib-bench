@@ -1,0 +1,72 @@
+{
+  "task_id": "m-005",
+  "rubric_hash": "ab267571",
+  "scored_at": "2026-01-13T16:03:16.427457",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "formatting",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "points": 10,
+      "points_earned": 0,
+      "actual": null,
+      "details": "No output files available for formatting check"
+    },
+    {
+      "id": "p22_total_cogs_q4e",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 23,
+      "points_earned": 0,
+      "actual": null,
+      "details": "No output files available for excel check [GATES LLM]"
+    },
+    {
+      "id": "f28_service_q4_index_2023",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 18,
+      "points_earned": 0,
+      "actual": null,
+      "details": "No output files available for excel check"
+    },
+    {
+      "id": "g30_auto_credit_2023",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 18,
+      "points_earned": 0,
+      "actual": null,
+      "details": "No output files available for excel check"
+    },
+    {
+      "id": "p32_gross_profit_q4e",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 18,
+      "points_earned": 0,
+      "actual": null,
+      "details": "No output files available for excel check"
+    },
+    {
+      "id": "c32_gross_profit_q1_2023",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 13,
+      "points_earned": 0,
+      "actual": null,
+      "details": "No output files available for excel check"
+    }
+  ]
+}
