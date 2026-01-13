@@ -5,17 +5,17 @@
   "blocked": 0,
   "skipped": 0,
   "total_points": 100,
-  "points_earned": 0,
+  "points_earned": 9.0,
   "results": [
     {
       "task_id": "h-001",
       "passed": false,
-      "points_earned": 0,
+      "points_earned": 9.0,
       "total_points": 100,
-      "score_percent": 0.0
+      "score_percent": 9.0
     }
   ],
-  "overall_percent": 0.0,
+  "overall_percent": 9.0,
   "rubric_hashes": {
     "h-001": "d84b33a7"
   }

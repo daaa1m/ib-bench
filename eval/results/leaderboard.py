@@ -241,14 +241,10 @@ def calculate_entry(
     hard_raw = (tier_credits["hard"] / hard.completed) * 100 if hard.completed else 0.0
 
     # Calculate weighted overall score
-    overall_weights = weights
-    if hard.completed == 0:
-        overall_weights = {"easy": 0.35, "medium": 0.65, "hard": 0.0}
-
     overall = (
-        easy_raw * overall_weights["easy"]
-        + medium_raw * overall_weights["medium"]
-        + hard_raw * overall_weights["hard"]
+        easy_raw * weights["easy"]
+        + medium_raw * weights["medium"]
+        + hard_raw * weights["hard"]
     )
 
     # Extract run date from run_id (format: YYYYMMDD_HHMMSS)
