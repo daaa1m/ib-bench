@@ -1,0 +1,325 @@
+{
+  "tasks": [
+    {
+      "id": "e-001",
+      "title": "Find the balance sheet error in an LBO model",
+      "type": "fix-error",
+      "category": [
+        "financial-analysis"
+      ],
+      "input_type": "excel"
+    },
+    {
+      "id": "e-002",
+      "title": "Summarize Grant's Interest Rate Observer article",
+      "type": "summarise",
+      "category": [
+        "document-review"
+      ],
+      "input_type": "pdf"
+    },
+    {
+      "id": "e-003",
+      "title": "Extract AMZN purchase obligations from SEC 10-K",
+      "type": "extraction",
+      "category": [
+        "data-extraction",
+        "due-diligence"
+      ],
+      "input_type": "web"
+    },
+    {
+      "id": "e-004",
+      "title": "Reconcile AMD GAAP to non-GAAP operating income",
+      "type": "extraction",
+      "category": [
+        "data-extraction",
+        "financial-analysis"
+      ],
+      "input_type": "web"
+    },
+    {
+      "id": "e-005",
+      "title": "Extract AMZN Q3 2025 earnings metrics and write summary",
+      "type": "extraction",
+      "category": [
+        "data-extraction",
+        "document-review"
+      ],
+      "input_type": "multi"
+    },
+    {
+      "id": "e-006",
+      "title": "Add interest circularity to LBO model",
+      "type": "fix-error",
+      "category": [
+        "financial-analysis"
+      ],
+      "input_type": "excel"
+    },
+    {
+      "id": "e-007",
+      "title": "Synthesize GS and JPM equity research on Alphabet",
+      "type": "summarise",
+      "category": [
+        "document-review",
+        "financial-analysis"
+      ],
+      "input_type": "multi"
+    },
+    {
+      "id": "e-008",
+      "title": "Summarize TSLA 10-K MD&A section",
+      "type": "summarise",
+      "category": [
+        "document-review"
+      ],
+      "input_type": "pdf"
+    },
+    {
+      "id": "e-009",
+      "title": "Extract key assumptions from LBO model",
+      "type": "extraction",
+      "category": [
+        "data-extraction",
+        "financial-analysis"
+      ],
+      "input_type": "excel"
+    },
+    {
+      "id": "e-010",
+      "title": "Find and fix multiple errors in an LBO model",
+      "type": "fix-error",
+      "category": [
+        "financial-analysis"
+      ],
+      "input_type": "excel"
+    },
+    {
+      "id": "e-011",
+      "title": "Build Carnival debt schedule from 3Q22-2025",
+      "type": "creating",
+      "category": [
+        "financial-analysis",
+        "data-extraction"
+      ],
+      "input_type": "multi"
+    },
+    {
+      "id": "e-012",
+      "title": "Summarize S-1 top risk factors for Coinbase",
+      "type": "summarise",
+      "category": [
+        "document-review",
+        "due-diligence"
+      ],
+      "input_type": "pdf"
+    },
+    {
+      "id": "e-013",
+      "title": "Draft management diligence questions for Dollar General",
+      "type": "creating",
+      "category": [
+        "due-diligence",
+        "financial-analysis"
+      ],
+      "input_type": "web"
+    },
+    {
+      "id": "e-014",
+      "title": "Complete balance sheet and cash flow in a 3-statement model",
+      "type": "creating",
+      "category": [
+        "financial-analysis"
+      ],
+      "input_type": "excel"
+    },
+    {
+      "id": "e-015",
+      "title": "Identify U.S. biotech M&A targets by tier",
+      "type": "creating",
+      "category": [
+        "financial-analysis",
+        "due-diligence"
+      ],
+      "input_type": "web"
+    },
+    {
+      "id": "e-016",
+      "title": "Summarize Compass-Anywhere merger agreement terms",
+      "type": "summarise",
+      "category": [
+        "document-review",
+        "due-diligence"
+      ],
+      "input_type": "pdf"
+    },
+    {
+      "id": "e-017",
+      "title": "Build E&P oil & gas M&A comps for H2 2025",
+      "type": "creating",
+      "category": [
+        "financial-analysis",
+        "data-extraction"
+      ],
+      "input_type": "excel"
+    },
+    {
+      "id": "e-018",
+      "title": "Fix NWC sign error in 3-statement model",
+      "type": "fix-error",
+      "category": [
+        "financial-analysis"
+      ],
+      "input_type": "excel"
+    },
+    {
+      "id": "e-019",
+      "title": "Extract AMC HY indenture covenant terms",
+      "type": "extraction",
+      "category": [
+        "document-review",
+        "due-diligence",
+        "data-extraction"
+      ],
+      "input_type": "pdf"
+    },
+    {
+      "id": "e-020",
+      "title": "Populate top 15 Apple shareholders from 13F data",
+      "type": "extraction",
+      "category": [
+        "data-extraction",
+        "financial-analysis"
+      ],
+      "input_type": "excel"
+    },
+    {
+      "id": "h-001",
+      "title": "Update WildBrain model for new revenue segmentation",
+      "type": "creating",
+      "category": [
+        "financial-analysis",
+        "data-extraction"
+      ],
+      "input_type": "excel"
+    },
+    {
+      "id": "h-002",
+      "title": "Build LBO model and assessment for Albertsons",
+      "type": "creating",
+      "category": [
+        "financial-analysis",
+        "due-diligence"
+      ],
+      "input_type": "excel"
+    },
+    {
+      "id": "h-003",
+      "title": "Build 3-statement model and co-investment view for Phillips 66",
+      "type": "creating",
+      "category": [
+        "financial-analysis",
+        "due-diligence",
+        "document-review"
+      ],
+      "input_type": "multi"
+    },
+    {
+      "id": "m-001",
+      "title": "Update DCF model with LQA values and recalculate valuation",
+      "type": "creating",
+      "category": [
+        "financial-analysis"
+      ],
+      "input_type": "excel"
+    },
+    {
+      "id": "m-002",
+      "title": "Update Kirby Corp financial model with 2Q24 data",
+      "type": "creating",
+      "category": [
+        "financial-analysis"
+      ],
+      "input_type": "multi"
+    },
+    {
+      "id": "m-003",
+      "title": "Build LBO model from scratch for Reverse Logistics Group",
+      "type": "creating",
+      "category": [
+        "financial-analysis"
+      ],
+      "input_type": "excel"
+    },
+    {
+      "id": "m-004",
+      "title": "Generate M&A target list for European food ingredients sector",
+      "type": "extraction",
+      "category": [
+        "due-diligence",
+        "data-extraction"
+      ],
+      "input_type": "web"
+    },
+    {
+      "id": "m-005",
+      "title": "Build a seasonal cost of goods analysis for Tesla",
+      "type": "creating",
+      "category": [
+        "financial-analysis"
+      ],
+      "input_type": "excel"
+    },
+    {
+      "id": "m-006",
+      "title": "Find and fix three errors in EuropeCo LBO model",
+      "type": "fix-error",
+      "category": [
+        "financial-analysis"
+      ],
+      "input_type": "excel"
+    },
+    {
+      "id": "m-007",
+      "title": "Build management return analysis with sweet equity hurdle",
+      "type": "creating",
+      "category": [
+        "financial-analysis"
+      ],
+      "input_type": "excel"
+    },
+    {
+      "id": "m-008",
+      "title": "Analyze activist presentation and recommend co-investment (PepsiCo)",
+      "type": "summarise",
+      "category": [
+        "document-review",
+        "due-diligence",
+        "financial-analysis"
+      ],
+      "input_type": "web"
+    },
+    {
+      "id": "m-009",
+      "title": "Extract and populate ADT management guidance history",
+      "type": "extraction",
+      "category": [
+        "data-extraction",
+        "financial-analysis"
+      ],
+      "input_type": "multi"
+    },
+    {
+      "id": "m-010",
+      "title": "Update equity model with 3Q25 actuals (Moody's)",
+      "type": "creating",
+      "category": [
+        "financial-analysis",
+        "data-extraction"
+      ],
+      "input_type": "multi"
+    }
+  ],
+  "count": 33
+}
