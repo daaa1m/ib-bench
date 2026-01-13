@@ -30,7 +30,7 @@ class TaskResult:
 
     @property
     def credit_tier(self) -> str:
-        if self.score_percent >= 100:
+        if self.score_percent >= 90:
             return "full"
         elif self.score_percent >= 50:
             return "half"
@@ -193,7 +193,7 @@ def calc_credits(task_results: list[TaskResult]) -> float:
     """Calculate total credits from task results."""
     credits = 0.0
     for r in task_results:
-        if r.score_percent >= 100:
+        if r.score_percent >= 90:
             credits += 1.0
         elif r.score_percent >= 50:
             credits += 0.5
