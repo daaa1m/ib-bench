@@ -1,0 +1,83 @@
+{
+  "task_id": "m-008",
+  "rubric_hash": "8cdfbf06",
+  "scored_at": "2026-01-13T13:33:13.609732",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 79.25,
+  "score_percent": 79.25,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "executive_summary",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 8.5,
+      "actual": "0.85",
+      "details": "Score: 0.85 - Three clear, prioritized bullets that capture the situation (FLNA underperformance), thesis (management accountability/operational improvement), and recommendation (conditional investment at \u226421x NTM P/E). Appropriately concise for IC presentation. Specific entry multiple and conditions demonstrate investment discipline. Would be stronger with a dollar amount or position size recommendation, but otherwise IC-ready."
+    },
+    {
+      "id": "state_of_company",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 12.0,
+      "actual": "0.80",
+      "details": "Score: 0.80 - Provides clear narrative of PepsiCo's underperformance concentrated in FLNA (~25% revenue, 40%+ profit contribution). Identifies specific issues: volume declines, share losses, margin compression, retailer relationship deterioration. Links problems to post-COVID pricing strategy. However, lacks specific numbers (how much volume decline? what market share loss? which quarters?). For an investment memo, would expect at least some quantification even if directional. Solid qualitative summary but missing numerical precision expected in banking work."
+    },
+    {
+      "id": "activist_thesis",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 12.75,
+      "actual": "0.85",
+      "details": "Score: 0.85 - Clearly articulates Elliott's five-point thesis: (1) price-over-volume strategy backfired, (2) volume declines accelerating, (3) competitors gaining sticky share, (4) management credibility lost, (5) board accountability lacking. Logically connects operational failures to valuation discount and need for leadership change. Well-structured and persuasive. Minor gap: doesn't specify what Elliott's target valuation or timeline is, which would typically be in an activist presentation."
+    },
+    {
+      "id": "value_creation_plan",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 11.25,
+      "actual": "0.75",
+      "details": "Score: 0.75 - Four initiatives with clear structure (what/why/evidence). Leadership change, pricing reset, operational efficiency, and capital allocation are logical and interconnected. However, initiatives lack specificity on magnitude and timeline - no targets for volume recovery, margin impact, cost savings, or capital deployment. 'Evidence from deck' citations are vague ('referenced throughout deck', 'multiple slides') rather than specific page/chart references. For IC presentation, would expect more quantification of value creation (e.g., 'pricing reset could recover X% volume over Y quarters, worth Z basis points of multiple expansion'). Directionally correct but lacks analytical rigor."
+    },
+    {
+      "id": "valuation_recommendation",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 14.0,
+      "actual": "0.70",
+      "details": "Score: 0.70 - Provides clear conditional recommendation with specific entry multiple (\u226421x NTM P/E vs. current 22-23x), upside case (26-28x, implying 20-30% return), and downside case (18-19x, implying 10-15% loss). Risk/reward framework is reasonable. Four specific conditions to invest show discipline. However, critical gaps: (1) no current stock price or market cap, (2) no calculation of what 21x NTM P/E implies in dollar terms, (3) NTM earnings estimate not provided, (4) no discussion of position sizing or portfolio context, (5) 'conditional' recommendation is somewhat equivocal for IC - typically need clearer yes/no with conditions as execution milestones. Framework is sound but lacks the numerical precision and decisiveness expected for an actual investment decision."
+    },
+    {
+      "id": "risk_assessment",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 17.0,
+      "actual": "0.85",
+      "details": "Score: 0.85 - Identifies five material risks: management entrenchment, continued volume deterioration, margin compression, campaign timeline, and macro weakness. Each risk has clear 'why it matters' and specific signposts to monitor. Risks are realistic and comprehensive, covering governance, operational, financial, and timing dimensions. Signposts are actionable (Nielsen data, proxy dynamics, margin trends). Strong risk framework that demonstrates mature thinking. Minor improvement: could quantify probability or magnitude of each risk, but overall this is solid professional work."
+    },
+    {
+      "id": "presentation_quality",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 5,
+      "points_earned": 3.75,
+      "actual": "0.75",
+      "details": "Score: 0.75 - Well-structured memo with logical flow and professional tone. JSON format is clean and organized. Self-aware about evidence limitations (notes when deck provides qualitative vs. quantitative support). 'Missing info' section shows good judgment about gaps. However, significant issue: cannot verify ANY claims against source document since it wasn't provided. All 'evidence from deck' citations are vague and unverifiable. In real banking work, this would be unacceptable - every claim must tie to specific pages/exhibits. Additionally, lacks any numerical exhibits, charts, or tables that would typically support an investment memo. Presentation is competent but would require substantial verification and supporting materials before sharing."
+    }
+  ],
+  "judge": "claude-sonnet-4-5-20250929"
+}
