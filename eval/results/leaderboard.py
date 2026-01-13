@@ -235,10 +235,14 @@ def calculate_entry(
     hard = tier_score("hard")
 
     # Calculate weighted overall score
+    overall_weights = weights
+    if hard.completed == 0:
+        overall_weights = {"easy": 0.35, "medium": 0.65, "hard": 0.0}
+
     overall = (
-        easy.score * weights["easy"]
-        + medium.score * weights["medium"]
-        + hard.score * weights["hard"]
+        easy.score * overall_weights["easy"]
+        + medium.score * overall_weights["medium"]
+        + hard.score * overall_weights["hard"]
     )
 
     # Extract run date from run_id (format: YYYYMMDD_HHMMSS)
