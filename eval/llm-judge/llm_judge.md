@@ -16,6 +16,8 @@ The analyst had access to the following materials:
 
 {files_list}
 
+Additional judge-only attachments may be provided (named `judge-*`). These are supplied to you via file uploads for verification, even if the analyst under evaluation did not see them.
+
 ## Response to Evaluate
 
 {response_text}
