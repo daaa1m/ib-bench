@@ -17,3 +17,6 @@ wheels/
 
 # Private task folders
 eval/tasks/_private/
+
+# Local run configs
+eval/configs/
