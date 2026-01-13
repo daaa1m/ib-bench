@@ -529,6 +529,12 @@ def score_task(
     )
 
 
+def _select_judge_files(task: Task) -> list[Path]:
+    allowed_suffixes = {".pdf", ".xlsx", ".xls"}
+    judge_files = sorted(task.task_dir.glob("judge*.*"))
+    return [f for f in judge_files if f.suffix.lower() in allowed_suffixes]
+
+
 def score_llm_criteria(
     task: Task,
     parsed_response: dict[str, Any],
@@ -541,6 +547,8 @@ def score_llm_criteria(
     source_files = [
         f for f in task.input_files if f.suffix in [".pdf", ".xlsx", ".xls"]
     ]
+    judge_files = _select_judge_files(task)
+    source_files.extend(judge_files)
 
     llm_rubric = cast(Rubric, {"criteria": criteria})
     response_text = json.dumps(parsed_response, indent=2)
