@@ -1,0 +1,30 @@
+{
+  "total": 2,
+  "passed": 1,
+  "failed": 1,
+  "blocked": 0,
+  "skipped": 0,
+  "total_points": 200,
+  "points_earned": 84.4,
+  "results": [
+    {
+      "task_id": "m-010",
+      "passed": true,
+      "points_earned": 84.4,
+      "total_points": 100,
+      "score_percent": 84.4
+    },
+    {
+      "task_id": "m-009",
+      "passed": false,
+      "points_earned": 0,
+      "total_points": 100,
+      "score_percent": 0.0
+    }
+  ],
+  "overall_percent": 42.2,
+  "rubric_hashes": {
+    "m-010": "1a68534b",
+    "m-009": "423b748e"
+  }
+}

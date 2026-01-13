@@ -66,6 +66,7 @@ Brief bullet-point answers addressing:
 ## Constraints
 
 - Use only the provided Excel file as your data source
+- Use headless LibreOffice to recalculate the workbook; do not rely on calculations outside the spreadsheet.
 - Base year is 2020, first projection year is 2021
 - Assume exit at end of Year 5 (2025)
 - Model must be functional with working formulas

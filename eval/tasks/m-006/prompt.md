@@ -30,6 +30,7 @@ Apply these systematic checks:
 - Provide specific cell references for each error location
 - Fix the model so it calculates correctly
 - All values in millions EUR
+- Use headless LibreOffice to recalculate the workbook; do not rely on calculations outside the spreadsheet.
 
 ## Negative Constraints
 

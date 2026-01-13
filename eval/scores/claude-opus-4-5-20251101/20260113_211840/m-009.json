@@ -1,0 +1,53 @@
+{
+  "task_id": "m-009",
+  "rubric_hash": "423b748e",
+  "scored_at": "2026-01-13T21:46:39.901283",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "revenue_accuracy",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 30,
+      "points_earned": 0,
+      "actual": "#DIV/0!",
+      "details": "Cell E11 is not numeric: #DIV/0!"
+    },
+    {
+      "id": "ebitda_margin_accuracy",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 30,
+      "points_earned": 0,
+      "actual": "#DIV/0!",
+      "details": "Cell E12 is not numeric: #DIV/0!"
+    },
+    {
+      "id": "eps_accuracy",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 20,
+      "points_earned": 0,
+      "actual": 9.924999999999999,
+      "details": "Cell E13 = 9.924999999999999, expected 7.54 (diff: 2.384999999999999)"
+    },
+    {
+      "id": "fcf_accuracy",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 20,
+      "points_earned": 0,
+      "actual": 9412.5,
+      "details": "Cell E14 = 9412.5, expected 4900 (diff: 4512.5)"
+    }
+  ],
+  "judge": "claude-sonnet-4-5-20250929"
+}

@@ -59,6 +59,7 @@ You must fill in the Low and High values for these metrics:
 - EPS values should be in dollars (e.g., 0.85)
 - Leave cells blank if guidance was not provided for that metric/period
 - Only fill in cells highlighted in green
+- Use headless LibreOffice to recalculate the workbook; do not rely on calculations outside the spreadsheet.
 
 ## Formatting Requirements
 

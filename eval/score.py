@@ -437,10 +437,6 @@ def score_task(
     total_points = rubric.get("total_points", 100)
     parsed_response = response_data.get("parsed_response", {})
 
-    # Handle JSON parse failure
-    if not parsed_response:
-        return _build_json_parse_failure(task, response_data, total_points)
-
     results: list[CriterionResult] = []
 
     # Separate criteria by type
@@ -459,6 +455,10 @@ def score_task(
     human_criteria = {
         cid: spec for cid, spec in criteria.items() if spec.get("type") == "human_judge"
     }
+
+    # Handle JSON parse failure unless we are generating human templates
+    if not parsed_response and not human_criteria and not human_judge:
+        return _build_json_parse_failure(task, response_data, total_points)
 
     # Step 1: Run ALL programmatic checks
     output_files = response_data.get("output_files", [])

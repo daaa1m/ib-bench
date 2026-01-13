@@ -43,6 +43,7 @@ tie across tabs, and the balance sheet balances).
 - Keep units consistent with the model (values are in USD millions unless the
   model indicates otherwise)
 - Ensure the balance sheet balances for 3Q25 after the update
+- Use headless LibreOffice to recalculate the workbook; do not rely on calculations outside the spreadsheet.
 
 ## Negative Constraints
 

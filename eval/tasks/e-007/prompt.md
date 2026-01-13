@@ -34,6 +34,7 @@ Constraints:
 - Reference both Goldman Sachs and JPMorgan perspectives
 - Key drivers should be tied to specific model line items or segment metrics
 - Summary should be 400-600 words, suitable for senior banker briefing
+- Use headless LibreOffice to recalculate the workbook; do not rely on calculations outside the spreadsheet.
 
 Negative Constraints:
 

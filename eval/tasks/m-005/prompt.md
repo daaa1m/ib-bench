@@ -47,6 +47,7 @@ Your task is to:
 - All monetary values in millions USD
 - Q4 2025 estimate (column P) should use the average seasonal index
 - The circularity toggle in P9 controls whether Q4E calculations are active
+- Use headless LibreOffice to recalculate the workbook; do not rely on calculations outside the spreadsheet.
 
 ## Negative Constraints
 

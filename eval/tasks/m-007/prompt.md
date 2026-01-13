@@ -36,6 +36,7 @@ You must return the completed Excel workbook.
 - Sweet equity hurdle: 200% (exit equity >= 3x entry equity)
 - Use the model's circularity toggle setting
 - All values in millions USD
+- Use headless LibreOffice to recalculate the workbook; do not rely on calculations outside the spreadsheet.
 
 ## Negative Constraints
 

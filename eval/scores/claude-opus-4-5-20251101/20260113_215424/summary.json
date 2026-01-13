@@ -5,18 +5,18 @@
   "blocked": 0,
   "skipped": 0,
   "total_points": 100,
-  "points_earned": 53.75,
+  "points_earned": 0,
   "results": [
     {
-      "task_id": "m-008",
+      "task_id": "h-001",
       "passed": false,
-      "points_earned": 53.75,
+      "points_earned": 0,
       "total_points": 100,
-      "score_percent": 53.75
+      "score_percent": 0.0
     }
   ],
-  "overall_percent": 53.75,
+  "overall_percent": 0.0,
   "rubric_hashes": {
-    "m-008": "8cdfbf06"
+    "h-001": "d84b33a7"
   }
 }

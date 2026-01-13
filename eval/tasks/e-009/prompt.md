@@ -34,6 +34,7 @@ Constraints:
 - Include cell references where assumptions are located
 - Distinguish between assumption inputs and calculated values
 - Report interest rates and growth rates as percentages
+- Use headless LibreOffice to recalculate the workbook; do not rely on calculations outside the spreadsheet.
 
 Negative Constraints:
 
