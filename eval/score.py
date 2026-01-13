@@ -740,7 +740,9 @@ def score_run(responses_dir: Path, scores_dir: Path, args):
 
     # Find response files to score (exclude config.json)
     response_files = [
-        f for f in responses_dir.glob("*.json") if f.name != "config.json"
+        f
+        for f in responses_dir.glob("*.json")
+        if f.name not in {"config.json", "errors.json"}
     ]
 
     if args.tasks:

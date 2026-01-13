@@ -144,7 +144,7 @@ def _print_error(
     model: str,
     input_files: list[Path],
 ) -> dict[str, Any]:
-    details, summary, next_steps = build_error_report(error, verbose)
+    details, summary, next_steps = build_error_report(error, verbose=True)
     next_steps.append(f"Retry with --resume {run_id}")
 
     print(f"  ERROR {task_id}: {summary}")
@@ -425,11 +425,14 @@ Examples:
 
     successful = [r for r in results if r.get("status") == "success"]
     if not successful and not args.resume:
-        import shutil
+        if errors:
+            print(f"\nNo successful responses. Preserving {run_dir} for error review")
+        else:
+            import shutil
 
-        print(f"\nNo successful responses. Cleaning up {run_dir}")
-        shutil.rmtree(run_dir)
-        return
+            print(f"\nNo successful responses. Cleaning up {run_dir}")
+            shutil.rmtree(run_dir)
+            return
 
     existing_task_ids = {r.get("task_id") for r in existing_results}
     merged_results = existing_results + [
