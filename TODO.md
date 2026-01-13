@@ -1,6 +1,6 @@
 # TODO
 
-- sort out export task and export task results schema
+- sort out export task results schema
 - look into VCR tests for recording/replaying real API calls (config exists in
   tests/conftest.py)
 
