@@ -19,4 +19,4 @@ wheels/
 eval/tasks/_private/
 
 # Local run configs
-!eval/configs/
+eval/configs/
