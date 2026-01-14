@@ -214,16 +214,37 @@ def main():
         print()
         print("Merging scores from source runs...")
         scores_merged = 0
+        md_files_merged = 0
         for run_path in run_paths:
             score_path = scores_dir / run_path.relative_to(responses_dir)
             if score_path.exists():
                 for f in score_path.glob("*.json"):
                     if f.name != "summary.json":
-                        shutil.copy2(f, out_scores_path / f.name)
+                        with open(f) as src:
+                            score_data = json.load(src)
+
+                        if "response_file" in score_data:
+                            old_response = Path(score_data["response_file"])
+                            new_response = output_path / old_response.name
+                            score_data["response_file"] = str(new_response)
+
+                        if "human_template" in score_data:
+                            old_template = Path(score_data["human_template"])
+                            new_template = out_scores_path / old_template.name
+                            score_data["human_template"] = str(new_template)
+
+                        with open(out_scores_path / f.name, "w") as dst:
+                            json.dump(score_data, dst, indent=2)
                         scores_merged += 1
+
+                for f in score_path.glob("*.md"):
+                    shutil.copy2(f, out_scores_path / f.name)
+                    md_files_merged += 1
         print(
             f"  Merged {scores_merged} score files to {out_scores_path.relative_to(scores_dir)}"
         )
+        if md_files_merged > 0:
+            print(f"  Merged {md_files_merged} human scoring templates")
 
         print()
         print("Deleting source runs (responses + scores)...")
