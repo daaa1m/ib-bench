@@ -1,0 +1,63 @@
+{
+  "task_id": "m-004",
+  "rubric_hash": "b8f4e74a",
+  "scored_at": "2026-01-14T16:57:45.814457",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 16.0,
+  "score_percent": 16.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "target_count",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 10,
+      "points_earned": 10,
+      "actual": "{\"methodology\": \"Identified European private B2B food-ingredient and specialty food-chemical suppliers by triangulating (i) company websites and product portfolios, (ii) PE portfolio pages and deal announcements, and (iii) business databases/trade sources that commonly publish revenue bands (e.g., Dun & Bradstreet/Orbis-style profiles, PitchBook-style summaries, and trade press interviews). For each target, screened for: European HQ, private ownership (family or PE-backed), B2B to food & beverage manufacturers, and a defensible revenue band in the \\u20ac50M\\u2013\\u20ac500M range based on publicly stated figures, press coverage, or widely cited database estimates.\", \"targets\": [{\"company_name\": \"Prysmian Cavi e Sistemi Italia S.r.l.\", \"headquarters\": \"Milan, Italy\", \"estimated_revenue\": \"N/A\", \"key_products\": \"N/A\", \"ownership\": \"N/A\", \"rationale\": \"N/A\"}, {\"company_name\": \"N/A\", \"headquarters\": \"N/A\", \"estimated_revenue\": \"N/A\", \"key_products\": \"N/A\", \"ownership\": \"N/A\", \"rationale\": \"N/A\"}, {\"company_name\": \"N/A\", \"headquarters\": \"N/A\", \"estimated_revenue\": \"N/A\", \"key_products\": \"N/A\", \"ownership\": \"N/A\", \"rationale\": \"N/A\"}, {\"company_name\": \"N/A\", \"headquarters\": \"N/A\", \"estimated_revenue\": \"N/A\", \"key_products\": \"N/A\", \"ownership\": \"N/A\", \"rationale\": \"N/A\"}, {\"company_name\": \"N/A\", \"headquarters\": \"N/A\", \"estimated_revenue\": \"N/A\", \"key_products\": \"N/A\", \"ownership\": \"N/A\", \"rationale\": \"N/A\"}, {\"company_name\": \"N/A\", \"headquarters\": \"N/A\", \"estimated_revenue\": \"N/A\", \"key_products\": \"N/A\", \"ownership\": \"N/A\", \"rationale\": \"N/A\"}, {\"company_name\": \"N/A\", \"headquarters\": \"N/A\", \"estimated_revenue\": \"N/A\", \"key_products\": \"N/A\", \"ownership\": \"N/A\", \"rationale\": \"N/A\"}, {\"company_name\": \"N/A\", \"headquarters\": \"N/A\", \"estimated_revenue\": \"N/A\", \"key_products\": \"N/A\", \"ownership\": \"N/A\", \"rationale\": \"N/A\"}, {\"company_name\": \"N/A\", \"headquarters\": \"N/A\", \"estimated_revenue\": \"N/A\", \"key_products\": \"N/A\", \"ownership\": \"N/A\", \"rationale\": \"N/A\"}, {\"company_name\": \"N/A\", \"headquarters\": \"N/A\", \"estimated_revenue\": \"N/A\", \"key_products\": \"N/A\", \"ownership\": \"N/A\", \"rationale\": \"N/A\"}], \"data_limitations\": \"I do not have live web-browsing in this environment to verify private-company revenue and ownership with citations in real time. To avoid fabricating details, I have not populated targets without verifiable sources. If you enable browsing or provide access to specific databases (e.g., Orbis, PitchBook, Capital IQ, Beauhurst), I can return a fully validated list of 10 private European targets with defensible revenue ranges and source-backed ownership.\"}",
+      "details": "Matched pattern: \"company_name\".*\"company_name\".*\"company_name\".*\"company_name\".*\"company_name\".*\"company_name\".*\"company_name\".*\"company_name\".*\"company_name\".*\"company_name\""
+    },
+    {
+      "id": "company_validity",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 25,
+      "points_earned": 0.0,
+      "actual": "0.00",
+      "details": "Score: 0.00 - Only one company name provided (Prysmian Cavi e Sistemi), which is actually a cable/wire manufacturer, not a food ingredients company. The remaining 9 entries are blank 'N/A' placeholders. No verifiable food ingredients companies identified. This is completely unusable."
+    },
+    {
+      "id": "criteria_fit",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 25,
+      "points_earned": 0.0,
+      "actual": "0.00",
+      "details": "Score: 0.00 - The single company listed (Prysmian) is in the wrong sector entirely\u2014it manufactures cables and wires, not food ingredients or specialty chemicals for food. Zero companies meet the stated criteria of European private food ingredients/specialty chemicals firms. Complete miss on the assignment."
+    },
+    {
+      "id": "information_completeness",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 0.0,
+      "actual": "0.00",
+      "details": "Score: 0.00 - 9 out of 10 entries are completely blank with 'N/A' across all fields. The one named company has no data populated. Zero substantive information provided. A target list with no targets and no information is fundamentally incomplete and unusable."
+    },
+    {
+      "id": "research_quality",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 6.0,
+      "actual": "0.30",
+      "details": "Score: 0.30 - The methodology description is well-articulated and shows understanding of proper research approach. The data limitations caveat is honest. However, no actual research was executed or delivered. The analyst identified constraints but failed to deliver any work product within those constraints. In investment banking, we work with imperfect information daily\u2014this is an excuse, not a deliverable."
+    }
+  ],
+  "judge": "claude-sonnet-4-5-20250929"
+}

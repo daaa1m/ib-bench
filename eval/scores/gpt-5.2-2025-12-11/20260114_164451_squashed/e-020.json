@@ -1,0 +1,53 @@
+{
+  "task_id": "e-020",
+  "rubric_hash": "d99429e9",
+  "scored_at": "2026-01-14T16:54:46.685145",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "sum_shares_held",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 25,
+      "points_earned": 0,
+      "actual": null,
+      "details": "Cell E3 is empty"
+    },
+    {
+      "id": "sum_market_value",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 25,
+      "points_earned": 0,
+      "actual": null,
+      "details": "Cell E4 is empty"
+    },
+    {
+      "id": "sum_pct_portfolio",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 25,
+      "points_earned": 0,
+      "actual": null,
+      "details": "Cell E5 is empty"
+    },
+    {
+      "id": "sum_pct_ownership",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 25,
+      "points_earned": 0,
+      "actual": null,
+      "details": "Cell E6 is empty"
+    }
+  ],
+  "judge": "claude-sonnet-4-5-20250929"
+}

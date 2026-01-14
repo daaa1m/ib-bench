@@ -1,0 +1,28 @@
+{
+  "task_id": "m-003",
+  "model": "gpt-5.2-2025-12-11",
+  "timestamp": "2026-01-14T15:54:16.602387",
+  "input_files": [
+    "input.xlsx"
+  ],
+  "output_files": [
+    "m-003_output_1.xlsx"
+  ],
+  "raw_response": "{\n  \"entry_ev_multiple\": \"8.0x\",\n  \"entry_equity_value\": \"20.1\",\n  \"exit_ev_multiple\": \"8.0x\",\n  \"irr\": \"48.5%\",\n  \"moic\": \"7.22x\",\n  \"revenue_2025\": \"215.4\",\n  \"ebitda_2025\": \"24.2\",\n  \"investment_thesis\": \"Base case assumes accelerated growth in Americas & Asia (12% CAGR) alongside steady European growth, with 2020E gross margin and opex ratios held constant and modest working-capital/capex reinvestment. With 5.0x entry leverage and an 8.0x entry/exit multiple, rapid deleveraging drives a high equity return profile; key risks are margin compression and execution risk in faster-growing regions.\"\n}",
+  "parsed_response": {
+    "entry_ev_multiple": "8.0x",
+    "entry_equity_value": "20.1",
+    "exit_ev_multiple": "8.0x",
+    "irr": "48.5%",
+    "moic": "7.22x",
+    "revenue_2025": "215.4",
+    "ebitda_2025": "24.2",
+    "investment_thesis": "Base case assumes accelerated growth in Americas & Asia (12% CAGR) alongside steady European growth, with 2020E gross margin and opex ratios held constant and modest working-capital/capex reinvestment. With 5.0x entry leverage and an 8.0x entry/exit multiple, rapid deleveraging drives a high equity return profile; key risks are margin compression and execution risk in faster-growing regions."
+  },
+  "stop_reason": "unknown",
+  "usage": {
+    "input_tokens": 18340,
+    "output_tokens": 9075,
+    "latency_ms": 264361.998796463
+  }
+}

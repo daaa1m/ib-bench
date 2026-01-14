@@ -1,0 +1,83 @@
+{
+  "task_id": "e-016",
+  "rubric_hash": "9d7589f8",
+  "scored_at": "2026-01-14T16:53:33.560244",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 85.5,
+  "score_percent": 85.5,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "deal_structure",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 14.25,
+      "actual": "0.95",
+      "details": "Score: 0.95 - Analyst correctly identified all key structural elements: forward triangular merger, parties (Compass as acquirer, Anywhere as target, Velocity Merger Sub), all-stock consideration with 1.436 exchange ratio, cash in lieu of fractional shares, tax-free reorganization intent under IRC 368(a). Accurate and comprehensive."
+    },
+    {
+      "id": "purchase_price",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 15.0,
+      "actual": "0.75",
+      "details": "Score: 0.75 - Analyst correctly stated the exchange ratio (1.436 shares) and appropriately noted that no fixed cash price or implied equity value is stated in the provided excerpt. This is accurate - the 8-K does not provide an implied equity value. However, a more proactive analyst might have noted that implied value could be calculated from market prices at announcement, though this wasn't explicitly asked. The response is accurate but somewhat passive."
+    },
+    {
+      "id": "conditions_to_closing",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 13.5,
+      "actual": "0.90",
+      "details": "Score: 0.90 - Analyst accurately captured all key closing conditions: both stockholder approvals (with correct voting standards), NYSE listing authorization, registration statement effectiveness, HSR waiting period, no injunction/order, reps/warranties accuracy, and covenant compliance. Comprehensive and accurate."
+    },
+    {
+      "id": "termination_provisions",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 19.0,
+      "actual": "0.95",
+      "details": "Score: 0.95 - Excellent coverage of termination provisions. Correctly identified: Outside Date of September 22, 2026 with three 3-month extensions for regulatory delays; termination triggers (final prohibition, stockholder approval failures, material breach, board recommendation changes); $200M termination fee payable by either party; $350M regulatory reverse termination fee payable by Compass. Also noted specific performance availability. Accurate and thorough."
+    },
+    {
+      "id": "mac_provisions",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 10.5,
+      "actual": "0.70",
+      "details": "Score: 0.70 - Analyst correctly acknowledged that the MAC/MAE definition and carve-outs are not included in the provided 8-K excerpt. This is accurate - the 8-K references the full merger agreement as Exhibit 2.1 but notes schedules/exhibits were omitted. The analyst appropriately did not speculate. However, a more thorough analyst might have noted that the full merger agreement would contain these provisions and flagged this as a gap requiring follow-up."
+    },
+    {
+      "id": "other_material_terms",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 9.0,
+      "actual": "0.90",
+      "details": "Score: 0.90 - Strong coverage of other material terms: non-solicitation obligations (correctly noting no go-shop described), debt financing commitment ($750M from Morgan Stanley, 364-day bridge, purpose to refinance Anywhere debt), existing senior notes remaining in place, and both support/voting agreements with accurate percentages (29.6% Reffkin/funds, 8.7% Angelo Gordon). Comprehensive and accurate."
+    },
+    {
+      "id": "reasoning",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 5,
+      "points_earned": 4.25,
+      "actual": "0.85",
+      "details": "Score: 0.85 - Analyst demonstrated a systematic approach, focusing on economically material terms and avoiding boilerplate. Appropriately acknowledged limitations of the source document (no MAE definition, no implied equity value). The reasoning steps show logical progression through the document. Professional approach of not speculating beyond what the document provides."
+    }
+  ],
+  "judge": "claude-opus-4-5-20251101"
+}

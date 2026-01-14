@@ -293,7 +293,7 @@ class AnthropicRunner:
                 print(f"  Warning: Failed to download file {file_id}: {e}")
 
         if not output_files and container_id:
-            print(f"  DEBUG no files from blocks, trying container listing...")
+            print("  DEBUG no files from blocks, trying container listing...")
             try:
                 container_files = self.client.beta.files.list(
                     container_id=container_id  # type: ignore[call-arg]
@@ -514,36 +514,41 @@ class OpenAIRunner:
             ]
         print(f"  DEBUG output types: {output_types}")
 
+        # Extract files from container - list all files and filter out uploaded inputs
         output_files: list[OutputFile] = []
+        container_id = None
         if hasattr(response, "output") and response.output:
             for item in response.output:
-                item_type = getattr(item, "type", None)
-                if item_type == "code_interpreter_call":
-                    # Use outputs list (not container listing) to get only generated files
-                    outputs = getattr(item, "outputs", None) or []
-                    for output in outputs:
-                        files_list = getattr(output, "files", None) or []
-                        for f in files_list:
-                            try:
-                                print(f"  Downloading output file: {f.name}")
-                                file_content = self.client.files.content(f.file_id)
-                                output_files.append(
-                                    OutputFile(
-                                        filename=f.name,
-                                        content=cast(
-                                            bytes, _read_file_content(file_content)
-                                        ),
-                                        mime_type=getattr(
-                                            f,
-                                            "mime_type",
-                                            "application/octet-stream",
-                                        ),
-                                    )
-                                )
-                            except Exception as e:
-                                print(
-                                    f"  Warning: Failed to download file {f.name}: {e}"
-                                )
+                if getattr(item, "type", None) == "code_interpreter_call":
+                    container_id = getattr(item, "container_id", None)
+                    if container_id:
+                        break
+
+        if container_id:
+            try:
+                container_files = self.client.containers.files.list(
+                    container_id=container_id
+                )
+                uploaded_names = {f.name for f in (input_files or [])}
+                for idx, cf in enumerate(container_files.data):
+                    fid = getattr(cf, "id", None)
+                    fpath = getattr(cf, "path", None) or f"output_{idx + 1}.bin"
+                    fname = fpath.split("/")[-1] if "/" in fpath else fpath
+                    is_uploaded = any(uname in fname for uname in uploaded_names)
+                    if fid and not is_uploaded:
+                        print(f"  Downloading output file: {fname}")
+                        file_content = self.client.containers.files.content.retrieve(
+                            fid, container_id=container_id
+                        )
+                        output_files.append(
+                            OutputFile(
+                                filename=fname,
+                                content=cast(bytes, _read_file_content(file_content)),
+                                mime_type="application/octet-stream",
+                            )
+                        )
+            except Exception as e:
+                print(f"  Warning: Failed to retrieve container files: {e}")
 
         usage = response.usage
         input_tokens = usage.input_tokens if usage else 0
