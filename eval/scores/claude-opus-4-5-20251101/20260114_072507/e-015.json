@@ -1,0 +1,53 @@
+{
+  "task_id": "e-015",
+  "rubric_hash": "8d2b1f0c",
+  "scored_at": "2026-01-14T10:57:09.995832",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 47.75,
+  "score_percent": 47.75,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "tier_1_targets",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 45,
+      "points_earned": 13.5,
+      "actual": "0.30",
+      "details": "Score: 0.30 - Critical temporal error: All 5 Tier 1 targets are companies with deals already announced in 2023 (Seagen/Pfizer, Karuna/BMS, Mirati/BMS, Prometheus/Merck). As of Jan 1, 2026, these would be completed or failed deals, not prospective targets. The analyst fundamentally misunderstood the task - they were asked to propose FUTURE targets as of 2026, not list historical 2023 deals. Market caps appear outdated (pre-acquisition). Strategic rationales are sound but irrelevant for closed deals. This would embarrass the bank if shared - requires complete rework."
+    },
+    {
+      "id": "tier_2_targets",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 35,
+      "points_earned": 22.75,
+      "actual": "0.65",
+      "details": "Score: 0.65 - Tier 2 is more defensible with companies that could plausibly be targets (Neurocrine, Halozyme, Ultragenyx, Rocket, Madrigal). Strategic rationales are competent and show understanding of value drivers. However, market caps are not verified as of Jan 2026 and appear to be historical estimates. Neurocrine at $12.5B seems low given Ingrezza's $1.5B+ revenue trajectory. Missing key considerations like balance sheet strength, pipeline risk, and competitive dynamics. Adequate work but needs refinement."
+    },
+    {
+      "id": "source_urls",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 5.0,
+      "actual": "0.50",
+      "details": "Score: 0.50 - Lists generic financial websites (NASDAQ, Yahoo Finance) rather than specific URLs for each company's market cap verification. No links to SEC filings, investor presentations, or deal announcements that would validate the analysis. Sources are credible platforms but lack specificity needed for professional work. Cannot reproduce the analyst's market cap figures from the sources provided. Meets minimum bar but barely."
+    },
+    {
+      "id": "selection_methodology",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 6.5,
+      "actual": "0.65",
+      "details": "Score: 0.65 - Methodology is logically structured and covers relevant screening criteria (market cap range, therapeutic areas, strategic fit, M&A activity). However, the approach is fundamentally flawed by including announced deals in Tier 1, suggesting the analyst misunderstood how to apply the methodology for a forward-looking 2026 analysis. The $2-50B range is reasonable. Reasoning steps are clear but don't address the temporal aspect of projecting targets as of a future date. Competent framework applied incorrectly."
+    }
+  ],
+  "judge": "claude-sonnet-4-5-20250929"
+}

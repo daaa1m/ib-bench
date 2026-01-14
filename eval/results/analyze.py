@@ -222,7 +222,7 @@ def analyze_run(config: dict, results: list[TaskResult], total_tasks: int):
         try:
             dt = datetime.fromisoformat(started)
             started = dt.strftime("%Y-%m-%d %H:%M:%S")
-        except:
+        except ValueError:
             pass
     print(f"  Run Date:   {started}")
     print(f"  Tasks:      {len(results)} attempted / {total_tasks} total")

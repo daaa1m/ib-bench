@@ -1,0 +1,53 @@
+{
+  "task_id": "e-020",
+  "rubric_hash": "d99429e9",
+  "scored_at": "2026-01-14T13:15:34.852830",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "sum_shares_held",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 25,
+      "points_earned": 0,
+      "actual": 6071000000.0,
+      "details": "Cell E3 = 6071000000.0, expected 5512434108 (diff: 558565892.0)"
+    },
+    {
+      "id": "sum_market_value",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 25,
+      "points_earned": 0,
+      "actual": 1412738200000.0,
+      "details": "Cell E4 = 1412738200000.0, expected 1393927369181 (diff: 18810830819.0)"
+    },
+    {
+      "id": "sum_pct_portfolio",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 25,
+      "points_earned": 0,
+      "actual": 82.69999999999999,
+      "details": "Cell E5 = 82.69999999999999, expected 0.8962 (diff: 81.8038)"
+    },
+    {
+      "id": "sum_pct_ownership",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 25,
+      "points_earned": 0,
+      "actual": 40.19,
+      "details": "Cell E6 = 40.19, expected 0.3713 (diff: 39.8187)"
+    }
+  ],
+  "judge": "claude-sonnet-4-5-20250929"
+}

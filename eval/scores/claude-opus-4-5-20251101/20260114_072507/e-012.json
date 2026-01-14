@@ -1,0 +1,57 @@
+{
+  "task_id": "e-012",
+  "rubric_hash": "013aba50",
+  "scored_at": "2026-01-14T14:21:10.698404",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 91.5,
+  "score_percent": 91.5,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "top_5_risks",
+      "passed": true,
+      "type": "human_judge",
+      "match_type": "human_judge",
+      "points": 50,
+      "points_earned": 47.5,
+      "actual": "0.95",
+      "details": "Human score: 0.95 - Excellent risk identification with accurate source verification. All 5 risks directly supported by S-1: (1) Revenue concentration - S-1 confirms 'transaction revenue represented over 96% of our net revenue' and BTC/ETH 'drove over 56% of total Trading Volume'; (2) Regulatory/securities risk - S-1 confirms XRP suspension 'in light of the SEC's lawsuit filed against Ripple Labs'; (3) Cybersecurity - S-1 confirms '$90 billion' in assets and detailed breach risks; (4) Competitive disadvantage - S-1 states 'customers transferring significant funds and crypto assets to these unregulated or less regulated competitors'; (5) Platform outages - S-1 confirms 'approximately 30 outages, with an average outage duration of 64.6 minutes' in 2020. Each risk has clear title, quantified summary from actual S-1 data, and actionable analyst implications with specific modeling guidance (50-80% downside sensitivity, 20-40% asset classification scenarios). Risks prioritized by materiality rather than document order. Minor deduction: could quantify insurance coverage gaps for cybersecurity risk.",
+      "score": 0.95,
+      "reasoning": "Excellent risk identification with accurate source verification. All 5 risks directly supported by S-1: (1) Revenue concentration - S-1 confirms 'transaction revenue represented over 96% of our net revenue' and BTC/ETH 'drove over 56% of total Trading Volume'; (2) Regulatory/securities risk - S-1 confirms XRP suspension 'in light of the SEC's lawsuit filed against Ripple Labs'; (3) Cybersecurity - S-1 confirms '$90 billion' in assets and detailed breach risks; (4) Competitive disadvantage - S-1 states 'customers transferring significant funds and crypto assets to these unregulated or less regulated competitors'; (5) Platform outages - S-1 confirms 'approximately 30 outages, with an average outage duration of 64.6 minutes' in 2020. Each risk has clear title, quantified summary from actual S-1 data, and actionable analyst implications with specific modeling guidance (50-80% downside sensitivity, 20-40% asset classification scenarios). Risks prioritized by materiality rather than document order. Minor deduction: could quantify insurance coverage gaps for cybersecurity risk.",
+      "description": "Must provide exactly 5 risks prioritized by materiality, not document order. Each risk should include a clear title, concise summary, and actionable analyst implication.",
+      "scoring_guide": "Score 0-1 based on completeness and accuracy versus the criterion description."
+    },
+    {
+      "id": "prioritization_rationale",
+      "passed": true,
+      "type": "human_judge",
+      "match_type": "human_judge",
+      "points": 30,
+      "points_earned": 27.0,
+      "actual": "0.90",
+      "details": "Human score: 0.90 - Strong materiality framework with clear probability \u00d7 magnitude logic. Analyst correctly ranks revenue concentration (#1) as 'highest-probability, highest-impact' given S-1's 96%+ transaction fee dependency disclosure. Regulatory risk (#2) ranked appropriately citing 'demonstrated precedent' (XRP delisting documented in S-1) and 'existential threat to core business model'. Cybersecurity (#3) correctly characterized as 'low-probability but catastrophic-impact tail risk' given $90B custodial exposure. Competitive pressure (#4) as 'ongoing margin and growth pressure'. Platform reliability (#5) as 'quantified operational risk with documented frequency'. Rationale explains selection from '60+ disclosed risks' by filtering 'generic boilerplate' - consistent with S-1's ~60 pages of risk factors. Could strengthen with explicit probability estimates.",
+      "score": 0.9,
+      "reasoning": "Strong materiality framework with clear probability \u00d7 magnitude logic. Analyst correctly ranks revenue concentration (#1) as 'highest-probability, highest-impact' given S-1's 96%+ transaction fee dependency disclosure. Regulatory risk (#2) ranked appropriately citing 'demonstrated precedent' (XRP delisting documented in S-1) and 'existential threat to core business model'. Cybersecurity (#3) correctly characterized as 'low-probability but catastrophic-impact tail risk' given $90B custodial exposure. Competitive pressure (#4) as 'ongoing margin and growth pressure'. Platform reliability (#5) as 'quantified operational risk with documented frequency'. Rationale explains selection from '60+ disclosed risks' by filtering 'generic boilerplate' - consistent with S-1's ~60 pages of risk factors. Could strengthen with explicit probability estimates.",
+      "description": "Must explain why these 5 risks were selected over others and the logic behind the ranking. Should demonstrate understanding of materiality assessment.",
+      "scoring_guide": "Score 0-1 based on completeness and accuracy versus the criterion description."
+    },
+    {
+      "id": "methodology_notes",
+      "passed": true,
+      "type": "human_judge",
+      "match_type": "human_judge",
+      "points": 20,
+      "points_earned": 17.0,
+      "actual": "0.85",
+      "details": "Human score: 0.85 - Good methodology description demonstrating systematic approach. Analyst correctly identifies Risk Factors section spans 'pages 15-75' (verified against S-1 table of contents). Four-factor weighting framework described: (1) revenue/margin impact magnitude, (2) probability based on disclosed incidents or regulatory actions, (3) uniqueness to Coinbase vs. industry-generic, (4) near-term vs. long-term threat horizon. Reasoning steps show proper cataloging of 60+ risks, filtering for company-specific quantification and demonstrated precedent, then ranking by probability \u00d7 impact. Appropriately distinguishes quantified risks (retained) from generic boilerplate (filtered). Could improve by describing conflict resolution between competing priorities and specific screening thresholds used.",
+      "score": 0.85,
+      "reasoning": "Good methodology description demonstrating systematic approach. Analyst correctly identifies Risk Factors section spans 'pages 15-75' (verified against S-1 table of contents). Four-factor weighting framework described: (1) revenue/margin impact magnitude, (2) probability based on disclosed incidents or regulatory actions, (3) uniqueness to Coinbase vs. industry-generic, (4) near-term vs. long-term threat horizon. Reasoning steps show proper cataloging of 60+ risks, filtering for company-specific quantification and demonstrated precedent, then ranking by probability \u00d7 impact. Appropriately distinguishes quantified risks (retained) from generic boilerplate (filtered). Could improve by describing conflict resolution between competing priorities and specific screening thresholds used.",
+      "description": "Must describe the analytical approach used to identify and prioritize risks from the S-1 Risk Factors section.",
+      "scoring_guide": "Score 0-1 based on completeness and accuracy versus the criterion description."
+    }
+  ],
+  "judge": "human",
+  "response_file": "/Users/da1m/Code/ib-bench/eval/responses/claude-opus-4-5-20251101/20260114_072507/e-012.json",
+  "human_template": "/Users/da1m/Code/ib-bench/eval/scores/claude-opus-4-5-20251101/20260114_072507/e-012.human.md"
+}
