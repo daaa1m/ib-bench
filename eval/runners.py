@@ -13,7 +13,14 @@ def _is_content_filter_error(error_str: str) -> bool:
     """Check if an error message indicates a content filter block."""
     error_lower = error_str.lower()
     return (
-        ("content" in error_lower and ("policy" in error_lower or "blocked" in error_lower or "safety" in error_lower))
+        (
+            "content" in error_lower
+            and (
+                "policy" in error_lower
+                or "blocked" in error_lower
+                or "safety" in error_lower
+            )
+        )
         or "invalid_prompt" in error_lower
         or "invalid prompt" in error_lower
         or "flagged" in error_lower
@@ -378,7 +385,7 @@ class OpenAIRunner:
 
         start = time.time()
         files = input_files or []
-        tools = []
+        tools: list[dict] = [{"type": "web_search"}]
         vector_store_id = None
         uploaded_file_ids = []
 
@@ -523,7 +530,9 @@ class OpenAIRunner:
                                 output_files.append(
                                     OutputFile(
                                         filename=f.name,
-                                        content=cast(bytes, _read_file_content(file_content)),
+                                        content=cast(
+                                            bytes, _read_file_content(file_content)
+                                        ),
                                         mime_type=getattr(
                                             f,
                                             "mime_type",
@@ -532,7 +541,9 @@ class OpenAIRunner:
                                     )
                                 )
                             except Exception as e:
-                                print(f"  Warning: Failed to download file {f.name}: {e}")
+                                print(
+                                    f"  Warning: Failed to download file {f.name}: {e}"
+                                )
 
         usage = response.usage
         input_tokens = usage.input_tokens if usage else 0
