@@ -12,26 +12,28 @@
     "e-008",
     "e-009",
     "e-010",
+    "h-001",
     "m-001",
     "m-002",
+    "m-003",
+    "m-004",
+    "m-005",
+    "m-006",
+    "m-007",
+    "m-008",
     "m-009",
     "m-010"
   ],
   "config_file": "squashed",
   "started_at": "2025-12-30T11:41:40.000000",
-  "completed_at": "2026-01-06T20:54:59.163709",
+  "completed_at": "2026-01-14T06:58:32.711633",
   "squashed_from": [
-    "claude-opus-4-5-20251101/20251230_114140",
-    "claude-opus-4-5-20251101/20260101_094708",
-    "claude-opus-4-5-20251101/20260102_073901",
-    "claude-opus-4-5-20251101/20260102_105037",
-    "claude-opus-4-5-20251101/20260102_222514",
-    "claude-opus-4-5-20251101/20260103_012848",
-    "claude-opus-4-5-20251101/20260105_203417",
-    "claude-opus-4-5-20251101/20260106_131430",
-    "claude-opus-4-5-20251101/20260106_133202",
-    "claude-opus-4-5-20251101/20260106_133558",
-    "claude-opus-4-5-20251101/20260106_203330"
+    "claude-opus-4-5-20251101/20260107_063702_squashed",
+    "claude-opus-4-5-20251101/20260107_063859",
+    "claude-opus-4-5-20251101/20260113_065322",
+    "claude-opus-4-5-20251101/20260113_151343",
+    "claude-opus-4-5-20251101/20260113_211840",
+    "claude-opus-4-5-20251101/20260113_215424"
   ],
   "results_summary": [
     {
@@ -75,11 +77,39 @@
       "status": "success"
     },
     {
+      "task_id": "h-001",
+      "status": "success"
+    },
+    {
       "task_id": "m-001",
       "status": "success"
     },
     {
       "task_id": "m-002",
+      "status": "success"
+    },
+    {
+      "task_id": "m-003",
+      "status": "success"
+    },
+    {
+      "task_id": "m-004",
+      "status": "success"
+    },
+    {
+      "task_id": "m-005",
+      "status": "success"
+    },
+    {
+      "task_id": "m-006",
+      "status": "success"
+    },
+    {
+      "task_id": "m-007",
+      "status": "success"
+    },
+    {
+      "task_id": "m-008",
       "status": "success"
     },
     {
@@ -92,3 +122,4 @@
     }
   ]
 }
+

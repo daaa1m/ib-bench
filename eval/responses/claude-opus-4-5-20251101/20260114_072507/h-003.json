@@ -1,0 +1,145 @@
+{
+  "company": "Phillips 66",
+  "ticker": "PSX",
+  "analysis_date": "2026-01-14",
+  "activist_investor": "Elliott Management",
+  "campaign_name": "Streamline 66",
+
+  "current_situation": {
+    "stock_price": 120.3,
+    "shares_outstanding_mm": 408,
+    "market_cap_mm": 49082,
+    "net_debt_mm": 19100,
+    "tev_mm": 68182,
+    "2026e_ebitda_mm": 10500,
+    "tev_ebitda_multiple": 6.6,
+    "10yr_underperformance_vs_sp500": "163%"
+  },
+
+  "elliott_thesis": {
+    "total_value_creation_per_share": 78,
+    "pillars": {
+      "pillar_1_portfolio_streamline": {
+        "value_per_share": 36,
+        "components": {
+          "midstream_sale_gross": 50000,
+          "cpchem_50pct_stake": 15000,
+          "jet_germany_austria": 3000,
+          "total_gross_proceeds": 68000,
+          "tax_leakage_rate": 0.22,
+          "net_proceeds": 48000
+        },
+        "rationale": "Unlock sum-of-parts discount through asset monetization"
+      },
+      "pillar_2_refining_performance": {
+        "value_per_share": 18,
+        "metrics": {
+          "psx_ebitda_per_bbl": 4.87,
+          "vlo_ebitda_per_bbl": 6.76,
+          "performance_gap": 1.89,
+          "annual_throughput_mm_bbl": 602,
+          "ebitda_improvement_potential_mm": 1138
+        },
+        "rationale": "Close operational gap to Valero through better trading, lower opex"
+      },
+      "pillar_3_enhanced_oversight": {
+        "value_per_share": 24,
+        "initiatives": [
+          "Add independent directors with refining expertise",
+          "Review executive leadership effectiveness",
+          "Improve capital allocation discipline"
+        ],
+        "rationale": "Management has missed targets; needs activist pressure"
+      }
+    }
+  },
+
+  "scenario_analysis": {
+    "bear_case": {
+      "description": "Status Quo - No activist changes",
+      "exit_price": 95,
+      "total_return_pct": -0.17,
+      "irr_3yr": -0.08,
+      "probability": 0.2
+    },
+    "base_case": {
+      "description": "Elliott Plan Partially Executed",
+      "exit_price": 198,
+      "total_return_pct": 0.77,
+      "irr_3yr": 0.22,
+      "probability": 0.55
+    },
+    "bull_case": {
+      "description": "Marathon Path - Full Value Unlock",
+      "exit_price": 300,
+      "total_return_pct": 1.62,
+      "irr_3yr": 0.37,
+      "probability": 0.25
+    },
+    "probability_weighted_return": 0.52
+  },
+
+  "key_risks": [
+    {
+      "risk": "Execution Risk",
+      "description": "Management track record poor; $14B EBITDA target missed by $5.7B",
+      "severity": "HIGH"
+    },
+    {
+      "risk": "Refining Cycle",
+      "description": "Weak crack spreads could delay value realization",
+      "severity": "MEDIUM"
+    },
+    {
+      "risk": "Tax Leakage",
+      "description": "Asset sales may trigger higher taxes than 22% assumed",
+      "severity": "MEDIUM"
+    },
+    {
+      "risk": "Buyer Interest",
+      "description": "CPChem sale requires Chevron cooperation; Midstream needs buyer",
+      "severity": "MEDIUM"
+    },
+    {
+      "risk": "Board Resistance",
+      "description": "Management defending conglomerate structure",
+      "severity": "HIGH"
+    }
+  ],
+
+  "investment_recommendation": {
+    "decision": "INVEST",
+    "confidence": "MEDIUM-HIGH",
+    "rationale": [
+      "Probability-weighted expected return of ~52% over 3 years is attractive",
+      "Elliott's track record with activist campaigns is strong",
+      "Downside protected by hard asset values and ~4% dividend yield",
+      "Conglomerate discount is real and measurable vs. peers",
+      "Asset monetization provides clear catalysts with defined timeline"
+    ],
+    "conditions": [
+      "Elliott achieves board representation",
+      "Midstream sale/spin process initiated within 6 months",
+      "Evidence of refining cost improvements in Q1/Q2 results",
+      "Management commits to specific buyback targets with timeline"
+    ],
+    "position_sizing": "2-3% of portfolio",
+    "time_horizon": "2-3 years",
+    "target_entry_range": {
+      "low": 110,
+      "high": 125
+    }
+  },
+
+  "model_outputs": {
+    "excel_file": "PSX_Elliott_Model.xlsx",
+    "sheets": [
+      "Summary - Key metrics and recommendation",
+      "Income Statement - 3-year history + 3-year projections",
+      "Balance Sheet - Asset sales and debt paydown modeled",
+      "Cash Flow - Buyback acceleration from proceeds",
+      "Assumptions - Elliott thesis inputs documented",
+      "Returns - Scenario analysis and probability weighting"
+    ]
+  }
+}

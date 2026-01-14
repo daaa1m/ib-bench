@@ -1,7 +1,9 @@
 {
   "provider": "anthropic",
   "model": "claude-opus-4-5-20251101",
-  "task_ids": ["h-001"],
+  "task_ids": [
+    "h-001"
+  ],
   "parallel": 3,
   "config_file": "configs/opus-run.yaml",
   "started_at": "2026-01-13T21:54:24.230315",
@@ -13,4 +15,3 @@
     }
   ]
 }
-
