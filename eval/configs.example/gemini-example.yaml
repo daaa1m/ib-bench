@@ -1,7 +1,0 @@
-# Gemini example config
-provider: gemini
-model: gemini-2.5-pro
-tasks:
-  - e-001
-  - e-002
-parallel: 1

@@ -1,7 +1,0 @@
-# OpenAI example config
-provider: openai
-model: gpt-4o
-tasks:
-  - e-001
-  - e-002
-parallel: 1
