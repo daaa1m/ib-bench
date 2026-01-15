@@ -23,3 +23,4 @@ eval/configs/
 .prettierrc
 tmp/
 docs/
+.claude/
