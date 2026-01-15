@@ -1,6 +1,0 @@
-# Test with OpenAI
-provider: openai
-model: gpt-5.2-2025-12-11
-tasks:
-  - m-001
-parallel: 1
