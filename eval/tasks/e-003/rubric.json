@@ -1,0 +1,22 @@
+{
+  "task_id": "e-003",
+  "version": "1.0",
+  "total_points": 100,
+  "criteria": {
+    "purchase_obligations_24m": {
+      "description": "Must extract the correct value of USD 16,477 million for purchase obligations due within 24 months",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": [
+        "16,477",
+        "16477",
+        "$16,477",
+        "$16477",
+        "16.477",
+        "USD 16,477",
+        "USD 16477"
+      ],
+      "points": 100
+    }
+  }
+}

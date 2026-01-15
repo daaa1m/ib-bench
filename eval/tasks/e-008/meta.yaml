@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/meta.schema.json
+task:
+  id: e-008
+  title: "Summarize TSLA 10-K MD&A section"
+  type: summarise
+  category:
+    - document-review
+  input_type: pdf
+  description:
+    "LLM is provided a 10-K filing and must summarize the MD&A section,
+    focusing on key business drivers, significant trends, and management's
+    outlook. Expected answer should capture 3-5 main themes. Tests LLM's
+    ability to extract management perspective from regulatory filings."
+
+prompt:
+  notes: "LLM should prioritize forward-looking statements and risk factors"
+
+input:
+  input-file-original: "$human/TSLA-10k-FY24.pdf"
+  notes: "input file (TSLA FY24 10k) presented as-is"

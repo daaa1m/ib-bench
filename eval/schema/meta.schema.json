@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ib-bench/schema/meta.schema.yaml",
+  "title": "IB-bench Task Metadata",
+  "type": "object",
+  "required": [
+    "task",
+    "prompt",
+    "input"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "task": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "type",
+        "category",
+        "input_type",
+        "description"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[emh]-\\d{3}$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 100
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "fix-error",
+            "summarise",
+            "extraction",
+            "creating"
+          ]
+        },
+        "category": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "financial-analysis",
+              "due-diligence",
+              "document-review",
+              "data-extraction"
+            ]
+          }
+        },
+        "input_type": {
+          "type": "string",
+          "enum": [
+            "excel",
+            "pdf",
+            "web",
+            "multi"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 50
+        }
+      }
+    },
+    "prompt": {
+      "type": "object",
+      "required": [
+        "notes"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "input": {
+      "type": "object",
+      "required": [
+        "input-file-original",
+        "notes"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "input-file-original": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              }
+            }
+          ]
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

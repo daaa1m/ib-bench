@@ -1,0 +1,49 @@
+{
+  "task_id": "e-016",
+  "version": "1.0",
+  "total_points": 100,
+  "criteria": {
+    "deal_structure": {
+      "description": "Does the summary correctly identify the transaction type (merger, tender offer, etc.), the parties (acquirer, target), and the form of consideration (cash, stock, mixed)?",
+      "type": "llm_judge",
+      "core_concepts": ["Compass", "Anywhere", "merger type", "acquirer", "target", "consideration", "cash", "stock"],
+      "points": 15
+    },
+    "purchase_price": {
+      "description": "Does the summary accurately state the per-share price and any implied total equity or enterprise value figures from the agreement?",
+      "type": "llm_judge",
+      "core_concepts": ["per-share price", "equity value", "premium", "exchange ratio"],
+      "points": 20
+    },
+    "conditions_to_closing": {
+      "description": "Does the summary identify key closing conditions including regulatory approvals, shareholder vote requirements, and any material conditions precedent?",
+      "type": "llm_judge",
+      "core_concepts": ["regulatory approval", "shareholder vote", "antitrust", "HSR", "conditions precedent"],
+      "points": 15
+    },
+    "termination_provisions": {
+      "description": "Does the summary accurately describe termination rights, termination fee amounts, reverse termination fees, and the triggers for each?",
+      "type": "llm_judge",
+      "core_concepts": ["termination fee", "reverse termination fee", "breakup fee", "superior proposal", "fiduciary out"],
+      "points": 20
+    },
+    "mac_provisions": {
+      "description": "Does the summary capture the Material Adverse Change/Effect definition and identify key carve-outs (market conditions, industry changes, etc.)?",
+      "type": "llm_judge",
+      "core_concepts": ["material adverse change", "material adverse effect", "MAC", "MAE", "carve-outs", "exclusions"],
+      "points": 15
+    },
+    "other_material_terms": {
+      "description": "Does the summary identify other economically significant provisions such as go-shop periods, no-shop clauses, financing conditions, or specific indemnities?",
+      "type": "llm_judge",
+      "core_concepts": ["go-shop", "no-shop", "financing condition", "matching rights", "window shop"],
+      "points": 10
+    },
+    "reasoning": {
+      "description": "Does the reasoning demonstrate a systematic approach to analyzing the merger agreement and prioritizing economically material terms over boilerplate language?",
+      "type": "llm_judge",
+      "core_concepts": ["systematic", "economic terms", "material provisions", "analysis approach"],
+      "points": 5
+    }
+  }
+}

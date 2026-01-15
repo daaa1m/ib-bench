@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/meta.schema.json
+task:
+  id: e-009
+  title: "Extract key assumptions from LBO model"
+  type: extraction
+  category:
+    - data-extraction
+    - financial-analysis
+  input_type: excel
+  description:
+    "LLM is provided an LBO model and must extract all key assumptions
+    including entry/exit multiples, hold period, debt tranches, rates, and
+    growth rates. Expected answer: complete list of driver cells and values.
+    Tests LLM's ability to navigate complex models and identify inputs."
+
+prompt:
+  notes: "LLM should identify assumption cells vs calculated cells"
+
+input:
+  input-file-original: "$human/MRW-LBO-Model-No-Circ.xlsx"
+  notes: "presented as-is but the senior debt tranche extraction requires LLM to understand LIBOR+margin"

@@ -1,0 +1,56 @@
+{
+  "task_id": "e-018",
+  "version": "1.0",
+  "total_points": 100,
+  "criteria": {
+    "error_location": {
+      "description": "Identifies the Change in NWC line in BS & CFS as the error location",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": [
+        "Row 61",
+        "61",
+        "Chg in NWC",
+        "BS & CFS Row 61",
+        "I61",
+        "J61"
+      ],
+      "points": 45
+    },
+    "corrected_formula": {
+      "description": "Provides the corrected sign for the Change in NWC formula",
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "valid_patterns": [
+        "H41-I41",
+        "I41-J41",
+        "J41-K41",
+        "-\\(I41-H41\\)",
+        "-\\(J41-I41\\)"
+      ],
+      "points": 40
+    },
+    "explanation": {
+      "description": "Explains that the sign was reversed in the working capital change",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": [
+        "sign",
+        "reversed",
+        "inverted",
+        "negative",
+        "should be subtracted",
+        "should be added"
+      ],
+      "points": 10
+    },
+    "formatting": {
+      "description": "IB formatting conventions: blue for hardcoded numbers, green for cross-sheet refs, red for external workbook refs",
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "sheet": "BS & CFS",
+      "cells": ["I61:K61"],
+      "points": 5
+    }
+  }
+}

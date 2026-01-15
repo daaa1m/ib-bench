@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/meta.schema.json
+
+task:
+  id: e-018
+  title: "Fix NWC sign error in 3-statement model"
+  type: fix-error
+  category:
+    - financial-analysis
+  input_type: excel
+  description: >
+    A 3-statement model has a balance sheet break due to an incorrect sign in the
+    Change in Net Working Capital calculation on the BS & CFS sheet. Identify
+    the error, correct the formula, and explain the fix. Tests ability to audit
+    and repair cash flow linkage errors.
+
+prompt:
+  notes: >
+    Use input.xlsx as the model. Output includes the corrected Excel file and
+    JSON summary.
+
+input:
+  input-file-original: null
+  notes: >
+    Task folder includes input.xlsx (model with error) and _golden-solution.xlsx
+    for validation.

@@ -1,0 +1,86 @@
+{
+  "task_id": "e-014",
+  "version": "1.0",
+  "total_points": 100,
+  "criteria": {
+    "cash_equivalents_fy2025": {
+      "description": "Cash & Cash Equivalents for FY2025 matches expected value",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "sheet": "Balance Sheet",
+      "cell": "D7",
+      "expected": 105627,
+      "tolerance": 1,
+      "points": 15
+    },
+    "total_liabilities_fy2025": {
+      "description": "Total Liabilities for FY2025 matches expected value",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "sheet": "Balance Sheet",
+      "cell": "D35",
+      "expected": 30516,
+      "tolerance": 1,
+      "points": 15
+    },
+    "total_equity_fy2025": {
+      "description": "Total Shareholders' Equity for FY2025 matches expected value",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "sheet": "Balance Sheet",
+      "cell": "D41",
+      "expected": 170854,
+      "tolerance": 1,
+      "points": 15
+    },
+    "net_cash_from_ops_fy2026e": {
+      "description": "Net Cash from Operating Activities for FY2026E matches expected value",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "sheet": "Cash Flow",
+      "cell": "E18",
+      "expected": 89683.0789,
+      "tolerance": 1,
+      "points": 15
+    },
+    "net_cash_from_investing_fy2026e": {
+      "description": "Net Cash from Investing Activities for FY2026E matches expected value",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "sheet": "Cash Flow",
+      "cell": "E22",
+      "expected": -3262.425,
+      "tolerance": 1,
+      "points": 15
+    },
+    "ending_cash_fy2026e": {
+      "description": "Ending Cash & Equivalents for FY2026E matches expected value",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "sheet": "Cash Flow",
+      "cell": "E27",
+      "expected": 176590.6539,
+      "tolerance": 1,
+      "points": 15,
+      "gates_llm": true
+    },
+    "formatting": {
+      "description": "IB formatting conventions: blue for hardcoded numbers, green for cross-sheet refs, red for external workbook refs",
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "sheet": "Balance Sheet",
+      "cells": ["D7:G41"],
+      "points": 5
+    },
+    "reasoning_steps": {
+      "description": "Reasoning steps describe how the statements were linked and validated",
+      "type": "llm_judge",
+      "core_concepts": [
+        "balance sheet linkage",
+        "cash flow tie",
+        "ending cash check"
+      ],
+      "points": 5
+    }
+  }
+}

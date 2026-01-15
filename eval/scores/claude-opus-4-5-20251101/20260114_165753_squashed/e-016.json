@@ -1,0 +1,83 @@
+{
+  "task_id": "e-016",
+  "rubric_hash": "9d7589f8",
+  "scored_at": "2026-01-14T12:35:18.514958",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 21.75,
+  "score_percent": 21.75,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "deal_structure",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 0.0,
+      "actual": "0.00",
+      "details": "Score: 0.00 - Completely wrong. The analyst reversed the parties - stated Compass is the target and Anywhere is the acquirer, when the opposite is true (Compass is acquiring Anywhere). Also incorrectly named the merger sub as 'Comanche Merger Sub' when it is actually 'Velocity Merger Sub'. The exchange ratio direction is also reversed (stated 3.444 Anywhere shares per Compass share, when it's actually 1.436 Compass shares per Anywhere share). This fundamental error would cause serious confusion and is unusable."
+    },
+    {
+      "id": "purchase_price",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 0.0,
+      "actual": "0.00",
+      "details": "Score: 0.00 - Completely wrong. The analyst stated the exchange ratio as 3.444 shares of Anywhere per Compass share, when the actual ratio is 1.436 shares of Compass per Anywhere share - both the direction and the number are incorrect. This is the inverse relationship and wrong magnitude. The analyst also incorrectly described which equity awards convert at what ratio due to the reversed party identification. This would lead to catastrophic valuation errors."
+    },
+    {
+      "id": "conditions_to_closing",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 7.5,
+      "actual": "0.50",
+      "details": "Score: 0.50 - The analyst correctly identified most standard closing conditions (shareholder approvals, HSR clearance, SEC effectiveness, NYSE listing, no MAE, representations/warranties accuracy, covenant compliance, tax opinions). However, the description is confused due to the reversed party identification (referring to 'Company Stockholder Approval' and 'Parent Stockholder Approval' with the wrong parties). The substance is mostly correct but the labeling errors make it confusing and barely usable as a starting point."
+    },
+    {
+      "id": "termination_provisions",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 0.0,
+      "actual": "0.00",
+      "details": "Score: 0.00 - Critically wrong on the termination fees. The analyst stated $92 million for both Company and Parent termination fees, when the actual fees are $200 million (standard) and $350 million (regulatory failure). The outside date is also incorrect - analyst stated February 11, 2026 extendable by 90 days, when it's actually September 22, 2026 with three automatic 3-month extensions. The analyst also mentioned a $15 million expense reimbursement that does not appear in the 8-K. These are material economic terms that are completely fabricated or wrong."
+    },
+    {
+      "id": "mac_provisions",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 9.75,
+      "actual": "0.65",
+      "details": "Score: 0.65 - The analyst correctly identified the standard MAE carve-outs (general economic conditions, industry changes, GAAP/law changes, acts of war/terrorism/pandemics, failure to meet projections, announcement/pendency effects, actions at other party's request, stock price changes) and noted the disproportionate impact exception. This section is substantively accurate and demonstrates understanding of standard MAE provisions. However, since the 8-K only briefly mentions MAE conditions without detailing the carve-outs, the analyst appears to be inferring standard provisions rather than extracting them from the document, which raises questions about whether they actually reviewed the full merger agreement."
+    },
+    {
+      "id": "other_material_terms",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 3.0,
+      "actual": "0.30",
+      "details": "Score: 0.30 - Mixed accuracy. The analyst correctly identified voting agreements (Robert Reffkin with 29.6% and Angelo Gordon with 8.7%), the all-stock nature with no financing condition, and regulatory efforts requirements. However, the analyst provided extensive detail on no-shop provisions (4-day matching rights, fiduciary out mechanics, Superior Proposal definitions) that are not detailed in the 8-K - only 'non-solicitation obligations' are mentioned. The analyst also claimed 'Robert Reffkin to serve as CEO of combined company' and 'Anywhere board to be expanded to include Compass designees' which do NOT appear in the 8-K. The debt financing commitment ($750M bridge facility) was completely omitted despite being prominently featured in the 8-K. Significant fabrication of terms."
+    },
+    {
+      "id": "reasoning",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 5,
+      "points_earned": 1.5,
+      "actual": "0.30",
+      "details": "Score: 0.30 - The analyst claims to have 'systematically reviewed the merger agreement' and cites specific articles and sections (Article I, II, III, V, VI, VII with section numbers). However, the provided document is only a 9-page 8-K filing, not the full merger agreement. The 8-K explicitly states the merger agreement is 'attached hereto as Exhibit 2.1' but the exhibit was omitted. The analyst appears to have either: (1) fabricated a review of a document they didn't have access to, (2) confused this with a different transaction, or (3) made assumptions about standard merger agreement provisions. The reasoning steps cite specific sections that cannot be verified from the provided 8-K, and the fundamental errors (reversed parties, wrong fees, wrong exchange ratio) suggest the analyst did not carefully read even the summary in the 8-K."
+    }
+  ],
+  "judge": "claude-sonnet-4-5-20250929"
+}

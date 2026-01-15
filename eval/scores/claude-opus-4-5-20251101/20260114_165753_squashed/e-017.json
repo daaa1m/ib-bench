@@ -1,0 +1,34 @@
+{
+  "task_id": "e-017",
+  "rubric_hash": "1411ddde",
+  "scored_at": "2026-01-14T13:08:35.808523",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0.0,
+  "score_percent": 0.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "deal_list",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 80,
+      "points_earned": 0.0,
+      "actual": "0.00",
+      "details": "Score: 0.00 - Completely fabricated data. The analyst was asked to find deals announced in H2 2025 (July-December 2025). The analyst appears to have taken historical E&P M&A deals from 2023-2024 and relabeled them with future 2025 dates. Multiple deals reference companies that no longer exist as independent entities (Pioneer was acquired by ExxonMobil in 2024, Parsley was acquired in 2021, SRC merged in 2020). Sources are generic company websites rather than specific press releases. This represents either a fundamental misunderstanding of the task or deliberate fabrication. Would cause serious credibility damage if shared with clients or senior bankers."
+    },
+    {
+      "id": "source_urls",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 0.0,
+      "actual": "0.00",
+      "details": "Score: 0.00 - Sources are generic company investor relations pages rather than specific press releases or deal announcements. Since the underlying deals are fabricated (dated in the future), these sources cannot and do not support the transactions listed. No credible sourcing provided. In a real banking context, we would need specific press releases, SEC filings, or reputable financial news sources with exact dates and deal details."
+    }
+  ],
+  "judge": "claude-sonnet-4-5-20250929"
+}
+

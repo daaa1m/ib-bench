@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/meta.schema.json
+
+task:
+  id: m-001
+  title: "Update DCF model with LQA values and recalculate valuation"
+  type: creating
+  category:
+    - financial-analysis
+  input_type: excel
+  description:
+    "Update the Marine DCF sheet with on FY2024 using LQA values and recalculate
+    DCF with 2025 as the first projection year. Guidance is intentionally
+    minimal to test LLM reasoning on Excel structure. LLM must not change any
+    assumptions. Expected answer: K8=1572, L2=1, K17=12, K20=-240, E27=5864"
+
+prompt:
+  notes:
+    "Low guidance to test reasoning. LLM told to edit only Marine DCF sheet,
+    update FY2024 with LQA, calculate new DCF starting 2025, preserve
+    assumptions"
+
+input:
+  input-file-original: "$human/KEX-Model-TODO.xlsx"
+  notes: "Kirby Corp model with Marine DCF sheet requiring update"

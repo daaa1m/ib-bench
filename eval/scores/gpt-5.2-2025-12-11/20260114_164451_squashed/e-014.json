@@ -1,0 +1,107 @@
+{
+  "task_id": "e-014",
+  "rubric_hash": "b9e8a8dd",
+  "scored_at": "2026-01-14T16:08:29.400893",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 94.25,
+  "score_percent": 94.25,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "cash_equivalents_fy2025",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 15,
+      "points_earned": 15,
+      "actual": 105627.0,
+      "details": "Cell D7 = 105627.0 (expected 105627)"
+    },
+    {
+      "id": "total_liabilities_fy2025",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 15,
+      "points_earned": 15,
+      "actual": 30516.0,
+      "details": "Cell D35 = 30516.0 (expected 30516)"
+    },
+    {
+      "id": "total_equity_fy2025",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 15,
+      "points_earned": 15,
+      "actual": 170854.0,
+      "details": "Cell D41 = 170854.0 (expected 170854)"
+    },
+    {
+      "id": "net_cash_from_ops_fy2026e",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 15,
+      "points_earned": 15,
+      "actual": 89683.07890410958,
+      "details": "Cell E18 = 89683.07890410958 (expected 89683.0789)"
+    },
+    {
+      "id": "net_cash_from_investing_fy2026e",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 15,
+      "points_earned": 15,
+      "actual": -3262.425,
+      "details": "Cell E22 = -3262.425 (expected -3262.425)"
+    },
+    {
+      "id": "ending_cash_fy2026e",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 15,
+      "points_earned": 15,
+      "actual": 176590.6539041096,
+      "details": "Cell E27 = 176590.6539041096 (expected 176590.6539)"
+    },
+    {
+      "id": "formatting",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "points": 5,
+      "points_earned": 0,
+      "actual": [
+        "E7: cross-sheet ref should be green",
+        "F7: cross-sheet ref should be green",
+        "G7: cross-sheet ref should be green",
+        "E9: cross-sheet ref should be green",
+        "F9: cross-sheet ref should be green",
+        "E10: cross-sheet ref should be green",
+        "F10: cross-sheet ref should be green",
+        "E15: cross-sheet ref should be green",
+        "F15: cross-sheet ref should be green",
+        "E24: cross-sheet ref should be green",
+        "F24: cross-sheet ref should be green",
+        "E39: cross-sheet ref should be green",
+        "F39: cross-sheet ref should be green"
+      ],
+      "details": "Formatting violations: E7: cross-sheet ref should be green; F7: cross-sheet ref should be green; G7: cross-sheet ref should be green; E9: cross-sheet ref should be green; F9: cross-sheet ref should be green (+8 more)"
+    },
+    {
+      "id": "reasoning_steps",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 5,
+      "points_earned": 4.25,
+      "actual": "0.85",
+      "details": "Score: 0.85 - The reasoning steps demonstrate a solid understanding of 3-statement modeling mechanics. Step 1 correctly describes Balance Sheet drivers (working capital days, PP&E roll-forward, retained earnings). Step 2 accurately outlines Cash Flow construction including proper sign conventions for working capital changes and the debt financing plug. Step 3 shows appropriate validation checks. The description is clear, methodical, and covers the key linkages. Minor deduction: could have been more explicit about the circular reference handling (if any) and the specific treatment of the cash plug/financing mechanics, but overall this reflects competent technical understanding that meets professional standards."
+    }
+  ],
+  "judge": "claude-sonnet-4-5-20250929"
+}

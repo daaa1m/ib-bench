@@ -1,0 +1,61 @@
+{
+  "task_id": "e-004",
+  "version": "1.0",
+  "total_points": 100,
+  "criteria": {
+    "gaap_operating_income": {
+      "description": "Must correctly extract GAAP operating income for AMD Q3 2025 ($1,270m)",
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "valid_patterns": ["\\$?1,?270\\s*(m|mm|mn|million)?\\b"],
+      "points": 15
+    },
+    "non_gaap_operating_income": {
+      "description": "Must correctly extract non-GAAP operating income for AMD Q3 2025 ($2,238m)",
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "valid_patterns": ["\\$?2,?238\\s*(m|mm|mn|million)?\\b"],
+      "points": 15
+    },
+    "adj_stock_based_compensation": {
+      "description": "Must identify stock-based compensation expense adjustment ($419m)",
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "search_full_response": true,
+      "valid_patterns": ["419"],
+      "points": 14
+    },
+    "adj_amortization_intangibles": {
+      "description": "Must identify amortization of acquisition-related intangibles ($562m)",
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "search_full_response": true,
+      "valid_patterns": ["562"],
+      "points": 14
+    },
+    "adj_acquisition_costs": {
+      "description": "Must identify acquisition-related and other costs ($42m)",
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "search_full_response": true,
+      "valid_patterns": ["\\b42\\b"],
+      "points": 14
+    },
+    "adj_inventory_loss_recovery": {
+      "description": "Must identify inventory recovery from contract manufacturer ($67m)",
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "search_full_response": true,
+      "valid_patterns": ["67"],
+      "points": 14
+    },
+    "adj_loss_contingency": {
+      "description": "Must identify loss contingency on legal matter ($12m)",
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "search_full_response": true,
+      "valid_patterns": ["\\b12\\b"],
+      "points": 14
+    }
+  }
+}

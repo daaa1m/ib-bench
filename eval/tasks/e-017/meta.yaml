@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/meta.schema.json
+
+task:
+  id: e-017
+  title: "Build E&P oil & gas M&A comps for H2 2025"
+  type: creating
+  category:
+    - financial-analysis
+    - data-extraction
+  input_type: excel
+  description: >
+    Create a transaction comparables sheet for 10 E&P oil & gas M&A transactions
+    announced in H2 2025 (July 1 to Dec 31, 2025), including corporate deals and
+    asset sales with deal value >= USD 100m. Required fields: date, target or
+    asset name, acquirer, seller (for asset sales), deal value in USD millions,
+    and payment type (cash, stock, or hybrid). Output in input.xlsx on the
+    M&A Deals sheet. Scored by LLM judge against a golden solution with partial
+    credit for correct but non-listed transactions.
+
+prompt:
+  notes: >
+    Use public sources to identify 10 qualifying E&P transactions in H2 2025.
+    Enter results in the template and provide sources in JSON.
+
+input:
+  input-file-original: null
+  notes: >
+    Task folder includes input.xlsx (M&A Deals template) and
+    _golden-solution.xlsx for validation.

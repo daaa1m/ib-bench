@@ -1,0 +1,18 @@
+{
+  "task_id": "e-004",
+  "model": "gpt-5.2",
+  "timestamp": "2025-12-31T03:07:23.351065",
+  "input_files": [],
+  "raw_response": "{\n  \"gaap_operating_income\": null,\n  \"non_gaap_operating_income\": null,\n  \"adjustments\": [],\n  \"error\": \"Unable to complete as requested because I do not have web/SEC EDGAR access in this environment to retrieve AMD\u2019s Q3 2025 earnings release/10-Q and extract the GAAP-to-non-GAAP operating income reconciliation from the official source. If you paste the reconciliation table (or provide the filing URL/text), I will extract GAAP operating income, non-GAAP operating income, all reconciling line items, convert to USD millions, and ensure the reconciliation ties exactly.\"\n}",
+  "parsed_response": {
+    "gaap_operating_income": null,
+    "non_gaap_operating_income": null,
+    "adjustments": [],
+    "error": "Unable to complete as requested because I do not have web/SEC EDGAR access in this environment to retrieve AMD\u2019s Q3 2025 earnings release/10-Q and extract the GAAP-to-non-GAAP operating income reconciliation from the official source. If you paste the reconciliation table (or provide the filing URL/text), I will extract GAAP operating income, non-GAAP operating income, all reconciling line items, convert to USD millions, and ensure the reconciliation ties exactly."
+  },
+  "usage": {
+    "input_tokens": 591,
+    "output_tokens": 136,
+    "latency_ms": 2541.25714302063
+  }
+}

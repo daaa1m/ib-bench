@@ -1,0 +1,21 @@
+task:
+  id: e-012
+  title: "Summarize S-1 top risk factors for Coinbase"
+  type: summarise
+  category:
+    - document-review
+    - due-diligence
+  input_type: pdf
+  description:
+    "LLM is provided an S-1 filing and must summarize the top 5 risk factors
+    with analyst implications. Expected answer: prioritized list of material
+    risks with business impact assessment. Tests LLM's ability to prioritize and
+    distill lengthy risk disclosures."
+
+prompt:
+  notes: "LLM should rank risks by materiality, not just list in document order"
+
+input:
+  input-file-original: null
+  notes: >
+    input.pdf is the Coinbase S-1 filing used for the Risk Factors section.

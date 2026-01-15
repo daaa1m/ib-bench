@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/meta.schema.json
+
+task:
+  id: h-002
+  title: "Build LBO model and assessment for Albertsons"
+  type: creating
+  category:
+    - financial-analysis
+    - due-diligence
+  input_type: excel
+  description: >
+    Populate a template LBO model for Albertsons with the last three fiscal years
+    of historicals, build a full projection and returns analysis, and complete
+    the Business Assessment sheet with a go/no-go recommendation. Tests ability
+    to source public financials, model an LBO, and synthesize an investment
+    thesis.
+
+prompt:
+  notes: >
+    input.xlsx contains the Operating Model and Business Assessment templates with
+    example content from another company. Replace all numbers and narrative with
+    Albertsons data, calculate returns, and provide a structured assessment.
+
+input:
+  input-file-original: null
+  notes: >
+    Task folder includes input.xlsx with two sheets: Operating Model and Business
+    Assessment. The file is a structural template and is not related to
+    Albertsons; the model output should be a new workbook populated with
+    Albertsons data.

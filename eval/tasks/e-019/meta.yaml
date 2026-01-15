@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/meta.schema.json
+
+task:
+  id: e-019
+  title: "Extract AMC HY indenture covenant terms"
+  type: extraction
+  category:
+    - document-review
+    - due-diligence
+    - data-extraction
+  input_type: pdf
+  description: >
+    Extract key covenant terms from AMC Entertainment's high-yield indenture.
+    Focus on debt incurrence, restricted payments, asset sales, change of
+    control, and liens/guarantor provisions with specific ratios, baskets,
+    thresholds, and timelines. Tests ability to parse indentures for material
+    covenant mechanics.
+
+prompt:
+  notes: >
+    Use only the attached indenture in input.pdf and focus on the specified
+    covenant sections.
+
+input:
+  input-file-original: null
+  notes: >
+    input.pdf is the AMC Entertainment HY bond indenture used for covenant
+    extraction.

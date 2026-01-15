@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/meta.schema.json
+
+task:
+  id: e-020
+  title: "Populate top 15 Apple shareholders from 13F data"
+  type: extraction
+  category:
+    - data-extraction
+    - financial-analysis
+  input_type: excel
+  description: >
+    Use 13F data (or other credible sources) to populate the top 15 largest
+    shareholders of Apple (AAPL). Fill the Holders tab in input.xlsx with name,
+    shares held, market value, % of portfolio, and % ownership. Scoring is
+    programmatic using the Rubric sheet totals. Output the updated Excel file and
+    a JSON summary with the top 5 holders and data sources.
+
+prompt:
+  notes: >
+    Only edit the Holders tab. Do not change the structure or the Rubric tab.
+    Formatting is not required.
+
+input:
+  input-file-original: null
+  notes: >
+    Task folder includes input.xlsx (template) and _golden-solution.xlsx for
+    validation.

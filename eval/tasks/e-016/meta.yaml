@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/meta.schema.json
+
+task:
+  id: e-016
+  title: "Summarize Compass-Anywhere merger agreement terms"
+  type: summarise
+  category:
+    - document-review
+    - due-diligence
+  input_type: pdf
+  description: >
+    Summarize key economic terms of the Compass agreement to acquire Anywhere.
+    Include price and consideration, closing conditions, termination fees,
+    MAC/MAE provisions, and any go-shop/no-shop terms. Tests ability to parse a
+    merger agreement from an 8-K for business-critical terms.
+
+prompt:
+  notes: >
+    Focus on economic terms from the Compass acquiring Anywhere merger agreement
+    attached as input.pdf. Avoid boilerplate.
+
+input:
+  input-file-original: null
+  notes: >
+    input.pdf is the Compass-Anywhere 8-K containing the merger agreement.

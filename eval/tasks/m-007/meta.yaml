@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/meta.schema.json
+
+task:
+  id: m-007
+  title: "Build management return analysis with sweet equity hurdle"
+  type: creating
+  category:
+    - financial-analysis
+  input_type: excel
+  description: >
+    Complete a management return analysis in an LBO model. Given exit multiple
+    range of 15x-19x (0.5x increments) and FY26 exit, calculate exit equity
+    values and determine when management earns sweet equity. Sweet equity
+    hurdle is 200% - exit equity must be at least 3x entry equity for mgmt
+    to earn their 5% sweet equity pot. Expected: sweet equity kicks in at 16x
+    multiple where exit equity of $5,387m exceeds 3x entry of $5,362m.
+
+prompt:
+  notes: >
+    Model has LBO sheet with transaction structure and projections through
+    FY26. Mgmt Return Analysis sheet has assumptions listed but calculations
+    incomplete. LLM must build the sensitivity table and sweet equity logic.
+
+input:
+  input-file-original: "$human/dave-and-busters.xlsx"
+  notes: >
+    D&B LBO model with 5-year projections. Mgmt Return Analysis sheet has
+    placeholder structure. Entry equity $1,787m, FY26 LTM EBITDA $403m,
+    net debt $1,056m. Sweet equity pot is 5% of sponsor equity.

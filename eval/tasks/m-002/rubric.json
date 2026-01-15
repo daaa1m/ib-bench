@@ -1,0 +1,66 @@
+{
+  "task_id": "m-002",
+  "version": "1.2",
+  "total_points": 100,
+  "criteria": {
+    "aq60_value": {
+      "description": "Total Assets in AQ60 must equal 5866",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "cell": "AQ60",
+      "expected": 5866,
+      "tolerance": 1,
+      "sheet": "Model Shell",
+      "points": 25
+    },
+    "aq83_value": {
+      "description": "Total L&SE in AQ83 must equal 5866 (balance check)",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "cell": "AQ83",
+      "expected": 5866,
+      "tolerance": 1,
+      "sheet": "Model Shell",
+      "points": 20
+    },
+    "lqa_label": {
+      "description": "G2 must be updated to 2Q24 for LQA",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "cell": "G2",
+      "expected": "2Q24",
+      "sheet": "Model Shell",
+      "points": 10
+    },
+    "aq31_value": {
+      "description": "Cell AQ31 must equal 124",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "cell": "AQ31",
+      "expected": 124,
+      "tolerance": 1,
+      "sheet": "Model Shell",
+      "points": 15
+    },
+    "aq93_value": {
+      "description": "Cell AQ93 must equal 824",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "cell": "AQ93",
+      "expected": 824,
+      "tolerance": 1,
+      "sheet": "Model Shell",
+      "points": 15
+    },
+    "aq112_value": {
+      "description": "Cell AQ112 must equal 3330",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "cell": "AQ112",
+      "expected": 3330,
+      "tolerance": 1,
+      "sheet": "Model Shell",
+      "points": 15
+    }
+  }
+}

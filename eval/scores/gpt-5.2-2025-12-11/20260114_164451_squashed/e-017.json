@@ -1,0 +1,33 @@
+{
+  "task_id": "e-017",
+  "rubric_hash": "1411ddde",
+  "scored_at": "2026-01-14T16:57:35.579407",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 86.0,
+  "score_percent": 86.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "deal_list",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 80,
+      "points_earned": 68.0,
+      "actual": "0.85",
+      "details": "Score: 0.85 - The analyst identified 10 legitimate E&P M&A transactions from H2 2025, all meeting the >$100mm threshold. Deal values, dates, and payment structures appear accurate based on the sources cited. The transactions span multiple basins (Permian, San Juan, Vaca Muerta, Anadarko, Delaware, California, Marcellus, Utica, DJ Basin) and include both corporate acquisitions (Vital Energy, Berry Corp, Canvas Energy) and asset sales. Minor issues: some seller fields are blank for public company mergers (acceptable convention but could be more explicit), and the Verdad transaction lists 'Stock' as payment type when the source indicates 'all-equity transaction' involving membership interests (technically correct but could be clearer). The work demonstrates solid research and appropriate transaction selection. Would be comfortable presenting this to senior bankers with minimal edits."
+    },
+    {
+      "id": "source_urls",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 18.0,
+      "actual": "0.90",
+      "details": "Score: 0.90 - Sources are highly credible, drawing primarily from company investor relations pages, SEC filings, Reuters, and official press releases. Each transaction is supported by a verifiable primary or reputable secondary source. The analyst appropriately prioritized company disclosures and SEC filings over news aggregators. URLs are specific and directly relevant to the cited transactions. This exceeds the standard for sourcing in comps analysis\u2014demonstrates strong research discipline and would withstand client scrutiny."
+    }
+  ],
+  "judge": "claude-sonnet-4-5-20250929"
+}

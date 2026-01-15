@@ -1,0 +1,47 @@
+{
+  "task_id": "m-009",
+  "version": "1.0",
+  "total_points": 100,
+  "criteria": {
+    "revenue_accuracy": {
+      "description": "Sum of all revenue midpoints matches expected value from historical ADT guidance",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "sheet": "rubric",
+      "cell": "E11",
+      "expected": 169987.5,
+      "tolerance": 20,
+      "points": 30
+    },
+    "ebitda_margin_accuracy": {
+      "description": "Sum of all EBITDA margin midpoints matches expected value, validating correct EBITDA guidance extraction",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "sheet": "rubric",
+      "cell": "E12",
+      "expected": 14.813072,
+      "tolerance": 0.1,
+      "points": 30
+    },
+    "eps_accuracy": {
+      "description": "Sum of all Adj. EPS midpoints matches expected value for periods where EPS guidance was provided",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "sheet": "rubric",
+      "cell": "E13",
+      "expected": 7.54,
+      "tolerance": 0.1,
+      "points": 20
+    },
+    "fcf_accuracy": {
+      "description": "Sum of all FCF midpoints matches expected value for periods where FCF guidance was provided",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "sheet": "rubric",
+      "cell": "E14",
+      "expected": 4900,
+      "tolerance": 10,
+      "points": 20
+    }
+  }
+}

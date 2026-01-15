@@ -1,0 +1,38 @@
+{
+  "provider": "anthropic",
+  "model": "claude-opus-4-5-20251101",
+  "task_ids": [
+    "e-016",
+    "e-017",
+    "e-018",
+    "e-019",
+    "e-020"
+  ],
+  "parallel": 3,
+  "config_file": "configs/opus-run.yaml",
+  "started_at": "2026-01-14T09:47:10.928961",
+  "completed_at": "2026-01-14T10:10:41.616818",
+  "results_summary": [
+    {
+      "task_id": "e-016",
+      "status": "success"
+    },
+    {
+      "task_id": "e-017",
+      "status": "success"
+    },
+    {
+      "task_id": "e-018",
+      "status": "error",
+      "error": "BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011... | status=400 | request_id=req_011CX6TXyE7NUUztfvNiuegx"
+    },
+    {
+      "task_id": "e-019",
+      "status": "success"
+    },
+    {
+      "task_id": "e-020",
+      "status": "success"
+    }
+  ]
+}

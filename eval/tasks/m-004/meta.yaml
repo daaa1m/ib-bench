@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/meta.schema.json
+
+task:
+  id: m-004
+  title: "Generate M&A target list for European food ingredients sector"
+  type: extraction
+  category:
+    - due-diligence
+    - data-extraction
+  input_type: web
+  description:
+    "Generate a target list of 10 private companies in the European food
+    ingredients/specialty chemicals sector for a potential acquisition mandate.
+    Must include company name, headquarters location, estimated revenue range,
+    key products/segments, and ownership (PE-backed vs family-owned). Tests LLM's
+    ability to conduct market research and synthesize company information from
+    web sources into actionable deal sourcing output."
+
+prompt:
+  notes:
+    "LLM must use web search to identify relevant private companies. No input
+    file provided. Scored by LLM judge on quality, relevance, and completeness
+    of target list."
+
+input:
+  input-file-original: None
+  notes:
+    "Web-based sourcing task. LLM should use search capabilities to identify
+    targets from industry databases, news, and company websites."

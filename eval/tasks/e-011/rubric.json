@@ -1,0 +1,117 @@
+{
+  "task_id": "e-011",
+  "version": "1.0",
+  "total_points": 100,
+  "criteria": {
+    "total_debt_3q22": {
+      "description": "Total Debt in 3Q22 (Debt!G95) matches expected value",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "sheet": "Debt",
+      "cell": "G95",
+      "expected": 34070,
+      "tolerance": 1,
+      "points": 10
+    },
+    "total_debt_2023": {
+      "description": "Total Debt in 2023 (Debt!N95) matches expected value",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "sheet": "Debt",
+      "cell": "N95",
+      "expected": 30572,
+      "tolerance": 1,
+      "points": 10
+    },
+    "total_debt_2025": {
+      "description": "Total Debt in 2025 (Debt!X95) matches expected value",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "sheet": "Debt",
+      "cell": "X95",
+      "expected": 26640,
+      "tolerance": 1,
+      "points": 10,
+      "gates_llm": true
+    },
+    "short_term_borrowings_3q22": {
+      "description": "Short-Term Borrowings in 3Q22 (Debt!G96) matches expected value",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "sheet": "Debt",
+      "cell": "G96",
+      "expected": -2675,
+      "tolerance": 1,
+      "points": 10
+    },
+    "short_term_borrowings_2023": {
+      "description": "Short-Term Borrowings in 2023 (Debt!N96) matches expected value",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "sheet": "Debt",
+      "cell": "N96",
+      "expected": 0,
+      "tolerance": 0,
+      "points": 10
+    },
+    "short_term_borrowings_2025": {
+      "description": "Short-Term Borrowings in 2025 (Debt!X96) matches expected value",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "sheet": "Debt",
+      "cell": "X96",
+      "expected": 0,
+      "tolerance": 0,
+      "points": 10
+    },
+    "short_term_debt_3q22": {
+      "description": "Short-Term Debt in 3Q22 (Debt!G97) matches expected value",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "sheet": "Debt",
+      "cell": "G97",
+      "expected": -2877,
+      "tolerance": 1,
+      "points": 10
+    },
+    "short_term_debt_2023": {
+      "description": "Short-Term Debt in 2023 (Debt!N97) matches expected value",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "sheet": "Debt",
+      "cell": "N97",
+      "expected": -2089,
+      "tolerance": 1,
+      "points": 10
+    },
+    "short_term_debt_2025": {
+      "description": "Short-Term Debt in 2025 (Debt!X97) matches expected value",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "sheet": "Debt",
+      "cell": "X97",
+      "expected": -2603,
+      "tolerance": 1,
+      "points": 10
+    },
+    "formatting": {
+      "description": "IB formatting conventions: blue for hardcoded numbers, green for cross-sheet refs, red for external workbook refs",
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "sheet": "Debt",
+      "cells": ["G7:X97"],
+      "points": 5
+    },
+    "reasoning_steps": {
+      "description": "Reasoning steps explain source selection, mapping, and validation",
+      "type": "llm_judge",
+      "core_concepts": [
+        "source filings",
+        "debt tables",
+        "mapped periods",
+        "validated totals"
+      ],
+      "points": 5
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "task_id": "e-020",
+  "version": "1.0",
+  "total_points": 100,
+  "criteria": {
+    "sum_shares_held": {
+      "description": "Sum of shares held in Holders tab matches Rubric total",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "sheet": "Rubric",
+      "cell": "E3",
+      "expected": 5512434108,
+      "tolerance": 10,
+      "points": 25
+    },
+    "sum_market_value": {
+      "description": "Sum of market value in Holders tab matches Rubric total",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "sheet": "Rubric",
+      "cell": "E4",
+      "expected": 1393927369181,
+      "tolerance": 1000,
+      "points": 25
+    },
+    "sum_pct_portfolio": {
+      "description": "Sum of % of portfolio matches Rubric total",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "sheet": "Rubric",
+      "cell": "E5",
+      "expected": 0.8962,
+      "tolerance": 0.0005,
+      "points": 25
+    },
+    "sum_pct_ownership": {
+      "description": "Sum of % ownership matches Rubric total",
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "sheet": "Rubric",
+      "cell": "E6",
+      "expected": 0.3713,
+      "tolerance": 0.0005,
+      "points": 25
+    }
+  }
+}

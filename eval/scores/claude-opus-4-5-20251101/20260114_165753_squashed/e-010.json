@@ -1,0 +1,23 @@
+{
+  "task_id": "e-010",
+  "rubric_hash": "96cd79c1",
+  "scored_at": "2026-01-07T07:27:59.590882",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "json_parse",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "json",
+      "points": 100,
+      "points_earned": 0,
+      "actual": "Now I can see the balance sheet doesn't tie from 2023 onwards (J39:S39 are False). Let me examine th",
+      "details": "Failed to parse JSON from response"
+    }
+  ],
+  "judge": "claude-sonnet-4-5-20250929"
+}

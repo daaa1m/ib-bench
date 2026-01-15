@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/meta.schema.json
+task:
+  id: e-001
+  title: "Find the balance sheet error in an LBO model"
+  type: fix-error
+  category:
+    - financial-analysis
+  input_type: excel
+  description:
+    "LLM is provided an LBO model with an unbalanced balance sheet. LLM must
+    identify the error source. Error is in row 140 where formula neglects to add
+    values from row 138. Expected answer: row 140 cell reference with corrected
+    formula. Tests LLM's ability to audit Excel formulae."
+
+prompt:
+  notes:
+    "LLM is given a guide on finding unbalanced balance sheet errors and told
+    there is only 1 error"
+
+input:
+  input-file-original: "$human/dave-and-busters.xlsx"
+  notes:
+    "Row 140 formula intentionally broken to create balance sheet imbalance"

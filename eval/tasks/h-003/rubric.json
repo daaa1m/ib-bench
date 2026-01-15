@@ -1,0 +1,61 @@
+{
+  "task_id": "h-003",
+  "version": "1.0",
+  "total_points": 100,
+  "criteria": {
+    "data_sources": {
+      "description": "Cites the activist deck and FY24 10-K plus FY25 Q1/Q2/Q3 10-Qs with clear references",
+      "type": "human_judge",
+      "scoring_guide": "Verify the response cites the activist deck and the FY24 10-K plus FY25 Q1/Q2/Q3 10-Qs with clear page/section references and no external sources.",
+      "points": 10
+    },
+    "model_structure": {
+      "description": "Three-statement model structure is coherent and ties together",
+      "type": "human_judge",
+      "scoring_guide": "Assess whether the Income Statement, Balance Sheet, and Cash Flow are all present, tie correctly, and assumptions bridge history to projections.",
+      "points": 10
+    },
+    "historicals_summary": {
+      "description": "Historical anchoring uses FY24A and FY25 YTD data correctly",
+      "type": "human_judge",
+      "scoring_guide": "Check that FY24 actuals and FY25 YTD figures are used correctly, units are consistent, and key line items reconcile across statements.",
+      "points": 10
+    },
+    "value_creation_drivers": {
+      "description": "Activist value-creation drivers are explicit and mapped to financial impacts",
+      "type": "human_judge",
+      "scoring_guide": "Confirm drivers (portfolio simplification, refining performance, cost actions, capital return) are explicit, quantified where possible, and tied to financial impacts with evidence from the deck.",
+      "points": 15
+    },
+    "projection_highlights": {
+      "description": "Projection takeaways are specific and consistent with the model",
+      "type": "human_judge",
+      "scoring_guide": "Ensure projections cite specific revenue/throughput, EBITDA/margin, FCF, and leverage trends and align with the model outputs.",
+      "points": 10
+    },
+    "returns_analysis": {
+      "description": "Returns analysis includes base/upside/downside and sensitivities tied to valuation",
+      "type": "human_judge",
+      "scoring_guide": "Evaluate entry valuation framing, base/upside/downside returns (IRR/MOIC), key sensitivities, and consistency with projections.",
+      "points": 20
+    },
+    "investment_recommendation": {
+      "description": "Clear invest/pass recommendation with rationale and conditions",
+      "type": "human_judge",
+      "scoring_guide": "Recommendation is clear (Invest/Pass/Conditional), IC-ready, and tied to returns, risks, and explicit conditions to proceed.",
+      "points": 15
+    },
+    "risks_and_sensitivities": {
+      "description": "Key risks and signposts are specific and tied to the thesis",
+      "type": "human_judge",
+      "scoring_guide": "At least four risks spanning operational, execution, and market/commodity exposure with realistic signposts or mitigants.",
+      "points": 5
+    },
+    "reasoning_steps": {
+      "description": "Reasoning steps are clear and follow the required workflow",
+      "type": "human_judge",
+      "scoring_guide": "Reasoning steps cover historical reconciliation, translating activist drivers into projections, and translating projections into returns and recommendation.",
+      "points": 5
+    }
+  }
+}

@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/meta.schema.json
+
+task:
+  id: m-002
+  title: "Update Kirby Corp financial model with 2Q24 data"
+  type: creating
+  category:
+    - financial-analysis
+  input_type: multi
+  description:
+    "Update an existing model for Kirby Corp (KEX) with 2Q24 quarterly data from
+    SEC filings and company report. Model has one sheet Model Shell. LLM must
+    update just the 2Q24 column and update LQA (Last Quarter Annualised) to be
+    2Q24 while perserving structure. Success requires model balance, no #REF
+    errors and correct update. Expected answer: AQ60=AQ83=5866, G2=2Q24,
+    AQ31=124, AQ93=824, AQ112=3330"
+
+prompt:
+  notes:
+    "LLM told to update only necessary cells, preserve structure, verify balance
+    and no #REF errors. Output is Excel file plus JSON with reasoning_steps"
+
+input:
+  input-file-original:
+    - "$human/KEX-Model.xlsx"
+  notes:
+    "Simplified original input for LLM's benefit. LLM needs to source their own
+    10Q and data source (for Marine Transport), we do not provide them"

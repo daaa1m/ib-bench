@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/meta.schema.json
+
+task:
+  id: m-005
+  title: "Build a seasonal cost of goods analysis for Tesla"
+  type: creating
+  category:
+    - financial-analysis
+  input_type: excel
+  description:
+    "Build a simple cost of goods sold (COGS) model for Tesla using provided
+    template. Extract COGS by segment (Automotive, Energy, Service) from Tesla
+    financials, calculate Q4 seasonal indices, estimate Q4 2025 costs using
+    seasonal factors, and calculate gross profit excluding auto credit revenue.
+    Expected values: P22=20855 (Q4E COGS), F28=1.076 (Service Q4 index),
+    G30=1790 (2023 auto credit), P32=3469 (Q4E gross profit ex credits),
+    C32=3990 (Q1 2023 gross profit ex credits)."
+
+prompt:
+  notes:
+    "LLM given Excel template with structure and task instructions in rows 2-6.
+    Must research Tesla quarterly financials, populate COGS data, calculate
+    seasonal indices, and derive gross profit metrics. Programmatic scoring on
+    key output cells."
+
+input:
+  input-file-original: null
+  notes:
+    "Template created with revenue data pre-filled. LLM must find and input
+    Tesla quarterly COGS by segment and auto credit revenue from public sources."

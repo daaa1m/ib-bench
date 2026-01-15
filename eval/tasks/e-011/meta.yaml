@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/meta.schema.json
+
+task:
+  id: e-011
+  title: "Build Carnival debt schedule from 3Q22-2025"
+  type: creating
+  category:
+    - financial-analysis
+    - data-extraction
+  input_type: multi
+  description: >
+    Populate the Debt sheet in input.xlsx with Carnival Corp debt schedule
+    amounts from 3Q22 through 2025 using public 10-Q/10-K filings. Key checks:
+    Debt!G95=34070, Debt!N95=30572, Debt!X95=26640; Debt!G96=-2675,
+    Debt!N96=0, Debt!X96=0; Debt!G97=-2877, Debt!N97=-2089, Debt!X97=-2603.
+    Tests ability to extract debt balances and map them to the correct period.
+
+prompt:
+  notes: >
+    Input includes an Excel shell (input.xlsx) with a Debt sheet. The model must
+    be completed using web-sourced Carnival Corp filings only. Output includes
+    the updated Excel file plus a JSON summary.
+
+input:
+  input-file-original: null
+  notes: >
+    Task folder includes input.xlsx (blank debt schedule template) and
+    _golden-solution.xlsx for validation. LLM must source debt amounts from
+    Carnival Corp 10-Q/10-K filings for 3Q22-2025.

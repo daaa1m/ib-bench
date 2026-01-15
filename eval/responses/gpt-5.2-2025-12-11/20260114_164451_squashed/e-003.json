@@ -1,0 +1,16 @@
+{
+  "task_id": "e-003",
+  "model": "gpt-5.2",
+  "timestamp": "2025-12-31T03:07:20.807991",
+  "input_files": [],
+  "raw_response": "{\n  \"purchase_obligations_24m\": \"184708\",\n  \"source_reference\": \"Amazon.com, Inc. Form 10-K for the fiscal year ended December 31, 2024 \u2014 Note 11 \u201cCommitments and Contingencies\u201d \u2014 \u201cPurchase obligations\u201d table (amounts in millions), showing $106,299 due in 2025 and $78,409 due in 2026; summed for obligations due within the next 24 months from December 31, 2024.\"\n}",
+  "parsed_response": {
+    "purchase_obligations_24m": "184708",
+    "source_reference": "Amazon.com, Inc. Form 10-K for the fiscal year ended December 31, 2024 \u2014 Note 11 \u201cCommitments and Contingencies\u201d \u2014 \u201cPurchase obligations\u201d table (amounts in millions), showing $106,299 due in 2025 and $78,409 due in 2026; summed for obligations due within the next 24 months from December 31, 2024."
+  },
+  "usage": {
+    "input_tokens": 459,
+    "output_tokens": 111,
+    "latency_ms": 3327.054977416992
+  }
+}

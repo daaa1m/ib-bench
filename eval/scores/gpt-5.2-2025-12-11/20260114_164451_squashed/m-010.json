@@ -1,0 +1,163 @@
+{
+  "task_id": "m-010",
+  "rubric_hash": "1a68534b",
+  "scored_at": "2026-01-14T16:34:06.706600",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0.0,
+  "llm_gated": true,
+  "criteria": [
+    {
+      "id": "formatting_segments",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "points": 4,
+      "points_earned": 0,
+      "actual": null,
+      "details": "No output files available for formatting check"
+    },
+    {
+      "id": "formatting_is",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "points": 3,
+      "points_earned": 0,
+      "actual": null,
+      "details": "No output files available for formatting check"
+    },
+    {
+      "id": "formatting_bs_cfs",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "points": 3,
+      "points_earned": 0,
+      "actual": null,
+      "details": "No output files available for formatting check"
+    },
+    {
+      "id": "segments_total_revenue_bt150",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 18,
+      "points_earned": 0,
+      "actual": "",
+      "details": "None of ['2007', '2,007'] found in '' [GATES LLM]"
+    },
+    {
+      "id": "segments_mis_revenue_bt31",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 14,
+      "points_earned": 0,
+      "actual": "",
+      "details": "None of ['1098', '1,098'] found in ''"
+    },
+    {
+      "id": "segments_ma_revenue_bt95",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 9,
+      "points_earned": 0,
+      "actual": "",
+      "details": "None of ['909'] found in ''"
+    },
+    {
+      "id": "is_net_income_bo62",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 9,
+      "points_earned": 0,
+      "actual": "",
+      "details": "None of ['646'] found in ''"
+    },
+    {
+      "id": "is_interest_expense_net_bo54",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 5,
+      "points_earned": 0,
+      "actual": "",
+      "details": "None of ['-58', '(58)'] found in ''"
+    },
+    {
+      "id": "bs_cash_bb10",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 5,
+      "points_earned": 0,
+      "actual": "",
+      "details": "None of ['2181', '2,181'] found in ''"
+    },
+    {
+      "id": "bs_total_assets_bb21",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 5,
+      "points_earned": 0,
+      "actual": "",
+      "details": "None of ['15415', '15,415'] found in ''"
+    },
+    {
+      "id": "bs_total_liabilities_bb36",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 4,
+      "points_earned": 0,
+      "actual": "",
+      "details": "None of ['11303', '11,303'] found in ''"
+    },
+    {
+      "id": "bs_total_equity_bb38",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 4,
+      "points_earned": 0,
+      "actual": "",
+      "details": "None of ['4112', '4,112'] found in ''"
+    },
+    {
+      "id": "bs_total_debt_bb31",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 4,
+      "points_earned": 0,
+      "actual": "",
+      "details": "None of ['6983', '6,983'] found in ''"
+    },
+    {
+      "id": "bs_balance_sheet_ties",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 9,
+      "points_earned": 0,
+      "actual": "",
+      "details": "None of ['true'] found in '' [GATES LLM]"
+    },
+    {
+      "id": "reasoning_steps",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 4,
+      "points_earned": 0,
+      "actual": "[SKIPPED - gated]",
+      "details": "Skipped due to programmatic gate failure"
+    }
+  ],
+  "judge": "claude-sonnet-4-5-20250929"
+}

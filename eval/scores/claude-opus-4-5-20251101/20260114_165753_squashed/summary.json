@@ -1,0 +1,22 @@
+{
+  "total": 1,
+  "passed": 1,
+  "failed": 0,
+  "blocked": 0,
+  "skipped": 0,
+  "total_points": 100,
+  "points_earned": 95,
+  "results": [
+    {
+      "task_id": "m-006",
+      "passed": true,
+      "points_earned": 95,
+      "total_points": 100,
+      "score_percent": 95.0
+    }
+  ],
+  "overall_percent": 95.0,
+  "rubric_hashes": {
+    "m-006": "b249a701"
+  }
+}

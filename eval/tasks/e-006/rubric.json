@@ -1,0 +1,48 @@
+{
+  "task_id": "e-006",
+  "version": "1.1",
+  "total_points": 100,
+  "criteria": {
+    "formatting": {
+      "description": "IB formatting conventions: blue for hardcoded numbers, green for cross-sheet refs, red for external workbook refs",
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "points": 10
+    },
+    "K164": {
+      "description": "Total Cash Interest in K164 must equal -112 (with circularity ON)",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["-112"],
+      "points": 18
+    },
+    "L164": {
+      "description": "Total Cash Interest in L164 must equal -102 (with circularity ON)",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["-102"],
+      "points": 18
+    },
+    "M164": {
+      "description": "Total Cash Interest in M164 must equal -98 (with circularity ON)",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["-98"],
+      "points": 18
+    },
+    "N164": {
+      "description": "Total Cash Interest in N164 must equal -92 (with circularity ON)",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["-92"],
+      "points": 18
+    },
+    "O164": {
+      "description": "Total Cash Interest in O164 must equal -84 (with circularity ON)",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["-84", "-83"],
+      "points": 18
+    }
+  }
+}

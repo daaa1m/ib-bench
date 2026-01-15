@@ -1,0 +1,47 @@
+{
+  "task_id": "e-009",
+  "version": "1.0",
+  "total_points": 100,
+  "criteria": {
+    "entry_multiple": {
+      "description": "Must correctly identify the entry EV/EBITDA multiple (forward basis, EV / FY22 EBITDA)",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["7.9", "7.9x"],
+      "points": 18,
+      "gates_llm": true
+    },
+    "exit_multiple": {
+      "description": "Must correctly identify the exit EV/EBITDA multiple from the transaction assumptions",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["10.0", "10.0x", "10.0", "10"],
+      "points": 18,
+      "gates_llm": true
+    },
+    "hold_period_years": {
+      "description": "Must correctly identify the investment holding period in years",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["5"],
+      "points": 18,
+      "gates_llm": true
+    },
+    "senior_debt_rate": {
+      "description": "Must correctly identify the senior debt interest rate as a percentage",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["3.49%", "3.49"],
+      "points": 28,
+      "gates_llm": true
+    },
+    "revenue_growth_rate": {
+      "description": "Must correctly identify the revenue growth rate assumption as a percentage",
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "accepted_values": ["5.1", "5.1%"],
+      "points": 18,
+      "gates_llm": true
+    }
+  }
+}

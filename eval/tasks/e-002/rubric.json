@@ -1,0 +1,37 @@
+{
+  "task_id": "e-002",
+  "version": "1.0",
+  "total_points": 100,
+  "criteria": {
+    "accuracy": {
+      "description": "Are all facts, figures, and claims accurate and traceable to the article with no hallucinated information?",
+      "type": "llm_judge",
+      "points": 25
+    },
+    "completeness": {
+      "description": "Does the summary capture all key points including the primary event, relevant figures, parties involved, and material implications?",
+      "type": "llm_judge",
+      "points": 25
+    },
+    "conciseness": {
+      "description": "Is the summary appropriately sized with no filler phrases, excessive hedging, or redundancy?",
+      "type": "llm_judge",
+      "points": 15
+    },
+    "relevance": {
+      "description": "Does the summary lead with the most important takeaway and prioritises relevant information?",
+      "type": "llm_judge",
+      "points": 15
+    },
+    "commentary_quality": {
+      "description": "Is any commentary clearly distinguished from article facts, relevant, and insightful? If no commentary is included, is that appropriate?",
+      "type": "llm_judge",
+      "points": 10
+    },
+    "professional_tone": {
+      "description": "Is the language professional, precise, and appropriate for senior banker communication?",
+      "type": "llm_judge",
+      "points": 10
+    }
+  }
+}

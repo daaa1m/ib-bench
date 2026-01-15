@@ -1,0 +1,88 @@
+{
+  "task_id": "m-005",
+  "rubric_hash": "6865fb11",
+  "scored_at": "2026-01-07T06:52:09.957333",
+  "passed": false,
+  "total_points": 110,
+  "points_earned": 20,
+  "score_percent": 18.181818181818183,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "formatting",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "points": 10,
+      "points_earned": 0,
+      "actual": [
+        "P9: hardcoded number should be blue",
+        "G11: hardcoded number should be blue",
+        "L11: hardcoded number should be blue",
+        "C13: hardcoded number should be blue",
+        "D13: hardcoded number should be blue",
+        "E13: hardcoded number should be blue",
+        "F13: hardcoded number should be blue",
+        "H13: hardcoded number should be blue",
+        "I13: hardcoded number should be blue",
+        "J13: hardcoded number should be blue",
+        "K13: hardcoded number should be blue",
+        "M13: hardcoded number should be blue",
+        "N13: hardcoded number should be blue",
+        "O13: hardcoded number should be blue"
+      ],
+      "details": "Formatting violations: P9: hardcoded number should be blue; G11: hardcoded number should be blue; L11: hardcoded number should be blue; C13: hardcoded number should be blue; D13: hardcoded number should be blue (+9 more)"
+    },
+    {
+      "id": "p22_total_cogs_q4e",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 25,
+      "points_earned": 0,
+      "actual": 23449.59930549379,
+      "details": "Cell P22 = 23449.59930549379, expected 20855 (diff: 2594.59930549379) [GATES LLM]"
+    },
+    {
+      "id": "f28_service_q4_index_2023",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 20,
+      "points_earned": 0,
+      "actual": 1.0981644054269752,
+      "details": "Cell F28 = 1.0981644054269752, expected 1.076 (diff: 0.022164405426975176)"
+    },
+    {
+      "id": "g30_auto_credit_2023",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 20,
+      "points_earned": 20,
+      "actual": 1790.0,
+      "details": "Cell G30 = 1790.0 (expected 1790)"
+    },
+    {
+      "id": "p32_gross_profit_q4e",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 20,
+      "points_earned": 0,
+      "actual": 874.4523374874079,
+      "details": "Cell P32 = 874.4523374874079, expected 3469 (diff: 2594.547662512592)"
+    },
+    {
+      "id": "c32_gross_profit_q1_2023",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 15,
+      "points_earned": 0,
+      "actual": 3446.0,
+      "details": "Cell C32 = 3446.0, expected 3990 (diff: 544.0)"
+    }
+  ],
+  "judge": "claude-sonnet-4-5-20250929"
+}

@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/meta.schema.json
+
+task:
+  id: e-014
+  title: "Complete balance sheet and cash flow in a 3-statement model"
+  type: creating
+  category:
+    - financial-analysis
+  input_type: excel
+  description: >
+    Complete the Balance Sheet and Cash Flow sheets in input.xlsx without
+    changing the structure. Key checks in the output: Balance Sheet!D7=105627,
+    Balance Sheet!D35=30516, Balance Sheet!D41=170854, Cash Flow!E18=89683.08,
+    Cash Flow!E22=-3262.43, Cash Flow!E27=176590.65. Tests ability to link
+    statements and build a coherent 3-statement model.
+
+prompt:
+  notes: >
+    LLM should fill in the missing Balance Sheet and Cash Flow calculations in
+    the provided 3-statement model while preserving formulas and structure.
+
+input:
+  input-file-original: null
+  notes: >
+    Task folder includes input.xlsx (model template) and _golden-solution.xlsx
+    for validation.

@@ -1,0 +1,43 @@
+{
+  "task_id": "e-012",
+  "rubric_hash": "013aba50",
+  "scored_at": "2026-01-14T16:36:12.961560",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 85.30000000000001,
+  "score_percent": 85.30000000000001,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "top_5_risks",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 50,
+      "points_earned": 42.5,
+      "actual": "0.85",
+      "details": "Score: 0.85 - The analyst identified 5 highly material risks that are well-grounded in the S-1 Risk Factors section. Each risk is accurately titled, summarized, and includes actionable analyst implications. The risks selected (regulatory uncertainty, transaction revenue volatility, BTC/ETH concentration, cybersecurity, and competitive disadvantage vs unregulated exchanges) are all explicitly discussed in the S-1 and represent core business threats. The summaries are concise and accurate, citing specific details from the document (e.g., '56% of trading volume from BTC/ETH in 2020', Travel Rule requirements, staking regulatory uncertainty). The analyst implications are practical and investment-banking appropriate (e.g., 'underwrite downside cases', 'model concentration risk explicitly', 'diligence custody architecture'). Minor deduction: The analyst could have been more explicit about the S-1's own designation of 'The Most Material Risks' section which appears at the beginning of the Risk Factors, though the risks selected do align well with those highlighted risks. The risk titles are clear and professional, and the content demonstrates strong understanding of materiality."
+    },
+    {
+      "id": "prioritization_rationale",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 30,
+      "points_earned": 26.4,
+      "actual": "0.88",
+      "details": "Score: 0.88 - The rationale is well-articulated and demonstrates sophisticated understanding of materiality assessment. The analyst clearly explains the selection criteria: risks that 'directly drive Coinbase's core revenue engine (transaction volume/pricing), could force product shutdowns or structural cost increases (regulation/enforcement), or could rapidly impair trust and platform usage (security).' The ranking logic is sound - prioritizing by 'expected magnitude and immediacy of impact on revenue and operating leverage' with emphasis on 'Coinbase-specific exposures.' The analyst correctly identifies that these are not generic risks but company-specific vulnerabilities. The rationale explicitly addresses why these 5 were chosen over others and explains the ranking order. The explanation is concise yet comprehensive, demonstrating clear analytical thinking appropriate for an investment banking context. Very strong work that would give a VP confidence in the analyst's judgment."
+    },
+    {
+      "id": "methodology_notes",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 16.4,
+      "actual": "0.82",
+      "details": "Score: 0.82 - The methodology is clearly described and appropriate. The analyst explains focusing on 'the Risk Factors section's most company-specific and financially causal disclosures' and prioritizing items tied to 'revenue concentration, regulatory permissions to operate/offer products, and trust/security of custody.' The two-step reasoning process is logical: (1) filtering to risks affecting ability to operate, transaction revenue, or customer trust, and (2) ranking by potential for largest/fastest deterioration in revenue and profitability. The approach is sound and demonstrates understanding of how to extract material risks from disclosure documents. Minor deduction: The methodology could have been slightly more specific about how the analyst navigated the extensive Risk Factors section (which spans many pages and contains dozens of individual risk disclosures). The analyst could have noted that they reviewed the S-1's own 'Most Material Risks' section or explained how they weighted risks that appeared in multiple contexts. Overall, this is competent professional work that clearly documents the analytical approach."
+    }
+  ],
+  "judge": "claude-sonnet-4-5-20250929"
+}

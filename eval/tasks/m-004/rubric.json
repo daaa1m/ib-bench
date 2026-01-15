@@ -1,0 +1,62 @@
+{
+  "task_id": "m-004",
+  "version": "1.0",
+  "total_points": 100,
+  "criteria": {
+    "target_count": {
+      "description": "Must provide exactly 10 target companies",
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "valid_patterns": ["\"company_name\".*\"company_name\".*\"company_name\".*\"company_name\".*\"company_name\".*\"company_name\".*\"company_name\".*\"company_name\".*\"company_name\".*\"company_name\""],
+      "search_full_response": true,
+      "points": 10,
+      "gates_llm": true
+    },
+    "company_validity": {
+      "description": "Companies are real, verifiable entities (not fabricated) with accurate basic information",
+      "type": "llm_judge",
+      "core_concepts": [
+        "real companies",
+        "verifiable entities",
+        "accurate information",
+        "not hallucinated"
+      ],
+      "points": 25
+    },
+    "criteria_fit": {
+      "description": "Companies meet target criteria: European HQ, food ingredients sector, private ownership, B2B business model, appropriate revenue range",
+      "type": "llm_judge",
+      "core_concepts": [
+        "European headquarters",
+        "food ingredients sector",
+        "private company",
+        "B2B supplier",
+        "revenue range €50M-€500M"
+      ],
+      "points": 25
+    },
+    "information_completeness": {
+      "description": "Each target includes all required fields with substantive detail: name, HQ, revenue estimate, products, ownership, rationale",
+      "type": "llm_judge",
+      "core_concepts": [
+        "complete information",
+        "revenue estimates",
+        "ownership details",
+        "product descriptions",
+        "acquisition rationale"
+      ],
+      "points": 20
+    },
+    "research_quality": {
+      "description": "Evidence of thorough research with credible sources, cross-referencing, and appropriate caveats on data limitations",
+      "type": "llm_judge",
+      "core_concepts": [
+        "multiple sources",
+        "credible research",
+        "appropriate caveats",
+        "data quality awareness"
+      ],
+      "points": 20
+    }
+  }
+}

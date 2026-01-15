@@ -1,0 +1,90 @@
+{
+  "task_id": "e-019",
+  "version": "1.0",
+  "total_points": 100,
+  "criteria": {
+    "debt_incurrence": {
+      "description": "Captures debt incurrence tests, key baskets, leverage thresholds, and non-guarantor caps from Section 4.05",
+      "type": "llm_judge",
+      "core_concepts": [
+        "Senior Leverage Ratio",
+        "3.50x",
+        "Credit Facility basket",
+        "2,250M",
+        "greater of",
+        "75% EBITDA",
+        "First Lien Leverage",
+        "3.00x",
+        "Secured Leverage",
+        "6.00x",
+        "400M",
+        "40% EBITDA",
+        "50M",
+        "5% EBITDA",
+        "non-guarantor cap"
+      ],
+      "points": 35
+    },
+    "restricted_payments": {
+      "description": "Captures RP starter and builder baskets, general basket, leverage-based exception, and EoD blocker from Section 4.06",
+      "type": "llm_judge",
+      "core_concepts": [
+        "starter basket",
+        "300M",
+        "builder basket",
+        "cumulative EBITDA",
+        "1.70",
+        "interest expense",
+        "Q1 2021",
+        "general RP basket",
+        "150M",
+        "15% EBITDA",
+        "Total Leverage",
+        "4.50x",
+        "event of default"
+      ],
+      "points": 25
+    },
+    "asset_sales": {
+      "description": "Captures asset sale cash consideration requirement, reinvestment timing, excess proceeds threshold, offer price, and collateral waterfall from Section 4.16",
+      "type": "llm_judge",
+      "core_concepts": [
+        "75% cash",
+        "50M",
+        "5% EBITDA",
+        "450 days",
+        "180-day extension",
+        "100M threshold",
+        "100% of principal",
+        "accrued interest",
+        "First Lien Obligations"
+      ],
+      "points": 20
+    },
+    "change_of_control": {
+      "description": "Captures change of control offer price, timing, and drag-along mechanics from Section 4.11",
+      "type": "llm_judge",
+      "core_concepts": [
+        "101%",
+        "principal",
+        "accrued interest",
+        "notice within 60 days",
+        "20-60 business days",
+        "90% tender",
+        "drag-along"
+      ],
+      "points": 15
+    },
+    "liens_and_other": {
+      "description": "Captures equal and ratable liens, future guarantor trigger, and negative pledge from Sections 4.07-4.10",
+      "type": "llm_judge",
+      "core_concepts": [
+        "equal and ratable",
+        "future guarantor",
+        "250M",
+        "negative pledge"
+      ],
+      "points": 5
+    }
+  }
+}

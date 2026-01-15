@@ -1,0 +1,53 @@
+{
+  "task_id": "e-018",
+  "rubric_hash": "319d1a20",
+  "scored_at": "2026-01-14T13:20:45.214027",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 95,
+  "score_percent": 95.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "error_location",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 45,
+      "points_earned": 45,
+      "actual": "Row 61 (Chg in NWC), Columns J through R (forecast periods 2023-2031)",
+      "details": "Found 'Row 61' in response"
+    },
+    {
+      "id": "corrected_formula",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 40,
+      "points_earned": 40,
+      "actual": "=I41-J41 (and similar for subsequent columns: =J41-K41, etc.)",
+      "details": "Matched pattern: I41-J41"
+    },
+    {
+      "id": "explanation",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 10,
+      "points_earned": 10,
+      "actual": "The Change in NWC formula had the wrong sign. In a cash flow statement, an increase in Net Working Capital is a USE of cash and should appear as a negative value. The original formula (Current NWC - Prior NWC) produced a positive value when NWC increased, incorrectly showing a source of cash instead of a use. The corrected formula (Prior NWC - Current NWC) produces a negative value when NWC increases, correctly reflecting the cash outflow. This error caused a cumulative balance sheet discrepancy equal to 2x the change in NWC each period, which compounded through the forecast.",
+      "details": "Found 'sign' in response"
+    },
+    {
+      "id": "formatting",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "points": 5,
+      "points_earned": 0,
+      "actual": null,
+      "details": "No output files available for formatting check"
+    }
+  ],
+  "judge": "claude-sonnet-4-5-20250929"
+}
