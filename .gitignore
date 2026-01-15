@@ -28,3 +28,7 @@ CLAUDE.md
 
 # Data warehouse (source files)
 data-warehouse/
+
+# Export script outputs
+eval/export-scripts/leaderboard/
+eval/export-scripts/task-results/

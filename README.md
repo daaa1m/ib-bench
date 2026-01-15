@@ -1,32 +1,42 @@
 # IB-bench
 
-IB-bench is an automated benchmark for evaluating Large Language Models (LLMs) on tasks typical of Investment Banking (IB) analysts. Inspired by SWE-bench, IB-bench focuses on high-stakes financial workflows including Excel modeling, complex document analysis, and precise data extraction.
+IB-bench is an automated benchmark for evaluating Large Language Models (LLMs)
+on tasks typical of Investment Banking (IB) analysts. Inspired by SWE-bench,
+IB-bench focuses on high-stakes financial workflows including Excel modeling,
+complex document analysis, and precise data extraction.
 
 ## Features & Scope
 
-- **Real-world IB Tasks**: Benchmarking across financial analysis, due diligence, document review, and data extraction.
-- **Multimodal Inputs**: Supports complex Excel spreadsheets (`.xlsx`), financial reports (`.pdf`), and vision-based tasks.
-- **Advanced Scoring**: Hybrid evaluation combining deterministic programmatic checks with LLM-as-a-judge for nuanced analysis.
-- **Human-in-the-Loop**: Integrated workflow for manual verification and expert human scoring.
-- **Rich Diagnostics**: Detailed analysis of model failure patterns, credit tiers, and leaderboard generation.
+- **Real-world IB Tasks**: Benchmarking across financial analysis, due
+  diligence, document review, and data extraction.
+- **Multimodal Inputs**: Supports complex Excel spreadsheets (`.xlsx`),
+  financial reports (`.pdf`), and web-based tasks.
+- **Advanced Scoring**: Hybrid evaluation combining deterministic programmatic
+  checks with LLM-as-a-judge for nuanced analysis.
+- **Human-in-the-Loop**: Integrated workflow for manual verification and expert
+  human scoring.
+- **Rich Diagnostics**: Detailed analysis of model failure patterns, credit
+  tiers, and leaderboard generation.
 
 ## Installation & Setup
 
-IB-bench uses `uv` for fast, reproducible Python environment management.
+IB-bench uses `uv` for package management.
 
 1. **Clone the repository**:
+
    ```bash
    git clone https://github.com/daaa1m/ib-bench.git
    cd ib-bench
    ```
 
 2. **Install dependencies**:
+
    ```bash
    uv sync
    ```
 
-3. **Configure environment**:
-   Create a `.env` file with your API keys (Anthropic, OpenAI, Gemini):
+3. **Configure environment**: Create a `.env` file with your API keys
+   (Anthropic, OpenAI, Gemini):
    ```bash
    cp .env.example .env
    # Edit .env with your keys
@@ -37,27 +47,33 @@ IB-bench uses `uv` for fast, reproducible Python environment management.
 Evaluation runs are controlled by YAML configuration files.
 
 1. **Initialize local configs**:
+
    ```bash
    cp -R eval/configs.example eval/configs
    ```
 
-2. **Edit configs**: Customize files in `eval/configs/` (copied from `eval/configs.example/`).
+2. **Edit configs**: Customize files in `eval/configs/` (copied from
+   `eval/configs.example/`).
 
 ## Usage
 
 ### 1. Run Evaluation (Generation)
-Run models against tasks. This phase is expensive as it calls LLM APIs. Results are cached in `eval/responses/`.
+
+Run models against tasks. This phase is expensive as it calls LLM APIs. Results
+are cached in `eval/responses/`.
 
 ```bash
 # Run using a specific config
-uv run eval/run.py --config configs/quick-test.yaml
+uv run eval/run.py --config configs/quick-run.yaml
 
 # Resume a partially completed run
-uv run eval/run.py --config configs/full-easy.yaml --resume MODEL/RUN_ID
+uv run eval/run.py --config configs/full-easy-example.yaml --resume MODEL/RUN_ID
 ```
 
 ### 2. Score Responses
-Score the generated outputs. This phase is fast and can be re-run whenever rubrics are updated.
+
+Score the generated outputs. This phase is fast and can be re-run whenever
+rubrics are updated.
 
 ```bash
 # Score the latest run for a model
@@ -66,19 +82,28 @@ uv run eval/score.py MODEL
 # Score a specific run
 uv run eval/score.py MODEL/RUN_ID
 
-# Rescore with a specific judge model
+# Score specific tasks only
+uv run eval/score.py MODEL/RUN_ID --tasks e-001 e-002
+
+# Force rescore (ignore cached scores)
+uv run eval/score.py MODEL/RUN_ID --rescore
+
+# Score with a specific judge model
 uv run eval/score.py MODEL/RUN_ID --judge-model claude-3-5-sonnet-20241022
 ```
 
 ### 3. Human Scoring Workflow
+
 For criteria requiring expert judgment or when LLM parsing fails:
 
 1. Generate templates: `uv run eval/score.py MODEL/RUN_ID --human`
 2. Review the generated `*_human.md` files in the score directory.
-3. Edit the corresponding JSON score files (provide `score` 0.0-1.0 and `reasoning`).
+3. Edit the corresponding JSON score files (provide `score` 0.0-1.0 and
+   `reasoning`).
 4. Finalize by running without the flag: `uv run eval/score.py MODEL/RUN_ID`
 
 ### 4. Analyze & Export
+
 ```bash
 # Analyze run health and failure patterns
 uv run eval/results/analyze.py MODEL/RUN_ID
@@ -91,6 +116,9 @@ uv run eval/results/leaderboard.py
 
 # Export task results for external analysis
 uv run eval/export-scripts/export_task_results.py
+
+# Export leaderboard for external analysis
+uv run eval/export-scripts/export_leaderboard.py
 ```
 
 ## Task Anatomy
@@ -107,21 +135,15 @@ Each task in `eval/tasks/{id}/` consists of:
 - `eval/tasks/`: Task definitions and source files.
 - `eval/responses/`: LLM outputs and generated files (expensive, preserve).
 - `eval/scores/`: Scoring results, logs, and human templates (regenerable).
-- `eval/configs.example/`: Example run and leaderboard configurations (copy to `eval/configs/`).
+- `eval/configs.example/`: Example run and leaderboard configurations (copy to
+  `eval/configs/`).
 - `eval/configs/`: Local run and leaderboard configurations (gitignored).
-- `data-warehouse/`: Human-generated and synthetic source data.
 - `tests/`: Project test suite (`uv run pytest`).
-
-## Contributing
-
-We welcome contributions to IB-bench. To contribute:
-1. Explore existing tasks in `eval/tasks/`.
-2. Use the internal task creation tools to propose new benchmark items.
-3. Ensure all changes pass the test suite: `uv run pytest`.
 
 ## License
 
-This repository does not yet include a license file. If you need licensing terms, please open an issue.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
+for details.
 
 ## Citation
 
