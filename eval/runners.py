@@ -229,8 +229,6 @@ class AnthropicRunner:
         extracted_file_ids: list[str] = []
 
         block_types = [getattr(b, "type", "unknown") for b in all_content_blocks]
-        print(f"  DEBUG block_types: {block_types}")
-        print(f"  DEBUG container_id (from response): {container_id}")
 
         for block in all_content_blocks:
             block_type = getattr(block, "type", None)
@@ -273,8 +271,6 @@ class AnthropicRunner:
                         elif item_text:
                             raw_text += item_text + "\n"
 
-        print(f"  DEBUG extracted_file_ids: {extracted_file_ids}")
-
         for file_id in extracted_file_ids:
             try:
                 file_metadata = self.client.beta.files.retrieve_metadata(file_id)
@@ -293,12 +289,10 @@ class AnthropicRunner:
                 print(f"  Warning: Failed to download file {file_id}: {e}")
 
         if not output_files and container_id:
-            print("  DEBUG no files from blocks, trying container listing...")
             try:
                 container_files = self.client.beta.files.list(
                     container_id=container_id  # type: ignore[call-arg]
                 )
-                print(f"  DEBUG container_files count: {len(container_files.data)}")
                 for cf in container_files.data:
                     print(f"  Downloading output file: {cf.filename}")
                     file_content = self.client.beta.files.download(cf.id)
@@ -391,7 +385,6 @@ class OpenAIRunner:
 
         pdf_files = [f for f in files if f.suffix.lower() == ".pdf"]
         code_files = [f for f in files if f.suffix.lower() in [".xlsx", ".xls", ".csv"]]
-        # we've not implemented image input on run.py yet TODO
         image_files = [
             f for f in files if f.suffix.lower() in [".png", ".jpg", ".jpeg"]
         ]
@@ -453,9 +446,6 @@ class OpenAIRunner:
             api_input = [{"role": "user", "content": input_content}]
 
         print("Running Responses API...")
-        print(
-            f"  DEBUG tools configured: {[t.get('type') for t in tools] if tools else 'none'}"
-        )
         content_filter_triggered = False
         try:
             response = self.client.responses.create(
@@ -466,10 +456,8 @@ class OpenAIRunner:
                 max_output_tokens=16384,
             )
         except Exception as e:
-            print(f"  DEBUG exception: {type(e).__name__}: {str(e)[:500]}")
             if _is_content_filter_error(str(e)):
                 print("  BLOCKED: Content filter triggered")
-                print(f"  DEBUG filter reason: {str(e)[:200]}")
                 content_filter_triggered = True
                 response = None
             else:
@@ -503,16 +491,6 @@ class OpenAIRunner:
 
         assert response is not None
         response_text = response.output_text or ""
-
-        response_status = getattr(response, "status", "unknown")
-        print(f"  DEBUG response status: {response_status}")
-
-        output_types = []
-        if hasattr(response, "output") and response.output:
-            output_types = [
-                getattr(item, "type", "unknown") for item in response.output
-            ]
-        print(f"  DEBUG output types: {output_types}")
 
         # Extract files from container - list all files and filter out uploaded inputs
         output_files: list[OutputFile] = []

@@ -12,11 +12,14 @@ wheels/
 # Environment variables
 .env
 
-.DS_Store
-.prettierrc
-
 # Private task folders
 eval/tasks/_private/
 
 # Local run configs
 eval/configs/
+
+# Misc
+.DS_Store
+.prettierrc
+tmp/
+docs/
