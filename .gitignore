@@ -25,3 +25,6 @@ tmp/
 docs/
 .claude/
 CLAUDE.md
+
+# Data warehouse (source files)
+data-warehouse/
