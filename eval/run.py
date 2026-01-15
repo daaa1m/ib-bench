@@ -172,8 +172,6 @@ def run_task(task: Task, runner: Runner, run_dir: Path) -> ResponseData:
     """Execute a single task and save the response."""
     print(f"Running task {task.id}...")
 
-    # Find input files (xlsx, pdf, etc.)
-    # TODO support for other file types
     input_files = _select_input_files(task)
 
     if input_files:
