@@ -1,11 +1,11 @@
 {
   "task_id": "m-006",
-  "rubric_hash": "66a70dd0",
-  "scored_at": "2026-01-07T07:24:46.807656",
+  "rubric_hash": "b249a701",
+  "scored_at": "2026-01-15T10:50:26.358205",
   "passed": true,
-  "total_points": 110,
-  "points_earned": 100,
-  "score_percent": 90.9090909090909,
+  "total_points": 100,
+  "points_earned": 95,
+  "score_percent": 95.0,
   "llm_gated": false,
   "criteria": [
     {
@@ -13,7 +13,7 @@
       "passed": false,
       "type": "programmatic",
       "match_type": "excel_formatting",
-      "points": 10,
+      "points": 5,
       "points_earned": 0,
       "actual": [
         "H1: hardcoded number should be blue",
@@ -120,8 +120,8 @@
       "passed": true,
       "type": "programmatic",
       "match_type": "substring_one_of",
-      "points": 15,
-      "points_earned": 15,
+      "points": 14,
+      "points_earned": 14,
       "actual": "H141:L141",
       "details": "Found 'H141' in response"
     },
@@ -130,8 +130,8 @@
       "passed": true,
       "type": "programmatic",
       "match_type": "regex_pattern",
-      "points": 25,
-      "points_earned": 25,
+      "points": 22,
+      "points_earned": 22,
       "actual": "2.36",
       "details": "Matched pattern: 2\\.[2-4]"
     },
@@ -140,8 +140,8 @@
       "passed": true,
       "type": "programmatic",
       "match_type": "regex_pattern",
-      "points": 20,
-      "points_earned": 20,
+      "points": 19,
+      "points_earned": 19,
       "actual": "346.07",
       "details": "Matched pattern: 33[0-9]|34[0-9]|35[0-5]"
     },
