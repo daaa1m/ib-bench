@@ -14,11 +14,7 @@ dependencies = [
     "pytest>=8.0.0",
     "pytest-mock>=3.12.0",
     "pytest-asyncio>=0.24.0",
-    "pdfminer-six>=20251227",
-    "pdfplumber>=0.5.3",
-    "six>=1.17.0",
     "types-pyyaml>=6.0.12.20250915",
-    "jsonschema>=4.25.1",
 ]
 
 [tool.basedpyright]
