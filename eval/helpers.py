@@ -19,7 +19,7 @@ from dotenv import load_dotenv
 # Type Definitions
 # -----------------------------------------------------------------------------
 
-Provider = Literal["anthropic", "openai", "gemini"]
+Provider = Literal["anthropic", "openai", "gemini", "azure"]
 CriterionType = Literal["programmatic", "llm_judge", "human_judge"]
 MatchType = Literal["substring_one_of", "regex_pattern"]
 
@@ -223,25 +223,75 @@ def get_rubric_hash(rubric: Rubric) -> str:
     return hashlib.sha256(content.encode()).hexdigest()[:8]
 
 
+def _sanitize_json_strings(text: str) -> str:
+    """Escape raw newlines/tabs inside JSON string values (Mistral outputs these)."""
+    result = []
+    in_string = False
+    escape_next = False
+
+    for char in text:
+        if escape_next:
+            result.append(char)
+            escape_next = False
+            continue
+        if char == "\\":
+            result.append(char)
+            escape_next = True
+            continue
+        if char == '"':
+            result.append(char)
+            in_string = not in_string
+            continue
+        if in_string:
+            if char == "\n":
+                result.append("\\n")
+                continue
+            if char == "\r":
+                result.append("\\r")
+                continue
+            if char == "\t":
+                result.append("\\t")
+                continue
+        result.append(char)
+
+    return "".join(result)
+
+
+def _strip_json_comments(text: str) -> str:
+    return re.sub(r"//.*?(?=\n|$)", "", text)
+
+
+def _try_parse_json(text: str) -> dict[str, Any] | None:
+    candidates = [
+        text,
+        _strip_json_comments(text),
+        _sanitize_json_strings(text),
+        _sanitize_json_strings(_strip_json_comments(text)),
+    ]
+    for candidate in candidates:
+        try:
+            return json.loads(candidate)
+        except json.JSONDecodeError:
+            pass
+        missing = candidate.count("{") - candidate.count("}")
+        if missing > 0:
+            try:
+                return json.loads(candidate + "}" * missing)
+            except json.JSONDecodeError:
+                pass
+    return None
+
+
 def extract_json(text: str) -> dict[str, Any] | None:
-    """Extract JSON object from response text."""
-    try:
-        return json.loads(text.strip())
-    except json.JSONDecodeError:
-        pass
+    result = _try_parse_json(text.strip())
+    if result:
+        return result
 
     code_block = re.search(r"```(?:json)?\s*(.*?)\s*```", text, re.DOTALL)
     if code_block:
-        content = code_block.group(1)
-        try:
-            return json.loads(content)
-        except json.JSONDecodeError:
-            missing = content.count("{") - content.count("}")
-            if missing > 0:
-                try:
-                    return json.loads(content + "}" * missing)
-                except json.JSONDecodeError:
-                    pass
+        result = _try_parse_json(code_block.group(1))
+        if result:
+            return result
 
     start = text.find("{")
     if start == -1:
@@ -254,16 +304,13 @@ def extract_json(text: str) -> dict[str, Any] | None:
         elif char == "}":
             depth -= 1
             if depth == 0:
-                try:
-                    return json.loads(text[start : i + 1])
-                except json.JSONDecodeError:
-                    break
+                result = _try_parse_json(text[start : i + 1])
+                if result:
+                    return result
+                break
 
     if depth > 0:
-        try:
-            return json.loads(text[start:] + "}" * depth)
-        except json.JSONDecodeError:
-            pass
+        return _try_parse_json(text[start:] + "}" * depth)
 
     return None
 
@@ -399,16 +446,18 @@ def build_error_report(
 
 
 def get_runner(provider: Provider, model: str):
-    """Factory function to get the appropriate runner.
-
-    Uses lazy import to avoid circular dependencies.
-    """
-    from runners import AnthropicRunner, GeminiRunner, OpenAIRunner
+    from runners import (
+        AnthropicRunner,
+        AzureAgentRunner,
+        GeminiRunner,
+        OpenAIRunner,
+    )
 
     runners = {
         "anthropic": AnthropicRunner,
         "openai": OpenAIRunner,
         "gemini": GeminiRunner,
+        "azure": AzureAgentRunner,
     }
 
     runner_class = runners.get(provider)

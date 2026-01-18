@@ -77,3 +77,38 @@ That should fix the issue.
         result = extract_json(text)
         assert result is not None
         assert result["outer"]["inner"]["deep"] == 42
+
+    def test_raw_newlines_in_string_values(self):
+        text = """{
+    "reasoning": "
+        1. **Primary News Event**:
+        The user mentioned something.
+    ",
+    "score": 0.8
+}"""
+        result = extract_json(text)
+        assert result is not None
+        assert result["score"] == 0.8
+        assert "Primary News Event" in result["reasoning"]
+
+    def test_js_style_comments(self):
+        text = """{
+  "value": "187.234",  // This is a comment
+  "other": "test"
+}"""
+        result = extract_json(text)
+        assert result is not None
+        assert result["value"] == "187.234"
+        assert result["other"] == "test"
+
+    def test_js_comments_in_code_block(self):
+        text = """Here is the result:
+```json
+{
+  "errors": [],
+  "total": 100  // final count
+}
+```"""
+        result = extract_json(text)
+        assert result is not None
+        assert result["total"] == 100

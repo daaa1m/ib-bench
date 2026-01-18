@@ -240,13 +240,9 @@ class TestInitialization:
         with pytest.raises(ValueError, match="ANTHROPIC_API_KEY"):
             LLMJudge(model="claude-test")
 
-    def test_lazy_client_creation(self, mocker):
-        """Client is not created until first access."""
-        mocker.patch.dict("os.environ", {"ANTHROPIC_API_KEY": "test-key"}, clear=False)
-        mock_anthropic = mocker.patch("anthropic.Anthropic")
+    def test_accepts_custom_runner(self, mocker, mock_api_key):
+        from judge_runners import AnthropicJudge
 
-        judge = LLMJudge(model="claude-test")
-        mock_anthropic.assert_not_called()
-
-        _ = judge.client
-        mock_anthropic.assert_called_once()
+        custom_runner = AnthropicJudge(model="custom-model")
+        judge = LLMJudge(runner=custom_runner)
+        assert judge.runner is custom_runner

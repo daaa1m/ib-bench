@@ -1,0 +1,19 @@
+# Azure AI Foundry Agent Service config
+# Supports multiple model providers: OpenAI, DeepSeek, Llama, Grok, etc.
+#
+# Available agent-supported models (check Azure AI Foundry for current list):
+#   - gpt-4o, gpt-4o-mini, gpt-4.1, gpt-5 (OpenAI)
+#   - DeepSeek-V3-0324, DeepSeek-R1-0528, MAI-DS-R1 (DeepSeek)
+#   - Llama-3.3-70B-Instruct, Llama-4-Maverick-17B (Meta)
+#   - grok-4, grok-3, grok-3-mini (xAI)
+#
+# The 'model' field should match your deployment name in Azure AI Foundry.
+
+provider: azure
+model: DeepSeek-V3-0324
+tasks:
+  - e-001
+  - e-002
+  - e-003
+  - m-001
+parallel: 1

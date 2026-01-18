@@ -877,8 +877,8 @@ def score_run(responses_dir: Path, scores_dir: Path, args):
         )
 
         if has_llm_criteria and judge is None and not args.human:
-            print(f"Initializing LLM judge with model: {args.judge_model}")
-            judge = LLMJudge(model=args.judge_model)
+            print(f"Initializing LLM judge: {args.judge_provider}/{args.judge_model}")
+            judge = LLMJudge(provider=args.judge_provider, model=args.judge_model)
 
         print(f"\nScoring {task_id} (eval_type: {eval_type})...")
         try:
@@ -1055,8 +1055,14 @@ def main():
     )
     parser.add_argument(
         "--judge-model",
-        default="claude-sonnet-4-5-20250929",
+        default="gpt-4o",
         help="Model to use for LLM-as-judge scoring",
+    )
+    parser.add_argument(
+        "--judge-provider",
+        default="azure",
+        choices=["anthropic", "azure"],
+        help="Provider for LLM-as-judge scoring",
     )
     parser.add_argument(
         "--human",
