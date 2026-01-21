@@ -1,0 +1,38 @@
+{
+  "total": 3,
+  "passed": 0,
+  "failed": 3,
+  "blocked": 0,
+  "skipped": 0,
+  "total_points": 300,
+  "points_earned": 1.0,
+  "results": [
+    {
+      "task_id": "h-003",
+      "passed": false,
+      "points_earned": 0,
+      "total_points": 100,
+      "score_percent": 0.0
+    },
+    {
+      "task_id": "h-002",
+      "passed": false,
+      "points_earned": 1.0,
+      "total_points": 100,
+      "score_percent": 1.0
+    },
+    {
+      "task_id": "h-001",
+      "passed": false,
+      "points_earned": 0,
+      "total_points": 100,
+      "score_percent": 0.0
+    }
+  ],
+  "overall_percent": 0.33333333333333337,
+  "rubric_hashes": {
+    "h-003": "f1e0cd5a",
+    "h-002": "6d655c7d",
+    "h-001": "d84b33a7"
+  }
+}

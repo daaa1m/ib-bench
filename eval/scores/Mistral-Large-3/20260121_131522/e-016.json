@@ -1,0 +1,83 @@
+{
+  "task_id": "e-016",
+  "rubric_hash": "9d7589f8",
+  "scored_at": "2026-01-21T16:06:19.898650",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 37.25,
+  "score_percent": 37.25,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "deal_structure",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 6.75,
+      "actual": "0.45",
+      "details": "Score: 0.45 - Identifies a plausible merger structure and parties, but the description appears generic and potentially fabricated (e.g., specific subsidiary name and tax-free treatment) without clear grounding in the provided agreement. Confidence exceeds evidentiary support."
+    },
+    {
+      "id": "purchase_price",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 7.0,
+      "actual": "0.35",
+      "details": "Score: 0.35 - States an exchange ratio but fails to confirm it directly from the agreement or provide any stated equity value if disclosed. Acknowledges that value is 'not explicitly stated,' which is insufficient for an internal M&A summary."
+    },
+    {
+      "id": "conditions_to_closing",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 8.25,
+      "actual": "0.55",
+      "details": "Score: 0.55 - Lists standard closing conditions that are directionally reasonable, but they read as boilerplate and are not clearly tied to specific language or sections of the merger agreement."
+    },
+    {
+      "id": "termination_provisions",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 6.0,
+      "actual": "0.30",
+      "details": "Score: 0.30 - Termination fees, outside date, and extensions are highly specific yet appear unsupported and possibly invented. This is a serious issue, as inaccurate termination economics would materially mislead senior bankers."
+    },
+    {
+      "id": "mac_provisions",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 3.0,
+      "actual": "0.20",
+      "details": "Score: 0.20 - Fails to summarize the actual MAC definition and instead substitutes generic market practice. Inferring terms where the agreement should be directly cited is unacceptable for this task."
+    },
+    {
+      "id": "other_material_terms",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 4.0,
+      "actual": "0.40",
+      "details": "Score: 0.40 - Mentions non-solicitation and financing at a high level, but again relies on assumptions rather than document-backed facts. No discussion of fiduciary outs or other potentially material deal protections."
+    },
+    {
+      "id": "reasoning",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 5,
+      "points_earned": 2.25,
+      "actual": "0.45",
+      "details": "Score: 0.45 - Describes a process, but the output shows reliance on inference and 'typical' terms rather than disciplined extraction from the merger agreement. This would not meet internal quality standards."
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

@@ -1,0 +1,113 @@
+{
+  "provider": "azure-v2",
+  "model": "Mistral-Large-3",
+  "task_ids": [
+    "e-001",
+    "e-002",
+    "e-003",
+    "e-004",
+    "e-005",
+    "e-006",
+    "e-007",
+    "e-008",
+    "e-009",
+    "e-010",
+    "e-011",
+    "e-012",
+    "e-013",
+    "e-014",
+    "e-015",
+    "e-016",
+    "e-017",
+    "e-018",
+    "e-019",
+    "e-020"
+  ],
+  "parallel": 3,
+  "config_file": "configs/azure-mistral.yaml",
+  "started_at": "2026-01-21T13:15:22.814943",
+  "completed_at": "2026-01-21T13:55:33.705282",
+  "results_summary": [
+    {
+      "task_id": "e-001",
+      "status": "success"
+    },
+    {
+      "task_id": "e-002",
+      "status": "success"
+    },
+    {
+      "task_id": "e-003",
+      "status": "success"
+    },
+    {
+      "task_id": "e-004",
+      "status": "success"
+    },
+    {
+      "task_id": "e-005",
+      "status": "success"
+    },
+    {
+      "task_id": "e-006",
+      "status": "success"
+    },
+    {
+      "task_id": "e-007",
+      "status": "success"
+    },
+    {
+      "task_id": "e-008",
+      "status": "error",
+      "error": "InternalServerError: Error code: 500 - {'error': {'message': 'The server had an error processing your request. Sorry about that! You can retry your request, or contact us through an Azure support request at: https://go.microsoft.com/fwlink/?linkid=2213926 if... | status=500 | request_id=eee5e014-25e5-4416-b819-410250484741"
+    },
+    {
+      "task_id": "e-009",
+      "status": "success"
+    },
+    {
+      "task_id": "e-010",
+      "status": "success"
+    },
+    {
+      "task_id": "e-011",
+      "status": "success"
+    },
+    {
+      "task_id": "e-012",
+      "status": "success"
+    },
+    {
+      "task_id": "e-013",
+      "status": "success"
+    },
+    {
+      "task_id": "e-014",
+      "status": "success"
+    },
+    {
+      "task_id": "e-015",
+      "status": "success"
+    },
+    {
+      "task_id": "e-016",
+      "status": "success"
+    },
+    {
+      "task_id": "e-017",
+      "status": "success"
+    },
+    {
+      "task_id": "e-018",
+      "status": "success"
+    },
+    {
+      "task_id": "e-019",
+      "status": "success"
+    },
+    {
+      "task_id": "e-020",
+      "status": "success"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "task_id": "m-009",
+  "rubric_hash": "423b748e",
+  "scored_at": "2026-01-21T16:09:15.502334",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "revenue_accuracy",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 30,
+      "points_earned": 0,
+      "actual": null,
+      "details": "Cell E11 is empty"
+    },
+    {
+      "id": "ebitda_margin_accuracy",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 30,
+      "points_earned": 0,
+      "actual": null,
+      "details": "Cell E12 is empty"
+    },
+    {
+      "id": "eps_accuracy",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 20,
+      "points_earned": 0,
+      "actual": null,
+      "details": "Cell E13 is empty"
+    },
+    {
+      "id": "fcf_accuracy",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 20,
+      "points_earned": 0,
+      "actual": null,
+      "details": "Cell E14 is empty"
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

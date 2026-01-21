@@ -1,0 +1,113 @@
+{
+  "task_id": "e-007",
+  "rubric_hash": "51b85292",
+  "scored_at": "2026-01-21T16:05:47.047072",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 93.35,
+  "score_percent": 93.35,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "gs_rating",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 8,
+      "points_earned": 8,
+      "actual": "Buy",
+      "details": "Found 'Buy' in response"
+    },
+    {
+      "id": "gs_price_target",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 8,
+      "points_earned": 8,
+      "actual": "330",
+      "details": "Found '330' in response"
+    },
+    {
+      "id": "jpm_rating",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 8,
+      "points_earned": 8,
+      "actual": "Overweight",
+      "details": "Found 'Overweight' in response"
+    },
+    {
+      "id": "jpm_price_target",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 8,
+      "points_earned": 8,
+      "actual": "340",
+      "details": "Found '340' in response"
+    },
+    {
+      "id": "q3_search_growth",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 8,
+      "points_earned": 8,
+      "actual": "14.5",
+      "details": "Found '14.5' in response"
+    },
+    {
+      "id": "q3_cloud_growth",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 8,
+      "points_earned": 8,
+      "actual": "34",
+      "details": "Found '34' in response"
+    },
+    {
+      "id": "fy25_capex_guidance",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 8,
+      "points_earned": 8,
+      "actual": "91-93",
+      "details": "Found '91-93' in response"
+    },
+    {
+      "id": "key_drivers",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 14,
+      "points_earned": 12.6,
+      "actual": "0.90",
+      "details": "Score: 0.90 - Key drivers are comprehensive and well aligned with what senior bankers expect: Search/AI, Cloud growth and margins, YouTube monetization, and capex/margin trade-offs are all clearly identified. Coverage is balanced and reflects the major valuation levers from both models."
+    },
+    {
+      "id": "summary_synthesis",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 12.75,
+      "actual": "0.85",
+      "details": "Score: 0.85 - The summary successfully synthesizes GS and JPM perspectives rather than restating one report. It compares ratings, price targets, and thematic views on AI, Cloud, and capex. That said, some bank-specific attribution blurs (e.g., which firm emphasized which datapoints), and the tone occasionally reads closer to a compiled narrative than a sharp comparative synthesis."
+    },
+    {
+      "id": "summary_drivers",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 12.0,
+      "actual": "0.80",
+      "details": "Score: 0.80 - The note references multiple concrete model drivers and metrics (Search and Cloud growth rates, capex guidance, backlog, margins), demonstrating an understanding of what moves valuation. However, the level of numerical specificity introduces risk if figures do not tie exactly to source models, and there is limited discussion of sensitivities or downside considerations."
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

@@ -1,0 +1,145 @@
+{
+  "task_id": "e-011",
+  "rubric_hash": "d0ac97f5",
+  "scored_at": "2026-01-21T16:05:52.895059",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0.0,
+  "llm_gated": true,
+  "criteria": [
+    {
+      "id": "total_debt_3q22",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 10,
+      "points_earned": 0,
+      "actual": null,
+      "details": "Cell G95 is empty"
+    },
+    {
+      "id": "total_debt_2023",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 10,
+      "points_earned": 0,
+      "actual": null,
+      "details": "Cell N95 is empty"
+    },
+    {
+      "id": "total_debt_2025",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 10,
+      "points_earned": 0,
+      "actual": null,
+      "details": "Cell X95 is empty [GATES LLM]"
+    },
+    {
+      "id": "short_term_borrowings_3q22",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 10,
+      "points_earned": 0,
+      "actual": 26640.0,
+      "details": "Cell G96 = 26640.0, expected -2675 (diff: 29315.0)"
+    },
+    {
+      "id": "short_term_borrowings_2023",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 10,
+      "points_earned": 0,
+      "actual": 25936.0,
+      "details": "Cell N96 = 25936.0, expected 0 (diff: 25936.0)"
+    },
+    {
+      "id": "short_term_borrowings_2025",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 10,
+      "points_earned": 0,
+      "actual": 25064.0,
+      "details": "Cell X96 = 25064.0, expected 0 (diff: 25064.0)"
+    },
+    {
+      "id": "short_term_debt_3q22",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 10,
+      "points_earned": 0,
+      "actual": 0.0,
+      "details": "Cell G97 = 0.0, expected -2877 (diff: 2877.0)"
+    },
+    {
+      "id": "short_term_debt_2023",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 10,
+      "points_earned": 0,
+      "actual": 0.0,
+      "details": "Cell N97 = 0.0, expected -2089 (diff: 2089.0)"
+    },
+    {
+      "id": "short_term_debt_2025",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 10,
+      "points_earned": 0,
+      "actual": 0.0,
+      "details": "Cell X97 = 0.0, expected -2603 (diff: 2603.0)"
+    },
+    {
+      "id": "formatting",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "points": 5,
+      "points_earned": 0,
+      "actual": [
+        "L7: hardcoded number should be blue",
+        "M7: hardcoded number should be blue",
+        "O7: hardcoded number should be blue",
+        "G8: hardcoded number should be blue",
+        "H8: hardcoded number should be blue",
+        "J8: hardcoded number should be blue",
+        "K8: hardcoded number should be blue",
+        "L8: hardcoded number should be blue",
+        "M8: hardcoded number should be blue",
+        "O8: hardcoded number should be blue",
+        "G9: hardcoded number should be blue",
+        "H9: hardcoded number should be blue",
+        "J9: hardcoded number should be blue",
+        "K9: hardcoded number should be blue",
+        "L9: hardcoded number should be blue",
+        "M9: hardcoded number should be blue",
+        "O9: hardcoded number should be blue",
+        "J10: hardcoded number should be blue",
+        "K10: hardcoded number should be blue",
+        "L10: hardcoded number should be blue",
+        "M10: hardcoded number should be blue"
+      ],
+      "details": "Formatting violations: L7: hardcoded number should be blue; M7: hardcoded number should be blue; O7: hardcoded number should be blue; G8: hardcoded number should be blue; H8: hardcoded number should be blue (+16 more)"
+    },
+    {
+      "id": "reasoning_steps",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 5,
+      "points_earned": 0,
+      "actual": "[SKIPPED - gated]",
+      "details": "Skipped due to programmatic gate failure"
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

@@ -1,0 +1,23 @@
+{
+  "task_id": "m-003",
+  "rubric_hash": "897abf5f",
+  "scored_at": "2026-01-21T17:47:04.084318",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "json_parse",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "json",
+      "points": 100,
+      "points_earned": 0,
+      "actual": "ERROR: BadRequestError: Error code: 400 - {'error': {'message': 'There was an issue with your reques",
+      "details": "Failed to parse JSON from response"
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

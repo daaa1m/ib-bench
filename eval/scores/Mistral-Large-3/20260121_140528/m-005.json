@@ -1,0 +1,88 @@
+{
+  "task_id": "m-005",
+  "rubric_hash": "ab267571",
+  "scored_at": "2026-01-21T16:09:15.045235",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "formatting",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "points": 10,
+      "points_earned": 0,
+      "actual": [
+        "P9: hardcoded number should be blue",
+        "G11: hardcoded number should be blue",
+        "L11: hardcoded number should be blue",
+        "C13: hardcoded number should be blue",
+        "D13: hardcoded number should be blue",
+        "E13: hardcoded number should be blue",
+        "F13: hardcoded number should be blue",
+        "H13: hardcoded number should be blue",
+        "I13: hardcoded number should be blue",
+        "J13: hardcoded number should be blue",
+        "K13: hardcoded number should be blue",
+        "M13: hardcoded number should be blue",
+        "N13: hardcoded number should be blue",
+        "O13: hardcoded number should be blue"
+      ],
+      "details": "Formatting violations: P9: hardcoded number should be blue; G11: hardcoded number should be blue; L11: hardcoded number should be blue; C13: hardcoded number should be blue; D13: hardcoded number should be blue (+9 more)"
+    },
+    {
+      "id": "p22_total_cogs_q4e",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 23,
+      "points_earned": 0,
+      "actual": null,
+      "details": "Cell P22 is empty [GATES LLM]"
+    },
+    {
+      "id": "f28_service_q4_index_2023",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 18,
+      "points_earned": 0,
+      "actual": 1.021897810218978,
+      "details": "Cell F28 = 1.021897810218978, expected 1.076 (diff: 0.0541021897810221)"
+    },
+    {
+      "id": "g30_auto_credit_2023",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 18,
+      "points_earned": 0,
+      "actual": null,
+      "details": "Cell G30 is empty"
+    },
+    {
+      "id": "p32_gross_profit_q4e",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 18,
+      "points_earned": 0,
+      "actual": null,
+      "details": "Cell P32 is empty"
+    },
+    {
+      "id": "c32_gross_profit_q1_2023",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 13,
+      "points_earned": 0,
+      "actual": null,
+      "details": "Cell C32 is empty"
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

@@ -1,0 +1,63 @@
+{
+  "provider": "azure-v2",
+  "model": "Mistral-Large-3",
+  "task_ids": [
+    "m-001",
+    "m-002",
+    "m-003",
+    "m-004",
+    "m-005",
+    "m-006",
+    "m-007",
+    "m-008",
+    "m-009",
+    "m-010"
+  ],
+  "parallel": 3,
+  "config_file": "configs/azure-mistral.yaml",
+  "started_at": "2026-01-21T14:05:28.847588",
+  "completed_at": "2026-01-21T14:24:07.459987",
+  "results_summary": [
+    {
+      "task_id": "m-001",
+      "status": "success"
+    },
+    {
+      "task_id": "m-002",
+      "status": "success"
+    },
+    {
+      "task_id": "m-003",
+      "status": "error",
+      "error": "BadRequestError: Error code: 400 - {'error': {'message': 'There was an issue with your request. Please check your inputs and try again', 'type': 'invalid_request_error', 'param': None, 'code': None}} | status=400 | request_id=bda997dd-e5c8-4a15-a212-8e8479831557"
+    },
+    {
+      "task_id": "m-004",
+      "status": "success"
+    },
+    {
+      "task_id": "m-005",
+      "status": "success"
+    },
+    {
+      "task_id": "m-006",
+      "status": "success"
+    },
+    {
+      "task_id": "m-007",
+      "status": "success"
+    },
+    {
+      "task_id": "m-008",
+      "status": "success"
+    },
+    {
+      "task_id": "m-009",
+      "status": "success"
+    },
+    {
+      "task_id": "m-010",
+      "status": "success"
+    }
+  ]
+}

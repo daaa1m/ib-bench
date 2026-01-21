@@ -1,0 +1,27 @@
+{
+  "errors": [
+    {
+      "task_id": "m-003",
+      "timestamp": "2026-01-21T14:11:09.820486",
+      "provider": "azure-v2",
+      "model": "Mistral-Large-3",
+      "summary": "BadRequestError: Error code: 400 - {'error': {'message': 'There was an issue with your request. Please check your inputs and try again', 'type': 'invalid_request_error', 'param': None, 'code': None}} | status=400 | request_id=bda997dd-e5c8-4a15-a212-8e8479831557",
+      "details": {
+        "error_type": "BadRequestError",
+        "message": "Error code: 400 - {'error': {'message': 'There was an issue with your request. Please check your inputs and try again', 'type': 'invalid_request_error', 'param': None, 'code': None}}",
+        "status_code": 400,
+        "type": "invalid_request_error",
+        "request_id": "bda997dd-e5c8-4a15-a212-8e8479831557",
+        "response_body": "{'message': 'There was an issue with your request. Please check your inputs and try again', 'type': 'invalid_request_error', 'param': None, 'code': None}"
+      },
+      "next_steps": [
+        "Inspect task prompt and input files for invalid content",
+        "Retry with --resume Mistral-Large-3/20260121_140528"
+      ],
+      "input_files": [
+        "input.xlsx"
+      ]
+    }
+  ],
+  "count": 1
+}

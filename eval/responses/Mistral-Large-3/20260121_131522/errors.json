@@ -1,0 +1,47 @@
+{
+  "errors": [
+    {
+      "task_id": "e-008",
+      "timestamp": "2026-01-21T13:32:42.684816",
+      "provider": "azure-v2",
+      "model": "Mistral-Large-3",
+      "summary": "InternalServerError: Error code: 500 - {'error': {'message': 'The server had an error processing your request. Sorry about that! You can retry your request, or contact us through an Azure support request at: https://go.microsoft.com/fwlink/?linkid=2213926 if... | status=500 | request_id=eee5e014-25e5-4416-b819-410250484741",
+      "details": {
+        "error_type": "InternalServerError",
+        "message": "Error code: 500 - {'error': {'message': 'The server had an error processing your request. Sorry about that! You can retry your request, or contact us through an Azure support request at: https://go.microsoft.com/fwlink/?linkid=2213926 if you keep seeing this error. (Please include the request ID eee5e014-25e5-4416-b819-410250484741 in your email.)', 'type': 'server_error', 'param': None, 'code': None}}",
+        "status_code": 500,
+        "type": "server_error",
+        "request_id": "eee5e014-25e5-4416-b819-410250484741",
+        "response_body": "{'message': 'The server had an error processing your request. Sorry about that! You can retry your request, or contact us through an Azure support request at: https://go.microsoft.com/fwlink/?linkid=2213926 if you keep seeing this error. (Please include the request ID eee5e014-25e5-4416-b819-410250484741 in your email.)', 'type': 'server_error', 'param': None, 'code': None}"
+      },
+      "next_steps": [
+        "Retry with --resume Mistral-Large-3/20260121_131522"
+      ],
+      "input_files": [
+        "input.pdf"
+      ]
+    },
+    {
+      "task_id": "e-008",
+      "timestamp": "2026-01-21T13:55:33.705172",
+      "provider": "azure-v2",
+      "model": "Mistral-Large-3",
+      "summary": "InternalServerError: Error code: 500 - {'error': {'message': 'The server had an error processing your request. Sorry about that! You can retry your request, or contact us through an Azure support request at: https://go.microsoft.com/fwlink/?linkid=2213926 if... | status=500 | request_id=9a2767b8-fafa-4c60-b399-442b5eda7224",
+      "details": {
+        "error_type": "InternalServerError",
+        "message": "Error code: 500 - {'error': {'message': 'The server had an error processing your request. Sorry about that! You can retry your request, or contact us through an Azure support request at: https://go.microsoft.com/fwlink/?linkid=2213926 if you keep seeing this error. (Please include the request ID 9a2767b8-fafa-4c60-b399-442b5eda7224 in your email.)', 'type': 'server_error', 'param': None, 'code': None}}",
+        "status_code": 500,
+        "type": "server_error",
+        "request_id": "9a2767b8-fafa-4c60-b399-442b5eda7224",
+        "response_body": "{'message': 'The server had an error processing your request. Sorry about that! You can retry your request, or contact us through an Azure support request at: https://go.microsoft.com/fwlink/?linkid=2213926 if you keep seeing this error. (Please include the request ID 9a2767b8-fafa-4c60-b399-442b5eda7224 in your email.)', 'type': 'server_error', 'param': None, 'code': None}"
+      },
+      "next_steps": [
+        "Retry with --resume Mistral-Large-3/20260121_131522"
+      ],
+      "input_files": [
+        "input.pdf"
+      ]
+    }
+  ],
+  "count": 2
+}

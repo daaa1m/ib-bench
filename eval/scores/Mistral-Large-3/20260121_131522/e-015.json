@@ -1,0 +1,53 @@
+{
+  "task_id": "e-015",
+  "rubric_hash": "8d2b1f0c",
+  "scored_at": "2026-01-21T16:04:14.814011",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 72.0,
+  "score_percent": 72.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "tier_1_targets",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 45,
+      "points_earned": 33.75,
+      "actual": "0.75",
+      "details": "Score: 0.75 - Plausible and well-known U.S. biotech targets with coherent strategic rationales, but several market cap figures appear imprecise or stale for a January 1, 2026 framing, and the 30\u201350% probability range is aggressive and not well-justified. Overall solid but not yet MD-ready without fact-checking."
+    },
+    {
+      "id": "tier_2_targets",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 35,
+      "points_earned": 22.75,
+      "actual": "0.65",
+      "details": "Score: 0.65 - Generally reasonable targets and rationales, but inclusion of a private company with no market cap estimate conflicts with the task instructions, and multiple market cap figures are likely inaccurate. Risk differentiation versus Tier 1 is directionally right but underdeveloped."
+    },
+    {
+      "id": "source_urls",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 7.0,
+      "actual": "0.70",
+      "details": "Score: 0.70 - Sources are mostly credible and relevant, but some links (e.g., PitchBook, Seeking Alpha articles) are not ideal for precise market cap verification and may not be fully public or point-in-time accurate."
+    },
+    {
+      "id": "selection_methodology",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 8.5,
+      "actual": "0.85",
+      "details": "Score: 0.85 - Clear, logical, and professionally articulated screening and tiering framework that aligns with how senior bankers would expect the universe to be narrowed. Minor enhancement needed around probability assignment logic."
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

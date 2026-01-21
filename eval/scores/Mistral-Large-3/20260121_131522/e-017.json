@@ -1,0 +1,33 @@
+{
+  "task_id": "e-017",
+  "rubric_hash": "1411ddde",
+  "scored_at": "2026-01-21T16:06:31.873027",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 32.0,
+  "score_percent": 32.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "deal_list",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 80,
+      "points_earned": 24.0,
+      "actual": "0.30",
+      "details": "Score: 0.30 - The transaction list contains numerous factual inaccuracies and likely fabricated deals. Several counterparties were no longer independent in 2025 (e.g., Pioneer already acquired by Exxon, Noble Energy and PDC Energy acquired by Chevron years earlier, Whiting Petroleum exited as a standalone public E&P earlier), making multiple entries impossible. Deal dates, values, and asset descriptions are generic and not verifiably tied to real announced transactions. The Excel model was also not delivered as required. This work would be unusable for client or senior banker review."
+    },
+    {
+      "id": "source_urls",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 8.0,
+      "actual": "0.40",
+      "details": "Score: 0.40 - Sources are generic industry blog or list pages and are not transaction-specific. They do not substantiate the individual deals, dates, values, or counterparties listed. No primary announcements, press releases, or reputable deal databases were cited, and several links appear unrelated to the specific transactions claimed."
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

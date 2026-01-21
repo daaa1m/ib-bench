@@ -1,0 +1,83 @@
+{
+  "task_id": "m-008",
+  "rubric_hash": "8cdfbf06",
+  "scored_at": "2026-01-21T16:09:41.573702",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 68.75,
+  "score_percent": 68.75,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "executive_summary",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 7.5,
+      "actual": "0.75",
+      "details": "Score: 0.75 - Clear and concise, but the recommended stance is somewhat hedged ('Conditional Invest') and not crisply prioritized up front. Reads more like a recap than a decisive IC framing."
+    },
+    {
+      "id": "state_of_company",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 9.0,
+      "actual": "0.60",
+      "details": "Score: 0.60 - High-level narrative is plausible but lacks numerical precision and overstates specifics (e.g., exact margin compression and segment drag) without clearly tying them to verifiable figures from the deck. Feels partially inferred rather than tightly sourced."
+    },
+    {
+      "id": "activist_thesis",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 10.5,
+      "actual": "0.70",
+      "details": "Score: 0.70 - Captures the spirit of Elliott\u2019s argument, but includes unsupported embellishments (e.g., specific turnaround analogs like Kraft Heinz) that may not be emphasized in the presentation. Thesis is directionally right but not cleanly grounded."
+    },
+    {
+      "id": "value_creation_plan",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 11.25,
+      "actual": "0.75",
+      "details": "Score: 0.75 - Initiatives are logically structured and actionable, but the level of specificity (slide numbers, $1B+ savings) appears overly confident and may not map exactly to the deck. Some initiatives blur inference vs. explicit activist proposals."
+    },
+    {
+      "id": "valuation_recommendation",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 11.0,
+      "actual": "0.55",
+      "details": "Score: 0.55 - This is the weakest section. The analyst introduces EPS ranges, share price targets, and entry multiples that are not clearly derived from the activist materials. The margin-of-safety framework is thoughtful but likely goes beyond what the deck supports."
+    },
+    {
+      "id": "risk_assessment",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 16.0,
+      "actual": "0.80",
+      "details": "Score: 0.80 - Risks are well-identified, realistic, and paired with sensible signposts. This section reflects good judgment and aligns with common activist situations without obvious overreach."
+    },
+    {
+      "id": "presentation_quality",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 5,
+      "points_earned": 3.5,
+      "actual": "0.70",
+      "details": "Score: 0.70 - Well-structured and professional, but the repeated use of precise figures, slide citations, and valuation outputs gives a false sense of sourcing rigor. Needs tighter discipline around what is explicitly in the deck vs. analyst interpretation."
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

@@ -1,0 +1,83 @@
+{
+  "task_id": "e-004",
+  "rubric_hash": "4a18edd7",
+  "scored_at": "2026-01-21T16:04:14.820960",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "gaap_operating_income",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 15,
+      "points_earned": 0,
+      "actual": "1800",
+      "details": "No patterns matched in '1800'"
+    },
+    {
+      "id": "non_gaap_operating_income",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 15,
+      "points_earned": 0,
+      "actual": "2200",
+      "details": "No patterns matched in '2200'"
+    },
+    {
+      "id": "adj_stock_based_compensation",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 14,
+      "points_earned": 0,
+      "actual": "{\"gaap_operating_income\": \"1800\", \"non_gaap_operating_income\": \"2200\", \"adjustments\": [{\"name\": \"Stock-based compensation\", \"amount\": \"250\"}, {\"name\": \"Amortization of acquired intangible assets\", \"amount\": \"100\"}, {\"name\": \"Other adjustments\", \"amount\": \"50\"}]}",
+      "details": "No patterns matched in '{\"gaap_operating_income\": \"1800\", \"non_gaap_operating_income\": \"2200\", \"adjustments\": [{\"name\": \"Stock-based compensation\", \"amount\": \"250\"}, {\"name\": \"Amortization of acquired intangible assets\", \"amount\": \"100\"}, {\"name\": \"Other adjustments\", \"amount\": \"50\"}]}'"
+    },
+    {
+      "id": "adj_amortization_intangibles",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 14,
+      "points_earned": 0,
+      "actual": "{\"gaap_operating_income\": \"1800\", \"non_gaap_operating_income\": \"2200\", \"adjustments\": [{\"name\": \"Stock-based compensation\", \"amount\": \"250\"}, {\"name\": \"Amortization of acquired intangible assets\", \"amount\": \"100\"}, {\"name\": \"Other adjustments\", \"amount\": \"50\"}]}",
+      "details": "No patterns matched in '{\"gaap_operating_income\": \"1800\", \"non_gaap_operating_income\": \"2200\", \"adjustments\": [{\"name\": \"Stock-based compensation\", \"amount\": \"250\"}, {\"name\": \"Amortization of acquired intangible assets\", \"amount\": \"100\"}, {\"name\": \"Other adjustments\", \"amount\": \"50\"}]}'"
+    },
+    {
+      "id": "adj_acquisition_costs",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 14,
+      "points_earned": 0,
+      "actual": "{\"gaap_operating_income\": \"1800\", \"non_gaap_operating_income\": \"2200\", \"adjustments\": [{\"name\": \"Stock-based compensation\", \"amount\": \"250\"}, {\"name\": \"Amortization of acquired intangible assets\", \"amount\": \"100\"}, {\"name\": \"Other adjustments\", \"amount\": \"50\"}]}",
+      "details": "No patterns matched in '{\"gaap_operating_income\": \"1800\", \"non_gaap_operating_income\": \"2200\", \"adjustments\": [{\"name\": \"Stock-based compensation\", \"amount\": \"250\"}, {\"name\": \"Amortization of acquired intangible assets\", \"amount\": \"100\"}, {\"name\": \"Other adjustments\", \"amount\": \"50\"}]}'"
+    },
+    {
+      "id": "adj_inventory_loss_recovery",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 14,
+      "points_earned": 0,
+      "actual": "{\"gaap_operating_income\": \"1800\", \"non_gaap_operating_income\": \"2200\", \"adjustments\": [{\"name\": \"Stock-based compensation\", \"amount\": \"250\"}, {\"name\": \"Amortization of acquired intangible assets\", \"amount\": \"100\"}, {\"name\": \"Other adjustments\", \"amount\": \"50\"}]}",
+      "details": "No patterns matched in '{\"gaap_operating_income\": \"1800\", \"non_gaap_operating_income\": \"2200\", \"adjustments\": [{\"name\": \"Stock-based compensation\", \"amount\": \"250\"}, {\"name\": \"Amortization of acquired intangible assets\", \"amount\": \"100\"}, {\"name\": \"Other adjustments\", \"amount\": \"50\"}]}'"
+    },
+    {
+      "id": "adj_loss_contingency",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 14,
+      "points_earned": 0,
+      "actual": "{\"gaap_operating_income\": \"1800\", \"non_gaap_operating_income\": \"2200\", \"adjustments\": [{\"name\": \"Stock-based compensation\", \"amount\": \"250\"}, {\"name\": \"Amortization of acquired intangible assets\", \"amount\": \"100\"}, {\"name\": \"Other adjustments\", \"amount\": \"50\"}]}",
+      "details": "No patterns matched in '{\"gaap_operating_income\": \"1800\", \"non_gaap_operating_income\": \"2200\", \"adjustments\": [{\"name\": \"Stock-based compensation\", \"amount\": \"250\"}, {\"name\": \"Amortization of acquired intangible assets\", \"amount\": \"100\"}, {\"name\": \"Other adjustments\", \"amount\": \"50\"}]}'"
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

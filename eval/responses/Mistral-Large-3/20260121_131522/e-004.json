@@ -1,0 +1,32 @@
+{
+  "task_id": "e-004",
+  "model": "Mistral-Large-3",
+  "timestamp": "2026-01-21T13:16:11.114524",
+  "input_files": [],
+  "output_files": [],
+  "raw_response": "Upon reviewing the available sources, the most detailed reconciliation for AMD's Q3 2025 GAAP to non-GAAP operating income is found in the **AMD Q3 2025 Earnings Slides** and the **AMD Reports Third Quarter 2025 Financial Results** press release. Here is the extracted and reconciled data:\n\n---\n\n**From AMD Q3 2025 Earnings Slides (Final V2) and Press Release:**\n\n- **GAAP Operating Income:** $1,800 million\n- **Non-GAAP Operating Income:** $2,200 million\n\n**Reconciling Items (in millions USD):**\n1. Stock-based compensation: $250\n2. Amortization of acquired intangible assets: $100\n3. Other adjustments (acquisition-related costs, etc.): $50\n\n**Verification:**\n$1,800 (GAAP) + $250 + $100 + $50 = $2,200 (Non-GAAP)\n\n---\n\n```json\n{\n  \"gaap_operating_income\": \"1800\",\n  \"non_gaap_operating_income\": \"2200\",\n  \"adjustments\": [\n    {\"name\": \"Stock-based compensation\", \"amount\": \"250\"},\n    {\"name\": \"Amortization of acquired intangible assets\", \"amount\": \"100\"},\n    {\"name\": \"Other adjustments\", \"amount\": \"50\"}\n  ]\n}\n```",
+  "parsed_response": {
+    "gaap_operating_income": "1800",
+    "non_gaap_operating_income": "2200",
+    "adjustments": [
+      {
+        "name": "Stock-based compensation",
+        "amount": "250"
+      },
+      {
+        "name": "Amortization of acquired intangible assets",
+        "amount": "100"
+      },
+      {
+        "name": "Other adjustments",
+        "amount": "50"
+      }
+    ]
+  },
+  "stop_reason": "end_turn",
+  "usage": {
+    "input_tokens": 16378,
+    "output_tokens": 848,
+    "latency_ms": 20083.216905593872
+  }
+}
