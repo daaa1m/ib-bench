@@ -36,11 +36,17 @@ IB-bench uses `uv` for package management.
    ```
 
 3. **Configure environment**: Create a `.env` file with your API keys
-   (Anthropic, OpenAI, Gemini):
+   (Anthropic, OpenAI, Gemini, Azure):
    ```bash
    cp .env.example .env
    # Edit .env with your keys
    ```
+
+   Supported providers:
+   - **Anthropic**: Claude models via Anthropic API
+   - **OpenAI**: GPT models via OpenAI API  
+   - **Gemini**: Gemini models via Google AI API
+   - **Azure**: Any model via Azure AI Foundry (GPT, Mistral, DeepSeek, Llama, etc.)
 
 ## Configuration
 

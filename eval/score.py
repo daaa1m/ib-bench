@@ -877,8 +877,11 @@ def score_run(responses_dir: Path, scores_dir: Path, args):
         )
 
         if has_llm_criteria and judge is None and not args.human:
-            print(f"Initializing LLM judge with model: {args.judge_model}")
-            judge = LLMJudge(model=args.judge_model)
+            judge_model_label = args.judge_model or "default"
+            print(
+                f"Initializing LLM judge: {args.judge_provider}/{judge_model_label}"
+            )
+            judge = LLMJudge(provider=args.judge_provider, model=args.judge_model)
 
         print(f"\nScoring {task_id} (eval_type: {eval_type})...")
         try:
@@ -1055,8 +1058,16 @@ def main():
     )
     parser.add_argument(
         "--judge-model",
-        default="claude-sonnet-4-5-20250929",
-        help="Model to use for LLM-as-judge scoring",
+        default="gpt-5.2-chat",
+        help=(
+            "Model to use for LLM-as-judge scoring (default: gpt-5.2-chat)"
+        ),
+    )
+    parser.add_argument(
+        "--judge-provider",
+        default="azure-v2",
+        choices=["anthropic", "azure-v2"],
+        help="Provider for LLM-as-judge scoring",
     )
     parser.add_argument(
         "--human",
@@ -1069,6 +1080,9 @@ def main():
         help="Show full API error details on failure",
     )
     args = parser.parse_args()
+
+    if args.judge_provider == "azure-v2" and not args.judge_model:
+        parser.error("--judge-model is required when --judge-provider azure-v2")
 
     # Find directories (responses/ and scores/ are directly under eval/)
     eval_dir = Path(__file__).parent

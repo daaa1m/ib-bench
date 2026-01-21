@@ -26,9 +26,15 @@ from helpers import (
     get_runner,
     load_tasks,
 )
-from runners import AnthropicRunner, GeminiRunner, OpenAIRunner, LLMResponse
+from runners import (
+    AnthropicRunner,
+    AzureAgentRunner,
+    GeminiRunner,
+    LLMResponse,
+    OpenAIRunner,
+)
 
-Runner = AnthropicRunner | OpenAIRunner | GeminiRunner
+Runner = AnthropicRunner | OpenAIRunner | GeminiRunner | AzureAgentRunner
 
 
 class UsageData(TypedDict):

@@ -139,19 +139,33 @@ class Runner:
     def run(self, task: Task, input_files: list[Path]) -> LLMResponse
 ```
 
-| Runner            | Provider  | File Handling | Tools                                     |
-| ----------------- | --------- | ------------- | ----------------------------------------- |
-| `AnthropicRunner` | Anthropic | Files API     | Code execution                            |
-| `OpenAIRunner`    | OpenAI    | Responses API | file_search, code_interpreter, web_search |
-| `GeminiRunner`    | Google    | Files API     | Code execution                            |
+| Runner              | Provider      | File Handling          | Tools                                        |
+| ------------------- | ------------- | ---------------------- | -------------------------------------------- |
+| `AnthropicRunner`   | Anthropic     | Files API              | Code execution                               |
+| `OpenAIRunner`      | OpenAI        | Responses API          | file_search, code_interpreter, web_search    |
+| `GeminiRunner`      | Google        | Files API              | Code execution                               |
+| `AzureAgentRunner`  | Azure (v1)    | Agent Files API        | code_interpreter, file_search                |
+| `AzureAgentRunnerV2`| Azure (v2)    | Containers + Vector Stores | code_interpreter, file_search, web_search |
+
+### Azure Runners
+
+Azure AI Foundry supports multiple model providers through a unified API:
+- **OpenAI models**: GPT-4o, GPT-5, o1, o3, o4
+- **Third-party models**: Mistral, DeepSeek, Llama, Grok
+
+**AzureAgentRunner (v1)**: Uses the Agent Service SDK with `client.agents` API.
+
+**AzureAgentRunnerV2 (v2)**: Uses the Responses API with containers. Recommended.
+- For **OpenAI models**: Uses native `web_search_preview` tool
+- For **other models**: Uses Brave Search via function calling (requires `BRAVE_API_KEY`)
 
 **File Type Routing:**
 
-| Extension   | Anthropic | OpenAI           | Gemini    |
-| ----------- | --------- | ---------------- | --------- |
-| `.pdf`      | Files API | file_search      | Files API |
-| `.xlsx`     | Code exec | code_interpreter | Code exec |
-| `.png/.jpg` | Vision    | Vision (base64)  | Files API |
+| Extension   | Anthropic | OpenAI           | Gemini    | Azure v2              |
+| ----------- | --------- | ---------------- | --------- | --------------------- |
+| `.pdf`      | Files API | file_search      | Files API | file_search (vector)  |
+| `.xlsx`     | Code exec | code_interpreter | Code exec | code_interpreter      |
+| `.png/.jpg` | Vision    | Vision (base64)  | Files API | code_interpreter      |
 
 ---
 
