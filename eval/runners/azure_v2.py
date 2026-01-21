@@ -60,9 +60,21 @@ class AzureAgentRunnerV2:
 
         self._brave_api_key = os.environ.get("BRAVE_API_KEY")
 
+        self._no_temperature_models = {"gpt-5.2-chat"}
+
     def _is_openai_model(self) -> bool:
         m = self.model.lower()
         return m.startswith(("gpt-", "o1", "o3", "o4"))
+
+    def _supports_temperature(self) -> bool:
+        return self.model.lower() not in self._no_temperature_models
+
+    def _create_response(self, **kwargs):
+        if self._supports_temperature():
+            kwargs.setdefault("temperature", 0)
+        else:
+            kwargs.pop("temperature", None)
+        return self.openai.responses.create(**kwargs)
 
     def _brave_search(self, query: str) -> str:
         import urllib.request
@@ -231,6 +243,7 @@ class AzureAgentRunnerV2:
         container_id: str | None = None
         vector_store_id: str | None = None
         uploaded_file_ids: list[str] = []
+        new_response_after_loop = False
 
         try:
             container_id = self._create_container(f"ib-bench-{task.id}")
@@ -261,11 +274,10 @@ class AzureAgentRunnerV2:
                 tools.append(BRAVE_SEARCH_TOOL)
 
             print(f"  Running {self.model} via Responses API...")
-            response = self.openai.responses.create(
+            response = self._create_response(
                 model=self.model,
                 tools=cast(list, tools),
                 input=task.prompt,
-                temperature=0,
             )
 
             total_input_tokens = 0
@@ -273,7 +285,6 @@ class AzureAgentRunnerV2:
 
             if not use_native_web_search:
                 max_tool_calls = 10
-                new_response_after_loop = False
                 for _ in range(max_tool_calls):
                     usage = getattr(response, "usage", None)
                     total_input_tokens += (
@@ -303,7 +314,7 @@ class AzureAgentRunnerV2:
                     print(f"  Brave search: {query}")
                     search_results = self._brave_search(query)
 
-                    response = self.openai.responses.create(
+                    response = self._create_response(
                         model=self.model,
                         tools=cast(list, tools),
                         input=[
@@ -313,7 +324,6 @@ class AzureAgentRunnerV2:
                                 "output": search_results,
                             }
                         ],
-                        temperature=0,
                         previous_response_id=response.id,
                     )
 
@@ -327,7 +337,7 @@ class AzureAgentRunnerV2:
 
                 if pending_call_id:
                     print("  Forcing final answer (max searches reached)...")
-                    response = self.openai.responses.create(
+                    response = self._create_response(
                         model=self.model,
                         tools=cast(list, tools),
                         input=[
@@ -337,7 +347,6 @@ class AzureAgentRunnerV2:
                                 "output": "Search limit reached. Please provide your final answer based on the information gathered so far.",
                             }
                         ],
-                        temperature=0,
                         previous_response_id=response.id,
                     )
                     new_response_after_loop = True
