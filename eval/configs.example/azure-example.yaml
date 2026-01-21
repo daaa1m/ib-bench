@@ -12,7 +12,6 @@
 provider: azure
 model: DeepSeek-V3-0324
 tasks:
-  - e-001
   - e-002
   - e-003
   - m-001

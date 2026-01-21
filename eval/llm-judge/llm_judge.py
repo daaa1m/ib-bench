@@ -16,14 +16,15 @@ class LLMJudge:
 
     def __init__(
         self,
-        model: str = "claude-sonnet-4-5",
-        provider: JudgeProvider = "anthropic",
+        model: str | None = None,
+        provider: JudgeProvider = "azure-v2",
         runner: JudgeRunner | None = None,
     ):
-        if runner:
+        if runner is not None:
             self.runner = runner
-        else:
-            self.runner = get_judge_runner(provider, model)
+            return
+
+        self.runner = get_judge_runner(provider, model)
 
     def _build_prompt(
         self,

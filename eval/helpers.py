@@ -19,7 +19,7 @@ from dotenv import load_dotenv
 # Type Definitions
 # -----------------------------------------------------------------------------
 
-Provider = Literal["anthropic", "openai", "gemini", "azure"]
+Provider = Literal["anthropic", "openai", "gemini", "azure", "azure-v2"]
 CriterionType = Literal["programmatic", "llm_judge", "human_judge"]
 MatchType = Literal["substring_one_of", "regex_pattern"]
 
@@ -70,12 +70,32 @@ class JudgeParseError(Exception):
         self.raw_response = raw_response
 
 
-def retry_on_rate_limit(max_retries: int = 3, initial_wait: int = 60):
-    """Decorator to retry on rate limit errors with exponential backoff.
+TRANSIENT_ERROR_PATTERNS = [
+    "429",
+    "rate_limit",
+    "rate limit",
+    "408",
+    "timeout",
+    "500",
+    "502",
+    "503",
+    "504",
+    "connection error",
+    "apiconnectionerror",
+    "internal server error",
+]
 
-    Args:
-        max_retries: Maximum number of retry attempts
-        initial_wait: Initial wait time in seconds (doubles each retry)
+
+def _is_transient_error(error_str: str) -> bool:
+    error_lower = error_str.lower()
+    return any(pattern in error_lower for pattern in TRANSIENT_ERROR_PATTERNS)
+
+
+def retry_on_rate_limit(max_retries: int = 3, initial_wait: int = 60):
+    """Decorator to retry on transient errors with exponential backoff.
+
+    Handles: rate limits (429), timeouts (408), server errors (500/502/503/504),
+    and connection errors.
     """
 
     def decorator(func):
@@ -89,22 +109,20 @@ def retry_on_rate_limit(max_retries: int = 3, initial_wait: int = 60):
                     return func(*args, **kwargs)
                 except Exception as e:
                     error_str = str(e)
-                    # Check if it's a rate limit error (429)
-                    if "429" in error_str or "rate_limit" in error_str.lower():
+                    if _is_transient_error(error_str):
                         last_exception = e
                         if attempt < max_retries:
                             print(
-                                f"  Rate limited. Waiting {wait_time}s before retry ({attempt + 1}/{max_retries})..."
+                                f"  Transient error: {type(e).__name__}. Waiting {wait_time}s before retry ({attempt + 1}/{max_retries})..."
                             )
                             time.sleep(wait_time)
-                            wait_time *= 2  # Exponential backoff
+                            wait_time *= 2
                         else:
                             print(
-                                f"  Rate limited. Max retries ({max_retries}) exceeded."
+                                f"  Transient error. Max retries ({max_retries}) exceeded."
                             )
                             raise
                     else:
-                        # Not a rate limit error, raise immediately
                         raise
 
             if last_exception is not None:
@@ -449,6 +467,7 @@ def get_runner(provider: Provider, model: str):
     from runners import (
         AnthropicRunner,
         AzureAgentRunner,
+        AzureAgentRunnerV2,
         GeminiRunner,
         OpenAIRunner,
     )
@@ -458,6 +477,7 @@ def get_runner(provider: Provider, model: str):
         "openai": OpenAIRunner,
         "gemini": GeminiRunner,
         "azure": AzureAgentRunner,
+        "azure-v2": AzureAgentRunnerV2,
     }
 
     runner_class = runners.get(provider)

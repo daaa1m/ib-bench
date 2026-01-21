@@ -4,13 +4,17 @@ import os
 import sys
 import time
 from pathlib import Path
-from typing import Any, Literal, Protocol
+from typing import Any, Literal, Protocol, cast
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from helpers import retry_on_rate_limit
+from runners.base import categorize_input_files
 
-JudgeProvider = Literal["anthropic", "openai", "azure"]
+JudgeProvider = Literal["anthropic", "azure-v2"]
+
+DEFAULT_ANTHROPIC_MODEL = "claude-sonnet-4-5"
+DEFAULT_AZURE_MODEL = "gpt-5.2-chat"
 
 
 class JudgeRunner(Protocol):
@@ -26,7 +30,7 @@ class JudgeRunner(Protocol):
 class AnthropicJudge:
     """Judge runner using Anthropic's Claude with Files API."""
 
-    def __init__(self, model: str = "claude-sonnet-4-5"):
+    def __init__(self, model: str = DEFAULT_ANTHROPIC_MODEL):
         self.model = model
         self.api_key = os.environ.get("ANTHROPIC_API_KEY")
         if not self.api_key:
@@ -41,6 +45,8 @@ class AnthropicJudge:
             self._client = anthropic.Anthropic(api_key=self.api_key)
         return self._client
 
+    # Expected output: raw JSON text containing a top-level "scores" key.
+    # Output parsed by _parse_response() in llm-judge/llm_judge.py
     def _extract_text(self, response: Any) -> str:
         text_blocks = []
         for block in response.content:
@@ -68,8 +74,11 @@ class AnthropicJudge:
             betas=["code-execution-2025-08-25", "files-api-2025-04-14"],
             max_tokens=16384,
             temperature=0,
-            messages=[{"role": "user", "content": content}],
-            tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+            messages=cast(Any, [{"role": "user", "content": content}]),
+            tools=[
+                {"type": "code_execution_20250825", "name": "code_execution"},
+                {"type": "web_search_20250305", "name": "web_search", "max_uses": 5},
+            ],
         )
 
     def judge(self, prompt: str, files: list[Path]) -> str:
@@ -101,21 +110,19 @@ class AnthropicJudge:
 
 
 class AzureJudge:
-    """Judge runner using Azure AI Foundry Agent Service."""
+    """Judge runner using Azure AI Foundry Responses API."""
 
     def __init__(self, model: str):
         if not model:
             raise ValueError("model (deployment name) required for AzureJudge")
         self.model = model
         self._client = None
+        self._openai = None
 
         self._endpoint = os.environ.get("AZURE_AI_PROJECT_ENDPOINT")
-        self._connection_string = os.environ.get("AZURE_AI_PROJECT_CONNECTION_STRING")
-
-        if not self._endpoint and not self._connection_string:
-            raise ValueError(
-                "AZURE_AI_PROJECT_ENDPOINT or AZURE_AI_PROJECT_CONNECTION_STRING required"
-            )
+        if not self._endpoint:
+            raise ValueError("AZURE_AI_PROJECT_ENDPOINT must be set")
+        self._endpoint = cast(str, self._endpoint)
 
     @property
     def client(self):
@@ -123,111 +130,130 @@ class AzureJudge:
             from azure.ai.projects import AIProjectClient
             from azure.identity import DefaultAzureCredential
 
-            if self._connection_string:
-                self._client = AIProjectClient.from_connection_string(
-                    credential=DefaultAzureCredential(),
-                    conn_str=self._connection_string,
-                )
-            else:
-                self._client = AIProjectClient(
-                    endpoint=self._endpoint,
-                    credential=DefaultAzureCredential(),
-                )
+            assert self._endpoint is not None
+            self._client = AIProjectClient(
+                endpoint=self._endpoint,
+                credential=DefaultAzureCredential(),
+            )
         return self._client
 
-    def _extract_text(self, messages: list) -> str:
-        text_parts = []
-        for msg in messages:
-            if getattr(msg, "role", None) != "assistant":
-                continue
-            text_messages = getattr(msg, "text_messages", None)
-            if text_messages:
-                for tm in text_messages:
-                    text_value = getattr(tm, "text", None)
-                    if text_value:
-                        if hasattr(text_value, "value"):
-                            text_parts.append(text_value.value)
-                        elif isinstance(text_value, str):
-                            text_parts.append(text_value)
-        return "\n".join(text_parts)
+    @property
+    def openai(self):
+        if self._openai is None:
+            self._openai = self.client.get_openai_client()
+        return self._openai
+
+    def _create_container(self, name: str) -> str:
+        print(f"  Creating container: {name}")
+        container = self.openai.containers.create(name=name)
+        return container.id
+
+    def _upload_to_container(self, container_id: str, path: Path) -> None:
+        print(f"  Uploading {path.name} to container...")
+        with open(path, "rb") as f:
+            self.openai.containers.files.create(container_id=container_id, file=f)
+
+    def _upload_file(self, path: Path) -> str:
+        print(f"  Uploading {path.name} for file search...")
+        with open(path, "rb") as f:
+            file = self.openai.files.create(file=f, purpose="assistants")
+        return file.id
+
+    def _create_vector_store(self, file_ids: list[str], name: str) -> str:
+        print(f"  Creating vector store: {name}")
+        vector_store = self.openai.vector_stores.create(name=name, file_ids=file_ids)
+        return vector_store.id
+
+    def _delete_vector_store(self, vector_store_id: str) -> None:
+        try:
+            self.openai.vector_stores.delete(vector_store_id)
+            print(f"  Deleted vector store: {vector_store_id}")
+        except Exception as e:
+            print(f"  Warning: Failed to delete vector store {vector_store_id}: {e}")
+
+    def _delete_file(self, file_id: str) -> None:
+        try:
+            self.openai.files.delete(file_id)
+        except Exception as e:
+            print(f"  Warning: Failed to delete file {file_id}: {e}")
+
+    def _delete_container(self, container_id: str) -> None:
+        try:
+            self.openai.containers.delete(container_id)
+            print(f"  Deleted container: {container_id}")
+        except Exception as e:
+            print(f"  Warning: Failed to delete container {container_id}: {e}")
 
     @retry_on_rate_limit(max_retries=3, initial_wait=60)
     def judge(self, prompt: str, files: list[Path]) -> str:
-        from azure.ai.agents.models import (
-            CodeInterpreterTool,
-            FilePurpose,
-            ToolResources,
-        )
-
         start = time.time()
+        container_id: str | None = None
+        vector_store_id: str | None = None
         uploaded_file_ids: list[str] = []
-        agent_id: str | None = None
 
         try:
-            if files:
-                print(f"  Uploading {len(files)} file(s) for judging...")
-                for f in files:
-                    file_obj = self.client.agents.files.upload_and_poll(
-                        file_path=str(f), purpose=FilePurpose.AGENTS
-                    )
-                    uploaded_file_ids.append(file_obj.id)
-
             tools = []
-            tool_resources = None
-            if uploaded_file_ids:
-                ci = CodeInterpreterTool(file_ids=uploaded_file_ids)
-                tools = ci.definitions
-                tool_resources = ToolResources(
-                    code_interpreter=ci.resources.code_interpreter
+            code_files, search_files = categorize_input_files(files)
+
+            if code_files:
+                container_id = self._create_container(
+                    f"ib-bench-judge-{int(time.time())}"
+                )
+                for f in code_files:
+                    self._upload_to_container(container_id, f)
+                tools.append({"type": "code_interpreter", "container": container_id})
+
+            if search_files:
+                for f in search_files:
+                    fid = self._upload_file(f)
+                    uploaded_file_ids.append(fid)
+                vector_store_id = self._create_vector_store(
+                    uploaded_file_ids, f"ib-bench-judge-{int(time.time())}-docs"
+                )
+                tools.append(
+                    {"type": "file_search", "vector_store_ids": [vector_store_id]}
                 )
 
-            agent = self.client.agents.create_agent(
-                model=self.model,
-                name="ib-bench-judge",
-                instructions="You are an expert evaluator. Score responses precisely according to the rubric.",
-                tools=tools if tools else None,
-                tool_resources=tool_resources,
-                temperature=0,
-            )
-            agent_id = agent.id
+            tools.append({"type": "web_search_preview"})
+            # default model gpt-5.2-chat does not take temperature
+            create_params: dict[str, Any] = {
+                "model": self.model,
+                "input": prompt,
+            }
+            if tools:
+                create_params["tools"] = tools
 
-            thread = self.client.agents.threads.create()
-            self.client.agents.messages.create(
-                thread_id=thread.id, role="user", content=prompt
-            )
-
-            run = self.client.agents.runs.create_and_process(
-                thread_id=thread.id, agent_id=agent_id
-            )
-
-            if run.status == "failed":
-                error = getattr(run, "last_error", None)
-                print(f"  Warning: Judge run failed: {error}")
-
-            messages = list(self.client.agents.messages.list(thread_id=thread.id))
-            response_text = self._extract_text(messages)
+            response = self.openai.responses.create(**create_params)
+            # raw_text parsed by _parse_response() in llm-judge/llm_judge.py
+            raw_text = ""
+            output = getattr(response, "output", None)
+            if output:
+                for item in output:
+                    if getattr(item, "type", None) == "message":
+                        content = getattr(item, "content", None)
+                        if content:
+                            for c in content:
+                                c_type = getattr(c, "type", None)
+                                if c_type in {"output_text", "text"}:
+                                    raw_text += getattr(c, "text", "")
 
             print(f"  Judge completed in {(time.time() - start) * 1000:.0f}ms")
-            return response_text
+            return raw_text
 
         finally:
-            if agent_id:
-                try:
-                    self.client.agents.delete_agent(agent_id)
-                except Exception:
-                    pass
-            for fid in uploaded_file_ids:
-                try:
-                    self.client.agents.files.delete(fid)
-                except Exception:
-                    pass
+            if container_id:
+                self._delete_container(container_id)
+            if vector_store_id:
+                self._delete_vector_store(vector_store_id)
+            for file_id in uploaded_file_ids:
+                self._delete_file(file_id)
 
 
-def get_judge_runner(provider: JudgeProvider, model: str) -> JudgeRunner:
+def get_judge_runner(provider: JudgeProvider, model: str | None = None) -> JudgeRunner:
     """Factory function to get the appropriate judge runner."""
     runners = {
         "anthropic": AnthropicJudge,
-        "azure": AzureJudge,
+        "azure-v2": AzureJudge,
     }
 
     runner_class = runners.get(provider)
@@ -235,5 +261,11 @@ def get_judge_runner(provider: JudgeProvider, model: str) -> JudgeRunner:
         raise ValueError(
             f"Unknown judge provider: {provider}. Available: {list(runners.keys())}"
         )
+
+    if model is None:
+        if provider == "anthropic":
+            return runner_class()
+        if provider == "azure-v2":
+            return runner_class(model=DEFAULT_AZURE_MODEL)
 
     return runner_class(model=model)

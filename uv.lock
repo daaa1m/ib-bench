@@ -45,33 +45,19 @@ wheels = [
 ]
 
 [[package]]
-name = "azure-ai-agents"
-version = "1.1.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "azure-core" },
-    { name = "isodate" },
-    { name = "typing-extensions" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/39/98/bbe2e9e5b0a934be1930545025bf7018ebc4cc33b10134cc3314d6487076/azure_ai_agents-1.1.0.tar.gz", hash = "sha256:eb9d7226282d03206c3fab3f3ee0a2fc71e0ad38e52d2f4f19a92c56ed951aea", size = 303656, upload-time = "2025-08-05T19:02:26.7Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/e6/31/43750555bf20d3d2d7589fcd775c96ce7c96e58e208b81c1ed6d4bad6c5f/azure_ai_agents-1.1.0-py3-none-any.whl", hash = "sha256:f660bb0d564aeb88e33140ebc1e4700d2e36e2e12ee60c3346915d702a9310a9", size = 191126, upload-time = "2025-08-05T19:02:28.178Z" },
-]
-
-[[package]]
 name = "azure-ai-projects"
-version = "1.0.0"
+version = "2.0.0b3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "azure-ai-agents" },
     { name = "azure-core" },
+    { name = "azure-identity" },
     { name = "azure-storage-blob" },
     { name = "isodate" },
-    { name = "typing-extensions" },
+    { name = "openai" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/dd/95/9c04cb5f658c7f856026aa18432e0f0fa254ead2983a3574a0f5558a7234/azure_ai_projects-1.0.0.tar.gz", hash = "sha256:b5f03024ccf0fd543fbe0f5abcc74e45b15eccc1c71ab87fc71c63061d9fd63c", size = 130798, upload-time = "2025-07-31T02:09:27.912Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/24/e0/3512d3f07e9dd2eb4af684387c31598c435bd87833b6a81850972963cb9c/azure_ai_projects-2.0.0b3.tar.gz", hash = "sha256:6d09ad110086e450a47b991ee8a3644f1be97fa3085d5981d543f900d78f4505", size = 431749, upload-time = "2026-01-06T05:31:25.849Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b5/db/7149cdf71e12d9737f186656176efc94943ead4f205671768c1549593efe/azure_ai_projects-1.0.0-py3-none-any.whl", hash = "sha256:81369ed7a2f84a65864f57d3fa153e16c30f411a1504d334e184fb070165a3fa", size = 115188, upload-time = "2025-07-31T02:09:29.362Z" },
+    { url = "https://files.pythonhosted.org/packages/4e/b6/8fbd4786bb5c0dd19eaff86ddce0fbfb53a6f90d712038272161067a076a/azure_ai_projects-2.0.0b3-py3-none-any.whl", hash = "sha256:3b3048a3ba3904d556ba392b7bd20b6e84c93bb39df6d43a6470cdb0ad08af8c", size = 240717, upload-time = "2026-01-06T05:31:27.716Z" },
 ]
 
 [[package]]
@@ -528,7 +514,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "anthropic", specifier = ">=0.40.0" },
-    { name = "azure-ai-projects", specifier = ">=1.0.0" },
+    { name = "azure-ai-projects", specifier = "==2.0.0b3" },
     { name = "azure-identity", specifier = ">=1.25.1" },
     { name = "google-genai", specifier = ">=1.0.0" },
     { name = "openai", specifier = ">=1.50.0" },
