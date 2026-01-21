@@ -61,6 +61,9 @@ Evaluation runs are controlled by YAML configuration files.
 2. **Edit configs**: Customize files in `eval/configs/` (copied from
    `eval/configs.example/`).
 
+   Optional Azure v2 settings:
+   - `web_search_mode`: `brave` (default) or `native`
+
 ## Usage
 
 ### 1. Run Evaluation (Generation)
@@ -96,6 +99,9 @@ uv run eval/score.py MODEL/RUN_ID --rescore
 
 # Score with a specific judge model
 uv run eval/score.py MODEL/RUN_ID --judge-model claude-3-5-sonnet-20241022
+
+# (Optional) Regenerate summary.json from score files
+uv run eval/scripts/regenerate_score_summary.py eval/scores/MODEL/RUN_ID
 ```
 
 ### 3. Human Scoring Workflow
@@ -140,7 +146,8 @@ Each task in `eval/tasks/{id}/` consists of:
 
 - `eval/tasks/`: Task definitions and source files.
 - `eval/responses/`: LLM outputs and generated files (expensive, preserve).
-- `eval/scores/`: Scoring results, logs, and human templates (regenerable).
+- `eval/scores/`: Scoring results, logs, and human templates (regenerable). Optional
+  `summary.json` can be generated via `eval/scripts/regenerate_score_summary.py`.
 - `eval/configs.example/`: Example run and leaderboard configurations (copy to
   `eval/configs/`).
 - `eval/configs/`: Local run and leaderboard configurations (gitignored).
