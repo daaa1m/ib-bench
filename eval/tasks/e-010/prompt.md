@@ -34,6 +34,7 @@ To diagnose the errors, apply the following systematic audit approach:
 
 Constraints:
 
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - Identify ALL errors, not just the first one found
 - Provide specific cell or row references for each error
 - Explain what is wrong and how to fix it

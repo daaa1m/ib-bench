@@ -52,6 +52,7 @@ You must fill in the Low and High values for these metrics:
 
 ## Constraints
 
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - Only modify the "Guidance" sheet
 - Enter only numeric values (no currency symbols, no "million" text)
 - Revenue and EBITDA values should be in millions USD (e.g., 5000

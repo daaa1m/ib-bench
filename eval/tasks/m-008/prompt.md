@@ -36,6 +36,7 @@ price has moved up since the stake was revealed.
 
 ## Constraints
 
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - Use ONLY the activist presentation at the URL above as your source.
 - Do not cite or rely on external data, news, or filings.
 - Keep the write-up structured and senior-readable (IC-ready), not a

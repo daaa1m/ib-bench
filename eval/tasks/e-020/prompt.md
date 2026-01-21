@@ -18,6 +18,7 @@ Your deliverable includes the completed Excel model and a JSON summary.
 ## Constraints and Negative Constraints
 
 Constraints:
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - Use headless LibreOffice to recalculate the workbook; do not rely on calculations outside the spreadsheet.
 - Modify only the `Holders` sheet in `input.xlsx`.
 - Fill exactly 15 rows (rows 2-16).

@@ -20,6 +20,7 @@ credible industry commentary) to ground the questions in specific issues.
 ## Constraints and Negative Constraints
 
 Constraints:
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - Provide exactly 10 questions, ranked 1-10 by priority.
 - Each question must be 1-2 sentences and include a brief rationale.
 - Cover all required topic areas (margins/shrink, SG&A drivers, inventory/SKU,

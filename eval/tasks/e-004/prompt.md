@@ -32,6 +32,7 @@ filing, extract and reconcile the following:
 
 Constraints:
 
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - Use the official SEC filing or AMD's IR website as your data source
 - Report all values in millions USD (e.g., "1,234" for USD 1,234 million)
 - Extract all reconciling line items that bridge GAAP to non-GAAP operating

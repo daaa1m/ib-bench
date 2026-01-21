@@ -30,6 +30,7 @@ transaction and operating assumptions that drive the model outputs.
 
 Constraints:
 
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - Report all monetary values in the same unit as the model (typically millions)
 - Include cell references where assumptions are located
 - Distinguish between assumption inputs and calculated values

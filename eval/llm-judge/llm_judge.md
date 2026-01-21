@@ -22,6 +22,10 @@ Additional judge-only attachments may be provided (named `judge-*`). These are s
 
 {response_text}
 
+The analyst was instructed not to ask clarifying questions. Assume all required
+information is provided or can be obtained via web search. If the response asks
+questions instead of answering, score accordingly.
+
 ## Evaluation Criteria
 
 {criteria_text}

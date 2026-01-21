@@ -39,6 +39,7 @@ To diagnose the error, apply the following systematic accounting checks:
 
 ### Constraints & Negative Constraints
 
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - DO NOT use manual "plugs" or hard-codes to force the model to balance.
 - DO NOT make changes to the Transaction Dashboard, Operating Assumptions, or
   Returns Analysis sections.

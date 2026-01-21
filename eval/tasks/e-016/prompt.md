@@ -21,6 +21,7 @@ The summary should focus on deal economics and material protections, not boilerp
 
 Constraints:
 
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - Focus on economic terms that would matter to bankers advising on similar transactions
 - Use only `input.pdf` as your source
 - Include specific figures (prices, percentages, dollar amounts) when stated

@@ -31,6 +31,7 @@ Your deliverable includes the completed Excel model and a JSON summary.
 
 Constraints:
 
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - Use headless LibreOffice to recalculate the workbook; do not rely on
   calculations outside the spreadsheet.
 - Treat `input.xlsx` as a template only; do not reuse its numbers as data.

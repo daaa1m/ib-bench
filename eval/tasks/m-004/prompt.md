@@ -46,6 +46,7 @@ For each company, provide:
 
 ## Constraints
 
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - Include exactly 10 companies
 - All companies must be private (not publicly traded)
 - All companies must have European headquarters
