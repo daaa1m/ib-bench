@@ -1,0 +1,83 @@
+{
+  "task_id": "m-008",
+  "rubric_hash": "8cdfbf06",
+  "scored_at": "2026-01-21T11:09:01.828523",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 44.0,
+  "score_percent": 44.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "executive_summary",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 5.0,
+      "actual": "0.50",
+      "details": "Score: 0.50 - Clear but extremely generic. Does not state a concrete, conviction-backed recommendation or summarize the activist\u2019s specific plan or valuation logic. Reads like a placeholder rather than an IC-ready executive summary."
+    },
+    {
+      "id": "state_of_company",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 6.75,
+      "actual": "0.45",
+      "details": "Score: 0.45 - Overly narrow and partially inaccurate. The activist deck emphasizes portfolio complexity, structural margin under-earning, and conglomerate discount issues, not just North American beverage bottling inefficiency. Lacks financial context and specificity from the deck."
+    },
+    {
+      "id": "activist_thesis",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 7.5,
+      "actual": "0.50",
+      "details": "Score: 0.50 - Repeats high-level claims without articulating Elliott\u2019s core thesis, strategic alternatives, or structural critique. No discussion of separation logic, capital allocation, or margin gap analysis that are central to the presentation."
+    },
+    {
+      "id": "value_creation_plan",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 6.0,
+      "actual": "0.40",
+      "details": "Score: 0.40 - Initiatives are vague, generic, and not actionable. They fail to reflect the actual activist proposals and do not quantify impact, timelines, or mechanisms. Slide references appear superficial and not clearly tied to specific data or arguments."
+    },
+    {
+      "id": "valuation_recommendation",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 7.0,
+      "actual": "0.35",
+      "details": "Score: 0.35 - The weakest section. The 15x NTM P/E multiple appears arbitrary and is not tied to the deck\u2019s valuation framework, sum-of-the-parts analysis, or implied upside. No clear margin-of-safety logic, entry price, or reconciliation with post-announcement stock move."
+    },
+    {
+      "id": "risk_assessment",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 9.0,
+      "actual": "0.45",
+      "details": "Score: 0.45 - Risks are boilerplate and not grounded in the activist\u2019s identified challenges (e.g., management resistance, complexity of separation, execution drag, or multiple compression). Mitigants are vague and non-actionable."
+    },
+    {
+      "id": "presentation_quality",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 5,
+      "points_earned": 2.75,
+      "actual": "0.55",
+      "details": "Score: 0.55 - Well-structured and readable, but content quality is insufficient. The memo relies on generic investment banking language, lacks analytical depth, and would not be suitable for senior bankers or clients without a full rewrite."
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

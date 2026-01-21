@@ -1,0 +1,17 @@
+{
+  "task_id": "h-003",
+  "model": "gpt-4o",
+  "timestamp": "2026-01-21T15:43:33.025896",
+  "input_files": [
+    "input.pdf"
+  ],
+  "output_files": [],
+  "raw_response": "",
+  "parsed_response": null,
+  "stop_reason": "content_filter",
+  "usage": {
+    "input_tokens": 2339,
+    "output_tokens": 171,
+    "latency_ms": 26307.734966278076
+  }
+}

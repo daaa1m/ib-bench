@@ -1,0 +1,53 @@
+{
+  "task_id": "e-015",
+  "rubric_hash": "8d2b1f0c",
+  "scored_at": "2026-01-21T11:01:07.446729",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 41.0,
+  "score_percent": 41.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "tier_1_targets",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 45,
+      "points_earned": 13.5,
+      "actual": "0.30",
+      "details": "Score: 0.30 - Tier 1 contains multiple fundamental errors. Seagen was acquired by Pfizer in December 2023 and cannot be an M&A target as of January 1, 2026. Vertex and Regeneron are mega-cap, independent biopharma companies with entrenched business models and governance structures; assigning them 30\u201350% takeout probabilities is not credible. Overall target selection shows weak judgment of what constitutes a plausible U.S. biotech M&A target."
+    },
+    {
+      "id": "tier_2_targets",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 35,
+      "points_earned": 17.5,
+      "actual": "0.50",
+      "details": "Score: 0.50 - Tier 2 includes generally plausible biotech names, but still suffers from analytical weaknesses. Moderna\u2019s inclusion lacks context around strategic resistance to acquisition and post-COVID valuation volatility. Royalty Pharma is not a traditional biotech operating company, making its inclusion questionable. Probabilities appear arbitrary and unsupported."
+    },
+    {
+      "id": "source_urls",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 5.0,
+      "actual": "0.50",
+      "details": "Score: 0.50 - Sources are generic market-cap aggregation sites rather than primary or institutional-quality references (e.g., SEC filings, Bloomberg, Capital IQ). No evidence that figures are as-of January 1, 2026, and no triangulation across sources is shown."
+    },
+    {
+      "id": "selection_methodology",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 5.0,
+      "actual": "0.50",
+      "details": "Score: 0.50 - Methodology is high-level and superficial. It does not address key M&A drivers such as pipeline maturity, loss-of-exclusivity risk, balance sheet constraints, antitrust considerations, or buyer universe. Tiering logic is overly simplistic and not defensible at a senior or client level."
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

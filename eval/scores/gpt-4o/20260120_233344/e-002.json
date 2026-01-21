@@ -1,0 +1,73 @@
+{
+  "task_id": "e-002",
+  "rubric_hash": "796e16ce",
+  "scored_at": "2026-01-21T11:00:58.525532",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 60.0,
+  "score_percent": 60.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "accuracy",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 25,
+      "points_earned": 11.25,
+      "actual": "0.45",
+      "details": "Score: 0.45 - Several specific figures and themes (e.g., Supreme Court tariff case, $3 trillion import revenue impact) appear unrelated to FTI Consulting and raise a high risk of hallucination or misattribution. Without clear linkage to the source article, factual reliability is questionable."
+    },
+    {
+      "id": "completeness",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 25,
+      "points_earned": 15.0,
+      "actual": "0.60",
+      "details": "Score: 0.60 - Covers some company-specific metrics and governance issues, but it is unclear whether these are the core focus of the article. Potentially important context (timing, competitive positioning, deal relevance) is either missing or diluted by extraneous macro commentary."
+    },
+    {
+      "id": "conciseness",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 11.25,
+      "actual": "0.75",
+      "details": "Score: 0.75 - Reasonably tight and readable, though it could be more streamlined by removing less relevant macro elements and focusing on the primary company narrative."
+    },
+    {
+      "id": "relevance",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 9.0,
+      "actual": "0.60",
+      "details": "Score: 0.60 - The summary does not clearly lead with the most important takeaway for deal activity or strategic implications. Inclusion of broad regulatory and tariff discussion distracts from what should be a company-focused brief."
+    },
+    {
+      "id": "commentary_quality",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 5.0,
+      "actual": "0.50",
+      "details": "Score: 0.50 - Implicit commentary is mixed with facts and not clearly distinguished. Strategic implications are asserted but not tightly grounded in clearly sourced article content."
+    },
+    {
+      "id": "professional_tone",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 8.5,
+      "actual": "0.85",
+      "details": "Score: 0.85 - Tone is professional and appropriate for a senior banking audience, with correct use of financial terminology and no informal language."
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

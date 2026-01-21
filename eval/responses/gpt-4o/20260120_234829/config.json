@@ -1,0 +1,63 @@
+{
+  "provider": "azure-v2",
+  "model": "gpt-4o",
+  "task_ids": [
+    "m-001",
+    "m-002",
+    "m-003",
+    "m-004",
+    "m-005",
+    "m-006",
+    "m-007",
+    "m-008",
+    "m-009",
+    "m-010"
+  ],
+  "parallel": 2,
+  "config_file": "configs/azure-gpt4o.yaml",
+  "started_at": "2026-01-20T23:48:29.016895",
+  "completed_at": "2026-01-21T00:04:26.357073",
+  "results_summary": [
+    {
+      "task_id": "m-001",
+      "status": "success"
+    },
+    {
+      "task_id": "m-002",
+      "status": "success"
+    },
+    {
+      "task_id": "m-003",
+      "status": "error",
+      "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Too Many Requests', 'type': 'too_many_requests', 'param': None, 'code': 'too_many_requests'}} | status=429 | code=too_many_requests | request_id=00d373bc-847a-450b-98d6-db0b08afc4fd"
+    },
+    {
+      "task_id": "m-004",
+      "status": "success"
+    },
+    {
+      "task_id": "m-005",
+      "status": "success"
+    },
+    {
+      "task_id": "m-006",
+      "status": "success"
+    },
+    {
+      "task_id": "m-007",
+      "status": "success"
+    },
+    {
+      "task_id": "m-008",
+      "status": "success"
+    },
+    {
+      "task_id": "m-009",
+      "status": "success"
+    },
+    {
+      "task_id": "m-010",
+      "status": "success"
+    }
+  ]
+}

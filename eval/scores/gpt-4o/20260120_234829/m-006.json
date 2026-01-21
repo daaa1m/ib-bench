@@ -1,0 +1,23 @@
+{
+  "task_id": "m-006",
+  "rubric_hash": "b249a701",
+  "scored_at": "2026-01-21T11:08:16.685876",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "json_parse",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "json",
+      "points": 100,
+      "points_earned": 0,
+      "actual": "The \"LBO\" sheet contains various sections, including transaction assumptions, sources and uses, and ",
+      "details": "Failed to parse JSON from response"
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

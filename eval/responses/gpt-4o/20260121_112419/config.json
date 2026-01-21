@@ -1,0 +1,27 @@
+{
+  "provider": "azure-v2",
+  "model": "gpt-4o",
+  "task_ids": [
+    "h-001",
+    "h-002",
+    "h-003"
+  ],
+  "parallel": 1,
+  "config_file": "configs/azure-gpt4o.yaml",
+  "started_at": "2026-01-21T11:24:19.347588",
+  "completed_at": "2026-01-21T15:43:33.028038",
+  "results_summary": [
+    {
+      "task_id": "h-001",
+      "status": "success"
+    },
+    {
+      "task_id": "h-002",
+      "status": "success"
+    },
+    {
+      "task_id": "h-003",
+      "status": "success"
+    }
+  ]
+}

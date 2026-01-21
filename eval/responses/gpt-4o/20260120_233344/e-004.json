@@ -1,0 +1,32 @@
+{
+  "task_id": "e-004",
+  "model": "gpt-4o",
+  "timestamp": "2026-01-20T23:33:59.470300",
+  "input_files": [],
+  "output_files": [],
+  "raw_response": "```json\n{\n  \"gaap_operating_income\": \"1,270\",\n  \"non_gaap_operating_income\": \"2,238\",\n  \"adjustments\": [\n    {\"name\": \"Stock-based compensation\", \"amount\": \"150\"},\n    {\"name\": \"Amortization of acquisition-related intangibles\", \"amount\": \"260\"},\n    {\"name\": \"Restructuring and other charges\", \"amount\": \"558\"}\n  ]\n}\n```",
+  "parsed_response": {
+    "gaap_operating_income": "1,270",
+    "non_gaap_operating_income": "2,238",
+    "adjustments": [
+      {
+        "name": "Stock-based compensation",
+        "amount": "150"
+      },
+      {
+        "name": "Amortization of acquisition-related intangibles",
+        "amount": "260"
+      },
+      {
+        "name": "Restructuring and other charges",
+        "amount": "558"
+      }
+    ]
+  },
+  "stop_reason": "end_turn",
+  "usage": {
+    "input_tokens": 24619,
+    "output_tokens": 183,
+    "latency_ms": 14707.286596298218
+  }
+}

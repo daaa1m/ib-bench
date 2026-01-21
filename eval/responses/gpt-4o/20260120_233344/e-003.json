@@ -1,0 +1,18 @@
+{
+  "task_id": "e-003",
+  "model": "gpt-4o",
+  "timestamp": "2026-01-20T23:33:56.671412",
+  "input_files": [],
+  "output_files": [],
+  "raw_response": "```json\n{\n  \"purchase_obligations_24m\": \"Unable to retrieve data\",\n  \"source_reference\": \"Unable to locate the specific section in the 10-K filing\"\n}\n```",
+  "parsed_response": {
+    "purchase_obligations_24m": "Unable to retrieve data",
+    "source_reference": "Unable to locate the specific section in the 10-K filing"
+  },
+  "stop_reason": "end_turn",
+  "usage": {
+    "input_tokens": 22522,
+    "output_tokens": 124,
+    "latency_ms": 10840.471029281616
+  }
+}

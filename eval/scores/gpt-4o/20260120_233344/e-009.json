@@ -1,0 +1,63 @@
+{
+  "task_id": "e-009",
+  "rubric_hash": "c7730ed8",
+  "scored_at": "2026-01-21T11:02:26.621644",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 36,
+  "score_percent": 36.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "entry_multiple",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 18,
+      "points_earned": 0,
+      "actual": "4.5",
+      "details": "None of ['7.9', '7.9x'] found in '4.5' [GATES LLM]"
+    },
+    {
+      "id": "exit_multiple",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 18,
+      "points_earned": 18,
+      "actual": "4.854107648725212",
+      "details": "Found '10' in response"
+    },
+    {
+      "id": "hold_period_years",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 18,
+      "points_earned": 18,
+      "actual": "5",
+      "details": "Found '5' in response"
+    },
+    {
+      "id": "senior_debt_rate",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 28,
+      "points_earned": 0,
+      "actual": "8.0%",
+      "details": "None of ['3.49%', '3.49'] found in '8.0%' [GATES LLM]"
+    },
+    {
+      "id": "revenue_growth_rate",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 18,
+      "points_earned": 0,
+      "actual": "5.0%",
+      "details": "None of ['5.1', '5.1%'] found in '5.0%' [GATES LLM]"
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}
