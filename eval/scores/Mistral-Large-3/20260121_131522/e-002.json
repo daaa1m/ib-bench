@@ -1,0 +1,73 @@
+{
+  "task_id": "e-002",
+  "rubric_hash": "796e16ce",
+  "scored_at": "2026-01-21T16:03:35.410736",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 75.75,
+  "score_percent": 75.75,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "accuracy",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 25,
+      "points_earned": 17.5,
+      "actual": "0.70",
+      "details": "Score: 0.70 - Core FTI-specific figures (net debt, leverage, valuation, buybacks, coverage, ratings context) are accurate and traceable to the article, but several macro and credit datapoints (consumer delinquencies, subprime auto statistics, specific defaults like Tricolor/First Brands, and commentary on FTI\u2019s economic division profitability and M&A timing) are not clearly supported by the provided source and appear partially inferred or added."
+    },
+    {
+      "id": "completeness",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 25,
+      "points_earned": 20.0,
+      "actual": "0.80",
+      "details": "Score: 0.80 - Captures the main thesis around FTI\u2019s balance sheet shift, valuation discount, and restructuring upside, while also situating it in the broader credit and earnings backdrop. Some article elements (e.g., buyback strategy, management actions) could have been emphasized more explicitly."
+    },
+    {
+      "id": "conciseness",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 11.25,
+      "actual": "0.75",
+      "details": "Score: 0.75 - Generally well-structured and readable, but somewhat longer than necessary for a senior banker, with macro detail that could be tightened or deprioritized."
+    },
+    {
+      "id": "relevance",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 12.0,
+      "actual": "0.80",
+      "details": "Score: 0.80 - Leads with FTI\u2019s financial position and strategic implications for restructuring activity, which are the most relevant takeaways for deal and advisory discussions."
+    },
+    {
+      "id": "commentary_quality",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 6.5,
+      "actual": "0.65",
+      "details": "Score: 0.65 - Commentary is directionally sensible but not always clearly separated from article facts, and in places extends beyond what is explicitly supported by the source."
+    },
+    {
+      "id": "professional_tone",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 8.5,
+      "actual": "0.85",
+      "details": "Score: 0.85 - Tone is professional, appropriately analytical, and suitable for internal senior banker consumption."
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

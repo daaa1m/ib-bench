@@ -1,0 +1,17 @@
+{
+  "task_id": "e-008",
+  "model": "Mistral-Large-3",
+  "timestamp": "2026-01-21T13:32:42.684816",
+  "input_files": [
+    "input.pdf"
+  ],
+  "output_files": [],
+  "raw_response": "ERROR: InternalServerError: Error code: 500 - {'error': {'message': 'The server had an error processing your request. Sorry about that! You can retry your request, or contact us through an Azure support request at: https://go.microsoft.com/fwlink/?linkid=2213926 if... | status=500 | request_id=eee5e014-25e5-4416-b819-410250484741",
+  "parsed_response": {},
+  "stop_reason": "error",
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_ms": 0
+  }
+}

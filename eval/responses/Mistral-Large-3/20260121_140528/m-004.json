@@ -1,0 +1,100 @@
+{
+  "task_id": "m-004",
+  "model": "Mistral-Large-3",
+  "timestamp": "2026-01-21T14:07:32.490427",
+  "input_files": [],
+  "output_files": [],
+  "raw_response": "```json\n{\n  \"methodology\": \"The search approach involved querying industry association member lists (e.g., EU Specialty Food Ingredients, European Flavour Association, IFRA), trade publications, M&A databases, and company websites. Sources were cross-referenced to validate company details, ownership, revenue estimates, and product segments. Priority was given to companies with recent news, PE backing, or family ownership, and those explicitly mentioned in industry reports or association memberships.\",\n  \"targets\": [\n    {\n      \"company_name\": \"MANE SA\",\n      \"headquarters\": \"Le Bar-sur-Loup, France\",\n      \"estimated_revenue\": \"\u20ac1,770M (2023)\",\n      \"key_products\": \"Flavors, fragrances, natural ingredients for food & beverage, personal care\",\n      \"ownership\": \"Family/Founder-owned\",\n      \"rationale\": \"MANE is a global leader in flavors and fragrances, with strong B2B relationships and a broad portfolio of specialty ingredients. Its size, private ownership, and sector focus make it a prime acquisition target.\"\n    },\n    {\n      \"company_name\": \"BENEO GmbH\",\n      \"headquarters\": \"Mannheim, Germany\",\n      \"estimated_revenue\": \"\u20ac100M-500M (2024)\",\n      \"key_products\": \"Functional food ingredients, prebiotic fibers, rice derivatives, specialty sweeteners\",\n      \"ownership\": \"Subsidiary of S\u00fcdzucker Group\",\n      \"rationale\": \"BENEO is a key player in functional food ingredients, with a strong B2B focus and innovative product portfolio. Its parent company may consider divestment as part of strategic portfolio repositioning.\"\n    },\n    {\n      \"company_name\": \"D\u00f6hler GmbH\",\n      \"headquarters\": \"Darmstadt, Germany\",\n      \"estimated_revenue\": \"\u20ac1,000M-5,000M (2024)\",\n      \"key_products\": \"Natural flavors, colors, fruit and vegetable ingredients, health ingredients, beverage bases\",\n      \"ownership\": \"Family/Founder-owned\",\n      \"rationale\": \"D\u00f6hler is a global leader in natural food and beverage ingredients, with a strong B2B model and extensive R&D capabilities. Its size and private ownership make it a strategic fit for large-scale M&A.\"\n    },\n    {\n      \"company_name\": \"Azelis Group NV (Food & Health Division)\",\n      \"headquarters\": \"Antwerp, Belgium\",\n      \"estimated_revenue\": \"\u20ac2,100M (Group, 2024); Food & Health division: \u20ac50M-500M (estimated)\",\n      \"key_products\": \"Specialty food ingredients, food additives, functional ingredients\",\n      \"ownership\": \"Public (but division may be carved out)\",\n      \"rationale\": \"Azelis is a leading distributor of specialty chemicals and food ingredients in Europe, with a strong B2B network. Its Food & Health division is a potential carve-out target for strategic buyers.\"\n    },\n    {\n      \"company_name\": \"TER Chemicals Distribution Group\",\n      \"headquarters\": \"Hamburg, Germany\",\n      \"estimated_revenue\": \"\u20ac50M-500M (estimated, 2024)\",\n      \"key_products\": \"Specialty chemicals, food additives, functional ingredients\",\n      \"ownership\": \"Private (ownership not publicly disclosed)\",\n      \"rationale\": \"TER Chemicals is a key distributor of specialty chemicals and food additives, with a strong B2B model and pan-European presence. Its focus on food and feed additives aligns with the target sector.\"\n    },\n    {\n      \"company_name\": \"Sensient Technologies Corporation (Europe Division)\",\n      \"headquarters\": \"Geesthacht, Germany (European HQ)\",\n      \"estimated_revenue\": \"\u20ac50M-500M (Europe division, estimated)\",\n      \"key_products\": \"Natural colors, flavors, fragrances, functional ingredients\",\n      \"ownership\": \"Public (but Europe division may be a carve-out target)\",\n      \"rationale\": \"Sensient\u2019s Europe division is a leading supplier of natural colors and flavors to the food and beverage industry. Its strong B2B relationships and innovative product pipeline make it a compelling target.\"\n    },\n    {\n      \"company_name\": \"Bioweg GmbH\",\n      \"headquarters\": \"Bielefeld, Germany\",\n      \"estimated_revenue\": \"\u20ac50M-200M (estimated, 2024)\",\n      \"key_products\": \"Bio-based ingredients, sustainable food additives, plant-based proteins\",\n      \"ownership\": \"PE-backed (undisclosed)\",\n      \"rationale\": \"Bioweg is a fast-growing innovator in sustainable, bio-based food ingredients. Its focus on green chemistry and plant-based solutions aligns with industry trends, making it an attractive target for strategic buyers.\"\n    },\n    {\n      \"company_name\": \"MATR Foods ApS\",\n      \"headquarters\": \"Copenhagen, Denmark\",\n      \"estimated_revenue\": \"\u20ac50M-150M (estimated, 2024)\",\n      \"key_products\": \"Plant-based food ingredients, fermentation-based proteins, functional additives\",\n      \"ownership\": \"PE-backed (undisclosed)\",\n      \"rationale\": \"MATR Foods specializes in innovative plant-based ingredients through fermentation, addressing the growing demand for sustainable and functional food solutions. Its technology-driven approach makes it a high-potential target.\"\n    },\n    {\n      \"company_name\": \"SekaPark G\u0131da ve Kimya San. Tic. A.\u015e.\",\n      \"headquarters\": \"Istanbul, Turkey (with EU operations)\",\n      \"estimated_revenue\": \"\u20ac50M-200M (estimated, 2024)\",\n      \"key_products\": \"Food additives, plant proteins, amino acids, functional food ingredients\",\n      \"ownership\": \"Family/Founder-owned\",\n      \"rationale\": \"SekaPark is a key supplier of food additives and plant-based proteins to the European food industry. Its B2B model and focus on high-value-added products make it a relevant acquisition target.\"\n    },\n    {\n      \"company_name\": \"Frutarom Industries Ltd. (Europe Division)\",\n      \"headquarters\": \"Haifa, Israel (with major EU operations in Switzerland, UK, Germany)\",\n      \"estimated_revenue\": \"\u20ac50M-500M (Europe division, estimated)\",\n      \"key_products\": \"Natural flavors, functional food ingredients, specialty extracts\",\n      \"ownership\": \"Subsidiary of International Flavors & Fragrances (IFF)\",\n      \"rationale\": \"Frutarom\u2019s Europe division is a leading supplier of natural flavors and functional ingredients. Its strong B2B relationships and innovative product portfolio make it a potential carve-out target for strategic buyers.\"\n    }\n  ],\n  \"data_limitations\": \"Revenue estimates for private companies are based on industry reports, company disclosures, and third-party databases, which may not be precise or up-to-date. Ownership details for some companies are not publicly disclosed. Revenue for regional divisions (e.g., Europe) is estimated based on group-level data and may not reflect standalone figures.\"\n}\n```",
+  "parsed_response": {
+    "methodology": "The search approach involved querying industry association member lists (e.g., EU Specialty Food Ingredients, European Flavour Association, IFRA), trade publications, M&A databases, and company websites. Sources were cross-referenced to validate company details, ownership, revenue estimates, and product segments. Priority was given to companies with recent news, PE backing, or family ownership, and those explicitly mentioned in industry reports or association memberships.",
+    "targets": [
+      {
+        "company_name": "MANE SA",
+        "headquarters": "Le Bar-sur-Loup, France",
+        "estimated_revenue": "\u20ac1,770M (2023)",
+        "key_products": "Flavors, fragrances, natural ingredients for food & beverage, personal care",
+        "ownership": "Family/Founder-owned",
+        "rationale": "MANE is a global leader in flavors and fragrances, with strong B2B relationships and a broad portfolio of specialty ingredients. Its size, private ownership, and sector focus make it a prime acquisition target."
+      },
+      {
+        "company_name": "BENEO GmbH",
+        "headquarters": "Mannheim, Germany",
+        "estimated_revenue": "\u20ac100M-500M (2024)",
+        "key_products": "Functional food ingredients, prebiotic fibers, rice derivatives, specialty sweeteners",
+        "ownership": "Subsidiary of S\u00fcdzucker Group",
+        "rationale": "BENEO is a key player in functional food ingredients, with a strong B2B focus and innovative product portfolio. Its parent company may consider divestment as part of strategic portfolio repositioning."
+      },
+      {
+        "company_name": "D\u00f6hler GmbH",
+        "headquarters": "Darmstadt, Germany",
+        "estimated_revenue": "\u20ac1,000M-5,000M (2024)",
+        "key_products": "Natural flavors, colors, fruit and vegetable ingredients, health ingredients, beverage bases",
+        "ownership": "Family/Founder-owned",
+        "rationale": "D\u00f6hler is a global leader in natural food and beverage ingredients, with a strong B2B model and extensive R&D capabilities. Its size and private ownership make it a strategic fit for large-scale M&A."
+      },
+      {
+        "company_name": "Azelis Group NV (Food & Health Division)",
+        "headquarters": "Antwerp, Belgium",
+        "estimated_revenue": "\u20ac2,100M (Group, 2024); Food & Health division: \u20ac50M-500M (estimated)",
+        "key_products": "Specialty food ingredients, food additives, functional ingredients",
+        "ownership": "Public (but division may be carved out)",
+        "rationale": "Azelis is a leading distributor of specialty chemicals and food ingredients in Europe, with a strong B2B network. Its Food & Health division is a potential carve-out target for strategic buyers."
+      },
+      {
+        "company_name": "TER Chemicals Distribution Group",
+        "headquarters": "Hamburg, Germany",
+        "estimated_revenue": "\u20ac50M-500M (estimated, 2024)",
+        "key_products": "Specialty chemicals, food additives, functional ingredients",
+        "ownership": "Private (ownership not publicly disclosed)",
+        "rationale": "TER Chemicals is a key distributor of specialty chemicals and food additives, with a strong B2B model and pan-European presence. Its focus on food and feed additives aligns with the target sector."
+      },
+      {
+        "company_name": "Sensient Technologies Corporation (Europe Division)",
+        "headquarters": "Geesthacht, Germany (European HQ)",
+        "estimated_revenue": "\u20ac50M-500M (Europe division, estimated)",
+        "key_products": "Natural colors, flavors, fragrances, functional ingredients",
+        "ownership": "Public (but Europe division may be a carve-out target)",
+        "rationale": "Sensient\u2019s Europe division is a leading supplier of natural colors and flavors to the food and beverage industry. Its strong B2B relationships and innovative product pipeline make it a compelling target."
+      },
+      {
+        "company_name": "Bioweg GmbH",
+        "headquarters": "Bielefeld, Germany",
+        "estimated_revenue": "\u20ac50M-200M (estimated, 2024)",
+        "key_products": "Bio-based ingredients, sustainable food additives, plant-based proteins",
+        "ownership": "PE-backed (undisclosed)",
+        "rationale": "Bioweg is a fast-growing innovator in sustainable, bio-based food ingredients. Its focus on green chemistry and plant-based solutions aligns with industry trends, making it an attractive target for strategic buyers."
+      },
+      {
+        "company_name": "MATR Foods ApS",
+        "headquarters": "Copenhagen, Denmark",
+        "estimated_revenue": "\u20ac50M-150M (estimated, 2024)",
+        "key_products": "Plant-based food ingredients, fermentation-based proteins, functional additives",
+        "ownership": "PE-backed (undisclosed)",
+        "rationale": "MATR Foods specializes in innovative plant-based ingredients through fermentation, addressing the growing demand for sustainable and functional food solutions. Its technology-driven approach makes it a high-potential target."
+      },
+      {
+        "company_name": "SekaPark G\u0131da ve Kimya San. Tic. A.\u015e.",
+        "headquarters": "Istanbul, Turkey (with EU operations)",
+        "estimated_revenue": "\u20ac50M-200M (estimated, 2024)",
+        "key_products": "Food additives, plant proteins, amino acids, functional food ingredients",
+        "ownership": "Family/Founder-owned",
+        "rationale": "SekaPark is a key supplier of food additives and plant-based proteins to the European food industry. Its B2B model and focus on high-value-added products make it a relevant acquisition target."
+      },
+      {
+        "company_name": "Frutarom Industries Ltd. (Europe Division)",
+        "headquarters": "Haifa, Israel (with major EU operations in Switzerland, UK, Germany)",
+        "estimated_revenue": "\u20ac50M-500M (Europe division, estimated)",
+        "key_products": "Natural flavors, functional food ingredients, specialty extracts",
+        "ownership": "Subsidiary of International Flavors & Fragrances (IFF)",
+        "rationale": "Frutarom\u2019s Europe division is a leading supplier of natural flavors and functional ingredients. Its strong B2B relationships and innovative product portfolio make it a potential carve-out target for strategic buyers."
+      }
+    ],
+    "data_limitations": "Revenue estimates for private companies are based on industry reports, company disclosures, and third-party databases, which may not be precise or up-to-date. Ownership details for some companies are not publicly disclosed. Revenue for regional divisions (e.g., Europe) is estimated based on group-level data and may not reflect standalone figures."
+  },
+  "stop_reason": "end_turn",
+  "usage": {
+    "input_tokens": 41321,
+    "output_tokens": 3265,
+    "latency_ms": 83288.17224502563
+  }
+}

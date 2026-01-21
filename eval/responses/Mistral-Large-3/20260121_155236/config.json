@@ -1,0 +1,27 @@
+{
+  "provider": "azure-v2",
+  "model": "Mistral-Large-3",
+  "task_ids": [
+    "h-001",
+    "h-002",
+    "h-003"
+  ],
+  "parallel": 3,
+  "config_file": "configs/azure-mistral.yaml",
+  "started_at": "2026-01-21T15:52:36.580750",
+  "completed_at": "2026-01-21T15:58:05.557997",
+  "results_summary": [
+    {
+      "task_id": "h-001",
+      "status": "success"
+    },
+    {
+      "task_id": "h-002",
+      "status": "success"
+    },
+    {
+      "task_id": "h-003",
+      "status": "success"
+    }
+  ]
+}

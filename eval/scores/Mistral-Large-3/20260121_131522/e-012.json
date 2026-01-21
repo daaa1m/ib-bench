@@ -1,0 +1,43 @@
+{
+  "task_id": "e-012",
+  "rubric_hash": "013aba50",
+  "scored_at": "2026-01-21T16:04:47.131750",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 69.5,
+  "score_percent": 69.5,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "top_5_risks",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 50,
+      "points_earned": 35.0,
+      "actual": "0.70",
+      "details": "Score: 0.70 - Provides exactly five risks with clear titles, summaries, and implications, and the prioritization is broadly sensible. However, the risks are highly generic and read like an industry template rather than a Coinbase S-1\u2013specific analysis. Key Coinbase-specific risks disclosed in the S-1 (e.g., reliance on retail trading volumes, regulatory status of specific assets, dependence on a small number of revenue drivers or customer cohorts, litigation exposure, or conflicts with regulators) are not clearly reflected, which reduces materiality precision."
+    },
+    {
+      "id": "prioritization_rationale",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 30,
+      "points_earned": 19.5,
+      "actual": "0.65",
+      "details": "Score: 0.65 - The rationale explains the general logic for ranking (probability and impact) and correctly elevates regulatory risk. However, it lacks concrete linkage to disclosures in the Coinbase S-1 and does not clearly explain why these risks were chosen over other highly material risks actually emphasized in the filing. The explanation remains high-level and could apply to nearly any crypto exchange."
+    },
+    {
+      "id": "methodology_notes",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 15.0,
+      "actual": "0.75",
+      "details": "Score: 0.75 - The methodology is coherent, structured, and professionally stated, and it aligns with how an analyst should approach an S-1 review. That said, it is generic and not evidentially tied to the actual document (no indication of weighting, cross-referencing, or validation against Coinbase-specific risk language), limiting confidence that the process was truly executed as described."
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

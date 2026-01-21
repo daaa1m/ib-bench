@@ -1,0 +1,73 @@
+{
+  "task_id": "m-002",
+  "rubric_hash": "64904dfc",
+  "scored_at": "2026-01-21T16:09:15.024656",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "aq60_value",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 25,
+      "points_earned": 0,
+      "actual": null,
+      "details": "Cell AQ60 is empty"
+    },
+    {
+      "id": "aq83_value",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 20,
+      "points_earned": 0,
+      "actual": null,
+      "details": "Cell AQ83 is empty"
+    },
+    {
+      "id": "lqa_label",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 10,
+      "points_earned": 0,
+      "actual": "2Q24 LQA",
+      "details": "Cell G2 = '2Q24 LQA', expected '2Q24'"
+    },
+    {
+      "id": "aq31_value",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 15,
+      "points_earned": 0,
+      "actual": 484.8,
+      "details": "Cell AQ31 = 484.8, expected 124 (diff: 360.8)"
+    },
+    {
+      "id": "aq93_value",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 15,
+      "points_earned": 0,
+      "actual": 94.9,
+      "details": "Cell AQ93 = 94.9, expected 824 (diff: 729.1)"
+    },
+    {
+      "id": "aq112_value",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 15,
+      "points_earned": 0,
+      "actual": null,
+      "details": "Cell AQ112 is empty"
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

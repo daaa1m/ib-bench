@@ -1,0 +1,86 @@
+{
+  "task_id": "e-019",
+  "model": "Mistral-Large-3",
+  "timestamp": "2026-01-21T13:33:36.390355",
+  "input_files": [
+    "input.pdf"
+  ],
+  "output_files": [],
+  "raw_response": "Here is the extracted and structured JSON object based on the provided covenant sections from `input.pdf`:\n\n---\n\n```json\n{\n  \"debt_incurrence\": {\n    \"general_test\": \"The Company may incur additional Indebtedness if, after giving Pro Forma Effect, the Total Leverage Ratio is less than or equal to 4.50 to 1.0, or the Senior Leverage Ratio is less than or equal to 3.50 to 1.0, or the First Lien Leverage Ratio is maintained or improved.\",\n    \"key_baskets\": [\n      {\n        \"name\": \"General Ratio Test Basket\",\n        \"threshold\": \"Total Leverage Ratio \u2264 4.50:1.0 or Senior Leverage Ratio \u2264 3.50:1.0\"\n      },\n      {\n        \"name\": \"Refinancing Basket\",\n        \"threshold\": \"Refinancing Indebtedness may not exceed the principal amount of Indebtedness being refinanced plus permitted amounts.\"\n      },\n      {\n        \"name\": \"Non-Guarantor Subsidiary Indebtedness Basket\",\n        \"threshold\": \"Aggregate principal amount of Indebtedness of Restricted Subsidiaries that are not Guarantors shall not exceed the greater of $50,000,000 and 5% of Consolidated EBITDA for the most recently ended Test Period.\"\n      },\n      {\n        \"name\": \"Acquisition/Investment Basket\",\n        \"threshold\": \"Indebtedness incurred to finance an acquisition or Investment, provided the Senior Leverage Ratio or First Lien Leverage Ratio is maintained or improved.\"\n      },\n      {\n        \"name\": \"Equity Proceeds Basket\",\n        \"threshold\": \"Indebtedness incurred using proceeds from equity issuances, not to exceed 200% of equity contributions received.\"\n      }\n    ]\n  },\n  \"restricted_payments\": {\n    \"rp_baskets\": [\n      {\n        \"name\": \"Available RP Capacity\",\n        \"description\": \"Restricted Payments may be made up to the Available RP Capacity, which includes 50% of Consolidated Net Income from the Issue Date, less 100% of losses, plus 100% of equity issuance proceeds, less certain restricted payments made.\"\n      },\n      {\n        \"name\": \"Annual Dividend Basket\",\n        \"description\": \"Dividends and distributions to equity holders in an annual amount equal to 6.0% of net cash proceeds from public offerings of common stock.\"\n      },\n      {\n        \"name\": \"General Basket\",\n        \"threshold\": \"Restricted Payments up to the greater of $150,000,000 and 15% of Consolidated EBITDA for the most recently ended Test Period.\"\n      },\n      {\n        \"name\": \"Equity Contribution Basket\",\n        \"description\": \"Restricted Payments up to the amount of Excluded Contribution Amount that is not otherwise applied.\"\n      }\n    ],\n    \"builder_mechanics\": \"Unused portions of the Available RP Capacity for any fiscal year may be carried forward to succeeding fiscal years.\",\n    \"ratio_test\": \"Additional Restricted Payments are permitted if, after giving Pro Forma Effect, the Total Leverage Ratio is less than or equal to 4.50 to 1.0 and there is no continuing Event of Default.\"\n  },\n  \"asset_sales\": {\n    \"cash_requirements\": \"At least 75% of the consideration for Asset Sales exceeding the greater of $50,000,000 and 5% of Consolidated EBITDA must be in cash or Cash Equivalents.\",\n    \"reinvestment_timing\": \"Within 450 days after receipt of Net Proceeds from Asset Sales, the Company must apply such proceeds to repay Indebtedness or reinvest in assets constituting Collateral.\",\n    \"excess_proceeds_mechanics\": \"If proceeds are not applied within 450 days, the Company must offer to repurchase Notes using the Excess Proceeds at 100% of their principal amount plus accrued interest.\"\n  },\n  \"change_of_control\": {\n    \"offer_price\": \"101% of the principal amount of the Notes (or higher, at the Company's discretion) plus accrued and unpaid interest.\",\n    \"timing\": \"The Company must send a notice to Holders within 60 days following the Change of Control, with the Change of Control Payment Date set no earlier than 20 Business Days nor later than 60 days from the notice date.\",\n    \"tender_mechanics\": \"Holders must surrender Notes to the paying agent prior to the close of business on the third Business Day preceding the Change of Control Payment Date.\"\n  },\n  \"liens_and_other\": {\n    \"equal_and_ratable\": \"The Company must secure the Notes equally and ratably with any Initial Lien securing Indebtedness on any asset or property of the Company or any Restricted Subsidiary, unless such Lien is a Permitted Lien.\",\n    \"guarantor_triggers\": \"Each Restricted Subsidiary guaranteeing certain Indebtedness (e.g., Senior Credit Facilities or capital markets debt exceeding $250,000,000) must also guarantee the Notes within 60 days of such guarantee.\",\n    \"lien_limitations\": \"Permitted Liens include Liens existing on the Issue Date, Liens securing Indebtedness permitted under Section 4.05, tax Liens, and other customary exceptions.\"\n  },\n  \"reasoning_steps\": [\n    \"Step 1: Located the covenant sections (4.05, 4.06, 4.16, 4.11, 4.07-4.10) by searching for the section headings and reviewing the surrounding text in the document.\",\n    \"Step 2: Extracted ratio tests, basket sizes, thresholds, and timing requirements by identifying numeric values, formulas, and conditional language (e.g., 'greater of', 'less than or equal to') within each section.\",\n    \"Step 3: Noted 'greater of' basket mechanics and required conditions (e.g., no Event of Default) by analyzing the language around permitted baskets and exceptions.\",\n    \"Step 4: Summarized each section in a structured format, ensuring precise covenant terminology and specific numeric thresholds were included.\"\n  ]\n}\n```",
+  "parsed_response": {
+    "debt_incurrence": {
+      "general_test": "The Company may incur additional Indebtedness if, after giving Pro Forma Effect, the Total Leverage Ratio is less than or equal to 4.50 to 1.0, or the Senior Leverage Ratio is less than or equal to 3.50 to 1.0, or the First Lien Leverage Ratio is maintained or improved.",
+      "key_baskets": [
+        {
+          "name": "General Ratio Test Basket",
+          "threshold": "Total Leverage Ratio \u2264 4.50:1.0 or Senior Leverage Ratio \u2264 3.50:1.0"
+        },
+        {
+          "name": "Refinancing Basket",
+          "threshold": "Refinancing Indebtedness may not exceed the principal amount of Indebtedness being refinanced plus permitted amounts."
+        },
+        {
+          "name": "Non-Guarantor Subsidiary Indebtedness Basket",
+          "threshold": "Aggregate principal amount of Indebtedness of Restricted Subsidiaries that are not Guarantors shall not exceed the greater of $50,000,000 and 5% of Consolidated EBITDA for the most recently ended Test Period."
+        },
+        {
+          "name": "Acquisition/Investment Basket",
+          "threshold": "Indebtedness incurred to finance an acquisition or Investment, provided the Senior Leverage Ratio or First Lien Leverage Ratio is maintained or improved."
+        },
+        {
+          "name": "Equity Proceeds Basket",
+          "threshold": "Indebtedness incurred using proceeds from equity issuances, not to exceed 200% of equity contributions received."
+        }
+      ]
+    },
+    "restricted_payments": {
+      "rp_baskets": [
+        {
+          "name": "Available RP Capacity",
+          "description": "Restricted Payments may be made up to the Available RP Capacity, which includes 50% of Consolidated Net Income from the Issue Date, less 100% of losses, plus 100% of equity issuance proceeds, less certain restricted payments made."
+        },
+        {
+          "name": "Annual Dividend Basket",
+          "description": "Dividends and distributions to equity holders in an annual amount equal to 6.0% of net cash proceeds from public offerings of common stock."
+        },
+        {
+          "name": "General Basket",
+          "threshold": "Restricted Payments up to the greater of $150,000,000 and 15% of Consolidated EBITDA for the most recently ended Test Period."
+        },
+        {
+          "name": "Equity Contribution Basket",
+          "description": "Restricted Payments up to the amount of Excluded Contribution Amount that is not otherwise applied."
+        }
+      ],
+      "builder_mechanics": "Unused portions of the Available RP Capacity for any fiscal year may be carried forward to succeeding fiscal years.",
+      "ratio_test": "Additional Restricted Payments are permitted if, after giving Pro Forma Effect, the Total Leverage Ratio is less than or equal to 4.50 to 1.0 and there is no continuing Event of Default."
+    },
+    "asset_sales": {
+      "cash_requirements": "At least 75% of the consideration for Asset Sales exceeding the greater of $50,000,000 and 5% of Consolidated EBITDA must be in cash or Cash Equivalents.",
+      "reinvestment_timing": "Within 450 days after receipt of Net Proceeds from Asset Sales, the Company must apply such proceeds to repay Indebtedness or reinvest in assets constituting Collateral.",
+      "excess_proceeds_mechanics": "If proceeds are not applied within 450 days, the Company must offer to repurchase Notes using the Excess Proceeds at 100% of their principal amount plus accrued interest."
+    },
+    "change_of_control": {
+      "offer_price": "101% of the principal amount of the Notes (or higher, at the Company's discretion) plus accrued and unpaid interest.",
+      "timing": "The Company must send a notice to Holders within 60 days following the Change of Control, with the Change of Control Payment Date set no earlier than 20 Business Days nor later than 60 days from the notice date.",
+      "tender_mechanics": "Holders must surrender Notes to the paying agent prior to the close of business on the third Business Day preceding the Change of Control Payment Date."
+    },
+    "liens_and_other": {
+      "equal_and_ratable": "The Company must secure the Notes equally and ratably with any Initial Lien securing Indebtedness on any asset or property of the Company or any Restricted Subsidiary, unless such Lien is a Permitted Lien.",
+      "guarantor_triggers": "Each Restricted Subsidiary guaranteeing certain Indebtedness (e.g., Senior Credit Facilities or capital markets debt exceeding $250,000,000) must also guarantee the Notes within 60 days of such guarantee.",
+      "lien_limitations": "Permitted Liens include Liens existing on the Issue Date, Liens securing Indebtedness permitted under Section 4.05, tax Liens, and other customary exceptions."
+    },
+    "reasoning_steps": [
+      "Step 1: Located the covenant sections (4.05, 4.06, 4.16, 4.11, 4.07-4.10) by searching for the section headings and reviewing the surrounding text in the document.",
+      "Step 2: Extracted ratio tests, basket sizes, thresholds, and timing requirements by identifying numeric values, formulas, and conditional language (e.g., 'greater of', 'less than or equal to') within each section.",
+      "Step 3: Noted 'greater of' basket mechanics and required conditions (e.g., no Event of Default) by analyzing the language around permitted baskets and exceptions.",
+      "Step 4: Summarized each section in a structured format, ensuring precise covenant terminology and specific numeric thresholds were included."
+    ]
+  },
+  "stop_reason": "end_turn",
+  "usage": {
+    "input_tokens": 42910,
+    "output_tokens": 4560,
+    "latency_ms": 49718.31130981445
+  }
+}

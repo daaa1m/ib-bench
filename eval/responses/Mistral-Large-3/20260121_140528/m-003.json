@@ -1,0 +1,17 @@
+{
+  "task_id": "m-003",
+  "model": "Mistral-Large-3",
+  "timestamp": "2026-01-21T14:11:09.820486",
+  "input_files": [
+    "input.xlsx"
+  ],
+  "output_files": [],
+  "raw_response": "ERROR: BadRequestError: Error code: 400 - {'error': {'message': 'There was an issue with your request. Please check your inputs and try again', 'type': 'invalid_request_error', 'param': None, 'code': None}} | status=400 | request_id=bda997dd-e5c8-4a15-a212-8e8479831557",
+  "parsed_response": {},
+  "stop_reason": "error",
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "latency_ms": 0
+  }
+}

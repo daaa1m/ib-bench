@@ -1,0 +1,19 @@
+{
+  "task_id": "e-005",
+  "model": "Mistral-Large-3",
+  "timestamp": "2026-01-21T13:17:15.072106",
+  "input_files": [
+    "input-1.pdf",
+    "input-2.pdf",
+    "input-3.pdf"
+  ],
+  "output_files": [],
+  "raw_response": "",
+  "parsed_response": null,
+  "stop_reason": "end_turn",
+  "usage": {
+    "input_tokens": 100944,
+    "output_tokens": 2500,
+    "latency_ms": 54410.27808189392
+  }
+}

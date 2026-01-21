@@ -1,0 +1,23 @@
+{
+  "task_id": "m-010",
+  "rubric_hash": "1a68534b",
+  "scored_at": "2026-01-21T16:09:13.056729",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "json_parse",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "json",
+      "points": 100,
+      "points_earned": 0,
+      "actual": "It appears that I am unable to directly extract the necessary financial figures from the `input-2.pd",
+      "details": "Failed to parse JSON from response"
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

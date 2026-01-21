@@ -1,0 +1,63 @@
+{
+  "task_id": "e-019",
+  "rubric_hash": "921ca5b7",
+  "scored_at": "2026-01-21T16:04:04.779258",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 62.5,
+  "score_percent": 62.5,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "debt_incurrence",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 35,
+      "points_earned": 19.25,
+      "actual": "0.55",
+      "details": "Score: 0.55 - The analyst attempts to summarize Section 4.05 but mixes and likely fabricates leverage tests and baskets without clear anchoring to the actual AMC indenture. AMC\u2019s HY indentures are typically heavily basket-driven with limited or no true Total Leverage ratio incurrence test, and the specific ratios (4.50x, 3.50x), equity proceeds basket mechanics, and non-guarantor caps appear generic and not reliably sourced. This is usable only as a rough starting point and would require a full re-pull from the document."
+    },
+    {
+      "id": "restricted_payments",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 25,
+      "points_earned": 15.0,
+      "actual": "0.60",
+      "details": "Score: 0.60 - Correctly identifies the general structure of a builder basket, general RP basket, equity contribution basket, and an Event of Default blocker, but the numerical thresholds (50% CNI, 6% dividend basket, $150mm / 15% EBITDA) are highly suspect and read like template language rather than extracted terms. Lacks clarity on starter amount, carve-outs, and whether AMC was even permitted dividends at issuance. Needs substantial verification but the framework is directionally correct."
+    },
+    {
+      "id": "asset_sales",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 13.0,
+      "actual": "0.65",
+      "details": "Score: 0.65 - Captures the core asset sale mechanics (cash consideration, reinvestment period, excess proceeds offer) in a way that is structurally sound and consistent with market practice. However, specific percentages, dollar thresholds, and the 450-day reinvestment period may not tie exactly to the document, and the collateral waterfall and permitted uses are oversimplified. Reasonably competent but requires cleanup and cross-checking."
+    },
+    {
+      "id": "change_of_control",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 12.75,
+      "actual": "0.85",
+      "details": "Score: 0.85 - Strong and largely credible summary of Change of Control mechanics. The 101% offer price, notice timing, and payment window are consistent with typical AMC-style HY indentures and are presented clearly and professionally. Minor risk that exact day counts differ, but this would be safe to circulate with light verification."
+    },
+    {
+      "id": "liens_and_other",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 5,
+      "points_earned": 2.5,
+      "actual": "0.50",
+      "details": "Score: 0.50 - High-level and generic treatment of lien covenants and guarantor provisions. Does not clearly distinguish between equal-and-ratable versus negative pledge structures, omits important exceptions, and introduces a $250mm guarantor trigger that is likely inaccurate. This section would need to be reworked directly from Sections 4.07\u20134.10 before being shared."
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

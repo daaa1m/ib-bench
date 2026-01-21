@@ -1,0 +1,23 @@
+{
+  "task_id": "e-003",
+  "rubric_hash": "29b90165",
+  "scored_at": "2026-01-21T16:04:14.817488",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "purchase_obligations_24m",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 100,
+      "points_earned": 0,
+      "actual": "58650",
+      "details": "None of ['16,477', '16477', '$16,477', '$16477', '16.477', 'USD 16,477', 'USD 16477'] found in '58650'"
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}
