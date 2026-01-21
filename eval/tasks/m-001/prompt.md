@@ -22,6 +22,7 @@ valuation. Focus exclusively on the **Marine DCF** sheet for editing.
 
 ## Constraints
 
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - Edit ONLY the Marine DCF sheet
 - Preserve all existing assumptions (discount rate, terminal growth, etc.)
 - Preserve the model structure

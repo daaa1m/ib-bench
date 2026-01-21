@@ -27,6 +27,7 @@ Apply these systematic checks:
 
 ## Constraints
 
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - Provide specific cell references for each error location
 - Fix the model so it calculates correctly
 - All values in millions EUR

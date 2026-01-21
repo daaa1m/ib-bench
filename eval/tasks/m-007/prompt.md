@@ -31,6 +31,7 @@ You must return the completed Excel workbook.
 
 ## Constraints
 
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - Use FY26 as the exit year
 - Exit multiple range: 15.0x to 19.0x in 0.5x increments (9 scenarios)
 - Sweet equity hurdle: 200% (exit equity >= 3x entry equity)

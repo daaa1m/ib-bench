@@ -22,6 +22,7 @@ Your deliverable includes the completed Excel model and a JSON summary.
 ## Constraints and Negative Constraints
 
 Constraints:
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - Use headless LibreOffice to recalculate the workbook; do not rely on calculations outside the spreadsheet.
 - Modify only the `Debt` sheet in `input.xlsx`.
 - Fill in the periods from 3Q22 through 2025 (columns G through X).

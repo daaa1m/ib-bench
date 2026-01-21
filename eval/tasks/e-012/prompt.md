@@ -33,6 +33,7 @@ only.
 
 Constraints:
 
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - Focus on the Risk Factors section specifically
 - Use only `input.pdf` as your source
 - Provide exactly 5 risks, no more and no fewer

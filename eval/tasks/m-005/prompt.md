@@ -43,6 +43,7 @@ Your task is to:
 
 ## Constraints
 
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - Use Tesla's actual reported quarterly figures from public filings
 - All monetary values in millions USD
 - Q4 2025 estimate (column P) should use the average seasonal index

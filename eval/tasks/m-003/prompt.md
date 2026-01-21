@@ -65,6 +65,7 @@ Brief bullet-point answers addressing:
 
 ## Constraints
 
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - Use only the provided Excel file as your data source
 - Use headless LibreOffice to recalculate the workbook; do not rely on calculations outside the spreadsheet.
 - Base year is 2020, first projection year is 2021

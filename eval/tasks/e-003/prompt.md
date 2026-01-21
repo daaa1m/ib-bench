@@ -25,6 +25,7 @@ the total purchase obligations due within the next 24 months from December
 
 Constraints:
 
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - Use the official SEC filing or Amazon's IR website as your data source
 - Report the value in millions USD (e.g., "12,599" for USD 12,599 million)
 - Extract only purchase obligations, not other types of contractual commitments

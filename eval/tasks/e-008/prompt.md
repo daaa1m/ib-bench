@@ -16,6 +16,7 @@ You are an investment banking analyst. Summarize the MD&A (Management's Discussi
 
 Constraints:
 
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - Focus specifically on the MD&A section content
 - Prioritize forward-looking statements and management's perspective
 - Include specific metrics or figures when management references them

@@ -26,6 +26,7 @@ Your deliverable has two parts:
 ## Constraints and Negative Constraints
 
 Constraints:
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - Report revenue and operating income in millions USD
 - Report diluted EPS as a dollar amount with two decimal places
 - Report guidance in billions USD

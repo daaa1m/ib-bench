@@ -30,6 +30,7 @@ company reports for the Marine Transportation segment.
 
 ## Constraints
 
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - Update ONLY cells that need new data values in column AQ and G
 - Preserve all existing formulas and model structure
 - Use values exactly as reported in SEC filings

@@ -35,6 +35,7 @@ tie across tabs, and the balance sheet balances).
 
 ## Constraints
 
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - Modify only these three columns:
   - `Segments` column `BT`
   - `IS` column `BO`

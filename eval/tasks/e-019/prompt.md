@@ -21,6 +21,7 @@ Focus on the following sections:
 ## Constraints and Negative Constraints
 
 Constraints:
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - Use only the information contained in `input.pdf`.
 - Provide specific numeric thresholds and formulas when stated.
 - Use precise covenant terminology (e.g., “Total Leverage Ratio”).

@@ -22,6 +22,7 @@ return the updated workbook plus a JSON summary.
 
 Constraints:
 
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - Use headless LibreOffice to recalculate the workbook; do not rely on
   calculations outside the spreadsheet.
 - Update all sheets except `Reference` (do not edit `Reference`).

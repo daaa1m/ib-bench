@@ -15,6 +15,7 @@ Your deliverable includes the completed Excel model and a JSON summary.
 ## Constraints and Negative Constraints
 
 Constraints:
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - Use only `input.pdf` and Phillips 66 public filings (FY24 10-K, FY25 Q1/Q2/Q3 10-Qs).
 - Clearly state units and timeframes (e.g., USD millions, FY24A, FY25E).
 - Create a new Excel workbook with these sheets: `Summary`, `Income Statement`, `Balance Sheet`, `Cash Flow`, `Assumptions`, `Returns`.

@@ -42,6 +42,7 @@ The standard solution is to:
 ## Constraints and Negative Constraints
 
 Constraints:
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - The circularity switch must be clearly labeled and easy to find
 - Interest calculation must use AVERAGE or (Begin + End) / 2 formula structure
 - Preserve all existing model functionality

@@ -29,6 +29,7 @@ Your deliverable has two parts:
 
 Constraints:
 
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - Include specific figures (price targets, growth rates, multiples) when citing
   analyst views
 - Reference both Goldman Sachs and JPMorgan perspectives

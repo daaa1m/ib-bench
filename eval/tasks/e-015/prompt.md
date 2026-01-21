@@ -21,6 +21,7 @@ rationale for each target.
 ## Constraints and Negative Constraints
 
 Constraints:
+- Do not ask clarifying questions; assume all required information is provided or can be obtained via web search.
 - Provide exactly 5 Tier 1 and 5 Tier 2 targets.
 - Each target must include company name, ticker, market cap, probability range,
   and strategic rationale.
