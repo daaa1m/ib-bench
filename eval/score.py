@@ -78,7 +78,7 @@ class ScoreData(TypedDict, total=False):
     criteria: list[CriterionData]
 
 
-# schema for the scores/{model}/{run-id}/summary.json
+# schema for summary reporting
 class SummaryResult(TypedDict, total=False):
     task_id: str
     passed: bool
@@ -1013,22 +1013,12 @@ def score_run(responses_dir: Path, scores_dir: Path, args):
             }
         )
 
-    # Save summary
-    summary_file = scores_dir / "summary.json"
     overall_percent = (
         (summary["points_earned"] / summary["total_points"] * 100)
         if summary["total_points"] > 0
         else 0
     )
     summary["overall_percent"] = overall_percent
-    summary["rubric_hashes"] = {
-        r["task_id"]: get_rubric_hash(task_map[r["task_id"]].rubric)
-        for r in summary["results"]
-        if r["task_id"] in task_map
-    }
-
-    with open(summary_file, "w") as f:
-        json.dump(summary, f, indent=2)
 
     print(f"\n{'=' * 50}")
     print(

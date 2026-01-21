@@ -178,8 +178,6 @@ class AnthropicRunner:
         output_files: list[OutputFile] = []
         extracted_file_ids: list[str] = []
 
-        block_types = [getattr(b, "type", "unknown") for b in all_content_blocks]
-
         for block in all_content_blocks:
             block_type = getattr(block, "type", None)
 

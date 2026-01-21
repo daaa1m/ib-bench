@@ -308,6 +308,7 @@ Examples:
     task_ids: list[str] | None = config.get("tasks")
     filter_pattern: str | None = config.get("filter")
     parallel: int = config.get("parallel", 1)
+    web_search_mode: str | None = config.get("web_search_mode")
 
     # Validate required fields
     if not provider:
@@ -328,7 +329,10 @@ Examples:
 
     print(f"Found {len(tasks)} task(s) to run")
 
-    runner = get_runner(cast(Provider, provider), model)
+    runner_kwargs: dict[str, Any] = {}
+    if provider == "azure-v2" and web_search_mode:
+        runner_kwargs["web_search_mode"] = web_search_mode
+    runner = get_runner(cast(Provider, provider), model, **runner_kwargs)
     model_name = runner.model
 
     # Create or resume run directory
@@ -361,6 +365,8 @@ Examples:
         "config_file": str(args.config),
         "started_at": original_started_at or datetime.now().isoformat(),
     }
+    if web_search_mode:
+        run_config["web_search_mode"] = web_search_mode
     run_config_path = run_dir / "config.json"
     with open(run_config_path, "w") as f:
         json.dump(run_config, f, indent=2)

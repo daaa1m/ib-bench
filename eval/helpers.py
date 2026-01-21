@@ -463,7 +463,7 @@ def build_error_report(
     return details, summary, next_steps
 
 
-def get_runner(provider: Provider, model: str):
+def get_runner(provider: Provider, model: str, **kwargs):
     from runners import (
         AnthropicRunner,
         AzureAgentRunner,
@@ -483,6 +483,8 @@ def get_runner(provider: Provider, model: str):
     runner_class = runners.get(provider)
     if runner_class is None:
         raise ValueError(f"Unknown provider: {provider}")
+    if provider == "azure-v2":
+        return runner_class(model=model, **kwargs)
     return runner_class(model=model)
 
 

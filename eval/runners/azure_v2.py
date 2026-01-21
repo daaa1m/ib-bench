@@ -34,8 +34,8 @@ class AzureAgentRunnerV2:
     Uses containers for code_interpreter, vector stores for file_search,
     and web_search for internet access. All three tools enabled by default.
 
-    For OpenAI models: uses native web_search_preview
-    For other models (Mistral, DeepSeek): uses Brave Search via function calling
+    Web search defaults to Brave via function calling.
+    Set web_search_mode="native" to use web_search_preview for OpenAI models.
 
     :param model: Deployment name in Azure AI Foundry (required)
 
@@ -44,7 +44,7 @@ class AzureAgentRunnerV2:
         BRAVE_API_KEY: Required for non-OpenAI models
     """
 
-    def __init__(self, model: str | None = None):
+    def __init__(self, model: str | None = None, web_search_mode: str = "brave"):
         if not model:
             raise ValueError(
                 "model (deployment name) is required for AzureAgentRunnerV2"
@@ -59,12 +59,26 @@ class AzureAgentRunnerV2:
             raise ValueError("AZURE_AI_PROJECT_ENDPOINT must be set")
 
         self._brave_api_key = os.environ.get("BRAVE_API_KEY")
+        self._web_search_mode = web_search_mode.lower()
+        if self._web_search_mode not in {"brave", "native"}:
+            raise ValueError("web_search_mode must be 'brave' or 'native'")
 
         self._no_temperature_models = {"gpt-5.2-chat"}
 
     def _is_openai_model(self) -> bool:
         m = self.model.lower()
         return m.startswith(("gpt-", "o1", "o3", "o4"))
+
+    def _use_native_web_search(self) -> bool:
+        if self._web_search_mode != "native":
+            return False
+        if not self._is_openai_model():
+            print(
+                "  Warning: native web_search_preview requires an OpenAI model; "
+                "falling back to Brave search."
+            )
+            return False
+        return True
 
     def _supports_temperature(self) -> bool:
         return self.model.lower() not in self._no_temperature_models
@@ -267,7 +281,7 @@ class AzureAgentRunnerV2:
                     {"type": "file_search", "vector_store_ids": [vector_store_id]}
                 )
 
-            use_native_web_search = self._is_openai_model()
+            use_native_web_search = self._use_native_web_search()
             if use_native_web_search:
                 tools.append({"type": "web_search_preview"})
             else:

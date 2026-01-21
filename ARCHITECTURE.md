@@ -156,8 +156,8 @@ Azure AI Foundry supports multiple model providers through a unified API:
 **AzureAgentRunner (v1)**: Uses the Agent Service SDK with `client.agents` API.
 
 **AzureAgentRunnerV2 (v2)**: Uses the Responses API with containers. Recommended.
-- For **OpenAI models**: Uses native `web_search_preview` tool
-- For **other models**: Uses Brave Search via function calling (requires `BRAVE_API_KEY`)
+- Default web search uses Brave Search via function calling (requires `BRAVE_API_KEY`).
+- Set `web_search_mode: native` in run config to use `web_search_preview` on OpenAI models.
 
 **File Type Routing:**
 
@@ -185,7 +185,7 @@ eval/
         └── {YYYYMMDD_HHMMSS}/
             ├── e-001.json        # Criterion results
             ├── e-002.json
-            └── summary.json      # Aggregated stats
+            └── summary.json      # Optional aggregated stats (generated manually)
 ```
 
 **Response JSON:**

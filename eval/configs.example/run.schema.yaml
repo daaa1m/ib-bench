@@ -60,3 +60,10 @@ parallel:
   # Recommended: 3-5 for most providers
   type: integer
   default: 1
+
+web_search_mode:
+  # Azure v2 web search mode
+  # Optional: brave | native
+  # Default: brave (native only supported for OpenAI models)
+  type: string
+  required: false
