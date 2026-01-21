@@ -1,0 +1,23 @@
+{
+  "task_id": "e-008",
+  "rubric_hash": "9240d228",
+  "scored_at": "2026-01-21T11:01:07.449717",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "json_parse",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "json",
+      "points": 100,
+      "points_earned": 0,
+      "actual": "It seems there was an issue locating the MD&A section in the document. Could you please confirm if t",
+      "details": "Failed to parse JSON from response"
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

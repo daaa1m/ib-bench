@@ -1,0 +1,23 @@
+{
+  "task_id": "m-003",
+  "rubric_hash": "897abf5f",
+  "scored_at": "2026-01-21T11:08:42.025493",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "json_parse",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "json",
+      "points": 100,
+      "points_earned": 0,
+      "actual": "The data appears to be structured with financial information for different segments and years. Let's",
+      "details": "Failed to parse JSON from response"
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

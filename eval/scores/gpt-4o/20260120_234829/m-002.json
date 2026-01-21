@@ -1,0 +1,73 @@
+{
+  "task_id": "m-002",
+  "rubric_hash": "64904dfc",
+  "scored_at": "2026-01-21T11:08:42.027008",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "aq60_value",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 25,
+      "points_earned": 0,
+      "actual": null,
+      "details": "No output files available for excel check"
+    },
+    {
+      "id": "aq83_value",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 20,
+      "points_earned": 0,
+      "actual": null,
+      "details": "No output files available for excel check"
+    },
+    {
+      "id": "lqa_label",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 10,
+      "points_earned": 0,
+      "actual": null,
+      "details": "No output files available for excel check"
+    },
+    {
+      "id": "aq31_value",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 15,
+      "points_earned": 0,
+      "actual": null,
+      "details": "No output files available for excel check"
+    },
+    {
+      "id": "aq93_value",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 15,
+      "points_earned": 0,
+      "actual": null,
+      "details": "No output files available for excel check"
+    },
+    {
+      "id": "aq112_value",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 15,
+      "points_earned": 0,
+      "actual": null,
+      "details": "No output files available for excel check"
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

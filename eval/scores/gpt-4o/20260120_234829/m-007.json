@@ -1,0 +1,123 @@
+{
+  "task_id": "m-007",
+  "rubric_hash": "d89ff9ac",
+  "scored_at": "2026-01-21T11:08:16.685122",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "formatting",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "points": 5,
+      "points_earned": 0,
+      "actual": [
+        "B2: hardcoded number should be blue",
+        "B3: hardcoded number should be blue",
+        "B4: hardcoded number should be blue",
+        "B5: hardcoded number should be blue",
+        "B6: hardcoded number should be blue",
+        "B7: hardcoded number should be blue",
+        "B8: hardcoded number should be blue",
+        "B9: hardcoded number should be blue",
+        "B10: hardcoded number should be blue"
+      ],
+      "details": "Formatting violations: B2: hardcoded number should be blue; B3: hardcoded number should be blue; B4: hardcoded number should be blue; B5: hardcoded number should be blue; B6: hardcoded number should be blue (+4 more)"
+    },
+    {
+      "id": "mgmt_equity_15x",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 10,
+      "points_earned": 0,
+      "actual": "89.37074425",
+      "details": "No patterns matched in '89.37074425'"
+    },
+    {
+      "id": "mgmt_equity_15_5x",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 10,
+      "points_earned": 0,
+      "actual": "89.37074425",
+      "details": "No patterns matched in '89.37074425'"
+    },
+    {
+      "id": "mgmt_equity_16x",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 14,
+      "points_earned": 0,
+      "actual": "89.37074425",
+      "details": "No patterns matched in '89.37074425'"
+    },
+    {
+      "id": "mgmt_equity_16_5x",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 10,
+      "points_earned": 0,
+      "actual": "89.37074425",
+      "details": "No patterns matched in '89.37074425'"
+    },
+    {
+      "id": "mgmt_equity_17x",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 10,
+      "points_earned": 0,
+      "actual": "89.37074425",
+      "details": "No patterns matched in '89.37074425'"
+    },
+    {
+      "id": "mgmt_equity_17_5x",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 10,
+      "points_earned": 0,
+      "actual": "89.37074425",
+      "details": "No patterns matched in '89.37074425'"
+    },
+    {
+      "id": "mgmt_equity_18x",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 9,
+      "points_earned": 0,
+      "actual": "89.37074425",
+      "details": "No patterns matched in '89.37074425'"
+    },
+    {
+      "id": "mgmt_equity_18_5x",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 9,
+      "points_earned": 0,
+      "actual": "89.37074425",
+      "details": "No patterns matched in '89.37074425'"
+    },
+    {
+      "id": "mgmt_equity_19x",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 13,
+      "points_earned": 0,
+      "actual": "89.37074425",
+      "details": "No patterns matched in '89.37074425'"
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

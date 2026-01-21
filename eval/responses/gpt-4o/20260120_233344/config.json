@@ -1,0 +1,112 @@
+{
+  "provider": "azure-v2",
+  "model": "gpt-4o",
+  "task_ids": [
+    "e-001",
+    "e-002",
+    "e-003",
+    "e-004",
+    "e-005",
+    "e-006",
+    "e-007",
+    "e-008",
+    "e-009",
+    "e-010",
+    "e-011",
+    "e-012",
+    "e-013",
+    "e-014",
+    "e-015",
+    "e-016",
+    "e-017",
+    "e-018",
+    "e-019",
+    "e-020"
+  ],
+  "parallel": 1,
+  "config_file": "configs/azure-gpt4o.yaml",
+  "started_at": "2026-01-20T23:33:44.254622",
+  "completed_at": "2026-01-21T15:46:37.478487",
+  "results_summary": [
+    {
+      "task_id": "e-001",
+      "status": "success"
+    },
+    {
+      "task_id": "e-002",
+      "status": "success"
+    },
+    {
+      "task_id": "e-003",
+      "status": "success"
+    },
+    {
+      "task_id": "e-004",
+      "status": "success"
+    },
+    {
+      "task_id": "e-005",
+      "status": "success"
+    },
+    {
+      "task_id": "e-006",
+      "status": "success"
+    },
+    {
+      "task_id": "e-007",
+      "status": "success"
+    },
+    {
+      "task_id": "e-008",
+      "status": "success"
+    },
+    {
+      "task_id": "e-009",
+      "status": "success"
+    },
+    {
+      "task_id": "e-010",
+      "status": "success"
+    },
+    {
+      "task_id": "e-011",
+      "status": "success"
+    },
+    {
+      "task_id": "e-012",
+      "status": "success"
+    },
+    {
+      "task_id": "e-013",
+      "status": "success"
+    },
+    {
+      "task_id": "e-014",
+      "status": "success"
+    },
+    {
+      "task_id": "e-015",
+      "status": "success"
+    },
+    {
+      "task_id": "e-016",
+      "status": "success"
+    },
+    {
+      "task_id": "e-017",
+      "status": "success"
+    },
+    {
+      "task_id": "e-018",
+      "status": "success"
+    },
+    {
+      "task_id": "e-019",
+      "status": "success"
+    },
+    {
+      "task_id": "e-020",
+      "status": "success"
+    }
+  ]
+}

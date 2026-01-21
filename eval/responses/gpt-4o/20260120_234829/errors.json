@@ -1,0 +1,29 @@
+{
+  "errors": [
+    {
+      "task_id": "m-003",
+      "timestamp": "2026-01-20T23:57:40.280317",
+      "provider": "azure-v2",
+      "model": "gpt-4o",
+      "summary": "RateLimitError: Error code: 429 - {'error': {'message': 'Too Many Requests', 'type': 'too_many_requests', 'param': None, 'code': 'too_many_requests'}} | status=429 | code=too_many_requests | request_id=00d373bc-847a-450b-98d6-db0b08afc4fd",
+      "details": {
+        "error_type": "RateLimitError",
+        "message": "Error code: 429 - {'error': {'message': 'Too Many Requests', 'type': 'too_many_requests', 'param': None, 'code': 'too_many_requests'}}",
+        "status_code": 429,
+        "code": "too_many_requests",
+        "type": "too_many_requests",
+        "request_id": "00d373bc-847a-450b-98d6-db0b08afc4fd",
+        "response_body": "{'message': 'Too Many Requests', 'type': 'too_many_requests', 'param': None, 'code': 'too_many_requests'}"
+      },
+      "next_steps": [
+        "Reduce --parallel and retry later",
+        "Check provider quota limits",
+        "Retry with --resume gpt-4o/20260120_234829"
+      ],
+      "input_files": [
+        "input.xlsx"
+      ]
+    }
+  ],
+  "count": 1
+}

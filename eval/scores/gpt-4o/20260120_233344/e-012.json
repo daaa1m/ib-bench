@@ -1,0 +1,43 @@
+{
+  "task_id": "e-012",
+  "rubric_hash": "013aba50",
+  "scored_at": "2026-01-21T11:01:35.769920",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 61.5,
+  "score_percent": 61.5,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "top_5_risks",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 50,
+      "points_earned": 32.5,
+      "actual": "0.65",
+      "details": "Score: 0.65 - Includes exactly five risks with clear titles and summaries, but the risks are high-level and generic. Several highly material Coinbase-specific S-1 risks (e.g., revenue concentration in transaction fees, dependence on retail trading volumes, regulatory classification of crypto assets as securities, reliance on third\u2011party banking partners) are missing. Implications are boilerplate and not clearly grounded in the S\u20111."
+    },
+    {
+      "id": "prioritization_rationale",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 30,
+      "points_earned": 18.0,
+      "actual": "0.60",
+      "details": "Score: 0.60 - Provides a basic explanation of why risks were selected, but the rationale is superficial and does not clearly justify the ranking order or why these risks outweigh others disclosed in the S\u20111. Limited demonstration of true materiality analysis."
+    },
+    {
+      "id": "methodology_notes",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 11.0,
+      "actual": "0.55",
+      "details": "Score: 0.55 - Methodology is described in very general terms and could apply to almost any company. It does not show evidence of a structured read-through of the S\u20111 Risk Factors or how probability and impact were concretely assessed from the document."
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

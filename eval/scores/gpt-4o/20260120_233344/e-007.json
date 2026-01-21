@@ -1,0 +1,113 @@
+{
+  "task_id": "e-007",
+  "rubric_hash": "51b85292",
+  "scored_at": "2026-01-21T11:03:11.208827",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 91.15,
+  "score_percent": 91.15,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "gs_rating",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 8,
+      "points_earned": 8,
+      "actual": "Buy",
+      "details": "Found 'Buy' in response"
+    },
+    {
+      "id": "gs_price_target",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 8,
+      "points_earned": 8,
+      "actual": "330",
+      "details": "Found '330' in response"
+    },
+    {
+      "id": "jpm_rating",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 8,
+      "points_earned": 8,
+      "actual": "Overweight",
+      "details": "Found 'Overweight' in response"
+    },
+    {
+      "id": "jpm_price_target",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 8,
+      "points_earned": 8,
+      "actual": "340",
+      "details": "Found '340' in response"
+    },
+    {
+      "id": "q3_search_growth",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 8,
+      "points_earned": 8,
+      "actual": "15%",
+      "details": "Found '15%' in response"
+    },
+    {
+      "id": "q3_cloud_growth",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 8,
+      "points_earned": 8,
+      "actual": "34%",
+      "details": "Found '34' in response"
+    },
+    {
+      "id": "fy25_capex_guidance",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 8,
+      "points_earned": 8,
+      "actual": "91-93",
+      "details": "Found '91-93' in response"
+    },
+    {
+      "id": "key_drivers",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 14,
+      "points_earned": 11.9,
+      "actual": "0.85",
+      "details": "Score: 0.85 - Covers the core drivers expected at this level: Search/AI, YouTube, Cloud, and capex/infrastructure. The list is directionally correct and complete, though somewhat generic and not explicitly tied to margin or FCF sensitivity."
+    },
+    {
+      "id": "summary_synthesis",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 12.0,
+      "actual": "0.80",
+      "details": "Score: 0.80 - The summary appropriately contrasts Goldman\u2019s near-term, fundamentals-driven focus with JPMorgan\u2019s longer-term AI and optionality angle. It is a true synthesis rather than a simple repetition, but remains fairly high-level and could better highlight points of disagreement or differing assumptions."
+    },
+    {
+      "id": "summary_drivers",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 11.25,
+      "actual": "0.75",
+      "details": "Score: 0.75 - References key growth metrics and capex, but lacks deeper linkage to the underlying models (e.g., margins, operating leverage, FCF impact, or valuation methodology). Some figures appear plausible but are not clearly grounded in model outputs, reducing confidence for senior-level use."
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

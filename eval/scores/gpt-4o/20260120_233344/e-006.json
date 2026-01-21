@@ -1,0 +1,76 @@
+{
+  "task_id": "e-006",
+  "rubric_hash": "c20ef671",
+  "scored_at": "2026-01-21T11:02:38.515953",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "formatting",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "points": 10,
+      "points_earned": 0,
+      "actual": [
+        "F198: hardcoded number should be blue",
+        "J198: hardcoded number should be blue"
+      ],
+      "details": "Formatting violations: F198: hardcoded number should be blue; J198: hardcoded number should be blue"
+    },
+    {
+      "id": "K164",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 18,
+      "points_earned": 0,
+      "actual": "None",
+      "details": "None of ['-112'] found in 'None'"
+    },
+    {
+      "id": "L164",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 18,
+      "points_earned": 0,
+      "actual": "None",
+      "details": "None of ['-102'] found in 'None'"
+    },
+    {
+      "id": "M164",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 18,
+      "points_earned": 0,
+      "actual": "None",
+      "details": "None of ['-98'] found in 'None'"
+    },
+    {
+      "id": "N164",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 18,
+      "points_earned": 0,
+      "actual": "None",
+      "details": "None of ['-92'] found in 'None'"
+    },
+    {
+      "id": "O164",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 18,
+      "points_earned": 0,
+      "actual": "None",
+      "details": "None of ['-84', '-83'] found in 'None'"
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

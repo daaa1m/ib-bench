@@ -1,0 +1,63 @@
+{
+  "task_id": "m-004",
+  "rubric_hash": "b8f4e74a",
+  "scored_at": "2026-01-21T11:09:13.610110",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 53.0,
+  "score_percent": 53.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "target_count",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 10,
+      "points_earned": 10,
+      "actual": "{\"methodology\": \"Conducted web searches to identify private companies in the European food ingredients and specialty chemicals sectors. Focused on companies with headquarters in Europe, operating in relevant sectors, and with estimated revenues between \\u20ac50M and \\u20ac500M. Utilized industry reports, trade publications, and company profiles to gather data.\", \"targets\": [{\"company_name\": \"Chr. Hansen\", \"headquarters\": \"H\\u00f8rsholm, Denmark\", \"estimated_revenue\": \"\\u20ac50M-\\u20ac500M\", \"key_products\": \"Natural ingredient solutions such as cultures, enzymes, colors & flavors\", \"ownership\": \"Family/Founder-owned\", \"rationale\": \"Chr. Hansen is a leader in natural ingredient solutions, making it a strong candidate for acquisition in the specialty food ingredients sector.\"}, {\"company_name\": \"Cosun\", \"headquarters\": \"Breda, Netherlands\", \"estimated_revenue\": \"\\u20ac50M-\\u20ac500M\", \"key_products\": \"Natural ingredients & foodstuffs\", \"ownership\": \"Family/Founder-owned\", \"rationale\": \"Cosun's focus on natural ingredients aligns with the growing demand for sustainable food solutions.\"}, {\"company_name\": \"Herbstreith & Fox GmbH & Co. KG\", \"headquarters\": \"Neuenb\\u00fcrg, Germany\", \"estimated_revenue\": \"\\u20ac50M-\\u20ac500M\", \"key_products\": \"Pectin for the food industry\", \"ownership\": \"Family/Founder-owned\", \"rationale\": \"Specializes in pectin production, a key ingredient in food processing, making it a valuable target.\"}, {\"company_name\": \"Kanegrade\", \"headquarters\": \"Hertfordshire, UK\", \"estimated_revenue\": \"\\u20ac50M-\\u20ac500M\", \"key_products\": \"Natural food ingredients\", \"ownership\": \"Family/Founder-owned\", \"rationale\": \"Kanegrade's extensive range of natural ingredients supports the clean label trend in food manufacturing.\"}, {\"company_name\": \"Macphie\", \"headquarters\": \"Glenbervie, Scotland\", \"estimated_revenue\": \"\\u20ac50M-\\u20ac500M\", \"key_products\": \"Food ingredients for bakery and confectionery\", \"ownership\": \"Family/Founder-owned\", \"rationale\": \"Macphie's focus on bakery ingredients positions it well within the specialty food sector.\"}, {\"company_name\": \"Eurospechim\", \"headquarters\": \"Paris, France\", \"estimated_revenue\": \"\\u20ac50M-\\u20ac500M\", \"key_products\": \"Specialty food ingredients\", \"ownership\": \"Family/Founder-owned\", \"rationale\": \"Eurospechim's diverse ingredient offerings make it a versatile player in the food ingredients market.\"}, {\"company_name\": \"Scott Bader Co., Ltd.\", \"headquarters\": \"Wollaston, UK\", \"estimated_revenue\": \"\\u20ac50M-\\u20ac500M\", \"key_products\": \"Structural adhesives, advanced composites\", \"ownership\": \"Family/Founder-owned\", \"rationale\": \"Scott Bader's expertise in adhesives and composites is crucial for specialty chemical applications.\"}, {\"company_name\": \"Mapei S.p.A.\", \"headquarters\": \"Milan, Italy\", \"estimated_revenue\": \"\\u20ac50M-\\u20ac500M\", \"key_products\": \"Cementitious and resin floor coverings, admixtures\", \"ownership\": \"Family/Founder-owned\", \"rationale\": \"Mapei's products are essential in construction, aligning with specialty chemical needs.\"}, {\"company_name\": \"Radici Partecipazioni S.p.A.\", \"headquarters\": \"Gandino, Italy\", \"estimated_revenue\": \"\\u20ac50M-\\u20ac500M\", \"key_products\": \"Chemical intermediates, polyamide polymers\", \"ownership\": \"Family/Founder-owned\", \"rationale\": \"Radici's focus on polymers and intermediates supports diverse industrial applications.\"}, {\"company_name\": \"HSH Chemie\", \"headquarters\": \"Hamburg, Germany\", \"estimated_revenue\": \"\\u20ac50M-\\u20ac500M\", \"key_products\": \"Functional food ingredients\", \"ownership\": \"Family/Founder-owned\", \"rationale\": \"HSH Chemie's distribution network and ingredient portfolio make it a strategic acquisition target.\"}], \"data_limitations\": \"Limited access to specific revenue figures and private company details. Estimates are based on available industry reports and company profiles.\"}",
+      "details": "Matched pattern: \"company_name\".*\"company_name\".*\"company_name\".*\"company_name\".*\"company_name\".*\"company_name\".*\"company_name\".*\"company_name\".*\"company_name\".*\"company_name\""
+    },
+    {
+      "id": "company_validity",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 25,
+      "points_earned": 16.25,
+      "actual": "0.65",
+      "details": "Score: 0.65 - Most listed companies are real, established entities, but several have materially incorrect or misleading descriptors (e.g., ownership status, size). Some are public, cooperative, or very large industrial groups rather than mid-sized private companies, which undermines factual reliability."
+    },
+    {
+      "id": "criteria_fit",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 25,
+      "points_earned": 8.75,
+      "actual": "0.35",
+      "details": "Score: 0.35 - The list substantially fails the core criteria. Multiple companies are not private (or not meaningfully acquirable), far exceed the stated \u20ac50\u2013500m revenue range, or operate outside food ingredients (e.g., construction chemicals, composites). Overall sector and size discipline is weak."
+    },
+    {
+      "id": "information_completeness",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 12.0,
+      "actual": "0.60",
+      "details": "Score: 0.60 - All required fields are populated, but content is generic and repetitive. Revenue is presented as the same broad band for every company, ownership is often inaccurately labeled, and rationales lack deal-specific insight."
+    },
+    {
+      "id": "research_quality",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 6.0,
+      "actual": "0.30",
+      "details": "Score: 0.30 - There is little evidence of rigorous research or cross-checking. Several well-known facts (public status, scale, core end markets) are wrong, suggesting superficial desk research. Caveats are generic and do not adequately address the magnitude of data uncertainty."
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

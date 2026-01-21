@@ -1,0 +1,23 @@
+{
+  "task_id": "e-019",
+  "rubric_hash": "921ca5b7",
+  "scored_at": "2026-01-21T11:00:58.630977",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "json_parse",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "json",
+      "points": 100,
+      "points_earned": 0,
+      "actual": "It seems there was an issue locating the specific sections in the document. Let me try again with a ",
+      "details": "Failed to parse JSON from response"
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

@@ -1,0 +1,53 @@
+{
+  "task_id": "e-010",
+  "rubric_hash": "96cd79c1",
+  "scored_at": "2026-01-21T11:02:38.438043",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0.0,
+  "score_percent": 0.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "final_long_term_debt_2024E",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 25,
+      "points_earned": 0,
+      "actual": "N/A",
+      "details": "None of ['504.9', '504.90', '504.9m', '$504.9', '504,9'] found in 'N/A'"
+    },
+    {
+      "id": "error_ocf_finance_costs",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 25,
+      "points_earned": 0.0,
+      "actual": "0.00",
+      "details": "Score: 0.00 - The analyst did not identify that OCF (row 64 in BS & CFS) is missing the adjustment for finance costs, net. This specific and critical cash flow linkage error was completely missed."
+    },
+    {
+      "id": "error_rogue_value_k32",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 25,
+      "points_earned": 0.0,
+      "actual": "0.00",
+      "details": "Score: 0.00 - The analyst failed to identify the rogue -10 value in cell K32 of the FS Calcs sheet. There is no mention of FS Calcs or any isolated hard-coded value error."
+    },
+    {
+      "id": "error_ppe_row_70",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 25,
+      "points_earned": 0.0,
+      "actual": "0.00",
+      "details": "Score: 0.00 - The analyst did not identify that row 70 in BS & CFS is missing the addition of PPE including leases (row 66). This structural balance sheet roll-forward error was not addressed."
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

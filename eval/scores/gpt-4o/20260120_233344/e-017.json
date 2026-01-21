@@ -1,0 +1,33 @@
+{
+  "task_id": "e-017",
+  "rubric_hash": "1411ddde",
+  "scored_at": "2026-01-21T11:03:57.596023",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 26.0,
+  "score_percent": 26.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "deal_list",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 80,
+      "points_earned": 20.0,
+      "actual": "0.25",
+      "details": "Score: 0.25 - The list does not meet professional standards for an E&P transaction comps set. Several entries are very likely fabricated or misclassified (e.g., Castrol is downstream/lubricants, not E&P; Athabasca oil sands sale by Shell/CNRL is historically earlier and not clearly an H2 2025 announced deal; Continental Resources\u2013Pan American Energy Vaca Muerta transaction is highly dubious). Multiple deals use 'Undisclosed Buyer/Seller' with no corroboration, which is unacceptable for a comps set. Geographic scope and industry definition are inconsistent (upstream vs downstream, corporate vs asset sales). Dates and values cannot be verified, and there is no evidence these were actually announced in H2 2025. Overall, this would require a complete rebuild."
+    },
+    {
+      "id": "source_urls",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 6.0,
+      "actual": "0.30",
+      "details": "Score: 0.30 - Sources are generic landing pages or broad commentary articles rather than deal-specific announcements. They do not support individual transactions, dates, or values. No primary press releases, filings, or transaction-level database links are provided. As cited, the sources cannot substantiate the data."
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}
