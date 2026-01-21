@@ -273,6 +273,7 @@ class AzureAgentRunnerV2:
 
             if not use_native_web_search:
                 max_tool_calls = 10
+                new_response_after_loop = False
                 for _ in range(max_tool_calls):
                     usage = getattr(response, "usage", None)
                     total_input_tokens += (
@@ -339,6 +340,7 @@ class AzureAgentRunnerV2:
                         temperature=0,
                         previous_response_id=response.id,
                     )
+                    new_response_after_loop = True
 
             latency_ms = (time.time() - start) * 1000
 
@@ -362,10 +364,13 @@ class AzureAgentRunnerV2:
                 input_tokens = getattr(usage, "input_tokens", 0) if usage else 0
                 output_tokens = getattr(usage, "output_tokens", 0) if usage else 0
             else:
-                total_input_tokens += getattr(usage, "input_tokens", 0) if usage else 0
-                total_output_tokens += (
-                    getattr(usage, "output_tokens", 0) if usage else 0
-                )
+                if new_response_after_loop:
+                    total_input_tokens += (
+                        getattr(usage, "input_tokens", 0) if usage else 0
+                    )
+                    total_output_tokens += (
+                        getattr(usage, "output_tokens", 0) if usage else 0
+                    )
                 input_tokens = total_input_tokens
                 output_tokens = total_output_tokens
 
