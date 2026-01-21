@@ -1,0 +1,76 @@
+{
+  "task_id": "e-006",
+  "rubric_hash": "fa274272",
+  "scored_at": "2026-01-21T19:53:17.577790",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 90,
+  "score_percent": 90.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "formatting",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "points": 10,
+      "points_earned": 0,
+      "actual": [
+        "F198: hardcoded number should be blue",
+        "J198: hardcoded number should be blue"
+      ],
+      "details": "Formatting violations: F198: hardcoded number should be blue; J198: hardcoded number should be blue"
+    },
+    {
+      "id": "K164",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 18,
+      "points_earned": 18,
+      "actual": "-112",
+      "details": "Found '-112' in response"
+    },
+    {
+      "id": "L164",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 18,
+      "points_earned": 18,
+      "actual": "-102",
+      "details": "Found '-102' in response"
+    },
+    {
+      "id": "M164",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 18,
+      "points_earned": 18,
+      "actual": "-99",
+      "details": "Found '99' in response"
+    },
+    {
+      "id": "N164",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 18,
+      "points_earned": 18,
+      "actual": "-93",
+      "details": "Found '-93' in response"
+    },
+    {
+      "id": "O164",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 18,
+      "points_earned": 18,
+      "actual": "-84",
+      "details": "Found '-84' in response"
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

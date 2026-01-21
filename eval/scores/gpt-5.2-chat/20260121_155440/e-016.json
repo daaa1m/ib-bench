@@ -1,0 +1,83 @@
+{
+  "task_id": "e-016",
+  "rubric_hash": "9d7589f8",
+  "scored_at": "2026-01-21T18:02:00.786843",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 56.25,
+  "score_percent": 56.25,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "deal_structure",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 12.0,
+      "actual": "0.80",
+      "details": "Score: 0.80 - Correctly identifies a stock-for-stock merger, the parties involved, survivor, and basic consideration structure. Adequate for an internal briefing, though could be tighter on acquirer/target framing and transaction mechanics."
+    },
+    {
+      "id": "purchase_price",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 6.0,
+      "actual": "0.30",
+      "details": "Score: 0.30 - Fails to provide the per-share exchange ratio or implied equity value. Simply stating that the price is 'not specified' is not acceptable if the merger agreement or 8-K includes economic terms. This is a critical omission."
+    },
+    {
+      "id": "conditions_to_closing",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 11.25,
+      "actual": "0.75",
+      "details": "Score: 0.75 - Captures the major categories of closing conditions (shareholder approvals, regulatory approvals, injunctions, outside date). Reasonable coverage, though it reads somewhat generic and could be more precise on regulatory scope and effort standards."
+    },
+    {
+      "id": "termination_provisions",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 11.0,
+      "actual": "0.55",
+      "details": "Score: 0.55 - Attempts to describe termination rights and fees, but the level of specificity (multiple fee amounts and triggers) creates risk if not perfectly accurate. Without clear anchoring to the document, this would require careful re-verification before senior use."
+    },
+    {
+      "id": "mac_provisions",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 6.0,
+      "actual": "0.40",
+      "details": "Score: 0.40 - Effectively punts on MAC by saying details are not described. MAC definition and carve-outs are economically important and usually summarized in an 8-K; omission materially weakens the summary."
+    },
+    {
+      "id": "other_material_terms",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 6.5,
+      "actual": "0.65",
+      "details": "Score: 0.65 - Identifies no-shop, lack of financing condition, and specific performance, which are relevant banker terms. However, coverage is thin and misses potential asymmetries or exceptions that would matter to senior bankers."
+    },
+    {
+      "id": "reasoning",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 5,
+      "points_earned": 3.5,
+      "actual": "0.70",
+      "details": "Score: 0.70 - Demonstrates a structured approach focused on economically relevant provisions and avoids boilerplate. However, the execution did not fully translate that approach into a complete or reliable output."
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

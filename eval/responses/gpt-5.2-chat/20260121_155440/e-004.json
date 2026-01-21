@@ -1,0 +1,32 @@
+{
+  "task_id": "e-004",
+  "model": "gpt-5.2-chat",
+  "timestamp": "2026-01-21T18:59:40.403707",
+  "input_files": [],
+  "output_files": [],
+  "raw_response": "{\n  \"gaap_operating_income\": \"1300\",\n  \"non_gaap_operating_income\": \"2200\",\n  \"adjustments\": [\n    {\n      \"name\": \"Stock-based compensation\",\n      \"amount\": \"740\"\n    },\n    {\n      \"name\": \"Amortization of acquisition-related intangibles\",\n      \"amount\": \"120\"\n    },\n    {\n      \"name\": \"Acquisition-related and other costs\",\n      \"amount\": \"40\"\n    }\n  ]\n}",
+  "parsed_response": {
+    "gaap_operating_income": "1300",
+    "non_gaap_operating_income": "2200",
+    "adjustments": [
+      {
+        "name": "Stock-based compensation",
+        "amount": "740"
+      },
+      {
+        "name": "Amortization of acquisition-related intangibles",
+        "amount": "120"
+      },
+      {
+        "name": "Acquisition-related and other costs",
+        "amount": "40"
+      }
+    ]
+  },
+  "stop_reason": "end_turn",
+  "usage": {
+    "input_tokens": 44778,
+    "output_tokens": 751,
+    "latency_ms": 55580.10506629944
+  }
+}

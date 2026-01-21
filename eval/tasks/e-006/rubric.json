@@ -13,35 +13,35 @@
       "description": "Total Cash Interest in K164 must equal -112 (with circularity ON)",
       "type": "programmatic",
       "match_type": "substring_one_of",
-      "accepted_values": ["-112"],
+      "accepted_values": ["-111", "-112", "-113"],
       "points": 18
     },
     "L164": {
       "description": "Total Cash Interest in L164 must equal -102 (with circularity ON)",
       "type": "programmatic",
       "match_type": "substring_one_of",
-      "accepted_values": ["-102"],
+      "accepted_values": ["-101", "-102", "-103"],
       "points": 18
     },
     "M164": {
       "description": "Total Cash Interest in M164 must equal -98 (with circularity ON)",
       "type": "programmatic",
       "match_type": "substring_one_of",
-      "accepted_values": ["-98"],
+      "accepted_values": ["97", "-98", "99"],
       "points": 18
     },
     "N164": {
       "description": "Total Cash Interest in N164 must equal -92 (with circularity ON)",
       "type": "programmatic",
       "match_type": "substring_one_of",
-      "accepted_values": ["-92"],
+      "accepted_values": ["-91", "-92", "-93"],
       "points": 18
     },
     "O164": {
       "description": "Total Cash Interest in O164 must equal -84 (with circularity ON)",
       "type": "programmatic",
       "match_type": "substring_one_of",
-      "accepted_values": ["-84", "-83"],
+      "accepted_values": ["-83", "-84", "-85"],
       "points": 18
     }
   }

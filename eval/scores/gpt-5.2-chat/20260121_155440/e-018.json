@@ -1,0 +1,53 @@
+{
+  "task_id": "e-018",
+  "rubric_hash": "319d1a20",
+  "scored_at": "2026-01-21T19:53:17.545720",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 100,
+  "score_percent": 100.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "error_location",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 45,
+      "points_earned": 45,
+      "actual": "BS & CFS!I61 (Change in NWC row, all forecast periods)",
+      "details": "Found '61' in response"
+    },
+    {
+      "id": "corrected_formula",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 40,
+      "points_earned": 40,
+      "actual": "=H41-I41",
+      "details": "Matched pattern: H41-I41"
+    },
+    {
+      "id": "explanation",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 10,
+      "points_earned": 10,
+      "actual": "The change in net working capital was calculated with the sign reversed. Using current period minus prior period in operating cash flow incorrectly treats working capital investments as cash inflows and releases as outflows. Reversing the formula to prior period minus current period correctly reflects cash consumption when working capital increases and cash generation when it decreases, which restores the proper cash flow linkage and allows cash on the balance sheet to roll forward correctly.",
+      "details": "Found 'sign' in response"
+    },
+    {
+      "id": "formatting",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "points": 5,
+      "points_earned": 5,
+      "actual": [],
+      "details": "Formatting conventions followed"
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

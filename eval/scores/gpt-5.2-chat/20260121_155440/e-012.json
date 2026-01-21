@@ -1,0 +1,43 @@
+{
+  "task_id": "e-012",
+  "rubric_hash": "013aba50",
+  "scored_at": "2026-01-21T18:00:32.347503",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 73.0,
+  "score_percent": 73.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "top_5_risks",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 50,
+      "points_earned": 35.0,
+      "actual": "0.70",
+      "details": "Score: 0.70 - The analyst delivers exactly five risks with clear titles, concise summaries, and generally actionable implications. Regulatory and custody risks are appropriately emphasized. However, there are material gaps in risk selection and prioritization. Most notably, the omission of transaction revenue volatility tied to crypto asset prices and trading volumes\u2014a core, repeatedly emphasized risk in Coinbase\u2019s S-1\u2014is a significant deficiency. There is also partial overlap between Rank 1 and Rank 3 (regulatory uncertainty vs. enforcement actions), which weakens prioritization discipline. Citation usage is inconsistent, suggesting uneven grounding in the source document."
+    },
+    {
+      "id": "prioritization_rationale",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 30,
+      "points_earned": 24.0,
+      "actual": "0.80",
+      "details": "Score: 0.80 - The rationale clearly explains the logic used to rank risks by impact on core revenues, regulatory exposure, and reputational damage. The framing aligns with how senior bankers assess IPO risk materiality. While somewhat generic and not explicitly tied back to specific S-1 disclosures, it is coherent and sufficient for senior review with light edits."
+    },
+    {
+      "id": "methodology_notes",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 14.0,
+      "actual": "0.70",
+      "details": "Score: 0.70 - The methodology outlines a reasonable high-level approach\u2014filtering for company-specific, high-impact risks and ranking by financial and operational impact. However, it lacks rigor and specificity (e.g., no mention of revenue concentration, volatility drivers, or frequency vs. severity tradeoffs) and reads more like a summary than a replicable analytical process."
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

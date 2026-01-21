@@ -1,0 +1,63 @@
+{
+  "task_id": "e-019",
+  "rubric_hash": "921ca5b7",
+  "scored_at": "2026-01-21T17:59:25.558800",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 78.75,
+  "score_percent": 78.75,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "debt_incurrence",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 35,
+      "points_earned": 29.75,
+      "actual": "0.85",
+      "details": "Score: 0.85 - Thorough and professional summary with multiple baskets, leverage tests, and reclassification mechanics clearly articulated. Reads like a real indenture abstraction. Main risk is numerical fidelity\u2014given AMC\u2019s complexity, several thresholds and basket interactions would need spot-checking against the document before client use."
+    },
+    {
+      "id": "restricted_payments",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 25,
+      "points_earned": 17.5,
+      "actual": "0.70",
+      "details": "Score: 0.70 - Captures the overall RP framework, EoD blocker, leverage-based permissions, and multiple baskets. However, some elements (e.g., IPO-related equity dividend mechanics) appear questionable for AMC and raise concerns about over-generalization or misattribution. Usable, but requires careful scrub."
+    },
+    {
+      "id": "asset_sales",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 17.0,
+      "actual": "0.85",
+      "details": "Score: 0.85 - Strong coverage of FMV test, cash consideration threshold, reinvestment window, excess proceeds mechanics, and offer requirements. Clear and actionable, with only minor polish or confirmation of exact dollar/percentage thresholds needed."
+    },
+    {
+      "id": "change_of_control",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 11.25,
+      "actual": "0.75",
+      "details": "Score: 0.75 - Correctly identifies the 101% offer and basic timing mechanics, but lacks detail on the precise Change of Control definition, exceptions, and interaction with other debt. Adequate summary, but not fully client-ready."
+    },
+    {
+      "id": "liens_and_other",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 5,
+      "points_earned": 3.25,
+      "actual": "0.65",
+      "details": "Score: 0.65 - Touches on equal-and-ratable concept, affiliate transactions, negative pledge, and future guarantors, but this section is high-level and somewhat compressed. Several covenants in Sections 4.07\u20134.10 likely require clearer separation and confirmation."
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

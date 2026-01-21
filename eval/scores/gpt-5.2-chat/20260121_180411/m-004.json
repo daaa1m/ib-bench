@@ -1,0 +1,63 @@
+{
+  "task_id": "m-004",
+  "rubric_hash": "b8f4e74a",
+  "scored_at": "2026-01-21T18:08:24.177311",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 82.0,
+  "score_percent": 82.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "target_count",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 10,
+      "points_earned": 10,
+      "actual": "{\"methodology\": \"Targets were identified via web searches across trade publications (FoodIngredientsFirst, Sweets Processing), company websites, private company databases (PitchBook, Tracxn, RocketReach), and European corporate registries. Revenue and ownership were cross-checked across multiple sources where available, prioritizing recent disclosures (2023\\u20132025). Only private, Europe-headquartered B2B food ingredient suppliers within the \\u20ac50M\\u2013\\u20ac500M revenue range were selected.\", \"targets\": [{\"company_name\": \"Palsgaard A/S\", \"headquarters\": \"Juelsminde, Denmark\", \"estimated_revenue\": \"\\u20ac300M (2023 turnover)\", \"key_products\": \"Food emulsifiers and stabilizers for bakery, confectionery, dairy, and plant-based foods\", \"ownership\": \"Foundation-owned (Schou Foundation)\", \"rationale\": \"Well-established emulsifier specialist with strong sustainability positioning and global B2B food customer base.\"}, {\"company_name\": \"Nactarome S.p.A.\", \"headquarters\": \"Milan, Italy\", \"estimated_revenue\": \"\\u20ac200M\\u2013\\u20ac250M\", \"key_products\": \"Natural flavours, taste solutions, and food colours\", \"ownership\": \"PE-backed (Ambienta SGR)\", \"rationale\": \"Scaled natural flavour platform with active M&A strategy and strong exposure to clean-label food trends.\"}, {\"company_name\": \"Cosucra Groupe Warcoing SA\", \"headquarters\": \"Warcoing, Belgium\", \"estimated_revenue\": \"\\u20ac140M\\u2013\\u20ac150M\", \"key_products\": \"Chicory root fiber (inulin), pea protein, starches, and fibers\", \"ownership\": \"Private (family-owned, minority PE involvement reported)\", \"rationale\": \"Leading plant-based functional ingredient supplier aligned with protein and fiber demand growth.\"}, {\"company_name\": \"Silesia Gerhard Hanke GmbH & Co. KG\", \"headquarters\": \"Neuss, Germany\", \"estimated_revenue\": \"\\u20ac200M\\u2013\\u20ac250M\", \"key_products\": \"Flavours for confectionery, bakery, beverages, and savoury foods\", \"ownership\": \"Family-owned\", \"rationale\": \"Independent European flavour house with long-standing customer relationships and global footprint.\"}, {\"company_name\": \"Nexira\", \"headquarters\": \"Rouen, France\", \"estimated_revenue\": \"\\u20ac65M\\u2013\\u20ac80M\", \"key_products\": \"Acacia gum, soluble dietary fibers, botanical extracts\", \"ownership\": \"Family-owned\", \"rationale\": \"Global leader in acacia-based natural ingredients with strong scientific and regulatory positioning.\"}, {\"company_name\": \"Sacco System\", \"headquarters\": \"Como, Italy\", \"estimated_revenue\": \"\\u20ac100M\\u2013\\u20ac110M\", \"key_products\": \"Starter cultures, probiotics, enzymes, and rennet for dairy and fermented foods\", \"ownership\": \"Family-owned\", \"rationale\": \"Specialist microbial ingredient platform with recurring B2B demand and recent international expansion.\"}, {\"company_name\": \"Axxence Aromatic GmbH\", \"headquarters\": \"Emmerich am Rhein, Germany\", \"estimated_revenue\": \"\\u20ac50M\\u2013\\u20ac100M (industry estimates)\", \"key_products\": \"Natural aroma chemicals and flavour ingredients\", \"ownership\": \"PE-backed (Capiton)\", \"rationale\": \"Niche natural flavour ingredient producer benefiting from demand for natural and bio-based formulations.\"}, {\"company_name\": \"Colin Ingredients SAS\", \"headquarters\": \"Mittelhausen, France\", \"estimated_revenue\": \"\\u20ac90M\\u2013\\u20ac100M\", \"key_products\": \"Flavours, colourings, vegetable raw materials, functional ingredient blends\", \"ownership\": \"Family-owned\", \"rationale\": \"Mid-sized French ingredient supplier with diversified portfolio and strong agro-food industry ties.\"}, {\"company_name\": \"Indena S.p.A.\", \"headquarters\": \"Milan, Italy\", \"estimated_revenue\": \"\\u20ac300M\\u2013\\u20ac400M (analyst estimates)\", \"key_products\": \"Botanical extracts and active plant-based ingredients for nutrition and food applications\", \"ownership\": \"Family-owned\", \"rationale\": \"Scaled botanical ingredient platform with deep R&D capabilities and exposure to functional food demand.\"}, {\"company_name\": \"Solina Group (selected food-ingredient activities)\", \"headquarters\": \"Br\\u00e9al-sous-Montfort, France\", \"estimated_revenue\": \"\\u20ac400M\\u2013\\u20ac500M\", \"key_products\": \"Savory ingredient solutions, seasoning systems, functional blends for food manufacturers\", \"ownership\": \"PE-backed (Astorg)\", \"rationale\": \"Large European savory ingredients platform with ongoing portfolio optimization and M&A activity.\"}], \"data_limitations\": \"Revenue figures for private companies are based on the latest publicly available disclosures, industry databases, and analyst estimates; exact figures may vary by fiscal year and consolidation scope. Ownership structures may include minority investors not fully disclosed publicly.\"}",
+      "details": "Matched pattern: \"company_name\".*\"company_name\".*\"company_name\".*\"company_name\".*\"company_name\".*\"company_name\".*\"company_name\".*\"company_name\".*\"company_name\".*\"company_name\""
+    },
+    {
+      "id": "company_validity",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 25,
+      "points_earned": 22.0,
+      "actual": "0.88",
+      "details": "Score: 0.88 - All listed companies are real, well-known European food ingredient or adjacent specialty ingredient businesses. Headquarters, product focus, and ownership descriptions are broadly accurate. Minor concerns exist around boundary cases (e.g., Solina\u2019s broader prepared food solutions scope and Indena\u2019s heavier pharma/nutraceutical exposure), but no fabricated or clearly incorrect entities are present."
+    },
+    {
+      "id": "criteria_fit",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 25,
+      "points_earned": 18.0,
+      "actual": "0.72",
+      "details": "Score: 0.72 - Most targets fit the stated criteria (Europe-headquartered, private, B2B food ingredients, \u20ac50\u2013500M revenue). However, there are notable edge cases: Solina Group is at the very top end of the revenue range and is more of a food solutions/seasonings platform than a pure ingredients play; Indena\u2019s core business skews toward pharma/nutraceutical actives rather than mainstream food ingredients. These issues weaken overall fit for an M&A origination screen."
+    },
+    {
+      "id": "information_completeness",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 17.0,
+      "actual": "0.85",
+      "details": "Score: 0.85 - Each target includes all required fields with sufficient detail for a preliminary target list: company name, HQ, revenue estimate, products, ownership, and rationale. Revenue ranges are appropriately rounded for private companies, and rationales are concise and relevant. This is usable as a first-pass longlist."
+    },
+    {
+      "id": "research_quality",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 15.0,
+      "actual": "0.75",
+      "details": "Score: 0.75 - The analyst demonstrates reasonable sector familiarity and uses credible-sounding sources, but the work lacks explicit citations and clearer differentiation between sourced data and analyst estimates. Some revenue figures and ownership descriptions are asserted confidently where more caveating would be prudent. Solid desktop research, but not yet at a level where I would rely on it without independent verification."
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

@@ -1,0 +1,107 @@
+{
+  "task_id": "e-014",
+  "rubric_hash": "b9e8a8dd",
+  "scored_at": "2026-01-21T19:53:17.505031",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 60,
+  "score_percent": 60.0,
+  "llm_gated": true,
+  "criteria": [
+    {
+      "id": "cash_equivalents_fy2025",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 15,
+      "points_earned": 15,
+      "actual": 105627.0,
+      "details": "Cell D7 = 105627.0 (expected 105627)"
+    },
+    {
+      "id": "total_liabilities_fy2025",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 15,
+      "points_earned": 15,
+      "actual": 30516.0,
+      "details": "Cell D35 = 30516.0 (expected 30516)"
+    },
+    {
+      "id": "total_equity_fy2025",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 15,
+      "points_earned": 15,
+      "actual": 170854.0,
+      "details": "Cell D41 = 170854.0 (expected 170854)"
+    },
+    {
+      "id": "net_cash_from_ops_fy2026e",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 15,
+      "points_earned": 0,
+      "actual": 88064.02,
+      "details": "Cell E18 = 88064.02, expected 89683.0789 (diff: 1619.058899999989)"
+    },
+    {
+      "id": "net_cash_from_investing_fy2026e",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 15,
+      "points_earned": 15,
+      "actual": -3262.425,
+      "details": "Cell E22 = -3262.425 (expected -3262.425)"
+    },
+    {
+      "id": "ending_cash_fy2026e",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_cell_value",
+      "points": 15,
+      "points_earned": 0,
+      "actual": "#VALUE!",
+      "details": "Cell E27 is not numeric: #VALUE! [GATES LLM]"
+    },
+    {
+      "id": "formatting",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "points": 5,
+      "points_earned": 0,
+      "actual": [
+        "E7: cross-sheet ref should be green",
+        "F7: cross-sheet ref should be green",
+        "G7: cross-sheet ref should be green",
+        "E9: cross-sheet ref should be green",
+        "F9: cross-sheet ref should be green",
+        "E10: cross-sheet ref should be green",
+        "F10: cross-sheet ref should be green",
+        "E15: cross-sheet ref should be green",
+        "F15: cross-sheet ref should be green",
+        "E24: cross-sheet ref should be green",
+        "F24: cross-sheet ref should be green",
+        "E39: cross-sheet ref should be green",
+        "F39: cross-sheet ref should be green"
+      ],
+      "details": "Formatting violations: E7: cross-sheet ref should be green; F7: cross-sheet ref should be green; G7: cross-sheet ref should be green; E9: cross-sheet ref should be green; F9: cross-sheet ref should be green (+8 more)"
+    },
+    {
+      "id": "reasoning_steps",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 5,
+      "points_earned": 0,
+      "actual": "[SKIPPED - gated]",
+      "details": "Skipped due to programmatic gate failure"
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

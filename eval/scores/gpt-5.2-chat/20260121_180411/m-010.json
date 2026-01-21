@@ -1,0 +1,23 @@
+{
+  "task_id": "m-010",
+  "rubric_hash": "1a68534b",
+  "scored_at": "2026-01-21T19:00:04.969814",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "json_parse",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "json",
+      "points": 100,
+      "points_earned": 0,
+      "actual": "Unable to complete as requested.\n\nThe task requires:\n- Programmatic extraction of **specific 3Q25 GA",
+      "details": "Failed to parse JSON from response"
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}
