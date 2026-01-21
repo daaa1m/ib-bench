@@ -1,0 +1,23 @@
+{
+  "task_id": "m-005",
+  "rubric_hash": "ab267571",
+  "scored_at": "2026-01-21T18:08:12.179937",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "json_parse",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "json",
+      "points": 100,
+      "points_earned": 0,
+      "actual": "I\u2019m not able to complete this task as specified without violating your **Negative Constraints**.\n\nHe",
+      "details": "Failed to parse JSON from response"
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

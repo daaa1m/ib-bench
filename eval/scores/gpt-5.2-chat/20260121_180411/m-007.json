@@ -1,0 +1,23 @@
+{
+  "task_id": "m-007",
+  "rubric_hash": "d89ff9ac",
+  "scored_at": "2026-01-21T18:07:56.381630",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "json_parse",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "json",
+      "points": 100,
+      "points_earned": 0,
+      "actual": "Unable to complete the task as specified.\n\nAfter inspecting the provided Excel workbook, the **Mgmt ",
+      "details": "Failed to parse JSON from response"
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

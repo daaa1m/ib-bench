@@ -1,0 +1,83 @@
+{
+  "task_id": "m-008",
+  "rubric_hash": "8cdfbf06",
+  "scored_at": "2026-01-21T19:00:33.957724",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 73.0,
+  "score_percent": 73.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "executive_summary",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 8.5,
+      "actual": "0.85",
+      "details": "Score: 0.85 - Clear, concise, and prioritized. States the activist view and a conditional recommendation. IC-ready in tone, though it would benefit from a sharper, more explicit investment call and reference to magnitude of upside."
+    },
+    {
+      "id": "state_of_company",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 11.25,
+      "actual": "0.75",
+      "details": "Score: 0.75 - Accurately captures the activist\u2019s characterization of PepsiCo as high quality but structurally underperforming due to complexity, with emphasis on North America. However, it remains high-level and lacks specific metrics or concrete comparisons cited in the deck."
+    },
+    {
+      "id": "activist_thesis",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 12.0,
+      "actual": "0.80",
+      "details": "Score: 0.80 - Correctly explains Elliott\u2019s core thesis and logic for multiple re-rating. The narrative is faithful to the presentation, but would be stronger with explicit references to the valuation discount, margin gaps, or historical benchmarks highlighted by Elliott."
+    },
+    {
+      "id": "value_creation_plan",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 11.25,
+      "actual": "0.75",
+      "details": "Score: 0.75 - Initiatives are logically structured and aligned with the deck\u2019s themes. However, they are framed at a conceptual level and lack specificity, sequencing, or clear accountability, which limits actionability for an IC audience."
+    },
+    {
+      "id": "valuation_recommendation",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 12.0,
+      "actual": "0.60",
+      "details": "Score: 0.60 - This is the weakest section. While the margin-of-safety logic is directionally sound, it fails to specify an explicit entry multiple or valuation range, despite this being a core requirement. An IC would expect concrete numbers tied to the deck\u2019s valuation analysis."
+    },
+    {
+      "id": "risk_assessment",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 20,
+      "points_earned": 14.0,
+      "actual": "0.70",
+      "details": "Score: 0.70 - Identifies the right high-level risks (execution, resistance, timing), but they are generic and not tightly linked to PepsiCo-specific complexities or activist history. Mitigants are reasonable but somewhat vague."
+    },
+    {
+      "id": "presentation_quality",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 5,
+      "points_earned": 4.0,
+      "actual": "0.80",
+      "details": "Score: 0.80 - Well-structured, professional, and internally consistent. The memo respects the constraint of using only the activist deck. However, the lack of numerical detail and specificity prevents it from feeling fully IC-ready."
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

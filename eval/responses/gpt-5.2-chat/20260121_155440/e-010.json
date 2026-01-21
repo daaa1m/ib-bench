@@ -1,0 +1,57 @@
+{
+  "task_id": "e-010",
+  "model": "gpt-5.2-chat",
+  "timestamp": "2026-01-21T15:57:14.771140",
+  "input_files": [
+    "input.xlsx"
+  ],
+  "output_files": [],
+  "raw_response": "{\n  \"errors_found\": [\n    {\n      \"location\": \"Row 39 in BS & CFS (Balance check), Columns J\u2013K\",\n      \"issue\": \"Total Assets do not equal Total Liabilities + Equity for FY 2023E and 2024E, indicating the model breaks starting in FY 2023E.\",\n      \"fix\": \"Identify and correct underlying cash flow and debt schedule linkage errors described below; no manual plug required once upstream errors are fixed.\"\n    },\n    {\n      \"location\": \"Row 72 in BS & CFS (Debt draw / (repayments)), Columns J\u2013K\",\n      \"issue\": \"Sign convention is incorrect: debt repayments are flowing as cash inflows instead of outflows, overstating Financing Cash Flow and ending cash.\",\n      \"fix\": \"Reverse the sign so repayments reduce cash (negative cash flow) and drawings increase cash.\"\n    },\n    {\n      \"location\": \"Row 112 in BS & CFS ((Repayment of) proceeds from long-term debt), Columns J\u2013K\",\n      \"issue\": \"This line double-counts long-term debt movements already captured in Row 72, causing cash and debt balances to diverge from the Debt Calcs schedule.\",\n      \"fix\": \"Link Row 112 directly to the Debt Calcs net long-term debt change and remove overlap with Row 72 so each debt movement is captured once.\"\n    },\n    {\n      \"location\": \"Debt Calcs sheet, Ending Long-Term Debt calculation (feeds K29 in BS & CFS)\",\n      \"issue\": \"Ending Long-Term Debt omits the current portion reclassification, overstating total long-term debt in forecast years.\",\n      \"fix\": \"Subtract the Current Portion of Long-Term Debt when calculating ending Long-Term Debt so totals reconcile to the Balance Sheet classification.\"\n    },\n    {\n      \"location\": \"Row 61 in BS & CFS (Change in NWC), Columns J\u2013K\",\n      \"issue\": \"Working capital change excludes Prepaid Expenses and Deferred Revenue movements, understating operating cash outflows.\",\n      \"fix\": \"Expand the NWC calculation in FS Calcs to include all current asset and liability components consistently with the Balance Sheet definition.\"\n    },\n    {\n      \"location\": \"Row 119 in BS & CFS (FX impact), Columns J\u2013K\",\n      \"issue\": \"FX impact on cash is calculated but not reflected in the cash balance roll-forward, creating a disconnect between CFS and Balance Sheet cash.\",\n      \"fix\": \"Link FX impact directly into the Net Change in Cash calculation so it flows into ending Cash & Equivalents.\"\n    },\n    {\n      \"location\": \"Row 121 in BS & CFS (Net change in cash), Columns J\u2013K\",\n      \"issue\": \"Net change in cash does not equal the period-over-period movement in Cash & Equivalents due to the issues above.\",\n      \"fix\": \"Once Operating, Investing, Financing, and FX lines are corrected, ensure Net Change in Cash sums those sections and feeds ending cash.\"\n    }\n  ],\n  \"final_long_term_debt_2024E\": \"1,018.6\",\n  \"audit_methodology\": \"Reviewed the Balance Sheet check to identify broken years, traced cash flow discrepancies back through Operating, Investing, and Financing sections, audited Debt Calcs and FS Calcs for sign errors and missing linkages, corrected double-counting and classification issues, and validated that cash and debt roll-forwards reconcile so the Balance Sheet ties without plugs.\"\n}",
+  "parsed_response": {
+    "errors_found": [
+      {
+        "location": "Row 39 in BS & CFS (Balance check), Columns J\u2013K",
+        "issue": "Total Assets do not equal Total Liabilities + Equity for FY 2023E and 2024E, indicating the model breaks starting in FY 2023E.",
+        "fix": "Identify and correct underlying cash flow and debt schedule linkage errors described below; no manual plug required once upstream errors are fixed."
+      },
+      {
+        "location": "Row 72 in BS & CFS (Debt draw / (repayments)), Columns J\u2013K",
+        "issue": "Sign convention is incorrect: debt repayments are flowing as cash inflows instead of outflows, overstating Financing Cash Flow and ending cash.",
+        "fix": "Reverse the sign so repayments reduce cash (negative cash flow) and drawings increase cash."
+      },
+      {
+        "location": "Row 112 in BS & CFS ((Repayment of) proceeds from long-term debt), Columns J\u2013K",
+        "issue": "This line double-counts long-term debt movements already captured in Row 72, causing cash and debt balances to diverge from the Debt Calcs schedule.",
+        "fix": "Link Row 112 directly to the Debt Calcs net long-term debt change and remove overlap with Row 72 so each debt movement is captured once."
+      },
+      {
+        "location": "Debt Calcs sheet, Ending Long-Term Debt calculation (feeds K29 in BS & CFS)",
+        "issue": "Ending Long-Term Debt omits the current portion reclassification, overstating total long-term debt in forecast years.",
+        "fix": "Subtract the Current Portion of Long-Term Debt when calculating ending Long-Term Debt so totals reconcile to the Balance Sheet classification."
+      },
+      {
+        "location": "Row 61 in BS & CFS (Change in NWC), Columns J\u2013K",
+        "issue": "Working capital change excludes Prepaid Expenses and Deferred Revenue movements, understating operating cash outflows.",
+        "fix": "Expand the NWC calculation in FS Calcs to include all current asset and liability components consistently with the Balance Sheet definition."
+      },
+      {
+        "location": "Row 119 in BS & CFS (FX impact), Columns J\u2013K",
+        "issue": "FX impact on cash is calculated but not reflected in the cash balance roll-forward, creating a disconnect between CFS and Balance Sheet cash.",
+        "fix": "Link FX impact directly into the Net Change in Cash calculation so it flows into ending Cash & Equivalents."
+      },
+      {
+        "location": "Row 121 in BS & CFS (Net change in cash), Columns J\u2013K",
+        "issue": "Net change in cash does not equal the period-over-period movement in Cash & Equivalents due to the issues above.",
+        "fix": "Once Operating, Investing, Financing, and FX lines are corrected, ensure Net Change in Cash sums those sections and feeds ending cash."
+      }
+    ],
+    "final_long_term_debt_2024E": "1,018.6",
+    "audit_methodology": "Reviewed the Balance Sheet check to identify broken years, traced cash flow discrepancies back through Operating, Investing, and Financing sections, audited Debt Calcs and FS Calcs for sign errors and missing linkages, corrected double-counting and classification issues, and validated that cash and debt roll-forwards reconcile so the Balance Sheet ties without plugs."
+  },
+  "stop_reason": "end_turn",
+  "usage": {
+    "input_tokens": 6110,
+    "output_tokens": 1049,
+    "latency_ms": 40864.74323272705
+  }
+}

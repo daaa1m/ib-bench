@@ -1,0 +1,103 @@
+{
+  "task_id": "e-005",
+  "rubric_hash": "687a2a1c",
+  "scored_at": "2026-01-21T18:01:26.064870",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 83.25,
+  "score_percent": 83.25,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "q3_revenue",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 10,
+      "points_earned": 10,
+      "actual": "180,169",
+      "details": "Found '180,169' in response"
+    },
+    {
+      "id": "q3_operating_income",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 10,
+      "points_earned": 10,
+      "actual": "17,422",
+      "details": "Found '17,422' in response"
+    },
+    {
+      "id": "q3_diluted_eps",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 10,
+      "points_earned": 10,
+      "actual": "1.95",
+      "details": "Found '1.95' in response"
+    },
+    {
+      "id": "q4_revenue_guidance",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 10,
+      "points_earned": 10,
+      "actual": "206.0 - 213.0",
+      "details": "Found '206' in response"
+    },
+    {
+      "id": "q4_operating_income_guidance",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 10,
+      "points_earned": 10,
+      "actual": "21.0 - 26.0",
+      "details": "Found '21' in response"
+    },
+    {
+      "id": "summary_accuracy",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 5.25,
+      "actual": "0.35",
+      "details": "Score: 0.35 - Multiple figures and claims appear inconsistent with known Amazon historical disclosures and are likely inaccurate or fabricated (e.g., AWS revenue at $33B, operating income of $17.4B described as flat YoY, large specific FTC settlement and Anthropic mark-to-market gains). These would require full re-verification before any senior or client-facing use."
+    },
+    {
+      "id": "summary_completeness",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 12.0,
+      "actual": "0.80",
+      "details": "Score: 0.80 - Covers all major required areas: consolidated results, segment performance (AWS, North America, International), margin drivers, unusual items, and forward guidance with context. No major topical gaps relative to the original task."
+    },
+    {
+      "id": "summary_insight",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 7.5,
+      "actual": "0.75",
+      "details": "Score: 0.75 - Provides YoY comparisons, identifies key drivers (AI, AWS, advertising), and discusses strategic implications and risks. Insight is solid, but its usefulness is undermined by questionable underlying facts."
+    },
+    {
+      "id": "summary_structure",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 8.5,
+      "actual": "0.85",
+      "details": "Score: 0.85 - Well-organized, professional, and appropriately sized for senior bankers. Clear paragraphing, logical flow from results to segments to outlook, and suitable tone for internal or client-facing materials."
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

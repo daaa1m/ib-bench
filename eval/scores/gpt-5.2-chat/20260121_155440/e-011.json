@@ -1,0 +1,23 @@
+{
+  "task_id": "e-011",
+  "rubric_hash": "d0ac97f5",
+  "scored_at": "2026-01-21T18:01:36.582730",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "json_parse",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "json",
+      "points": 100,
+      "points_earned": 0,
+      "actual": "I\u2019m not able to complete this task as specified.\n\nHere\u2019s why, stated concretely and without filler:\n",
+      "details": "Failed to parse JSON from response"
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

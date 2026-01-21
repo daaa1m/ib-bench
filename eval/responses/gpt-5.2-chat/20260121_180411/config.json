@@ -1,0 +1,76 @@
+{
+  "provider": "azure-v2",
+  "model": "gpt-5.2-chat",
+  "task_ids": [
+    "m-001",
+    "m-002",
+    "m-003",
+    "m-004",
+    "m-005",
+    "m-006",
+    "m-007",
+    "m-008",
+    "m-009",
+    "m-010"
+  ],
+  "parallel": 4,
+  "config_file": "configs/azure-gpt5.2-chat.yaml",
+  "started_at": "2026-01-21T18:04:11.222770",
+  "completed_at": "2026-01-21T18:55:39.468702",
+  "results_summary": [
+    {
+      "task_id": "m-001",
+      "status": "success"
+    },
+    {
+      "task_id": "m-002",
+      "status": "success"
+    },
+    {
+      "task_id": "m-003",
+      "status": "success"
+    },
+    {
+      "task_id": "m-004",
+      "status": "success"
+    },
+    {
+      "task_id": "m-005",
+      "status": "success"
+    },
+    {
+      "task_id": "m-006",
+      "status": "success"
+    },
+    {
+      "task_id": "m-007",
+      "status": "success"
+    },
+    {
+      "task_id": "m-008",
+      "status": "error",
+      "error": "BadRequestError: Error code: 400 - {'error': {'code': 'invalid_payload', 'message': 'Invalid request payload.', 'param': None, 'type': 'invalid_request_error', 'details': [], 'additionalInfo': {'request_id': '1a8ce7e28f489e37210cc53ca6acee0f'}}} | status=400 | code=invalid_payload | request_id=6b534205-46da-418f-9999-e0208845b2c2"
+    },
+    {
+      "task_id": "m-009",
+      "status": "success"
+    },
+    {
+      "task_id": "m-010",
+      "status": "error",
+      "error": "BadRequestError: Error code: 400 - {'error': {'code': 'invalid_payload', 'message': 'Invalid request payload.', 'param': None, 'type': 'invalid_request_error', 'details': [], 'additionalInfo': {'request_id': '8848599b779907356b68974406efe740'}}} | status=400 | code=invalid_payload | request_id=1896f9a3-1454-488f-95a6-194eb78b3336"
+    },
+    {
+      "task_id": "h-001",
+      "status": "success"
+    },
+    {
+      "task_id": "h-002",
+      "status": "success"
+    },
+    {
+      "task_id": "h-003",
+      "status": "success"
+    }
+  ]
+}

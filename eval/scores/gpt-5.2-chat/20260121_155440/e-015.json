@@ -1,0 +1,53 @@
+{
+  "task_id": "e-015",
+  "rubric_hash": "8d2b1f0c",
+  "scored_at": "2026-01-21T17:59:36.429744",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 73.5,
+  "score_percent": 73.5,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "tier_1_targets",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 45,
+      "points_earned": 33.75,
+      "actual": "0.75",
+      "details": "Score: 0.75 - The Tier 1 list contains credible, well-known U.S. biotech M&A candidates with clear strategic rationales aligned to large-cap pharma needs (rare disease, oncology, metabolic). However, several market cap figures appear materially inaccurate or at least not clearly anchored to January 1, 2026 values (e.g., Sarepta, Madrigal), and the 30\u201350% probability framing is asserted without deal-specific justification. Usable with corrections, but not yet client-ready."
+    },
+    {
+      "id": "tier_2_targets",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 35,
+      "points_earned": 26.25,
+      "actual": "0.75",
+      "details": "Score: 0.75 - Tier 2 targets are plausible and internally consistent, with a reasonable mix of platform-driven and valuation-driven candidates. Strategic rationales are directionally sound, but again market cap precision is questionable and the probability ranges feel generic rather than analytically derived. Solid foundation, but requires fact-checking and sharper differentiation versus Tier 1."
+    },
+    {
+      "id": "source_urls",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 6.0,
+      "actual": "0.60",
+      "details": "Score: 0.60 - Sources are credible in a general sense (Yahoo Finance, Nasdaq), but are too high-level. Individual market cap figures are not tied to dated snapshots or specific citations as of January 1, 2026, which weakens numerical defensibility under banking standards."
+    },
+    {
+      "id": "selection_methodology",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 7.5,
+      "actual": "0.75",
+      "details": "Score: 0.75 - Methodology explains the high-level screening and tiering logic clearly and coherently. However, it lacks specificity around quantitative cutoffs, precedent transaction logic, or buyer universes, which would be expected before senior banker or client distribution."
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

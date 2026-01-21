@@ -1,0 +1,28 @@
+{
+  "task_id": "e-001",
+  "model": "gpt-5.2-chat",
+  "timestamp": "2026-01-21T15:55:06.915785",
+  "input_files": [
+    "input.xlsx"
+  ],
+  "output_files": [],
+  "raw_response": "{\n  \"error_location\": \"Row 121 \u2013 Total Liabilities (e.g., cell F121)\",\n  \"current_formula\": \"=F120+SUM(F110:F118)\",\n  \"corrected_formula\": \"=F120+SUM(F110:F117)\",\n  \"logical_explanation\": \"Row 118 ('Other Non-Current Assets') is incorrectly classified within the liabilities section and is being summed into Total Liabilities. This violates balance sheet structure by including an asset as a liability, causing Total Liabilities + Equity to be overstated and the balance sheet to not tie. Removing this row from the liabilities summation resolves the imbalance without using plugs or hard-codes.\",\n  \"audit_steps_followed\": [\n    \"Identified the first break year using the balance sheet check row\",\n    \"Performed variance analysis to determine a static classification error\",\n    \"Audited summation ranges for Total Assets and Total Liabilities & Equity\",\n    \"Verified balance sheet line-item classification against accounting structure\"\n  ]\n}",
+  "parsed_response": {
+    "error_location": "Row 121 \u2013 Total Liabilities (e.g., cell F121)",
+    "current_formula": "=F120+SUM(F110:F118)",
+    "corrected_formula": "=F120+SUM(F110:F117)",
+    "logical_explanation": "Row 118 ('Other Non-Current Assets') is incorrectly classified within the liabilities section and is being summed into Total Liabilities. This violates balance sheet structure by including an asset as a liability, causing Total Liabilities + Equity to be overstated and the balance sheet to not tie. Removing this row from the liabilities summation resolves the imbalance without using plugs or hard-codes.",
+    "audit_steps_followed": [
+      "Identified the first break year using the balance sheet check row",
+      "Performed variance analysis to determine a static classification error",
+      "Audited summation ranges for Total Assets and Total Liabilities & Equity",
+      "Verified balance sheet line-item classification against accounting structure"
+    ]
+  },
+  "stop_reason": "end_turn",
+  "usage": {
+    "input_tokens": 5127,
+    "output_tokens": 465,
+    "latency_ms": 26104.889154434204
+  }
+}

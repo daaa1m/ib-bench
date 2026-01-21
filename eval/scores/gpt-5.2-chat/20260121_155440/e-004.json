@@ -1,0 +1,83 @@
+{
+  "task_id": "e-004",
+  "rubric_hash": "4a18edd7",
+  "scored_at": "2026-01-21T17:59:58.734081",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 44,
+  "score_percent": 44.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "gaap_operating_income",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 15,
+      "points_earned": 15,
+      "actual": "1,270",
+      "details": "Matched pattern: \\$?1,?270\\s*(m|mm|mn|million)?\\b"
+    },
+    {
+      "id": "non_gaap_operating_income",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 15,
+      "points_earned": 15,
+      "actual": "2,238",
+      "details": "Matched pattern: \\$?2,?238\\s*(m|mm|mn|million)?\\b"
+    },
+    {
+      "id": "adj_stock_based_compensation",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 14,
+      "points_earned": 0,
+      "actual": "{\"gaap_operating_income\": \"1,270\", \"non_gaap_operating_income\": \"2,238\", \"adjustments\": [{\"name\": \"Stock-based compensation\", \"amount\": \"621\"}, {\"name\": \"Amortization of acquired intangible assets\", \"amount\": \"263\"}, {\"name\": \"Acquisition-related and integration costs\", \"amount\": \"42\"}, {\"name\": \"Restructuring and other charges\", \"amount\": \"42\"}]}",
+      "details": "No patterns matched in '{\"gaap_operating_income\": \"1,270\", \"non_gaap_operating_income\": \"2,238\", \"adjustments\": [{\"name\": \"Stock-based compensation\", \"amount\": \"621\"}, {\"name\": \"Amortization of acquired intangible assets\", \"amount\": \"263\"}, {\"name\": \"Acquisition-related and integration costs\", \"amount\": \"42\"}, {\"name\": \"Restructuring and other charges\", \"amount\": \"42\"}]}'"
+    },
+    {
+      "id": "adj_amortization_intangibles",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 14,
+      "points_earned": 0,
+      "actual": "{\"gaap_operating_income\": \"1,270\", \"non_gaap_operating_income\": \"2,238\", \"adjustments\": [{\"name\": \"Stock-based compensation\", \"amount\": \"621\"}, {\"name\": \"Amortization of acquired intangible assets\", \"amount\": \"263\"}, {\"name\": \"Acquisition-related and integration costs\", \"amount\": \"42\"}, {\"name\": \"Restructuring and other charges\", \"amount\": \"42\"}]}",
+      "details": "No patterns matched in '{\"gaap_operating_income\": \"1,270\", \"non_gaap_operating_income\": \"2,238\", \"adjustments\": [{\"name\": \"Stock-based compensation\", \"amount\": \"621\"}, {\"name\": \"Amortization of acquired intangible assets\", \"amount\": \"263\"}, {\"name\": \"Acquisition-related and integration costs\", \"amount\": \"42\"}, {\"name\": \"Restructuring and other charges\", \"amount\": \"42\"}]}'"
+    },
+    {
+      "id": "adj_acquisition_costs",
+      "passed": true,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 14,
+      "points_earned": 14,
+      "actual": "{\"gaap_operating_income\": \"1,270\", \"non_gaap_operating_income\": \"2,238\", \"adjustments\": [{\"name\": \"Stock-based compensation\", \"amount\": \"621\"}, {\"name\": \"Amortization of acquired intangible assets\", \"amount\": \"263\"}, {\"name\": \"Acquisition-related and integration costs\", \"amount\": \"42\"}, {\"name\": \"Restructuring and other charges\", \"amount\": \"42\"}]}",
+      "details": "Matched pattern: \\b42\\b"
+    },
+    {
+      "id": "adj_inventory_loss_recovery",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 14,
+      "points_earned": 0,
+      "actual": "{\"gaap_operating_income\": \"1,270\", \"non_gaap_operating_income\": \"2,238\", \"adjustments\": [{\"name\": \"Stock-based compensation\", \"amount\": \"621\"}, {\"name\": \"Amortization of acquired intangible assets\", \"amount\": \"263\"}, {\"name\": \"Acquisition-related and integration costs\", \"amount\": \"42\"}, {\"name\": \"Restructuring and other charges\", \"amount\": \"42\"}]}",
+      "details": "No patterns matched in '{\"gaap_operating_income\": \"1,270\", \"non_gaap_operating_income\": \"2,238\", \"adjustments\": [{\"name\": \"Stock-based compensation\", \"amount\": \"621\"}, {\"name\": \"Amortization of acquired intangible assets\", \"amount\": \"263\"}, {\"name\": \"Acquisition-related and integration costs\", \"amount\": \"42\"}, {\"name\": \"Restructuring and other charges\", \"amount\": \"42\"}]}'"
+    },
+    {
+      "id": "adj_loss_contingency",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 14,
+      "points_earned": 0,
+      "actual": "{\"gaap_operating_income\": \"1,270\", \"non_gaap_operating_income\": \"2,238\", \"adjustments\": [{\"name\": \"Stock-based compensation\", \"amount\": \"621\"}, {\"name\": \"Amortization of acquired intangible assets\", \"amount\": \"263\"}, {\"name\": \"Acquisition-related and integration costs\", \"amount\": \"42\"}, {\"name\": \"Restructuring and other charges\", \"amount\": \"42\"}]}",
+      "details": "No patterns matched in '{\"gaap_operating_income\": \"1,270\", \"non_gaap_operating_income\": \"2,238\", \"adjustments\": [{\"name\": \"Stock-based compensation\", \"amount\": \"621\"}, {\"name\": \"Amortization of acquired intangible assets\", \"amount\": \"263\"}, {\"name\": \"Acquisition-related and integration costs\", \"amount\": \"42\"}, {\"name\": \"Restructuring and other charges\", \"amount\": \"42\"}]}'"
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

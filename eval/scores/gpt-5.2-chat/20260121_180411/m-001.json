@@ -1,0 +1,23 @@
+{
+  "task_id": "m-001",
+  "rubric_hash": "c364a7da",
+  "scored_at": "2026-01-21T18:07:56.464554",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "json_parse",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "json",
+      "points": 100,
+      "points_earned": 0,
+      "actual": "I\u2019m not able to complete this task as specified.\n\nThe core blocker is that the Excel model structure",
+      "details": "Failed to parse JSON from response"
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

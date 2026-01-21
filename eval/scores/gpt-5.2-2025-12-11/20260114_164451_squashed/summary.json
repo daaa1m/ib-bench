@@ -1,22 +1,289 @@
 {
-  "total": 1,
-  "passed": 1,
-  "failed": 0,
-  "blocked": 0,
+  "total": 33,
+  "passed": 11,
+  "failed": 11,
+  "blocked": 11,
   "skipped": 0,
-  "total_points": 100,
-  "points_earned": 85.0,
+  "total_points": 3300,
+  "points_earned": 1090.94,
   "results": [
+    {
+      "task_id": "e-001",
+      "passed": true,
+      "points_earned": 100,
+      "total_points": 100,
+      "score_percent": 100.0
+    },
+    {
+      "task_id": "e-002",
+      "passed": true,
+      "points_earned": 87.05,
+      "total_points": 100,
+      "score_percent": 87.05
+    },
+    {
+      "task_id": "e-003",
+      "passed": false,
+      "points_earned": 0,
+      "total_points": 100,
+      "score_percent": 0.0
+    },
+    {
+      "task_id": "e-004",
+      "passed": false,
+      "points_earned": 0,
+      "total_points": 100,
+      "score_percent": 0.0
+    },
+    {
+      "task_id": "e-005",
+      "passed": true,
+      "points_earned": 94.25,
+      "total_points": 100,
+      "score_percent": 94.25
+    },
+    {
+      "task_id": "e-006",
+      "passed": false,
+      "points_earned": 0,
+      "total_points": 100,
+      "score_percent": 0,
+      "blocked": true
+    },
+    {
+      "task_id": "e-007",
+      "passed": true,
+      "points_earned": 92.94,
+      "total_points": 100,
+      "score_percent": 92.94
+    },
+    {
+      "task_id": "e-008",
+      "passed": false,
+      "points_earned": 0,
+      "total_points": 100,
+      "score_percent": 0.0
+    },
+    {
+      "task_id": "e-009",
+      "passed": false,
+      "points_earned": 0,
+      "total_points": 100,
+      "score_percent": 0,
+      "blocked": true
+    },
+    {
+      "task_id": "e-010",
+      "passed": false,
+      "points_earned": 0,
+      "total_points": 100,
+      "score_percent": 0,
+      "blocked": true
+    },
+    {
+      "task_id": "e-011",
+      "passed": false,
+      "points_earned": 0,
+      "total_points": 100,
+      "score_percent": 0,
+      "blocked": true
+    },
+    {
+      "task_id": "e-012",
+      "passed": true,
+      "points_earned": 85.30000000000001,
+      "total_points": 100,
+      "score_percent": 85.30000000000001
+    },
+    {
+      "task_id": "e-013",
+      "passed": true,
+      "points_earned": 75.5,
+      "total_points": 100,
+      "score_percent": 75.5
+    },
+    {
+      "task_id": "e-014",
+      "passed": true,
+      "points_earned": 94.25,
+      "total_points": 100,
+      "score_percent": 94.25
+    },
+    {
+      "task_id": "e-015",
+      "passed": true,
+      "points_earned": 80.75,
+      "total_points": 100,
+      "score_percent": 80.75
+    },
+    {
+      "task_id": "e-016",
+      "passed": true,
+      "points_earned": 85.5,
+      "total_points": 100,
+      "score_percent": 85.5
+    },
+    {
+      "task_id": "e-017",
+      "passed": true,
+      "points_earned": 86.0,
+      "total_points": 100,
+      "score_percent": 86.0
+    },
+    {
+      "task_id": "e-018",
+      "passed": false,
+      "points_earned": 0,
+      "total_points": 100,
+      "score_percent": 0,
+      "blocked": true
+    },
     {
       "task_id": "e-019",
       "passed": true,
       "points_earned": 85.0,
       "total_points": 100,
       "score_percent": 85.0
+    },
+    {
+      "task_id": "e-020",
+      "passed": false,
+      "points_earned": 0,
+      "total_points": 100,
+      "score_percent": 0.0
+    },
+    {
+      "task_id": "h-001",
+      "passed": false,
+      "points_earned": 0,
+      "total_points": 100,
+      "score_percent": 0,
+      "blocked": true
+    },
+    {
+      "task_id": "h-002",
+      "passed": false,
+      "points_earned": 0,
+      "total_points": 100,
+      "score_percent": 0,
+      "blocked": true
+    },
+    {
+      "task_id": "h-003",
+      "passed": false,
+      "points_earned": 20,
+      "total_points": 100,
+      "score_percent": 20.0
+    },
+    {
+      "task_id": "m-001",
+      "passed": false,
+      "points_earned": 0,
+      "total_points": 100,
+      "score_percent": 0,
+      "blocked": true
+    },
+    {
+      "task_id": "m-002",
+      "passed": false,
+      "points_earned": 0,
+      "total_points": 100,
+      "score_percent": 0,
+      "blocked": true
+    },
+    {
+      "task_id": "m-003",
+      "passed": false,
+      "points_earned": 16.9,
+      "total_points": 100,
+      "score_percent": 16.9
+    },
+    {
+      "task_id": "m-004",
+      "passed": false,
+      "points_earned": 16.0,
+      "total_points": 100,
+      "score_percent": 16.0
+    },
+    {
+      "task_id": "m-005",
+      "passed": false,
+      "points_earned": 0,
+      "total_points": 100,
+      "score_percent": 0.0
+    },
+    {
+      "task_id": "m-006",
+      "passed": false,
+      "points_earned": 0,
+      "total_points": 100,
+      "score_percent": 0,
+      "blocked": true
+    },
+    {
+      "task_id": "m-007",
+      "passed": false,
+      "points_earned": 0,
+      "total_points": 100,
+      "score_percent": 0,
+      "blocked": true
+    },
+    {
+      "task_id": "m-008",
+      "passed": false,
+      "points_earned": 51.5,
+      "total_points": 100,
+      "score_percent": 51.5
+    },
+    {
+      "task_id": "m-009",
+      "passed": false,
+      "points_earned": 20,
+      "total_points": 100,
+      "score_percent": 20.0
+    },
+    {
+      "task_id": "m-010",
+      "passed": false,
+      "points_earned": 0,
+      "total_points": 100,
+      "score_percent": 0.0
     }
   ],
-  "overall_percent": 85.0,
+  "overall_percent": 33.05878787878788,
   "rubric_hashes": {
-    "e-019": "921ca5b7"
+    "e-001": "4ee50e89",
+    "e-002": "796e16ce",
+    "e-003": "29b90165",
+    "e-004": "4a18edd7",
+    "e-005": "687a2a1c",
+    "e-006": "22ce9c78",
+    "e-007": "51b85292",
+    "e-008": "9240d228",
+    "e-009": "c7730ed8",
+    "e-010": "96cd79c1",
+    "e-011": "d0ac97f5",
+    "e-012": "013aba50",
+    "e-013": "3558f072",
+    "e-014": "b9e8a8dd",
+    "e-015": "8d2b1f0c",
+    "e-016": "9d7589f8",
+    "e-017": "1411ddde",
+    "e-018": "319d1a20",
+    "e-019": "921ca5b7",
+    "e-020": "d99429e9",
+    "h-001": "d84b33a7",
+    "h-002": "6d655c7d",
+    "h-003": "f1e0cd5a",
+    "m-001": "507285c0",
+    "m-002": "aedf9f11",
+    "m-003": "897abf5f",
+    "m-004": "b8f4e74a",
+    "m-005": "ab267571",
+    "m-006": "b249a701",
+    "m-007": "d89ff9ac",
+    "m-008": "8cdfbf06",
+    "m-009": "423b748e",
+    "m-010": "1a68534b"
   }
 }

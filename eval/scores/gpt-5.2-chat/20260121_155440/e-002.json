@@ -1,0 +1,73 @@
+{
+  "task_id": "e-002",
+  "rubric_hash": "796e16ce",
+  "scored_at": "2026-01-21T17:58:57.599676",
+  "passed": true,
+  "total_points": 100,
+  "points_earned": 78.5,
+  "score_percent": 78.5,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "accuracy",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 25,
+      "points_earned": 17.5,
+      "actual": "0.70",
+      "details": "Score: 0.70 - The summary presents specific figures, company performance metrics, and failure rates that sound plausible and internally consistent, but the level of numerical detail (e.g., exact counts, percentages, EPS figures) creates meaningful risk of misattribution or hallucination without clear anchoring to the source article. As written, I would want to spot-check against the PDF before circulating."
+    },
+    {
+      "id": "completeness",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 25,
+      "points_earned": 20.0,
+      "actual": "0.80",
+      "details": "Score: 0.80 - Captures the core narrative (turning credit cycle, creditor takeovers, implications for restructuring and advisory) and includes relevant data points, actors, and strategic implications. For a senior banker, this is broadly sufficient, though it may overweight one company example versus the broader market."
+    },
+    {
+      "id": "conciseness",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 11.25,
+      "actual": "0.75",
+      "details": "Score: 0.75 - Generally efficient and readable, but slightly long for a quick senior-level skim. The FTI Consulting detail could be tightened or partially cut unless the banker specifically needs a public comps angle."
+    },
+    {
+      "id": "relevance",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 15,
+      "points_earned": 12.75,
+      "actual": "0.85",
+      "details": "Score: 0.85 - Leads with the right takeaway for deal activity and frames the article through restructuring, distressed M&A, and creditor-led transactions, which is exactly what a senior banker would care about."
+    },
+    {
+      "id": "commentary_quality",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 8.0,
+      "actual": "0.80",
+      "details": "Score: 0.80 - Strategic implications are clearly distinguished from article facts and are sensible and useful. Commentary stays close to the data and does not overreach, though it is more interpretive than strictly necessary."
+    },
+    {
+      "id": "professional_tone",
+      "passed": true,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 10,
+      "points_earned": 9.0,
+      "actual": "0.90",
+      "details": "Score: 0.90 - Tone is professional, precise, and appropriate for internal senior banker circulation. Uses correct industry terminology and avoids casual or speculative language."
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

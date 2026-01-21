@@ -1,0 +1,23 @@
+{
+  "task_id": "e-017",
+  "rubric_hash": "1411ddde",
+  "scored_at": "2026-01-21T18:02:00.790989",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "json_parse",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "json",
+      "points": 100,
+      "points_earned": 0,
+      "actual": "I was not able to complete the task as specified with sufficient factual certainty.\n\n**Summary of wh",
+      "details": "Failed to parse JSON from response"
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

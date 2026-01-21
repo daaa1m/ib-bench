@@ -1,0 +1,27 @@
+{
+  "provider": "azure-v2",
+  "model": "gpt-5.2-chat",
+  "task_ids": [
+    "h-001",
+    "h-002",
+    "h-003"
+  ],
+  "parallel": 4,
+  "config_file": "configs/azure-gpt5.2-chat.yaml",
+  "started_at": "2026-01-21T18:34:43.841371",
+  "completed_at": "2026-01-21T18:36:17.209160",
+  "results_summary": [
+    {
+      "task_id": "h-001",
+      "status": "success"
+    },
+    {
+      "task_id": "h-002",
+      "status": "success"
+    },
+    {
+      "task_id": "h-003",
+      "status": "success"
+    }
+  ]
+}

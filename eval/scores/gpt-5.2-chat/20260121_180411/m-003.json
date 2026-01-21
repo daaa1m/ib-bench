@@ -1,0 +1,103 @@
+{
+  "task_id": "m-003",
+  "rubric_hash": "897abf5f",
+  "scored_at": "2026-01-21T18:08:12.177802",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 12.299999999999999,
+  "score_percent": 12.299999999999999,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "formatting",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "excel_formatting",
+      "points": 10,
+      "points_earned": 0,
+      "actual": [
+        "C2: hardcoded number should be blue",
+        "D2: hardcoded number should be blue",
+        "E2: hardcoded number should be blue",
+        "F2: hardcoded number should be blue",
+        "G2: hardcoded number should be blue",
+        "B5: cross-sheet ref should be green",
+        "C5: cross-sheet ref should be green",
+        "D5: cross-sheet ref should be green",
+        "E5: cross-sheet ref should be green",
+        "F5: cross-sheet ref should be green",
+        "G5: cross-sheet ref should be green",
+        "B6: cross-sheet ref should be green",
+        "C6: cross-sheet ref should be green",
+        "D6: cross-sheet ref should be green",
+        "E6: cross-sheet ref should be green",
+        "F6: cross-sheet ref should be green",
+        "G6: cross-sheet ref should be green",
+        "B7: cross-sheet ref should be green",
+        "C7: cross-sheet ref should be green",
+        "D7: cross-sheet ref should be green",
+        "E7: cross-sheet ref should be green",
+        "F7: cross-sheet ref should be green",
+        "G7: cross-sheet ref should be green",
+        "B15: cross-sheet ref should be green",
+        "C15: cross-sheet ref should be green",
+        "D15: cross-sheet ref should be green",
+        "E15: cross-sheet ref should be green",
+        "F15: cross-sheet ref should be green",
+        "G15: cross-sheet ref should be green"
+      ],
+      "details": "Formatting violations: C2: hardcoded number should be blue; D2: hardcoded number should be blue; E2: hardcoded number should be blue; F2: hardcoded number should be blue; G2: hardcoded number should be blue (+24 more)"
+    },
+    {
+      "id": "model_functionality",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 18,
+      "points_earned": 0.0,
+      "actual": "0.00",
+      "details": "Score: 0.00 - No model, schedules, or formulas were provided. There is no evidence of a functional LBO model, linkages, or calculations. Outputs are presented without any underlying support."
+    },
+    {
+      "id": "operating_forecast",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 18,
+      "points_earned": 5.3999999999999995,
+      "actual": "0.30",
+      "details": "Score: 0.30 - Only a single-year (2025) revenue and EBITDA figure is shown. There is no 5-year forecast, no segment detail, no cost build, and no demonstration that margins or growth are derived from the historical inputs."
+    },
+    {
+      "id": "transaction_structure",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 18,
+      "points_earned": 0.0,
+      "actual": "0.00",
+      "details": "Score: 0.00 - No Sources & Uses, no debt structure, no fees, and no EV-to-equity bridge are provided. Entry EV multiple and equity value are stated without reconciliation."
+    },
+    {
+      "id": "returns_analysis",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 23,
+      "points_earned": 6.8999999999999995,
+      "actual": "0.30",
+      "details": "Score: 0.30 - IRR and MOIC are stated but cannot be validated without cash flow timing, leverage assumptions, exit equity value, or debt paydown. Results are effectively unsupported."
+    },
+    {
+      "id": "sensitivity_analysis",
+      "passed": false,
+      "type": "llm_judge",
+      "match_type": "llm_judge",
+      "points": 13,
+      "points_earned": 0.0,
+      "actual": "0.00",
+      "details": "Score: 0.00 - No sensitivity analysis is provided. This is a required component of the task and is entirely missing."
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

@@ -1,0 +1,23 @@
+{
+  "task_id": "e-007",
+  "rubric_hash": "51b85292",
+  "scored_at": "2026-01-21T18:01:36.581984",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "json_parse",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "json",
+      "points": 100,
+      "points_earned": 0,
+      "actual": "{\n  \"gs_rating\": \"Buy\",\n  \"gs_price_target\": \"$330\",\n  \"jpm_rating\": \"Overweight\",\n  \"jpm_price_targ",
+      "details": "Failed to parse JSON from response"
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

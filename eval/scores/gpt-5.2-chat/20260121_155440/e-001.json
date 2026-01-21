@@ -1,0 +1,33 @@
+{
+  "task_id": "e-001",
+  "rubric_hash": "4ee50e89",
+  "scored_at": "2026-01-21T18:02:00.790141",
+  "passed": false,
+  "total_points": 100,
+  "points_earned": 0,
+  "score_percent": 0.0,
+  "llm_gated": false,
+  "criteria": [
+    {
+      "id": "error_location",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "substring_one_of",
+      "points": 55,
+      "points_earned": 0,
+      "actual": "Row 121 \u2013 Total Liabilities (e.g., cell F121)",
+      "details": "None of ['Row 140', '140', 'L140', 'M140', 'N140', 'O140', 'P140', 'L140:P140', 'Range 140'] found in 'Row 121 \u2013 Total Liabilities (e.g., cell F121)'"
+    },
+    {
+      "id": "corrected_formula",
+      "passed": false,
+      "type": "programmatic",
+      "match_type": "regex_pattern",
+      "points": 45,
+      "points_earned": 0,
+      "actual": "=F120+SUM(F110:F117)",
+      "details": "Missing required elements: ['138']"
+    }
+  ],
+  "judge": "gpt-5.2-chat"
+}

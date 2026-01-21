@@ -1,0 +1,100 @@
+{
+  "task_id": "m-004",
+  "model": "gpt-5.2-chat",
+  "timestamp": "2026-01-21T18:05:14.986053",
+  "input_files": [],
+  "output_files": [],
+  "raw_response": "{\n  \"methodology\": \"Targets were identified via web searches across trade publications (FoodIngredientsFirst, Sweets Processing), company websites, private company databases (PitchBook, Tracxn, RocketReach), and European corporate registries. Revenue and ownership were cross-checked across multiple sources where available, prioritizing recent disclosures (2023\u20132025). Only private, Europe-headquartered B2B food ingredient suppliers within the \u20ac50M\u2013\u20ac500M revenue range were selected.\",\n  \"targets\": [\n    {\n      \"company_name\": \"Palsgaard A/S\",\n      \"headquarters\": \"Juelsminde, Denmark\",\n      \"estimated_revenue\": \"\u20ac300M (2023 turnover)\",\n      \"key_products\": \"Food emulsifiers and stabilizers for bakery, confectionery, dairy, and plant-based foods\",\n      \"ownership\": \"Foundation-owned (Schou Foundation)\",\n      \"rationale\": \"Well-established emulsifier specialist with strong sustainability positioning and global B2B food customer base.\"\n    },\n    {\n      \"company_name\": \"Nactarome S.p.A.\",\n      \"headquarters\": \"Milan, Italy\",\n      \"estimated_revenue\": \"\u20ac200M\u2013\u20ac250M\",\n      \"key_products\": \"Natural flavours, taste solutions, and food colours\",\n      \"ownership\": \"PE-backed (Ambienta SGR)\",\n      \"rationale\": \"Scaled natural flavour platform with active M&A strategy and strong exposure to clean-label food trends.\"\n    },\n    {\n      \"company_name\": \"Cosucra Groupe Warcoing SA\",\n      \"headquarters\": \"Warcoing, Belgium\",\n      \"estimated_revenue\": \"\u20ac140M\u2013\u20ac150M\",\n      \"key_products\": \"Chicory root fiber (inulin), pea protein, starches, and fibers\",\n      \"ownership\": \"Private (family-owned, minority PE involvement reported)\",\n      \"rationale\": \"Leading plant-based functional ingredient supplier aligned with protein and fiber demand growth.\"\n    },\n    {\n      \"company_name\": \"Silesia Gerhard Hanke GmbH & Co. KG\",\n      \"headquarters\": \"Neuss, Germany\",\n      \"estimated_revenue\": \"\u20ac200M\u2013\u20ac250M\",\n      \"key_products\": \"Flavours for confectionery, bakery, beverages, and savoury foods\",\n      \"ownership\": \"Family-owned\",\n      \"rationale\": \"Independent European flavour house with long-standing customer relationships and global footprint.\"\n    },\n    {\n      \"company_name\": \"Nexira\",\n      \"headquarters\": \"Rouen, France\",\n      \"estimated_revenue\": \"\u20ac65M\u2013\u20ac80M\",\n      \"key_products\": \"Acacia gum, soluble dietary fibers, botanical extracts\",\n      \"ownership\": \"Family-owned\",\n      \"rationale\": \"Global leader in acacia-based natural ingredients with strong scientific and regulatory positioning.\"\n    },\n    {\n      \"company_name\": \"Sacco System\",\n      \"headquarters\": \"Como, Italy\",\n      \"estimated_revenue\": \"\u20ac100M\u2013\u20ac110M\",\n      \"key_products\": \"Starter cultures, probiotics, enzymes, and rennet for dairy and fermented foods\",\n      \"ownership\": \"Family-owned\",\n      \"rationale\": \"Specialist microbial ingredient platform with recurring B2B demand and recent international expansion.\"\n    },\n    {\n      \"company_name\": \"Axxence Aromatic GmbH\",\n      \"headquarters\": \"Emmerich am Rhein, Germany\",\n      \"estimated_revenue\": \"\u20ac50M\u2013\u20ac100M (industry estimates)\",\n      \"key_products\": \"Natural aroma chemicals and flavour ingredients\",\n      \"ownership\": \"PE-backed (Capiton)\",\n      \"rationale\": \"Niche natural flavour ingredient producer benefiting from demand for natural and bio-based formulations.\"\n    },\n    {\n      \"company_name\": \"Colin Ingredients SAS\",\n      \"headquarters\": \"Mittelhausen, France\",\n      \"estimated_revenue\": \"\u20ac90M\u2013\u20ac100M\",\n      \"key_products\": \"Flavours, colourings, vegetable raw materials, functional ingredient blends\",\n      \"ownership\": \"Family-owned\",\n      \"rationale\": \"Mid-sized French ingredient supplier with diversified portfolio and strong agro-food industry ties.\"\n    },\n    {\n      \"company_name\": \"Indena S.p.A.\",\n      \"headquarters\": \"Milan, Italy\",\n      \"estimated_revenue\": \"\u20ac300M\u2013\u20ac400M (analyst estimates)\",\n      \"key_products\": \"Botanical extracts and active plant-based ingredients for nutrition and food applications\",\n      \"ownership\": \"Family-owned\",\n      \"rationale\": \"Scaled botanical ingredient platform with deep R&D capabilities and exposure to functional food demand.\"\n    },\n    {\n      \"company_name\": \"Solina Group (selected food-ingredient activities)\",\n      \"headquarters\": \"Br\u00e9al-sous-Montfort, France\",\n      \"estimated_revenue\": \"\u20ac400M\u2013\u20ac500M\",\n      \"key_products\": \"Savory ingredient solutions, seasoning systems, functional blends for food manufacturers\",\n      \"ownership\": \"PE-backed (Astorg)\",\n      \"rationale\": \"Large European savory ingredients platform with ongoing portfolio optimization and M&A activity.\"\n    }\n  ],\n  \"data_limitations\": \"Revenue figures for private companies are based on the latest publicly available disclosures, industry databases, and analyst estimates; exact figures may vary by fiscal year and consolidation scope. Ownership structures may include minority investors not fully disclosed publicly.\"\n}[Soci\u00e9t\u00e9 COLIN INGREDIENTS : Chiffre d'affaires, statuts ... - Pappers](https://www.pappers.fr/entreprise/colin-ingredients-698502275)[GROUPE COLIN (COLIN INGREDIENTS - DIAFOOD - COLIN RHD) Information](https://rocketreach.co/groupe-colin-colin-ingredients-diafood-colin-rhd-profile_b45da4ecfc674ad2)[Who are we - colin-ingredients.com](https://www.colin-ingredients.com/en/who-are-we)",
+  "parsed_response": {
+    "methodology": "Targets were identified via web searches across trade publications (FoodIngredientsFirst, Sweets Processing), company websites, private company databases (PitchBook, Tracxn, RocketReach), and European corporate registries. Revenue and ownership were cross-checked across multiple sources where available, prioritizing recent disclosures (2023\u20132025). Only private, Europe-headquartered B2B food ingredient suppliers within the \u20ac50M\u2013\u20ac500M revenue range were selected.",
+    "targets": [
+      {
+        "company_name": "Palsgaard A/S",
+        "headquarters": "Juelsminde, Denmark",
+        "estimated_revenue": "\u20ac300M (2023 turnover)",
+        "key_products": "Food emulsifiers and stabilizers for bakery, confectionery, dairy, and plant-based foods",
+        "ownership": "Foundation-owned (Schou Foundation)",
+        "rationale": "Well-established emulsifier specialist with strong sustainability positioning and global B2B food customer base."
+      },
+      {
+        "company_name": "Nactarome S.p.A.",
+        "headquarters": "Milan, Italy",
+        "estimated_revenue": "\u20ac200M\u2013\u20ac250M",
+        "key_products": "Natural flavours, taste solutions, and food colours",
+        "ownership": "PE-backed (Ambienta SGR)",
+        "rationale": "Scaled natural flavour platform with active M&A strategy and strong exposure to clean-label food trends."
+      },
+      {
+        "company_name": "Cosucra Groupe Warcoing SA",
+        "headquarters": "Warcoing, Belgium",
+        "estimated_revenue": "\u20ac140M\u2013\u20ac150M",
+        "key_products": "Chicory root fiber (inulin), pea protein, starches, and fibers",
+        "ownership": "Private (family-owned, minority PE involvement reported)",
+        "rationale": "Leading plant-based functional ingredient supplier aligned with protein and fiber demand growth."
+      },
+      {
+        "company_name": "Silesia Gerhard Hanke GmbH & Co. KG",
+        "headquarters": "Neuss, Germany",
+        "estimated_revenue": "\u20ac200M\u2013\u20ac250M",
+        "key_products": "Flavours for confectionery, bakery, beverages, and savoury foods",
+        "ownership": "Family-owned",
+        "rationale": "Independent European flavour house with long-standing customer relationships and global footprint."
+      },
+      {
+        "company_name": "Nexira",
+        "headquarters": "Rouen, France",
+        "estimated_revenue": "\u20ac65M\u2013\u20ac80M",
+        "key_products": "Acacia gum, soluble dietary fibers, botanical extracts",
+        "ownership": "Family-owned",
+        "rationale": "Global leader in acacia-based natural ingredients with strong scientific and regulatory positioning."
+      },
+      {
+        "company_name": "Sacco System",
+        "headquarters": "Como, Italy",
+        "estimated_revenue": "\u20ac100M\u2013\u20ac110M",
+        "key_products": "Starter cultures, probiotics, enzymes, and rennet for dairy and fermented foods",
+        "ownership": "Family-owned",
+        "rationale": "Specialist microbial ingredient platform with recurring B2B demand and recent international expansion."
+      },
+      {
+        "company_name": "Axxence Aromatic GmbH",
+        "headquarters": "Emmerich am Rhein, Germany",
+        "estimated_revenue": "\u20ac50M\u2013\u20ac100M (industry estimates)",
+        "key_products": "Natural aroma chemicals and flavour ingredients",
+        "ownership": "PE-backed (Capiton)",
+        "rationale": "Niche natural flavour ingredient producer benefiting from demand for natural and bio-based formulations."
+      },
+      {
+        "company_name": "Colin Ingredients SAS",
+        "headquarters": "Mittelhausen, France",
+        "estimated_revenue": "\u20ac90M\u2013\u20ac100M",
+        "key_products": "Flavours, colourings, vegetable raw materials, functional ingredient blends",
+        "ownership": "Family-owned",
+        "rationale": "Mid-sized French ingredient supplier with diversified portfolio and strong agro-food industry ties."
+      },
+      {
+        "company_name": "Indena S.p.A.",
+        "headquarters": "Milan, Italy",
+        "estimated_revenue": "\u20ac300M\u2013\u20ac400M (analyst estimates)",
+        "key_products": "Botanical extracts and active plant-based ingredients for nutrition and food applications",
+        "ownership": "Family-owned",
+        "rationale": "Scaled botanical ingredient platform with deep R&D capabilities and exposure to functional food demand."
+      },
+      {
+        "company_name": "Solina Group (selected food-ingredient activities)",
+        "headquarters": "Br\u00e9al-sous-Montfort, France",
+        "estimated_revenue": "\u20ac400M\u2013\u20ac500M",
+        "key_products": "Savory ingredient solutions, seasoning systems, functional blends for food manufacturers",
+        "ownership": "PE-backed (Astorg)",
+        "rationale": "Large European savory ingredients platform with ongoing portfolio optimization and M&A activity."
+      }
+    ],
+    "data_limitations": "Revenue figures for private companies are based on the latest publicly available disclosures, industry databases, and analyst estimates; exact figures may vary by fiscal year and consolidation scope. Ownership structures may include minority investors not fully disclosed publicly."
+  },
+  "stop_reason": "end_turn",
+  "usage": {
+    "input_tokens": 34507,
+    "output_tokens": 2601,
+    "latency_ms": 63123.12889099121
+  }
+}
